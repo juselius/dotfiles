@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+sget () {
+    dconf read /org/gnome/desktop/interface/text-scaling-factor
+}
+
+sset () {
+    dconf write /org/gnome/desktop/interface/text-scaling-factor $1
+}
+
+[ x$1 != x ] && { sset $1; exit 0; }
+
+s=`sget`
+if [ $s != "1.0" ]; then
+    sset 1.0
+else
+    sset 1.5
+fi

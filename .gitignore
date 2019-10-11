@@ -1,0 +1,11 @@
+*~
+*.o
+*.a
+*.swp
+.ssh/id_*
+.gnupg/
+*.pyc
+pki/*.pem
+vim/spell
+vim/.netrwhist
+vim-plugins/vim_fsharp_languageclient

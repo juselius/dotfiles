@@ -1,0 +1,35 @@
+Xclip.selection: clipboard
+
+Xcursor.theme: cursor-theme
+Xcursor.size: 16
+
+URxvt*transparent: false
+!URxvt*tintColor: Black
+!URxvt*shading: 40
+URxvt*saveLines: 5000
+URxvt*foreground: White
+URxvt*background: Black
+URxvt*color4: SteelBlue
+URxvt*color12: SteelBlue
+URxvt*scrollBar: false
+URxvt*scrollBar_right: false
+URxvt*scrollstyle: rxvt
+URxvt.iso14755 : false
+URxvt.iso14755_52: false
+
+URxvt.perl-ext-common:  default,clipboard-osc
+!URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+!URxvt.clipboard.pastecmd: xclip -o -selection clipboard
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+
+URxvt*font: xft:Ubuntu Mono:pixelsize=16:antialias=true:hinting=true
+URxvt*boldFont: xft:Ubuntu Mono:bold:pixelsize=16:antialias=true:hinting=true
+
+!URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=12:antialias=true:hinting=true
+!URxvt*boldFont: xft:Bitstream Vera Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
+!URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
+!URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
+!URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
+!URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=13:antialias=true:hinting=true
+

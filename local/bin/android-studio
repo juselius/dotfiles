@@ -1,0 +1,21 @@
+#!/usr/bin/env fish
+
+function nixLibPath
+    set p (nix-instantiate --eval -E "with (import <nixpkgs> {}); pkgs.$argv[1].outPath" | tr -d \")
+    echo $p/lib
+end
+
+set LD_LIBRARY_PATH $LD_LIBRARY_PATH:\
+~/.local/libexec/android-studio/jre/jre/lib/amd64:\
+~/.local/libexec/android-studio/jre/jre/lib/amd64/jli:\
+~/.local/libexec/android-studio/jre/jre/lib/amd64/server:\
+~/.local/libexec/android-studio/lib/libpty/linux/x86_64:\
+~/.local/libexec/android-studio/plugins/android/lib:\
+(nixLibPath xorg.libX11):\
+(nixLibPath xorg.libXext):\
+(nixLibPath xorg.libXrender):\
+(nixLibPath xorg.libXtst):\
+(nixLibPath xorg.libXi):\
+(nixLibPath freetype)
+
+exec ~/.local/libexec/android-studio/bin/studio.sh

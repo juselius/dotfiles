@@ -1,0 +1,4 @@
+editMode: Emacs
+completionType: MenuCompletion
+maxhistorysize: Just 100
+
