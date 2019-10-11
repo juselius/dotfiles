@@ -1,0 +1,26 @@
+#!/bin/bash
+
+launch() {
+    vncserver :$id -geometry 1280x1024 -localhost -SecurityTypes None
+}
+
+cleanup() {
+    vncserver -kill :$id
+}
+#trap cleanup EXIT SIGINT SIGTERM SIGQUIT
+
+case $1 in
+    -start) action=launch ;;
+    -stop) action=cleanup ;;
+    *) action="echo usage: vnc-session {-start|-stop} [user]"
+esac
+
+shift
+
+case $1 in
+    jonas) id=42 ;;
+    *) id=1 ;;
+esac
+
+$action
+sleep 4

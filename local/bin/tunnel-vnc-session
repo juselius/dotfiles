@@ -1,0 +1,15 @@
+#!/bin/bash
+
+id=42
+
+case $0 in
+    *manage*) host=stallo-manage ;;
+    *adm*) host=stallo-adm ;;
+esac
+
+port="59$id"
+ssh -f -L5901:localhost:$port $host \
+  "vncserver :$id -geometry 1280x1024 -localhost -SecurityTypes None"
+sleep 1
+vinagre localhost::5901 
+ssh $host "vncserver -kill :$id"

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+firefox -P mail --new-instance https://owa.itpartner.no/owa/
+
+
