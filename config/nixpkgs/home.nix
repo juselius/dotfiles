@@ -7,15 +7,15 @@ let
     "ghci"
     "haskeline"
     "Xmodmap"
-    "icons"
-    "taskrc"
   ];
+
   mkHomeFile = x: {
     ${x} = {
       source = ~/. + "/.dotfiles/${x}";
       target = ".${x}";
     };
   };
+
   vimPlugins = pkgs.vimPlugins // {
     vim-gnupg = pkgs.vimUtils.buildVimPlugin {
       name = "vim-gnupg";
@@ -30,6 +30,8 @@ let
       src = ~/.dotfiles/vim-plugins/jonas;
     };
   };
+
+  private = import ./private.nix;
 in
 {
   home.file =
@@ -39,22 +41,15 @@ in
         target = ".local/bin";
         recursive = true;
       };
-      ssh = {
-        source = ~/.dotfiles/ssh;
-        target = ".ssh";
-        recursive = true;
-      };
-      gnupg = {
-        source = ~/.dotfiles/gnupg;
-        target = ".gnupg";
-        recursive = true;
-      };
       xmobarrc = {
         source = ~/.xmonad/xmobarrc;
         target = ".xmobarrc";
         recursive = false;
       };
-    } // builtins.foldl' (a: x: a // mkHomeFile x) {} dotfiles;
+    }
+    // private.home.file
+    // builtins.foldl' (a: x: a // mkHomeFile x) {} dotfiles;
+
 
   home.packages = import ./packages.nix { pkgs = pkgs; };
 
@@ -117,8 +112,6 @@ in
     };
     git = {
       enable = true;
-      userEmail = "jonas.juselius@itpartner.no";
-      userName = "Jonas Juselius";
       aliases = {
         ll = "log --stat --abbrev-commit --decorate";
         history = "log --graph --abbrev-commit --decorate --all";
@@ -155,23 +148,16 @@ in
           sslVerify = false;
         };
       };
-      signing = {
-        key = "jonas.juselius@gmail.com";
-      };
-    };
+    } // private.git;
+
     ssh = {
       enable = true;
       compression = false;
       forwardAgent = true;
       serverAliveInterval = 30;
       extraConfig = "IPQoS throughput";
-      matchBlocks = {
-        example = {
-          user = "jonas";
-          hostname = "example.acme.com";
-        };
-      };
-    };
+    } // private.ssh;
+
     tmux = {
       enable = true;
       baseIndex = 1;
@@ -190,21 +176,21 @@ in
     GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
   };
   systemd.user.startServices = true;
-  # systemd.user.services = {
-  #   dropbox = {
-  #     Unit = {
-  #       Description = "Dropbox";
-  #     };
-  #     Service = {
-  #       ExecStart = "${pkgs.dropbox}/bin/dropbox";
-  #       Restart = "on-failure";
-  #       RestartSec = "10s";
-  #     };
-  #     Install = {
-  #       WantedBy = [ "default.target" ];
-  #     };
-  #   };
-  # };
+  systemd.user.services = {
+    dropbox = {
+      Unit = {
+        Description = "Dropbox";
+      };
+      Service = {
+        ExecStart = "${pkgs.dropbox}/bin/dropbox";
+        Restart = "on-failure";
+        RestartSec = "10s";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+    };
+  };
 
   services.flameshot.enable =  true;
   services.screen-locker = {
@@ -247,7 +233,6 @@ in
   };
 
   programs.lesspipe.enable = true;
-
   programs.termite = {
     enable = true;
     font = "Monospace 10";
@@ -329,6 +314,7 @@ in
       recursive = true;
     };
   };
+
   xdg.dataFile = {
     xmonad-desktop = {
       source = ~/.xmonad/Xmonad.desktop;
@@ -357,6 +343,7 @@ in
       enableContribAndExtras = true;
       extraPackages = self: [
         self.yeganesh
+        self.taffybar
         self.xmobar
         pkgs.dmenu
         pkgs.xmonad-log
