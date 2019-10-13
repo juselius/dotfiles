@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, options }:
 with pkgs;
 let
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
@@ -8,50 +8,26 @@ let
     cryptsetup
     fuse
     nmap
-    wireshark-qt
-    # kubernetes
-    #bind
-    postgresql
+    bind
     openldap
-    kubernetes-helm
-    # dropbox
-    dropbox-cli
-    xorg.xmodmap
-    xorg.xev
-    glib
+    iftop
+    openssl
+    inetutils
+    unrar
+    dmidecode
+    ethtool
+    parted
+    pciutils
+    pwgen
+    usbutils
   ];
   user = [
-    google-chrome
-    # googleearth
-    firefox
-    drive
+    kubernetes-helm
+    kubectl
     gnupg
-    meld
-    mplayer
-    sshuttle
-    xorg.xmessage
-    xorg.xvinfo
-    imagemagick
-    rdesktop
-    remmina
-    scrot
-    xsel
-    taskwarrior
-    #timewarrior
-    pass
     tomb
-    tectonic
-    pavucontrol
-    gimp
-    spotify
+    sshuttle
     minio-client
-    gnome3.dconf-editor
-    signal-desktop
-   # inkscape
-   # ledger
-   # slack
-   # pidgin
-   # pidginsipe
   ];
   devel = [
     git
@@ -60,142 +36,78 @@ let
     gcc
     gdb
     cmake
-    automake
-    autoconf
-    libtool
     libxml2
-    fsharp41
     chromedriver
     awscli
-  ];
-  haskell = with haskellPackages; [
-    ghc
-    hie
-    cabal-install
-    #cabal2nix
-    alex
-    happy
-    cpphs
-    hscolour
-    hlint
-    hoogle
-    #haddock
-    #pointfree
-    #pointful
-    #hasktags
-    #threadscope
-    hindent
-    # codex
-    # hscope
-    stack
-    # parallel
-    # aeson
-    # split
-    # tasty
-    # tasty-hunit
-    # tasty-smallcheck
-    # contravariant
-    # profunctors
-    # glirc
-  ];
-  dotnet = with dotnetPackages; [
-    # fsharp41
-    # mono-addins
-    mono5
-    dotnet-sdk
-  ];
-  # python27 = with python27Packages; [
-  #   python
-  #   matplotlib
-  #   numpy
-  # ];
-  node = with nodePackages; [
-    nodejs-9_x
-    npm
-    npm2nix
-    node2nix
-    gulp
-    yarn
-    webpack
-    # yo
-    # purescript
-    # psc-package
-    # pulp
-    # cordova
-    bundler
-    bundix
-  ];
-  proton = [
-    protonvpn-cli
-    openvpn
-    python
-    dialog
-  ];
-  eol = [];
-in
-[
-    #browserpass
-    calibre
-    cargo
+    postgresql
     docker_compose
-    farstream
-    freerdp
-    fira-code
     gnumake
     gradle
     gettext
+    nix-prefetch-scripts
+    sqlite-interactive
+    # sqsh
+    # automake
+    # autoconf
+    # libtool
+  ];
+  desktop = if ! options.desktop.enable then [] else [
+    dropbox-cli
+    wireshark-qt
+    xorg.xmodmap
+    xorg.xev
+    glib
+    google-chrome
+    # googleearth
+    firefox
+    drive
+    meld
+    mplayer
+    xorg.xmessage
+    xorg.xvinfo
+    imagemagick
+    rdesktop
+    remmina
+    scrot
+    xsel
+    taskwarrior
+    # timewarrior
+    pass
+    tectonic
+    pavucontrol
+    gimp
+    spotify
+    gnome3.dconf-editor
+    signal-desktop
+    inkscape
+    # ledger
+    # slack
+    # pidgin
+    # pidginsipe
+    vscode
+    # browserpass
+    calibre
+    cargo
+    farstream
+    freerdp
+    fira-code
     keybase
     keybase-gui
-    # cabal-install
-    # cabal2nix
-    # haskellPackages.ghc
-    # haskellPackages.ghc-mod
-    # haskellPackages.glirc
-    # haskellPackages.hakyll
-    # haskellPackages.hindent
-    # haskellPackages.hlint
-    # haskellPackages.hpack
-    # haskellPackages.stylish-haskell
     pandoc
-    # idris
-    io
-    clooj
-    leiningen
-    iftop
     networkmanager
     networkmanagerapplet
-    nix-prefetch-scripts
-    # nixopsUnstable
-    nodejs
-    openssl
-    # pidgin-sipe
     pinentry
     polkit_gnome
-    postgresql
-    #psc-package
-    #purescript
-    sqlite-interactive
-    #stack
     steghide
+    cdrtools
+    innoextract
     tectonic
     timewarrior
     tlaps
     unrtf
-    vimPlugins.idris-vim
     # wireshark-cli
-    # wkhtmltopdf
     xclip
-    yarn
-    vscode
     wavebox
-    # mono
-    unrar
-    sqsh
-    inetutils
-    haskellPackages.yeganesh
-    haskellPackages.xmobar
-    dmenu
-    kubectl
     gnome3.gnome-settings-daemon
     gnome3.gnome-font-viewer
     gnome3.adwaita-icon-theme
@@ -210,28 +122,87 @@ in
     gnome3.gnome-tweaks
     gnome3.eog
     blueman
-    cdrtools
-    dmidecode
-    ethtool
-    #googleearth
     gparted
-    innoextract
-    parted
-    pciutils
-    pwgen
-    qrencode
-    usbutils
     virtmanager
+    qrencode
     wkhtmltopdf
     zbar
-] ++
-sys ++
-user ++
-devel ++
-dotnet ++
-haskell ++
-proton ++
-# python27 ++
-#node ++
-#ruby ++
-eol
+  ];
+  haskell = if ! options.haskell then [] else with haskellPackages; [
+    ghc
+    stack
+    # hie
+    # cabal-install
+    # cabal2nix
+    # alex
+    # happy
+    # cpphs
+    # hscolour
+    # hlint
+    # hoogle
+    # haddock
+    # pointfree
+    # pointful
+    # hasktags
+    # threadscope
+    # hindent
+    # codex
+    # hscope
+    # parallel
+    # aeson
+    # split
+    # tasty
+    # tasty-hunit
+    # tasty-smallcheck
+    # contravariant
+    # profunctors
+    # glirc
+  ];
+  dotnet = if ! options.dotnet then [] else with dotnetPackages; [
+    mono
+    dotnet-sdk
+  ];
+  python = if ! options.python then [] else with pythonPackages; [
+    python
+    matplotlib
+    numpy
+  ];
+  node = if ! options.node then [] else with nodePackages; [
+    nodejs
+    npm
+    yarn
+    webpack
+    # node2nix
+    # gulp
+    # bundler
+    # bundix
+    # yo
+    # purescript
+    # psc-package
+    # pulp
+    # cordova
+  ];
+  proton = if ! options.proton then []  else [
+    protonvpn-cli
+    openvpn
+    python
+    dialog
+  ];
+  languages = if ! options.languages then []  else [
+    idris
+    io
+    clooj
+    leiningen
+  ];
+in
+  sys ++
+  user ++
+  devel ++
+  desktop ++
+  dotnet ++
+  haskell ++
+  node ++
+  languages ++
+  python ++
+  proton ++
+  []
