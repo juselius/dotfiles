@@ -127,6 +127,9 @@ let
     qrencode
     wkhtmltopdf
     zbar
+    haskellPackages.yeganesh
+    xmobar
+    dmenu
   ];
   haskell = if ! options.haskell then [] else with haskellPackages; [
     ghc
