@@ -1,5 +1,11 @@
 { pkgs, options, ... }:
 {
+  programs = {
+    browserpass.enable = true;
+    feh.enable = true;
+    firefox.enable = true;
+  };
+
   home.file = {
     xmobarrc = {
       source = ~/.xmonad/xmobarrc;
