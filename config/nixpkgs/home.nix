@@ -4,7 +4,7 @@ let
   options = {
     desktop = {
       enable = true;
-      dropbox = true;
+      dropbox = false;
     };
     dotnet = false;
     node = false;
@@ -54,7 +54,6 @@ let
     "codex"
     "ghci"
     "haskeline"
-    "taskrc"
   ];
 in
 {

@@ -12,11 +12,6 @@
       target = ".xmobarrc";
       recursive = false;
     };
-    icons = {
-      source = ~/.dotfiles/icons;
-      target = ".icons";
-      recursive = true;
-    };
     xmodmap = {
       source = ~/.dotfiles/Xmodmap;
       target = ".Xmodmap";
