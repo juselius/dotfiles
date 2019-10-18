@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+conn=$1
+shift
+
+exec openfortissl -c ~/.dotfiles/vpn/$conn $@
