@@ -1,6 +1,6 @@
 self: super:
 let
-  dotnet-sdk =
+  dotnet-sdk-2 =
       super.dotnet-sdk.overrideAttrs (attrs: rec {
       version = "2.2.402";
       name = "dotnet-sdk-${version}";
@@ -9,6 +9,7 @@ let
         sha256 = "16jp2xwz2dkmampjv7kixn9v6kjcfbbjww5xb2vdwvcwwkkf3bsd";
       };
     });
+
   dotnet-sdk-3 =
     { stdenv
     , fetchurl
@@ -38,9 +39,8 @@ let
 
         installPhase = ''
           runHook preInstall
-          mkdir -p $out/bin
+          mkdir -p $out
           cp -r ./ $out
-          mv $out/dotnet $out/bin
           runHook postInstall
         '';
 
@@ -50,14 +50,20 @@ let
         # autoPatchelf isn't able to be used as libicu* and other's aren't
         # listed under typical binary section
         postFixup = ''
-          patchelf --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" $out/bin/dotnet
-          patchelf --set-rpath "${rpath}" $out/bin/dotnet
+          for i in \
+            dotnet \
+            sdk/3.0.100/AppHostTemplate/apphost \
+            packs/Microsoft.NETCore.App.Host.linux-x64/3.0.0/runtimes/linux-x64/native/apphost
+          do
+            patchelf --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" $out/$i
+            patchelf --set-rpath "${rpath}" $out/$i
+          done
           find $out -type f -name "*.so" -exec patchelf --set-rpath '$ORIGIN:${rpath}' {} \;
         '';
 
         doInstallCheck = true;
         installCheckPhase = ''
-          $out/bin/dotnet --info
+          $out/dotnet --info
         '';
 
         meta = with stdenv.lib; {
@@ -68,8 +74,17 @@ let
           license = licenses.mit;
         };
       };
+
+  dotnet-core-3 =
+    let
+      sdk = super.callPackage dotnet-sdk-3 {};
+    in
+      self.pkgs.writeScriptBin "dotnet" ''
+        #!${self.pkgs.bash}/bin/bash
+        exec ${sdk}/dotnet $@
+      '';
 in
 {
-  inherit dotnet-sdk;
-  dotnet-sdk-3 = super.callPackage dotnet-sdk-3 {};
+  dotnet-sdk-2 = dotnet-sdk-2;
+  dotnet-sdk = dotnet-core-3;
 }
