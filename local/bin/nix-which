@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ #$ != 1 ]; then
+    echo "nix-which pkg"
+    exit 1
+fi
+
+nix-instantiate --eval -E "let p = import <nixpkgs> {}; in p.$1.outPath"
+
+# vim:ft=sh
