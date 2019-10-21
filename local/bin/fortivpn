@@ -3,4 +3,4 @@
 conn=$1
 shift
 
-exec openfortissl -c ~/.dotfiles/vpn/$conn $@
+exec sudo openfortivpn -c ~/.dotfiles/vpn/$conn $@
