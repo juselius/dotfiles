@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ ! -f ~/.dotnet/tools/fake ]; then
+    echo "Attempting to install the dotnet fake cli"
+    dotnet tool install -g fake-cli
+fi
+
+export DOTNET_ROOT=/tmp/dotnet-sdk/3.0.100
+exec ~/.dotnet/tools/fake $@
+
+# vim:ft=sh

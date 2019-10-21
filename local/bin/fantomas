@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ ! -f ~/.dotnet/tools/fantomas ]; then
+    echo "Attempting to install the dotnet fantomas cli"
+    dotnet tool install -g fantomas
+fi
+
+export DOTNET_ROOT=/tmp/dotnet-sdk/3.0.100
+exec ~/.dotnet/tools/fantomas $@
+
+# vim:ft=sh

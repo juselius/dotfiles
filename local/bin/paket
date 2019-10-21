@@ -1,21 +1,11 @@
 #!/usr/bin/env bash
 
-DIR=`git rev-parse --show-toplevel 2>/dev/null`
-if [ $? != 0 ]; then
-    if [ -d .paket ]; then
-        DIR=`pwd`
-    else
-        echo "error: can't find project toplevel directory."
-        exit 1
-    fi
+if [ ! -f ~/.dotnet/tools/paket ]; then
+    echo "Attempting to install the dotnet paket cli"
+    dotnet tool install -g paket
 fi
-if [ ! -d $DIR/.paket ]; then
-    echo "error: paket directory not found: $DIR/.paket"
-    exit 1
-fi
-[ ! -e $DIR/.paket/paket.exe ] && cp ~/.local/bin/paket.exe .paket/
 
-mono $DIR/.paket/paket.exe $*
-# mono ~/.local/bin/paket.exe $*
+export DOTNET_ROOT=/tmp/dotnet-sdk/3.0.100
+exec ~/.dotnet/tools/paket $@
 
 # vim:ft=sh
