@@ -162,14 +162,15 @@ let
     # glirc
   ];
   dotnet = if ! options.dotnet then [] else with dotnetPackages; [
-    mono
-    dotnet-sdk
+    # mono
+    # dotnet-sdk
   ];
-  python = if ! options.python then [] else with pythonPackages; [
-    python
-    matplotlib
-    numpy
-  ];
+  python = if ! options.python then [] else with pythonPackages;
+     python3.withPackages (ps: with ps; [
+      numpy
+      matplotlib
+      tkinter
+    ]);
   node = if ! options.node then [] else with nodePackages; [
     nodejs
     npm

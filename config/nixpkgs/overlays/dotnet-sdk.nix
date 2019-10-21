@@ -91,5 +91,5 @@ let
 in
 {
   dotnet-sdk-2 = dotnet-sdk-2;
-  dotnet-sdk-3 = dotnet-sdk-3;
+  dotnet-sdk = dotnet-sdk-3;
 }

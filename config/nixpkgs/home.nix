@@ -166,6 +166,7 @@ in
         st = "status";
         unstage = "reset HEAD";
         pick = "cherry-pick";
+        ltr = "branch --sort=-committerdate";
       };
       ignores = ["*~" "*.o" "*.a" "*.dll" "*.bak" "*.old"];
       extraConfig = {
