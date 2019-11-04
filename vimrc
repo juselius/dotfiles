@@ -168,14 +168,4 @@ endfunction
 autocmd FileType * autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 autocmd VimEnter * NoMatchParen
 
-autocmd BufEnter *.fs,*.fsx,*,fsi let g:LanguageClient_serverCommands = {
-  \ 'fsharp': g:fsharp#languageserver_command
-  \ }
-
-if has('nvim') && exists('*nvim_open_win')
-  augroup FSharpShowTooltip
-    autocmd!
-    autocmd CursorHold *.fs call fsharp#showTooltip()
-  augroup END
-endif
 set updatetime=1500
