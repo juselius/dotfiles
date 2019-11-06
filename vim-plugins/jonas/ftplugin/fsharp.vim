@@ -5,7 +5,7 @@ let g:LanguageClient_serverCommands = {
 if has('nvim') && exists('*nvim_open_win')
   augroup FSharpShowTooltip
     autocmd!
-    autocmd CursorHold call fsharp#showTooltip()
+    autocmd CursorHold * call fsharp#showTooltip()
   augroup END
 endif
 
