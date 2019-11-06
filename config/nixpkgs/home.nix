@@ -98,7 +98,9 @@ in
     options = [ "eurosign:e" "caps:none" ];
   };
 
-  home.sessionVariables = {};
+  home.sessionVariables = {
+    GIT_ALLOW_PROTOCOL = "keybase:ssh:https";
+  };
 
   programs = {
     htop.enable = true;
