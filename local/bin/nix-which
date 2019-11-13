@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
-if [ #$ != 1 ]; then
-    echo "nix-which pkg"
+search=0
+case $1 in
+  -s | --search) search=1; shift ;;
+esac
+
+if [ $# != 1 ]; then
+    echo "nix-which [-s | --search] pkg"
     exit 1
 fi
 
-nix-instantiate --eval -E "let p = import <nixpkgs> {}; in p.$1.outPath"
+if [ $search = 1 ]; then
+    ls -1d /nix/store/*$1* | sed '/\.drv$/d'
+else
+    nix-instantiate --eval -E "let p = import <nixpkgs> {}; in p.$1.outPath"
+fi
 
 # vim:ft=sh
