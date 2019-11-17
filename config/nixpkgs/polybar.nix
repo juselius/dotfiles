@@ -34,8 +34,8 @@
       padding = 1;
       module-margin = 2;
       separator = "|";
-      font-0 = "xft:Ubuntu:size=10:antialias=true";
-      modules-right = "cpu memory eth date powermenu volume";
+      font-0 = "xft:Ubuntu:size=11:antialias=true";
+      modules-right = "cpu memory eth date volume powermenu";
       modules-center = "";
       modules-left = "xmonad";
       tray-position = "right";
@@ -90,7 +90,7 @@
       format-underline = "\${colors.grey}";
       expand-right = "true";
       format-spacing = 1;
-      label-open = "O";
+      label-open = "⚙";
       label-open-foreground = "\${colors.secondary}";
       label-close = "close";
       label-close-foreground = "\${colors.secondary}";
@@ -146,7 +146,7 @@
       type = "internal/alsa";
       format-volume = "<label-volume>";
       label-muted = "muted";
-      label-volume = "%{A1:${pkgs.pavucontrol}/bin/pavucontrol:}vol %percentage%%%{A}";
+      label-volume = "%{A1:${pkgs.pavucontrol}/bin/pavucontrol:}♫%{A} %percentage%%";
       label-muted-foreground = "#66";
     };
   };
