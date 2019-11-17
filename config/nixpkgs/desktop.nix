@@ -76,7 +76,9 @@
       defaultCacheTtlSsh = 64800;
       maxCacheTtl = 64800;
       maxCacheTtlSsh = 64800;
-      extraConfig = '''';
+      extraConfig = ''
+        # pinentry-program ${pkgs.pinentry}/bin/pinentry
+      '';
     };
   };
 
@@ -106,12 +108,12 @@
     initExtra = ''
       xsetroot -solid '#888888'
       xsetroot -cursor_name left_ptr
+      expoer DBUS_SESSION_BUS_ADDRESS=/run/user/1000/bus
       ${pkgs.gnome3.gnome-settings-daemon}/libexec/gsd-xsettings &
       systemctl --user start gvfs-udisks2-volume-monitor.service
-      #[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
-      xmodmap $HOME/.Xmodmap
       xset s off
       xset dpms 0 0 3600
+      xmodmap $HOME/.dotfiles/Xmodmap
     '';
     windowManager.xmonad = {
       enable = true;
