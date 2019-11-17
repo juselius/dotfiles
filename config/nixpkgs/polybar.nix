@@ -29,54 +29,72 @@
     "bar/top" = {
       # monitor = "\${env:MONITOR:VGA-1}";
       width = "100%";
-      height = 20;
-      radius = 2;
-      font-0 = "xft:Ubuntu:size=8:antialias=true";
+      height = 22;
+      radius = 0;
+      padding = 1;
+      module-margin = 2;
       separator = "|";
-      modules-right = "volume cpu memory date powermenu";
+      font-0 = "xft:Ubuntu:size=10:antialias=true";
+      modules-right = "cpu memory eth date powermenu volume";
       modules-center = "";
       modules-left = "xmonad";
       tray-position = "right";
+      tray-padding = 2;
     };
-
     "module/date" = {
       type = "internal/date";
-      internal = 5;
-      date = "%d.%m";
-      time = "%H:%M";
-      label = "%date%  %time%";
+      internal = 1;
+      date = "%d %B %Y";
+      time = "%H:%M:%S";
+      # label = "%date% %time%";
+      label = "%{A1:${pkgs.gsimplecal}/bin/gsimplecal:}%date% %time% %{A}";
+    };
+    "module/cpu" = {
+      type = "internal/cpu";
+      interval = "2";
+      format = "<label>";
+      format-prefix = "%{T2}cpu%{T-} ";
+      format-prefix-foreground = "\${colors.foreground}";
+      format-underline = "\${colors.grey}";
+      label = "%percentage%%";
     };
     "module/memory" = {
       type = "internal/memory";
       interval = 2;
-      format-prefix = "%{T2}%{T-} ";
+      format = "<ramp-used>";
+      format-prefix = "%{T2}mem%{T-} ";
       format-prefix-foreground = "\${colors.foreground}";
       format-underline = "\${colors.grey}";
       label = "%percentage_used%%";
+      ramp-used-7 = "█";
+      ramp-used-6 = "▇";
+      ramp-used-5 = "▆";
+      ramp-used-4 = "▅";
+      ramp-used-3 = "▄";
+      ramp-used-2 = "▃";
+      ramp-used-1 = "▂";
+      ramp-used-0 = "▁";
     };
     "module/eth" = {
       type = "internal/network";
-      interface = "eno2";
-      interval = "3.0";
-
+      interface = "ens33";
+      interval = "2.0";
+      format-connected = "<label-connected>";
       format-connected-underline = "\${colors.grey}";
-      format-connected-prefix = " ";
+      format-connected-prefix = "";
       format-connected-prefix-foreground = "\${colors.foreground}";
-      label-connected = "%local_ip%";
+      label-connected = "%ifname%: %{F#ccccff}↓%downspeed%%{F-} %{F#ffcccc}↑%upspeed%%{F-}";
     };
     "module/powermenu" = {
       type = "custom/menu";
-
       format-underline = "\${colors.grey}";
       expand-right = "true";
-
       format-spacing = 1;
-
-      label-open = "";
+      label-open = "O";
       label-open-foreground = "\${colors.secondary}";
-      label-close = "";
+      label-close = "close";
       label-close-foreground = "\${colors.secondary}";
-      label-separator = "|";
+      label-separator = "/";
       label-separator-foreground = "\${colors.foreground}";
 
       menu-0-0 = "reboot";
@@ -99,32 +117,6 @@
       exec = "${pkgs.xmonad-log}/bin/xmonad-log";
       tail = true;
     };
-    "module/xwindow" = {
-      type = "internal/xwindow";
-      label = "%title:0:30:...%";
-    };
-    "module/xkeyboard" = {
-      type = "internal/xkeyboard";
-      blacklist-0 = "num lock";
-      format-prefix = " ";
-      format-prefix-foreground = "\${colors.foreground}";
-      format-prefix-underline = "\${colors.grey}";
-      label-layout = "%layout%";
-      label-layout-underline = "\${colors.secondary}";
-      label-indicator-padding = "2";
-      label-indicator-margin = "1";
-      label-indicator-background = "\${colors.secondary}";
-      label-indicator-underline = "\${colors.grey}";
-    };
-    "module/filesystem" = {
-      type = "internal/fs";
-      interval = "25";
-      mount-0 = "/";
-      mount-1 = "/home/idzard/harddrive";
-      label-mounted = "%{F#5b51c9}%mountpoint%%{F-}: %percentage_used%%";
-      label-unmounted = "%mountpoint% not mounted";
-      label-unmounted-foreground = "\${colors.foreground}";
-    };
     "module/battery" = {
       type = "internal/battery";
       battery = "BAT1";
@@ -136,61 +128,26 @@
       label-discharging = "%time%";
       format-full-prefix = "f ";
       format-full-prefix-foreground = "\${colors.foreground}";
-      ramp-capacity-0 = "";
-      ramp-capacity-1 = "";
-      ramp-capacity-2 = "";
-      ramp-capacity-3 = "";
-      ramp-capacity-4 = "";
+      ramp-capacity-0 = "";
+      ramp-capacity-1 = "";
+      ramp-capacity-2 = "";
+      ramp-capacity-3 = "";
+      ramp-capacity-4 = "";
       ramp-capacity-foreground = "\${colors.foreground}";
-      animation-charging-0 = "";
-      animation-charging-1 = "";
-      animation-charging-2 = "";
-      animation-charging-3 = "";
-      animation-charging-4 = "";
+      animation-charging-0 = "";
+      animation-charging-1 = "";
+      animation-charging-2 = "";
+      animation-charging-3 = "";
+      animation-charging-4 = "";
       animation-charging-foreground = "\${colors.foreground}";
       animation-charging-framerate = "750";
-    };
-    "module/cpu" = {
-      type = "internal/cpu";
-      interval = "2";
-      format = "<ramp-load>";
-      ramp-load-7 = "█";
-      ramp-load-6 = "▇";
-      ramp-load-5 = "▆";
-      ramp-load-4 = "▅";
-      ramp-load-3 = "▄";
-      ramp-load-2 = "▃";
-      ramp-load-1 = "▂";
-      ramp-load-0 = "▁";
-      format-prefix = "%{T2}%{T-} ";
-      format-prefix-foreground = "\${colors.foreground}";
-      format-underline = "\${colors.grey}";
-      label = "%percentage%%";
     };
     "module/volume" = {
       type = "internal/alsa";
       format-volume = "<label-volume>";
-      label-volume = " %percentage%%";
-      label-volume-foreground = "\${root.foreground}";
-      format-muted-prefix = " ";
-      format-muted-foreground = "\${colors.foreground}";
-      label-muted = "sound muted";
-      bar-volume-width = "10";
-      bar-volume-foreground-0 = "\${colors.grey2}";
-      bar-volume-foreground-1 = "\${colors.grey2}";
-      bar-volume-foreground-2 = "\${colors.grey2}";
-      bar-volume-foreground-3 = "\${colors.grey2}";
-      bar-volume-foreground-4 = "\${colors.grey2}";
-      bar-volume-foreground-5 = "\${colors.grey1}";
-      bar-volume-foreground-6 = "\${colors.grey}";
-      bar-volume-gradient = "false";
-      bar-volume-indicator = "|";
-      bar-volume-indicator-font = "0";
-      bar-volume-fill = " ";
-      bar-volume-fill-font = "1";
-      bar-volume-empty = " ";
-      bar-volume-empty-font = "1";
-      bar-volume-empty-foreground = "\${colors.foreground}";
+      label-muted = "muted";
+      label-volume = "%{A1:${pkgs.pavucontrol}/bin/pavucontrol:}vol %percentage%%%{A}";
+      label-muted-foreground = "#66";
     };
   };
 }
