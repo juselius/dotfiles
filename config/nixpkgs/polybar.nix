@@ -29,7 +29,7 @@
     "bar/top" = {
       # monitor = "\${env:MONITOR:VGA-1}";
       width = "100%";
-      height = 22;
+      height = 24;
       radius = 0;
       padding = 1;
       module-margin = 2;
@@ -39,16 +39,18 @@
       font-2 = "Material Icons:style=Regular:size=14";
       font-3 = "Noto Sans Symbols2:size=13";
       font-4 = "Noto Color Emoji:style=Regular";
-      modules-right = "cpu memory eth volume powermenu date";
+      modules-right = "cpu memory eth powermenu date";
       modules-center = "";
       modules-left = "xmonad";
       tray-position = "right";
       tray-padding = 2;
+      tray-maxsize = 16;
+      tray-scale = "1.0";
     };
     "module/date" = {
       type = "internal/date";
       internal = 1;
-      date = "%{F#C9AA7C}%d %B %Y%{F-}";
+      date = "%{F#c9aa7c}%d %B %Y%{F-}";
       time = "%H:%M:%S";
       label = "%{A1:${pkgs.gsimplecal}/bin/gsimplecal:}%date% %time% %{A}";
     };
@@ -87,7 +89,7 @@
       format-connected-underline = "\${colors.grey}";
       format-connected-prefix = "";
       format-connected-prefix-foreground = "\${colors.foreground}";
-      label-connected = "%ifname%: %{F#7C99C9}↓%downspeed%%{F-} %{F#C07A74}↑%upspeed%%{F-}";
+      label-connected = "%ifname%: ↓%{F#999999}%downspeed%%{F-} ↑%{F#999999}%upspeed%%{F-}";
     };
     "module/powermenu" = {
       type = "custom/menu";
@@ -96,21 +98,25 @@
       format-spacing = 1;
       label-open = "⏻";
       label-open-foreground = "\${colors.secondary}";
-      label-close = "%{F#C4392E}✕%{F-}";
+      label-close = "%{F#fe8019}✕%{F-}";
       label-close-foreground = "\${colors.secondary}";
       label-separator = "/";
       label-separator-foreground = "\${colors.foreground}";
 
-      menu-0-0 = "%{F#83A9C8}reboot%{F-}";
+      menu-0-0 = "%{F#999999}reboot%{F-}";
       menu-0-0-exec = "menu-open-1";
-      menu-0-1 = "%{F#83A9C8}power off%{F-}";
+      menu-0-1 = "%{F#999999}power off%{F-}";
       menu-0-1-exec = "menu-open-2";
 
-      menu-1-0 = "%{F#CB2A2F}reboot%{F-}";
+      menu-1-0 = "%{F#ff4000}yes%{F-}";
       menu-1-0-exec = "sudo reboot";
+      menu-1-1 = "%{F#999999}no%{F-}";
+      menu-1-1-exec = "menu-close";
 
-      menu-2-0 = "%{F#CB2A2F}power off%{F-}";
+      menu-2-0 = "%{F#ff4000}yes%{F-}";
       menu-2-0-exec = "sudo poweroff";
+      menu-2-1 = "%{F#999999}no%{F-}";
+      menu-2-1-exec = "menu-close";
     };
     "module/xmonad" = {
       type = "custom/script";

@@ -36,6 +36,20 @@
       }
     else {};
 
+  systemd.user.services.pa-applet = {
+      Unit = {
+        Description = "PulseAudio volume applet";
+      };
+      Service = {
+        ExecStart = "${pkgs.pa_applet}/bin/pa-applet";
+        Restart = "on-failure";
+        RestartSec = "10s";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+  };
+
   services = {
     flameshot.enable =  true;
 
@@ -68,6 +82,7 @@
     };
 
     network-manager-applet.enable = true;
+    blueman-applet.enable = true;
 
     gpg-agent = {
       enable = true;
