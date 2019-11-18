@@ -34,8 +34,12 @@
       padding = 1;
       module-margin = 2;
       separator = "|";
-      font-0 = "xft:Ubuntu:size=11:antialias=true";
-      modules-right = "cpu memory eth date volume powermenu";
+      font-0 = "NotoSans Regular:size=12;2";
+      font-1 = "Termsynu:size=8;-1";
+      font-2 = "Material Icons:style=Regular:size=14";
+      font-3 = "Noto Sans Symbols2:size=13";
+      font-4 = "Noto Color Emoji:style=Regular";
+      modules-right = "cpu memory eth volume powermenu date";
       modules-center = "";
       modules-left = "xmonad";
       tray-position = "right";
@@ -44,16 +48,15 @@
     "module/date" = {
       type = "internal/date";
       internal = 1;
-      date = "%d %B %Y";
+      date = "%{F#C9AA7C}%d %B %Y%{F-}";
       time = "%H:%M:%S";
-      # label = "%date% %time%";
       label = "%{A1:${pkgs.gsimplecal}/bin/gsimplecal:}%date% %time% %{A}";
     };
     "module/cpu" = {
       type = "internal/cpu";
       interval = "2";
       format = "<label>";
-      format-prefix = "%{T2}cpu%{T-} ";
+      format-prefix = "cpu ";
       format-prefix-foreground = "\${colors.foreground}";
       format-underline = "\${colors.grey}";
       label = "%percentage%%";
@@ -61,19 +64,20 @@
     "module/memory" = {
       type = "internal/memory";
       interval = 2;
-      format = "<ramp-used>";
-      format-prefix = "%{T2}mem%{T-} ";
+      format = "<bar-used>";
+      format-prefix = "mem ";
       format-prefix-foreground = "\${colors.foreground}";
       format-underline = "\${colors.grey}";
       label = "%percentage_used%%";
-      ramp-used-7 = "█";
-      ramp-used-6 = "▇";
-      ramp-used-5 = "▆";
-      ramp-used-4 = "▅";
-      ramp-used-3 = "▄";
-      ramp-used-2 = "▃";
-      ramp-used-1 = "▂";
-      ramp-used-0 = "▁";
+      bar-used-indicator = "";
+      bar-used-width = "10";
+      bar-used-foreground-0 = "#55aa55";
+      bar-used-foreground-1 = "#557755";
+      bar-used-foreground-2 = "#f5a70a";
+      bar-used-foreground-3 = "#ff5555";
+      bar-used-fill = "▐";
+      bar-used-empty = "▐";
+      bar-used-empty-foreground = "#444444";
     };
     "module/eth" = {
       type = "internal/network";
@@ -83,34 +87,30 @@
       format-connected-underline = "\${colors.grey}";
       format-connected-prefix = "";
       format-connected-prefix-foreground = "\${colors.foreground}";
-      label-connected = "%ifname%: %{F#ccccff}↓%downspeed%%{F-} %{F#ffcccc}↑%upspeed%%{F-}";
+      label-connected = "%ifname%: %{F#7C99C9}↓%downspeed%%{F-} %{F#C07A74}↑%upspeed%%{F-}";
     };
     "module/powermenu" = {
       type = "custom/menu";
       format-underline = "\${colors.grey}";
       expand-right = "true";
       format-spacing = 1;
-      label-open = "⚙";
+      label-open = "⏻";
       label-open-foreground = "\${colors.secondary}";
-      label-close = "close";
+      label-close = "%{F#C4392E}✕%{F-}";
       label-close-foreground = "\${colors.secondary}";
       label-separator = "/";
       label-separator-foreground = "\${colors.foreground}";
 
-      menu-0-0 = "reboot";
+      menu-0-0 = "%{F#83A9C8}reboot%{F-}";
       menu-0-0-exec = "menu-open-1";
-      menu-0-1 = "power off";
+      menu-0-1 = "%{F#83A9C8}power off%{F-}";
       menu-0-1-exec = "menu-open-2";
 
-      menu-1-0 = "cancel";
-      menu-1-0-exec = "menu-open-0";
-      menu-1-1 = "reboot";
-      menu-1-1-exec = "sudo reboot";
+      menu-1-0 = "%{F#CB2A2F}reboot%{F-}";
+      menu-1-0-exec = "sudo reboot";
 
-      menu-2-0 = "power off";
+      menu-2-0 = "%{F#CB2A2F}power off%{F-}";
       menu-2-0-exec = "sudo poweroff";
-      menu-2-1 = "cancel";
-      menu-2-1-exec = "menu-open-0";
     };
     "module/xmonad" = {
       type = "custom/script";
