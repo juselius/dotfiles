@@ -108,7 +108,6 @@
     initExtra = ''
       xsetroot -solid '#888888'
       xsetroot -cursor_name left_ptr
-      expoer DBUS_SESSION_BUS_ADDRESS=/run/user/1000/bus
       ${pkgs.gnome3.gnome-settings-daemon}/libexec/gsd-xsettings &
       systemctl --user start gvfs-udisks2-volume-monitor.service
       xset s off

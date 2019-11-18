@@ -146,7 +146,7 @@
       type = "internal/alsa";
       format-volume = "<label-volume>";
       label-muted = "muted";
-      label-volume = "%{A1:${pkgs.pavucontrol}/bin/pavucontrol:}♫%{A} %percentage%%";
+      label-volume = "%{A1:${pkgs.pavucontrol}/bin/pavucontrol:}%{A} %percentage%%";
       label-muted-foreground = "#66";
     };
   };
