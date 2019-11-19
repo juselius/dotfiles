@@ -42,11 +42,11 @@ let
       target = ".ssh";
       recursive = true;
     };
-    gnupg = {
-      source = ~/.dotfiles/gnupg;
-      target = ".gnupg";
-      recursive = true;
-    };
+    # gnupg = {
+    #   source = ~/.dotfiles/gnupg;
+    #   target = ".gnupg";
+    #   recursive = true;
+    # };
   };
 
   extraDotfiles = [
