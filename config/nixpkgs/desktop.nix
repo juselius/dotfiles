@@ -92,7 +92,7 @@
       maxCacheTtl = 64800;
       maxCacheTtlSsh = 64800;
       extraConfig = ''
-        # pinentry-program ${pkgs.pinentry}/bin/pinentry
+        pinentry-program ${pkgs.pinentry-gtk2}/bin/pinentry
       '';
     };
   };
