@@ -40,11 +40,10 @@ set termguicolors
 if !has('nvim')
     set clipboard=unnamedplus,autoselect
 endif
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
-noremap <Leader>. @:
+
+noremap <C-.> @:
+noremap <C-C> "+y
+noremap <C-A> "+p
 
 " zap the damned Ex mode.
 nnoremap Q <nop>
