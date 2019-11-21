@@ -8,7 +8,7 @@
       background-transparent = "#00303030";
       background-alt = "#c0303030";
       background-alt-2 = "#ff5fafcf";
-      foreground = "#eeeeee";
+      foreground = "#dddddd";
       foreground-alt = "#c1c2c3";
       red = "#fb4934";
       green = "#b8bb26";
@@ -39,7 +39,7 @@
       font-2 = "Material Icons:style=Regular:size=14";
       font-3 = "Noto Sans Symbols2:size=13";
       font-4 = "Noto Color Emoji:style=Regular";
-      modules-right = "cpu memory eth powermenu date";
+      modules-right = "cpu memory net date powermenu";
       modules-center = "";
       modules-left = "xmonad";
       tray-position = "right";
@@ -60,7 +60,6 @@
       format = "<label>";
       format-prefix = "cpu ";
       format-prefix-foreground = "\${colors.foreground}";
-      format-underline = "\${colors.grey}";
       label = "%percentage%%";
     };
     "module/memory" = {
@@ -69,7 +68,6 @@
       format = "<bar-used>";
       format-prefix = "mem ";
       format-prefix-foreground = "\${colors.foreground}";
-      format-underline = "\${colors.grey}";
       label = "%percentage_used%%";
       bar-used-indicator = "";
       bar-used-width = "10";
@@ -81,19 +79,15 @@
       bar-used-empty = "▐";
       bar-used-empty-foreground = "#444444";
     };
-    "module/eth" = {
+    "module/net" = {
       type = "internal/network";
       interface = "ens33";
       interval = "2.0";
       format-connected = "<label-connected>";
-      format-connected-underline = "\${colors.grey}";
-      format-connected-prefix = "";
-      format-connected-prefix-foreground = "\${colors.foreground}";
-      label-connected = "%ifname%: ↓%{F#999999}%downspeed%%{F-} ↑%{F#999999}%upspeed%%{F-}";
+      label-connected = "%ifname%: %{F#83a598}↓%{F-}%downspeed% %{F#fb4934}↑%{F-}%upspeed%";
     };
     "module/powermenu" = {
       type = "custom/menu";
-      format-underline = "\${colors.grey}";
       expand-right = "true";
       format-spacing = 1;
       label-open = "⏻";
