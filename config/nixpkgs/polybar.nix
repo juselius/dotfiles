@@ -29,17 +29,17 @@
     "bar/top" = {
       # monitor = "\${env:MONITOR:VGA-1}";
       width = "100%";
-      height = 24;
+      height = 20;
       radius = 0;
       padding = 1;
       module-margin = 2;
       separator = "|";
-      font-0 = "NotoSans Regular:size=12;2";
+      font-0 = "NotoSans Regular:size=8;2";
       font-1 = "Termsynu:size=8;-1";
-      font-2 = "Material Icons:style=Regular:size=14";
-      font-3 = "Noto Sans Symbols2:size=13";
-      font-4 = "Noto Color Emoji:style=Regular";
-      modules-right = "cpu memory net date powermenu";
+      font-2 = "Material Icons:style=Regular:size=10";
+      font-3 = "Noto Sans Symbols2:size=10";
+      font-4 = "Noto Color Emoji:style=Regular:size=10";
+      modules-right = "cpu memory eth date powermenu";
       modules-center = "";
       modules-left = "xmonad";
       tray-position = "right";
@@ -81,8 +81,8 @@
     };
     "module/net" = {
       type = "internal/network";
-      interface = "ens33";
-      interval = "2.0";
+      interface = "eno2";
+      interval = 1;
       format-connected = "<label-connected>";
       label-connected = "%ifname%: %{F#83a598}↓%{F-}%downspeed% %{F#fb4934}↑%{F-}%upspeed%";
     };
