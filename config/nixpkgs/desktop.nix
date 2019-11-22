@@ -51,34 +51,14 @@
   };
 
   services = {
+    polybar = import ./polybar.nix { inherit pkgs; };
+
     flameshot.enable =  true;
 
     screen-locker = {
       enable = true;
       inactiveInterval = 45;
       lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
-    };
-
-    polybar = {
-      enable = false;
-      script = "polybar bar/top &";
-      config = {
-        "bar/top" = {
-          # monitor = "\${env:MONITOR:VGA-1}";
-          width = "100%";
-          height = "3%";
-          radius = 0;
-          modules-center = "date";
-        };
-
-        "module/date" = {
-          type = "internal/date";
-          internal = 5;
-          date = "%d.%m.%y";
-          time = "%H:%M";
-          label = "%time%  %date%";
-        };
-      };
     };
 
     network-manager-applet.enable = true;
