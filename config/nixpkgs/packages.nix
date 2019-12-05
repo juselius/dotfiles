@@ -1,8 +1,8 @@
 { pkgs, options }:
 with pkgs;
 let
-  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
-  hie = all-hies.selection { selector = p: { inherit (p) ghc865; }; };
+  # all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  # hie = all-hies.selection { selector = p: { inherit (p) ghc865; }; };
   sys = [
     dpkg
     cryptsetup
@@ -130,19 +130,20 @@ let
     haskellPackages.yeganesh
     xmobar
     dmenu
+    zoom-us
   ];
   haskell = if ! options.haskell then [] else with haskellPackages; [
     ghc
     stack
-    # hie
-    # cabal-install
+    hie
+    cabal-install
+    hlint
+    hoogle
     # cabal2nix
     # alex
     # happy
     # cpphs
     # hscolour
-    # hlint
-    # hoogle
     # haddock
     # pointfree
     # pointful
@@ -151,14 +152,6 @@ let
     # hindent
     # codex
     # hscope
-    # parallel
-    # aeson
-    # split
-    # tasty
-    # tasty-hunit
-    # tasty-smallcheck
-    # contravariant
-    # profunctors
     # glirc
   ];
   dotnet = if ! options.dotnet then [] else with dotnetPackages; [
