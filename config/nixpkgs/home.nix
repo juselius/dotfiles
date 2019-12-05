@@ -1,19 +1,7 @@
 {pkgs, ...}:
 with pkgs.lib;
 let
-  options = {
-    desktop = {
-      enable = true;
-      dropbox = false;
-    };
-    dotnet = false;
-    node = false;
-    haskell = false;
-    python = false;
-    proton = false;
-    languages = false;
-    vimDevPlugins = true;
-  };
+  options = import ./options.nix;
 
   gitUser = {
     userEmail = "jonas.juselius@itpartner.no";
@@ -99,7 +87,7 @@ in
   };
 
   home.sessionVariables = {
-    GIT_ALLOW_PROTOCOL = "keybase:ssh:https";
+    GIT_ALLOW_PROTOCOL = "ssh:https:keybase:file";
   };
 
   programs = {
@@ -231,7 +219,7 @@ in
   systemd.user.startServices = true;
   systemd.user.sessionVariables = {
     GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
-    GIT_ALLOW_PROTOCOL = "keybase:ssh:https";
+    GIT_ALLOW_PROTOCOL = "ssh:https:keybase:file";
   };
 
 
