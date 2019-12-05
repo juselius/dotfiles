@@ -1,11 +1,8 @@
-set expandtab 
-set shiftwidth=2 
+set expandtab
+set shiftwidth=2
 set softtabstop=2
 setlocal completeopt+=longest
 autocmd BufWritePre <buffer> call StripTrailingWhitespace()
-" if executable("ghc-mod")
-"     autocmd BufWritePost GhcModCheckAndLintAsync
-" endif
 
 let g:haskell_enable_quantification = 1   " highlighting of forall
 let g:haskell_enable_recursivedo = 1      " highlighting of mdo and rec
@@ -19,24 +16,6 @@ let g:haskell_indent_let = 4
 let g:haskell_indent_where = 4
 let g:haskell_indent_do = 4
 let g:haskell_indent_in = 4
-
-" Use buffer words as default tab completion
-let g:SuperTabDefaultCompletionType = '<c-x><c-p>'
-
-" GhcMod configs
-"let g:ghcmod_hlint_options = ['--ignore=Redundant $']
-let g:ghcmod_open_quickfix_function = 'GhcModQuickFix'
-function! GhcModQuickFix()
-    " for unite.vim and unite-quickfix
-    " :Unite -no-empty quickfix
-
-    " for ctrlp
-    " :CtrlPQuickfix
-
-    " for FuzzyFinder
-    ":FufQuickfix
-endfunction
-
 
 " Tags {{{
 
@@ -74,17 +53,10 @@ let g:tagbar_type_haskell = {
     \ }
 \ }
 
-set completeopt+=longest
-
-" Use buffer words as default tab completion
-let g:SuperTabDefaultCompletionType = '<c-x><c-p>'
-
 " Generate haskell tags with codex and hscope
 map <leader>tg :!codex update --force<CR>:call system("git hscope -X TemplateHaskell")<CR><CR>:call LoadHscope()<CR>
 
-map <leader>tt :TagbarToggle<CR>
-
-set csprg=~/.cabal/bin/hscope
+set csprg=~/.nix-profile/bin/hscope
 set csto=1 " search codex tags first
 set cst
 set csverb
@@ -104,44 +76,17 @@ autocmd BufEnter <buffer> call LoadHscope()
 
 " }}}
 
-" But provide (neco-ghc) omnicompletion
-if has("gui_running")
-  imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-  endif
-endif
+" " But provide (neco-ghc) omnicompletion
+" if has("gui_running")
+"   imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+" else " no gui
+"   if has("unix")
+"     inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+"   endif
+" endif
 
 " Show types in completion suggestions
-let g:necoghc_enable_detailed_browse = 1
-
-" Type of expression under cursor
-nmap <silent> <leader>ht :GhcModType<CR>
-" Insert type of expression under cursor
-nmap <silent> <leader>hT :GhcModTypeInsert<CR>
-" GHC errors and warnings
-nmap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>
-" Haskell Lint
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
-nmap <silent> <leader>hl :SyntasticCheck hlint<CR>
-
-" Hoogle the word under the cursor
-nnoremap <silent> <leader>hh :Hoogle<CR>
-
-" Hoogle and prompt for input
-nnoremap <leader>hH :Hoogle<space>
-
-" Hoogle for detailed documentation (e.g. "Functor")
-nnoremap <silent> <leader>hi :HoogleInfo<CR>
-
-" Hoogle for detailed documentation and prompt for input
-nnoremap <leader>hI :HoogleInfo<space>
-
-" Hoogle, close the Hoogle window
-nnoremap <silent> <leader>hz :HoogleClose<CR>
-
-" }}}
+" let g:necoghc_enable_detailed_browse = 1
 
 " Conversion {{{
 
@@ -155,4 +100,20 @@ function! Pointful()
 endfunction
 vnoremap <silent> <leader>h> :call Pointful()<CR>
 
+" }}}
+
+" HIE {{{
+set rtp+=~/.vim/pack/XXX/start/LanguageClient-neovim
+let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper'] }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+map <Leader>lk :call LanguageClient#textDocument_hover()<CR>
+map <Leader>lg :call LanguageClient#textDocument_definition()<CR>
+map <Leader>lr :call LanguageClient#textDocument_rename()<CR>
+map <Leader>lf :call LanguageClient#textDocument_formatting()<CR>
+map <Leader>lb :call LanguageClient#textDocument_references()<CR>
+map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
+map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+
+" let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
 " }}}
