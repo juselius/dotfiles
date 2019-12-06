@@ -244,6 +244,7 @@ in
     omf = {
       source = ~/.dotfiles/local/share/omf;
       target = "omf";
+      recursive = true;
     };
   };
 }
