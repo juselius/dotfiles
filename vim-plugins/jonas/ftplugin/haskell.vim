@@ -115,5 +115,12 @@ map <Leader>lb :call LanguageClient#textDocument_references()<CR>
 map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 
+if has('nvim') && exists('*nvim_open_win')
+  augroup HieShowTooltip
+    autocmd!
+    autocmd CursorHold * call LanguageClient#textDocument_hover()
+  augroup END
+endif
+
 " let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
 " }}}

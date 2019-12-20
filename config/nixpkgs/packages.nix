@@ -1,8 +1,8 @@
 { pkgs, options }:
 with pkgs;
 let
-  # all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
-  hie = unstable.selection { selector = p: { inherit (p) ghc865; }; };
+  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  hie = all-hies.selection { selector = p: { inherit (p) ghc865; }; };
   sys = [
     dpkg
     cryptsetup
