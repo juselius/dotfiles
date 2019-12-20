@@ -124,6 +124,7 @@
 
   programs.termite = {
     enable = true;
+    clickableUrl = false;
     font = "Monospace 10";
     foregroundColor         = "#d8d8d8";
     foregroundBoldColor     = "#e8e8e8";
