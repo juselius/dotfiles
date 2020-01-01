@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ ! -f ~/.dotnet/tools/dotnet-retire ]; then
+    echo "Attempting to install the dotnet paket cli"
+    dotnet tool install -g dotnet-retire
+fi
+
+export DOTNET_ROOT=/tmp/dotnet-sdk/3.0.100
+exec ~/.dotnet/tools/dotnet-retire $@
+
+# vim:ft=sh
