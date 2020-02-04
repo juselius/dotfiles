@@ -155,8 +155,8 @@ let
     # glirc
   ];
   dotnet = if ! options.dotnet then [] else with dotnetPackages; [
-    # mono
-    # dotnet-sdk
+    dotnet-sdk_3
+    mono
   ];
   python = if ! options.python then [] else with pythonPackages;
      python3.withPackages (ps: with ps; [
