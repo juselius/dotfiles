@@ -5,7 +5,7 @@ if [ ! -f ~/.dotnet/tools/fake ]; then
     dotnet tool install -g fake-cli
 fi
 
-export DOTNET_ROOT=/tmp/dotnet-sdk/3.0.100
+#export DOTNET_ROOT=/nix/store/f3cvcvf900h9svrn52dj2cnz63zy3f23-dotnet-sdk-3.1.101
 exec ~/.dotnet/tools/fake $@
 
 # vim:ft=sh
