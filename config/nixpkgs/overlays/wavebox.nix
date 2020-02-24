@@ -1,8 +1,8 @@
 self: super:
 with super.stdenv.lib;
 let
-  version = "4.11.11";
-  tarball = "Wavebox_${replaceStrings ["."] ["_"] (toString version)}_linux_x86_64.tar.gz";
+  version = "10.0.86-2";
+  tarball = "Wavebox_${version}.tar.gz";
   desktopItem = super.makeDesktopItem rec {
     name = "Wavebox";
     exec = name;
@@ -16,8 +16,8 @@ in
   wavebox = super.wavebox.overrideAttrs (attrs: rec {
     name = "wavebox-${version}";
     src = super.fetchurl {
-      url = "https://github.com/wavebox/waveboxapp/releases/download/v${version}/${tarball}";
-      sha256 = "0ccs9ss30wcxzw86l3dz11jvd4ppn4izia8q8d0zyk1sr4nmrhfs";
+      url = "https://download.wavebox.app/stable/linux/tar/${tarball}";
+      sha256 = "1lx8jx6ix2hmbz7hpbxky8lg97l52xwwv5fabnax3n51g3d03p7n";
     };
     installPhase = ''
       mkdir -p $out/bin $out/opt/wavebox
@@ -28,5 +28,10 @@ in
       ln -s ${desktopItem}/share/applications/* $out/share/applications
       ln -s $out/opt/wavebox/wavebox_icon.png $out/share/pixmaps/wavebox.png
     '';
+    postFixup = ''
+      makeWrapper $out/opt/wavebox/wavebox $out/bin/wavebox \
+      --prefix PATH : ${self.xdg_utils}/bin
+    '';
+
   });
 }
