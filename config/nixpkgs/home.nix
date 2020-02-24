@@ -54,7 +54,7 @@ in
   ];
 
   nixpkgs.overlays = [
-    (import ./overlays/dotnet-sdk.nix)
+    # (import ./overlays/dotnet-sdk.nix)
     (import ./overlays/vscode.nix)
     (import ./overlays/wavebox.nix)
   ];
@@ -88,6 +88,7 @@ in
 
   home.sessionVariables = {
     GIT_ALLOW_PROTOCOL = "ssh:https:keybase:file";
+    DOTNET_ROOT = pkgs.dotnetCorePackages.sdk_3_1;
   };
 
   programs = {
