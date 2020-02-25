@@ -105,8 +105,9 @@
       xsetroot -cursor_name left_ptr
       ${pkgs.gnome3.gnome-settings-daemon}/libexec/gsd-xsettings &
       systemctl --user start gvfs-udisks2-volume-monitor.service
-      xset s off
-      xset dpms 0 0 3600
+      xset s 1800
+      xset +dpms
+      xset dpms 1800 2400 3600
       xmodmap $HOME/.dotfiles/Xmodmap
     '';
     windowManager.xmonad = {
