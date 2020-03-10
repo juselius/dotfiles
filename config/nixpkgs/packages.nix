@@ -28,9 +28,12 @@ let
     tomb
     sshuttle
     minio-client
+    openfortivpn
+    lorri
   ];
   devel = [
     git
+    niv
     patchelf
     binutils
     gcc
@@ -134,7 +137,7 @@ let
   ];
   haskell = if ! options.haskell then [] else with haskellPackages; [
     ghc
-    stack
+    # stack
     hie
     cabal-install
     hlint
