@@ -10,5 +10,12 @@
   proton = false;
   languages = false;
   vimDevPlugins = true;
+  gitUser = {
+    userEmail = "jonas.juselius@itpartner.no";
+    userName = "Jonas Juselius";
+    signing = {
+      key = "jonas.juselius@gmail.com";
+    };
+  };
 }
 

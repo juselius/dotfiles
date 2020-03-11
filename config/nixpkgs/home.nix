@@ -3,14 +3,6 @@ with pkgs.lib;
 let
   options = import ./options.nix;
 
-  gitUser = {
-    userEmail = "jonas.juselius@itpartner.no";
-    userName = "Jonas Juselius";
-    signing = {
-      key = "jonas.juselius@gmail.com";
-    };
-  };
-
   sshConfig = {
     compression = false;
     forwardAgent = true;
@@ -44,6 +36,8 @@ let
     "ghci"
     "haskeline"
   ];
+
+  gitUser = options.gitUser;
 in
 {
   require = [
