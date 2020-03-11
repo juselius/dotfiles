@@ -39,7 +39,11 @@
       font-2 = "Material Icons:style=Regular:size=10";
       font-3 = "Noto Sans Symbols2:size=10";
       font-4 = "Noto Color Emoji:style=Regular:size=10";
-      modules-right = "cpu memory net battery date powermenu";
+      modules-right =
+        if options.desktop.laptop then
+          "cpu memory net battery date powermenu"
+        else
+          "cpu memory net date powermenu";
       modules-center = "";
       modules-left = "xmonad";
       tray-position = "right";
