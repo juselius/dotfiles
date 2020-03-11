@@ -17,5 +17,11 @@
       key = "jonas.juselius@gmail.com";
     };
   };
+  sshHosts = {
+    example = {
+      user = "demo";
+      hostname = "acme.com";
+    };
+  };
 }
 

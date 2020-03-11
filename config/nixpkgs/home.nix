@@ -8,12 +8,7 @@ let
     forwardAgent = true;
     serverAliveInterval = 30;
     extraConfig = "IPQoS throughput";
-    matchBlocks = {
-      example = {
-        user = "example";
-        hostname = "example.com";
-      };
-    };
+    matchBlocks = options.sshHosts;
   };
 
   privateFiles = if ! options.desktop.enable then {} else {
@@ -27,13 +22,6 @@ let
     #   target = ".gnupg";
     #   recursive = true;
     # };
-  };
-
-  sshConfig = {
-    compression = false;
-    forwardAgent = true;
-    serverAliveInterval = 30;
-    extraConfig = "IPQoS throughput";
   };
 
   extraDotfiles = [
