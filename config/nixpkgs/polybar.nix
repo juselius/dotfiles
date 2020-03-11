@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, options, ...}:
 {
   enable = true;
   script = "polybar top &";
@@ -39,7 +39,7 @@
       font-2 = "Material Icons:style=Regular:size=10";
       font-3 = "Noto Sans Symbols2:size=10";
       font-4 = "Noto Color Emoji:style=Regular:size=10";
-      modules-right = "cpu memory net date powermenu";
+      modules-right = "cpu memory net battery date powermenu";
       modules-center = "";
       modules-left = "xmonad";
       tray-position = "right";
@@ -81,7 +81,7 @@
     };
     "module/net" = {
       type = "internal/network";
-      interface = "eno2";
+      interface = "\${env:DEFAULT_NETWORK_INTERFACE:${options.eth}}";
       interval = 1;
       format-connected = "<label-connected>";
       label-connected = "%ifname%: %{F#83a598}↓%{F-}%downspeed% %{F#fb4934}↑%{F-}%upspeed%";
@@ -119,26 +119,26 @@
     };
     "module/battery" = {
       type = "internal/battery";
-      battery = "BAT1";
-      adapter = "ADP1";
+      battery = "BAT0";
+      adapter = "AC";
       full-at = "98";
       time-format = "%H:%M";
       format-charging = "<animation-charging>";
       format-discharging = "<ramp-capacity> <label-discharging>";
-      label-discharging = "%time%";
-      format-full-prefix = "f ";
+      label-discharging = "%time% (%percentage%%)";
+      format-full-prefix = "F ";
       format-full-prefix-foreground = "\${colors.foreground}";
-      ramp-capacity-0 = "";
-      ramp-capacity-1 = "";
-      ramp-capacity-2 = "";
-      ramp-capacity-3 = "";
-      ramp-capacity-4 = "";
+      ramp-capacity-0 = "";
+      ramp-capacity-1 = "";
+      ramp-capacity-2 = "";
+      ramp-capacity-3 = "";
+      ramp-capacity-4 = "";
       ramp-capacity-foreground = "\${colors.foreground}";
-      animation-charging-0 = "";
-      animation-charging-1 = "";
-      animation-charging-2 = "";
-      animation-charging-3 = "";
-      animation-charging-4 = "";
+      animation-charging-0 = "";
+      animation-charging-1 = "";
+      animation-charging-2 = "";
+      animation-charging-3 = "";
+      animation-charging-4 = "";
       animation-charging-foreground = "\${colors.foreground}";
       animation-charging-framerate = "750";
     };
