@@ -1,7 +1,7 @@
 {
   allowUnfree = true;
   permittedInsecurePackages = [
-    "mono-4.6.2.16"
+    "openssl-1.0.2u"
   ];
   packageOverrides = pkgs: with pkgs; {
     myTerraform = terraform.withPlugins (ps: with ps; [
