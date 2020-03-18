@@ -20,6 +20,7 @@ let
     pciutils
     pwgen
     usbutils
+    nixos-generators
   ];
   user = [
     kubernetes-helm
@@ -31,6 +32,7 @@ let
     openfortivpn
     lorri
     direnv
+    byobu
   ];
   devel = [
     git
@@ -50,30 +52,80 @@ let
     gettext
     nix-prefetch-scripts
     sqlite-interactive
+    gnum4
+    python37Packages.virtualenv
     # sqsh
     # automake
     # autoconf
     # libtool
   ];
-  desktop = if ! options.desktop.enable then [] else [
+  media = [
+    guvcview # webcam
+    shotcut
+    simplescreenrecorder
+    audacity
+    gcolor3
+    xf86_input_wacom
+    mpv
+  ];
+  x11 = with xorg; [
+    appres
+    editres
+    listres
+    viewres
+    luit
+    xdpyinfo
+    xdriinfo
+    xev
+    xfd
+    xfontsel
+    xkill
+    xlsatoms
+    xlsclients
+    xlsfonts
+    xmessage
+    xprop
+    xvinfo
+    xwininfo
+    glxinfo
+    xclip
+    xmessage
+    xvinfo
+    xmodmap
+    xsel
+  ];
+  gnome = with gnome3; [
+    gnome-settings-daemon
+    gnome-font-viewer
+    adwaita-icon-theme
+    gnome-themes-extra
+    evince
+    gnome-calendar
+    gnome-bluetooth
+    seahorse
+    nautilus
+    dconf
+    gnome-disk-utility
+    gnome-tweaks
+    eog
+    networkmanager-fortisslvpn
+    gnome-keyring
+    dconf-editor
+  ];
+  desktop = if ! options.desktop.enable then [] else ([
+    xmonad-log
     dropbox-cli
     wireshark-qt
-    xorg.xmodmap
-    xorg.xev
     glib
     google-chrome
     # googleearth
     firefox
     drive
     meld
-    mplayer
-    xorg.xmessage
-    xorg.xvinfo
     imagemagick
     rdesktop
     remmina
     scrot
-    xsel
     taskwarrior
     # timewarrior
     pass
@@ -81,7 +133,6 @@ let
     pavucontrol
     gimp
     spotify
-    gnome3.dconf-editor
     signal-desktop
     inkscape
     # ledger
@@ -90,6 +141,8 @@ let
     # pidginsipe
     vscode
     # browserpass
+    blueman
+    gparted
     calibre
     cargo
     farstream
@@ -110,23 +163,7 @@ let
     tlaps
     unrtf
     # wireshark-cli
-    xclip
     wavebox
-    gnome3.gnome-settings-daemon
-    gnome3.gnome-font-viewer
-    gnome3.adwaita-icon-theme
-    gnome3.gnome-themes-extra
-    gnome3.evince
-    gnome3.gnome-calendar
-    gnome3.gnome-bluetooth
-    gnome3.seahorse
-    gnome3.nautilus
-    gnome3.dconf
-    gnome3.gnome-disk-utility
-    gnome3.gnome-tweaks
-    gnome3.eog
-    blueman
-    gparted
     virtmanager
     qrencode
     wkhtmltopdf
@@ -134,8 +171,13 @@ let
     haskellPackages.yeganesh
     xmobar
     dmenu
-    zoom-us
-  ];
+   # zoom-us
+    teams
+  ]
+  ++ gnome
+  ++ x11
+  ++ media
+  ++ []);
   haskell = if ! options.haskell then [] else with haskellPackages; [
     ghc
     # stack
@@ -195,16 +237,18 @@ let
     io
     clooj
     leiningen
+    go
+    go2nix
   ];
 in
-  sys ++
-  user ++
-  devel ++
-  desktop ++
-  dotnet ++
-  haskell ++
-  node ++
-  languages ++
-  python ++
-  proton ++
-  []
+  sys
+  ++ user
+  ++ devel
+  ++ desktop
+  ++ dotnet
+  ++ haskell
+  ++ node
+  ++ languages
+  ++ python
+  ++ proton
+  ++ [] # my monoid friend
