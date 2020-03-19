@@ -21,6 +21,7 @@ let
     pwgen
     usbutils
     nixos-generators
+    utillinux
   ];
   user = [
     kubernetes-helm
@@ -33,6 +34,13 @@ let
     lorri
     direnv
     byobu
+  ];
+  libs = [
+    icu
+    zlib
+    lttng-ust
+    libsecret
+    libkrb5
   ];
   devel = [
     git
@@ -58,7 +66,8 @@ let
     # automake
     # autoconf
     # libtool
-  ];
+  ]
+  ++ libs;
   media = [
     guvcview # webcam
     shotcut
@@ -111,6 +120,7 @@ let
     networkmanager-fortisslvpn
     gnome-keyring
     dconf-editor
+    desktop-file-utils
   ];
   desktop = if ! options.desktop.enable then [] else ([
     xmonad-log
