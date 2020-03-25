@@ -1,4 +1,4 @@
-set PATH ~/.local/bin $PATH
+set PATH ~/.local/bin $PATH ~/.dotnet/tools
 
 set -x EDITOR nvim
 set -x VISUAL nvim
