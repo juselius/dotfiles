@@ -7,13 +7,13 @@ let
 in
 {
   vscode = super.vscode.overrideAttrs (attrs: rec {
-      version = "1.43.1";
+      version = "1.43.2";
       name = "vscode-${version}";
 
       src = super.fetchurl {
         name = "VSCode_${version}_${plat}.${archive_fmt}";
         url = "https://vscode-update.azurewebsites.net/${version}/${plat}/stable";
-        sha256 = "1zzyihkd1q6h927i0rli0jnwj7h8r2s3sg2cd99c43k874f4swb5";
+        sha256 = "1vaga9ykib8b1rp502wpkq5hhsj6a0f0a4akkd3bs6wc4m74ff4g";
       };
       # postFixup = ''
       #     wrapProgram $out/bin/code --prefix PATH : ${lib.makeBinPath [hie]}
