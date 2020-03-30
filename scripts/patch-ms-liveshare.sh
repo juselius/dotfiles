@@ -82,7 +82,7 @@ function patch {
 }
 
 if [[ $# -eq 0 ]]; then
-    # patch
+    patch
     cd ~/.config/Code/User/globalStorage/ms-vsliveshare.vsliveshare
     rm -rf dotnet-3.1.1
     ln -s "$(resolve dotnetCorePackages.sdk_3_1)" dotnet-3.1.1
