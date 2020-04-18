@@ -72,7 +72,10 @@ in
   home.keyboard = {
     layout = "us(altgr-intl)";
     model = "pc104";
-    options = [ "eurosign:e" "caps:none" ];
+    options = [
+      "eurosign:e"
+      "caps:none"
+    ];
   };
 
   home.sessionVariables = {
