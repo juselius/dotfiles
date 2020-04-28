@@ -1,7 +1,7 @@
 self: super:
 with super.stdenv.lib;
 let
-  version = "10.0.128-2";
+  version = "10.0.142-2";
   tarball = "Wavebox_${version}.tar.gz";
   desktopItem = super.makeDesktopItem rec {
     name = "Wavebox";
@@ -17,7 +17,7 @@ in
     name = "wavebox-${version}";
     src = super.fetchurl {
       url = "https://download.wavebox.app/stable/linux/tar/${tarball}";
-      sha256 = "108561fs6mwlv0kpnmb2v1cwj4q5w6wlqaczrkk33rlycapg0xs7";
+      sha256 = "065mi550xlr7rqkjqwk41z3jc30nskrl810j91z4n83msy36vnld";
     };
     installPhase = ''
       mkdir -p $out/bin $out/opt/wavebox
