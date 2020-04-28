@@ -62,6 +62,7 @@ let
     sqlite-interactive
     gnum4
     python37Packages.virtualenv
+    chromedriver # for selenium
     # sqsh
     # automake
     # autoconf
