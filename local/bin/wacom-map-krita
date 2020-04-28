@@ -2,8 +2,10 @@
 
 id=$(xsetwacom list |grep STYLUS | sed 's/.*id: \([0-9]\+\).*/\1/')
 case $1 in
-    1) xsetwacom set $id maptooutput 1555x1101+83+80 ;;
-    *) xsetwacom set $id maptooutput 1555x1101+2003+80 ;;
+    # 1) xsetwacom set $id maptooutput 1555x1101+83+80 ;;
+    # *) xsetwacom set $id maptooutput 1555x1101+2003+80 ;;
+    1) xsetwacom set $id maptooutput 1920x1200+0+0 ;;
+    *) xsetwacom set $id maptooutput 1920x1200+1920+0 ;;
 esac
 xsetwacom set $id Button 2 "button 0"
 xsetwacom set $id Button 3 "button 0"
