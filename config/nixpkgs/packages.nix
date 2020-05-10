@@ -63,6 +63,7 @@ let
     gnum4
     python37Packages.virtualenv
     chromedriver # for selenium
+    jq
     # sqsh
     # automake
     # autoconf
