@@ -64,6 +64,7 @@ let
     python37Packages.virtualenv
     chromedriver # for selenium
     jq
+    websocat
     # sqsh
     # automake
     # autoconf
