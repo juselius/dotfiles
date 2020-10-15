@@ -13,9 +13,11 @@ let
   dotnet-sdk-3 =
     with self.pkgs;
     let
-      version = "3.0.100";
-      netCoreVersion = "3.0.0";
-      rpath = stdenv.lib.makeLibraryPath [ stdenv.cc.cc libunwind libuuid icu openssl zlib curl ];
+      version = "3.1.300";
+      netCoreVersion = "3.1.4";
+      rpath = stdenv.lib.makeLibraryPath [
+        stdenv.cc.cc libunwind libuuid icu openssl zlib curl libkrb5
+      ];
 
       dotnet-sdk =
         stdenv.mkDerivation rec {
@@ -91,5 +93,5 @@ let
 in
 {
   # dotnet-sdk-2 = dotnet-sdk-2;
-  # dotnet-sdk = dotnet-sdk-3;
+  dotnet-sdk = dotnet-sdk-3;
 }
