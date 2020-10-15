@@ -4,6 +4,13 @@
     browserpass.enable = true;
     feh.enable = true;
     firefox.enable = true;
+    gpg = {
+      enable = true;
+      settings = {
+        use-agent = true;
+      };
+    };
+
   };
 
   home.file = {
@@ -19,22 +26,7 @@
     };
   };
 
-  systemd.user.services.dropbox =
-    if options.desktop.dropbox then
-      {
-        Unit = {
-          Description = "Dropbox";
-        };
-        Service = {
-          ExecStart = "${pkgs.dropbox}/bin/dropbox";
-          Restart = "on-failure";
-          RestartSec = "10s";
-        };
-        Install = {
-          WantedBy = [ "default.target" ];
-        };
-      }
-    else {};
+  services.dropbox.enable = if options.desktop.dropbox then true else false;
 
   systemd.user.services.pa-applet = {
       Unit = {
@@ -54,6 +46,7 @@
     polybar = import ./polybar.nix { inherit pkgs options; };
 
     flameshot.enable =  true;
+    clipmenu.enable =  true;
 
     screen-locker = {
       enable = true;
@@ -67,10 +60,10 @@
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
-      defaultCacheTtl = 64800; # 18 hours
-      defaultCacheTtlSsh = 64800;
-      maxCacheTtl = 64800;
-      maxCacheTtlSsh = 64800;
+      defaultCacheTtl = 43200; # 12 hours
+      defaultCacheTtlSsh = 43200;
+      maxCacheTtl = 604800; # 7 days
+      maxCacheTtlSsh = 604800;
       extraConfig = ''
         pinentry-program ${pkgs.pinentry-gtk2}/bin/pinentry
       '';
@@ -120,6 +113,19 @@
         pkgs.xmonad-log
         self.string-conversions
       ];
+    };
+  };
+
+  programs.keychain.enable = true;
+
+  programs.vscode = {
+    enable = true;
+    # extensions = [];
+    haskell = {
+      enable = false;
+      hie.enable = false;
+    };
+    userSettings = {
     };
   };
 
