@@ -25,6 +25,7 @@ let
   ];
   user = [
     kubernetes-helm
+    kustomize
     kubectl
     gnupg
     tomb
@@ -51,7 +52,6 @@ let
     gdb
     cmake
     libxml2
-    chromedriver
     awscli
     postgresql
     docker_compose
@@ -173,7 +173,7 @@ let
     innoextract
     tectonic
     timewarrior
-    tlaps
+    # tlaps
     unrtf
     # wireshark-cli
     wavebox

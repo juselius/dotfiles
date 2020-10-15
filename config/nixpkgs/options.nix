@@ -4,6 +4,7 @@
     enable = true;
     dropbox = false;
   };
+  wsl.enable = false;
   dotnet = false;
   node = false;
   haskell = false;
