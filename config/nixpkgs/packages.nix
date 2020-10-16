@@ -152,7 +152,7 @@ let
     # slack
     # pidgin
     # pidginsipe
-    vscode
+    # vscode
     # browserpass
     blueman
     gparted
@@ -214,7 +214,7 @@ let
     # glirc
   ];
   dotnet = if ! options.dotnet then [] else with dotnetCorePackages; [
-    sdk_3_1
+    sdk_3_1_403
     omnisharp-roslyn
     # mono
   ];

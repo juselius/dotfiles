@@ -1,20 +1,10 @@
 self: super:
 let
-  dotnet-sdk-2 =
-      super.dotnet-sdk.overrideAttrs (attrs: rec {
-      version = "2.2.402";
-      name = "dotnet-sdk-${version}";
-      src = super.fetchurl {
-        url = "https://dotnetcli.azureedge.net/dotnet/Sdk/${version}/dotnet-sdk-${version}-linux-x64.tar.gz";
-        sha256 = "16jp2xwz2dkmampjv7kixn9v6kjcfbbjww5xb2vdwvcwwkkf3bsd";
-      };
-    });
-
   dotnet-sdk-3 =
     with self.pkgs;
     let
-      version = "3.1.300";
-      netCoreVersion = "3.1.4";
+      version = "3.1.403";
+      netCoreVersion = "3.1.9";
       rpath = stdenv.lib.makeLibraryPath [
         stdenv.cc.cc libunwind libuuid icu openssl zlib curl libkrb5
       ];
@@ -26,7 +16,7 @@ let
 
           src = fetchurl {
             url = "https://dotnetcli.azureedge.net/dotnet/Sdk/${version}/${pname}-${version}-linux-x64.tar.gz";
-            sha512 = "3vxhwqv78z8s9pzq19gn0d35g4340m3zvnv70pglk1cgnk02k9hbh51dsf2j6bgcmdxay8q2719ll7baj1sc7n9287vzkqbk8gs6vbn";
+            sha512 = "3m8hzlkyd59xw64zg29nly6100mrdny9m82n3bzdw7f3dcaj64bsvpppw46s90dp8rs3w5z0kk40kp4sv112cp8nq2byhlhivp1j0qa";
           };
 
           sourceRoot = ".";
@@ -48,8 +38,8 @@ let
           postFixup = ''
             for i in \
               dotnet \
-              sdk/3.0.100/AppHostTemplate/apphost \
-              packs/Microsoft.NETCore.App.Host.linux-x64/3.0.0/runtimes/linux-x64/native/apphost
+              sdk/${version}/AppHostTemplate/apphost \
+              packs/Microsoft.NETCore.App.Host.linux-x64/${netCoreVersion}/runtimes/linux-x64/native/apphost
             do
               patchelf --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" $out/$i
               patchelf --set-rpath "${rpath}" $out/$i
@@ -92,6 +82,6 @@ let
       dotnet-wrapper;
 in
 {
-  # dotnet-sdk-2 = dotnet-sdk-2;
   dotnet-sdk = dotnet-sdk-3;
+  sdk_3_1_403 = dotnet-sdk-3;
 }
