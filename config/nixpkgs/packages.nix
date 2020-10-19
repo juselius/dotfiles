@@ -214,8 +214,8 @@ let
     # glirc
   ];
   dotnet = if ! options.dotnet then [] else with dotnetCorePackages; [
-    sdk_3_1_403
-    omnisharp-roslyn
+    sdk_3_1
+    # omnisharp-roslyn
     # mono
   ];
   python = if ! options.python then [] else with pythonPackages;

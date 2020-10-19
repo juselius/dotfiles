@@ -13,6 +13,7 @@ alias nix-zsh='nix-shell --command "exec zsh"'
 alias nix-fish='nix-shell --command "exec fish"'
 alias halt='halt -p'
 alias kc='kubectl'
+alias k='kubectl'
 alias tw='timew'
 alias vim=nvim
 alias home-manager='home-manager -f ~/.dotfiles/config/nixpkgs/home.nix'
