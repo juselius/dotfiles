@@ -213,8 +213,8 @@ let
     # hscope
     # glirc
   ];
-  dotnet = if ! options.dotnet then [] else with dotnetCorePackages; [
-    sdk_3_1
+  dotnet = if ! options.dotnet.enable then [] else with dotnetCorePackages; [
+    options.dotnet.sdk
     # omnisharp-roslyn
     # mono
   ];

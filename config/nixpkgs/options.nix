@@ -1,3 +1,4 @@
+pkgs:
 {
   desktop = {
     laptop = true;
@@ -5,7 +6,15 @@
     dropbox = false;
   };
   wsl.enable = false;
-  dotnet = false;
+  dotnet = rec {
+    enable = false;
+    sdk = pkgs.dotnetCorePackages.sdk_5_0;
+    root =
+      if enable then
+        { DOTNET_ROOT = sdk; }
+      else
+        {};
+  };
   node = false;
   haskell = false;
   python = false;
@@ -26,5 +35,6 @@
       hostname = "acme.com";
     };
   };
+
 }
 
