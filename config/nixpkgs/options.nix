@@ -1,8 +1,8 @@
 pkgs:
 {
   desktop = {
-    laptop = true;
-    enable = true;
+    enable = false;
+    laptop = false;
     dropbox = false;
   };
   wsl.enable = false;
@@ -21,7 +21,7 @@ pkgs:
   proton = false;
   languages = false;
   vimDevPlugins = true;
-  eth = "wlp0s20f3";
+  eth = "ens3";
   gitUser = {
     userEmail = "jonas.juselius@itpartner.no";
     userName = "Jonas Juselius";
