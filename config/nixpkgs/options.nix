@@ -20,7 +20,7 @@ pkgs:
   python = false;
   proton = false;
   languages = false;
-  vimDevPlugins = true;
+  vimDevPlugins = false;
   eth = "ens3";
   gitUser = {
     userEmail = "jonas.juselius@itpartner.no";
