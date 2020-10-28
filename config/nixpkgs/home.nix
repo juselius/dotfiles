@@ -289,6 +289,14 @@ in
     };
   };
 
+  xdg.dataFile = {
+    j = {
+      source = ~/.dotfiles/config/fish/themes/j;
+      target = "omf/themes/j";
+      recursive = false;
+    };
+  };
+
   services.unison = {
     enable = false;
     pairs = {

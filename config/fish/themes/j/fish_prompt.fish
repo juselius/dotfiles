@@ -1,4 +1,4 @@
-# name: L
+# name: J
 function _git_branch_name
   echo (command git symbolic-ref HEAD 2> /dev/null | sed -e 's|^refs/heads/||')
 end
@@ -12,7 +12,7 @@ function fish_prompt
   set -l green (set_color green)
   set -l normal (set_color normal)
 
-  if [ -z SSH_CONNECTION ]
+  if [ -z SSH_TTY ]
       set -g arrow "λ"
   else
       set -g arrow (set_color yellow) "λ" (set_color normal)
