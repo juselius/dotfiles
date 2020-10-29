@@ -195,7 +195,7 @@ in
 
     ssh = {
       enable = true;
-    };
+    } // sshConfig;
 
     tmux = {
       enable = true;
