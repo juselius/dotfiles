@@ -1,4 +1,4 @@
-{ pkgs, options, ... }:
+{ pkgs, cfg, ... }:
 {
   services = {
     gpg-agent = {

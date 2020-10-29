@@ -1,4 +1,4 @@
-{ pkgs, options }:
+{ pkgs, cfg }:
 with pkgs;
 let
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
@@ -125,7 +125,7 @@ let
     dconf-editor
     desktop-file-utils
   ];
-  desktop = if ! options.desktop.enable then [] else ([
+  desktop = if ! cfg.desktop.enable then [] else ([
     xmonad-log
     dropbox-cli
     wireshark-qt
@@ -191,7 +191,7 @@ let
   ++ x11
   ++ media
   ++ []);
-  haskell = if ! options.haskell then [] else with haskellPackages; [
+  haskell = if ! cfg.devel.haskell.enable then [] else with haskellPackages; [
     ghc
     # stack
     hie
@@ -213,18 +213,17 @@ let
     # hscope
     # glirc
   ];
-  dotnet = if ! options.dotnet.enable then [] else with dotnetCorePackages; [
-    options.dotnet.sdk
+  dotnet = if ! cfg.devel.dotnet.enable then [] else with dotnetCorePackages; [
     # omnisharp-roslyn
     # mono
   ];
-  python = if ! options.python then [] else with pythonPackages;
+  python = if ! cfg.devel.python.enable then [] else with pythonPackages;
      python3.withPackages (ps: with ps; [
       numpy
       matplotlib
       tkinter
     ]);
-  node = if ! options.node then [] else with nodePackages; [
+  node = if ! cfg.devel.node.enable then [] else with nodePackages; [
     nodejs
     npm
     yarn
@@ -239,13 +238,13 @@ let
     # pulp
     # cordova
   ];
-  proton = if ! options.proton then []  else [
+  proton = if ! cfg.proton.enable then []  else [
     protonvpn-cli
     openvpn
     python
     dialog
   ];
-  languages = if ! options.languages then []  else [
+  languages = if ! cfg.devel.extraLanguages.enable then []  else [
     idris
     io
     clooj

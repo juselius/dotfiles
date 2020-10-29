@@ -1,4 +1,4 @@
-{ pkgs, options, ... }:
+{ pkgs, cfg, ... }:
 {
   programs = {
     browserpass.enable = true;
@@ -26,7 +26,7 @@
     };
   };
 
-  services.dropbox.enable = if options.desktop.dropbox then true else false;
+  services.dropbox.enable = if cfg.desktop.dropbox.enable then true else false;
 
   systemd.user.services.pa-applet = {
       Unit = {
@@ -43,7 +43,7 @@
   };
 
   services = {
-    polybar = import ./polybar.nix { inherit pkgs options; };
+    polybar = import ./polybar.nix { inherit pkgs cfg; };
 
     flameshot.enable =  true;
     clipmenu.enable =  true;

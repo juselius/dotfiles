@@ -1,4 +1,4 @@
-{pkgs, options, ...}:
+{pkgs, cfg, ...}:
 {
   enable = true;
   script = "polybar top &";
@@ -40,7 +40,7 @@
       font-3 = "Noto Sans Symbols2:size=10";
       font-4 = "Noto Color Emoji:style=Regular:size=10";
       modules-right =
-        if options.desktop.laptop then
+        if cfg.desktop.laptop.enable then
           "cpu memory net battery date powermenu"
         else
           "cpu memory net date powermenu";
@@ -85,7 +85,7 @@
     };
     "module/net" = {
       type = "internal/network";
-      interface = "\${env:DEFAULT_NETWORK_INTERFACE:${options.eth}}";
+      interface = "\${env:DEFAULT_NETWORK_INTERFACE:${cfg.desktop.eth}}";
       interval = 1;
       format-connected = "<label-connected>";
       label-connected = "%ifname%: %{F#83a598}↓%{F-}%downspeed% %{F#fb4934}↑%{F-}%upspeed%";
