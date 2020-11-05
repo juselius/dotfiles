@@ -147,7 +147,7 @@ let
     krita
     spotify
     signal-desktop
-    inkscape
+    # inkscape
     # ledger
     # slack
     # pidgin
@@ -156,8 +156,7 @@ let
     # browserpass
     blueman
     gparted
-    calibre
-    cargo
+    # calibre
     farstream
     freerdp
     fira-code
@@ -173,7 +172,6 @@ let
     innoextract
     tectonic
     timewarrior
-    # tlaps
     unrtf
     # wireshark-cli
     wavebox
@@ -184,7 +182,7 @@ let
     haskellPackages.yeganesh
     xmobar
     dmenu
-    zoom-us
+    # zoom-us
     teams
   ]
   ++ gnome
@@ -238,6 +236,9 @@ let
     # pulp
     # cordova
   ];
+  rust = [
+    cargo
+  ];
   proton = if ! cfg.proton.enable then []  else [
     protonvpn-cli
     openvpn
@@ -251,6 +252,7 @@ let
     leiningen
     go
     go2nix
+    # tlaps
   ];
 in
   sys
