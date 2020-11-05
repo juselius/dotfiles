@@ -26,9 +26,8 @@
     };
   };
 
-  services.dropbox.enable = if cfg.desktop.dropbox.enable then true else false;
-
   systemd.user.services.pa-applet = {
+      enable = false;
       Unit = {
         Description = "PulseAudio volume applet";
       };
@@ -43,6 +42,10 @@
   };
 
   services = {
+    dropbox.enable = if cfg.desktop.dropbox.enable then true else false;
+
+    pasystray.enable = true;
+
     polybar = import ./polybar.nix { inherit pkgs cfg; };
 
     flameshot.enable =  true;
