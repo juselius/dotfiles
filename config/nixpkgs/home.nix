@@ -82,6 +82,7 @@ in
       shellInit = ''
         set -e TMUX_TMPDIR
         set PATH ~/.local/bin $HOME/.nix-profile/bin ~/.dotnet/tools $PATH
+        bind \cp push-line
       '';
       promptInit = ''
         omf theme j
@@ -106,6 +107,14 @@ in
         vim = "nvim";
         home-manager = "home-manager -f ~/.dotfiles/config/nixpkgs/home.nix";
         lock = "xset s activate";
+      };
+      functions = {
+        push-line = ''
+          commandline -f kill-whole-line
+          function restore_line -e fish_postexec
+            commandline -f yank
+            functions -e restore_line
+          end'';
       };
     };
 
