@@ -27,7 +27,6 @@
   };
 
   systemd.user.services.pa-applet = {
-      enable = false;
       Unit = {
         Description = "PulseAudio volume applet";
       };
@@ -37,7 +36,7 @@
         RestartSec = "10s";
       };
       Install = {
-        WantedBy = [ "default.target" ];
+        # WantedBy = [ "default.target" ];
       };
   };
 
