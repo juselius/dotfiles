@@ -39,6 +39,7 @@ in
     (import ./overlays/minio-client.nix)
     (import ./overlays/teams.nix)
     (import ./overlays/vscode.nix)
+    (import ./overlays/linkerd.nix)
     (import ./overlays/dotnet-sdk.nix)
   ];
 

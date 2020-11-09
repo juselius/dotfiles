@@ -24,9 +24,6 @@ let
     utillinux
   ];
   user = [
-    kubernetes-helm
-    kustomize
-    kubectl
     gnupg
     tomb
     sshuttle
@@ -42,6 +39,12 @@ let
     lttng-ust
     libsecret
     libkrb5
+  ];
+  kubernetes = [
+    kubernetes-helm
+    kubectl
+    linkerd
+    # kustomize
   ];
   devel = [
     git
@@ -265,4 +268,5 @@ in
   ++ languages
   ++ python
   ++ proton
+  ++ kubernetes
   ++ [] # my monoid friend
