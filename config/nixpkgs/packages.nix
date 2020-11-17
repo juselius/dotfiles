@@ -32,6 +32,7 @@ let
     lorri
     direnv
     byobu
+    vault-bin
   ];
   libs = [
     icu
