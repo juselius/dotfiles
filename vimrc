@@ -43,7 +43,8 @@ endif
 
 noremap <C-.> @:
 noremap <C-C> "+y
-noremap <C-A> "+p
+noremap <C-B> "+p
+vnoremap <C-N> :normal.<CR>
 
 " zap the damned Ex mode.
 nnoremap Q <nop>
