@@ -15,7 +15,7 @@ function fish_prompt
   if [ -z "$SSH_TTY" ]
       set -g arrow "λ"
   else
-      set -g arrow (set_color yellow) "λ" (set_color normal)
+      set -g arrow (set_color bryellow) "λ" (set_color normal)
   end
 
   set -l cwd $blue(basename (prompt_pwd))
@@ -30,6 +30,10 @@ function fish_prompt
     end
   end
 
-  echo -n -s $cwd $git_info $normal ' ' $arrow ' '
+  if [ -z "$IN_NIX_SHELL" ]
+      echo -n -s $cwd $git_info $normal ' ' $arrow ' '
+  else
+      echo -n -s [ $cwd $git_info $normal ] ' ' $arrow ' '
+  end
 end
 
