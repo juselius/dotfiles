@@ -213,11 +213,18 @@ in
       clock24 = true;
       escapeTime = 10;
       terminal = "tmux-256color";
+      historyLimit = 5000;
+      keyMode = "vi";
       extraConfig = ''
         # start windows and panes at 1
         setw -g pane-base-index 1
         set -ga terminal-overrides ",xterm-termite:Tc"
         set-option -g default-shell ${pkgs.fish}/bin/fish
+        set-option -g status-style fg=white,bg=colour236 # colour24
+        set-option -g status-justify centre
+        set-option -g status-left-length 80
+        set-option -g status-right-length 30
+        set-option -g status-left "[#S] #[fg=colour10]#h#[default]:#[fg=yellow]#(pwd)#[default] "
       '';
     };
 
