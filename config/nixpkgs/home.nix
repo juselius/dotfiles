@@ -215,16 +215,38 @@ in
       terminal = "tmux-256color";
       historyLimit = 5000;
       keyMode = "vi";
+      plugins = with pkgs; [
+        (tmuxPlugins.mkDerivation {
+          pluginName = "statusbar";
+          version = "1.0";
+          src = ../../tmux-plugins;
+        })
+        (tmuxPlugins.mkDerivation {
+          pluginName = "current-pane-hostname";
+          version = "master";
+          src = fetchFromGitHub {
+            owner = "soyuka";
+            repo = "tmux-current-pane-hostname";
+            rev = "6bb3c95250f8120d8b072f46a807d2678ecbc97c";
+            sha256 = "1w1x8w351v9yppw37kcs985mm5ikpmdnckfjwqyhlqx90lf9sqdy";
+          };
+        })
+        (tmuxPlugins.mkDerivation {
+          pluginName = "simple-git-status";
+          version = "master";
+          src = fetchFromGitHub {
+            owner = "kristijanhusak";
+            repo = "tmux-simple-git-status";
+            rev = "287da42f47d7204618b62f2c4f8bd60b36d5c7ed";
+            sha256 = "04vs4afxcr118p78mw25nnzvlms7pmgmi2a80h92vw5pzw9a0msq";
+          };
+        })
+      ];
       extraConfig = ''
         # start windows and panes at 1
         setw -g pane-base-index 1
         set -ga terminal-overrides ",xterm-termite:Tc"
         set-option -g default-shell ${pkgs.fish}/bin/fish
-        set-option -g status-style fg=white,bg=colour236 # colour24
-        set-option -g status-justify centre
-        set-option -g status-left-length 80
-        set-option -g status-right-length 30
-        set-option -g status-left "[#S] #[fg=colour10]#h#[default]:#[fg=yellow]#(pwd)#[default] "
       '';
     };
 
