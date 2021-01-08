@@ -99,6 +99,13 @@ let
             vim-unimpaired
             vim-gnupg
             vim-singularity-syntax
+            LanguageClient-neovim
+            idris-vim
+            neco-ghc
+            purescript-vim
+            rust-vim
+            vim-clojure-static
+            vim-clojure-highlight
           ];
           extraConfig = builtins.readFile ../../../vimrc;
         };
@@ -302,14 +309,7 @@ let
           buildInputs = [ pkgs.curl pkgs.which pkgs.unzip ];
         };
       devPlugins = with pkgs.vimPlugins; [
-          LanguageClient-neovim
-          idris-vim
-          neco-ghc
-          purescript-vim
           vim-ionide
-          rust-vim
-          # vim-clojure-static
-          # vim-clojure-highlight
         ];
     in { programs.neovim.plugins = devPlugins; };
 
