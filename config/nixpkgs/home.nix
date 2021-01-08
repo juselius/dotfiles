@@ -50,5 +50,22 @@
 
   home.packages = with pkgs; [];
 
+  programs = {
+    git = {
+      userEmail = "jonas.juselius@tromso.serit.no";
+      userName = "Jonas Juselius";
+      signing = {
+        key = "jonas@juselius.io";
+      };
+    };
+
+    ssh.matchBlocks = {
+      example = {
+        user = "foo";
+        hostname = "acme.com";
+      };
+    };
+  };
+
   imports = [ ./modules ];
 }
