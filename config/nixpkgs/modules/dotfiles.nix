@@ -3,52 +3,6 @@ with lib;
 let
   cfg = config.dotfiles;
 
-  homeFiles = {
-    home.file = {
-      local-bin = {
-        source = ~/.dotfiles/local/bin;
-        target = ".local/bin";
-        recursive = true;
-      };
-    } // builtins.foldl' (a: x:
-      let
-        mkHomeFile = x: {
-          ${x} = {
-            source = ~/. + "/.dotfiles/${x}";
-            target = ".${x}";
-          };
-        };
-      in
-        a // mkHomeFile x) {} cfg.extraDotfiles;
-  };
-
-  sshFiles = {
-    home.file.ssh = {
-      source = ~/.dotfiles/ssh;
-      target = ".ssh";
-      recursive = true;
-    };
-  };
-
-  vimPlugins =
-    let
-      vim-ionide = pkgs.vimUtils.buildVimPlugin {
-          name = "vim-ionide";
-          src = ~/.dotfiles/vim-plugins/Ionide-vim;
-          buildInputs = [ pkgs.curl pkgs.which pkgs.unzip ];
-        };
-      devPlugins = with pkgs.vimPlugins; [
-          LanguageClient-neovim
-          idris-vim
-          neco-ghc
-          purescript-vim
-          vim-ionide
-          rust-vim
-          # vim-clojure-static
-          # vim-clojure-highlight
-        ];
-    in { programs.neovim.plugins = devPlugins; };
-
   configuration = {
     manual.manpages.enable = true;
 
@@ -146,7 +100,7 @@ let
             vim-gnupg
             vim-singularity-syntax
           ];
-          extraConfig = builtins.readFile ../../vimrc;
+          extraConfig = builtins.readFile ../../../vimrc;
         };
 
       git = {
@@ -210,7 +164,7 @@ let
           (tmuxPlugins.mkDerivation {
             pluginName = "statusbar";
             version = "1.0";
-            src = ../../tmux-plugins;
+            src = ../../../tmux-plugins;
           })
           (tmuxPlugins.mkDerivation {
             pluginName = "current-pane-hostname";
@@ -312,6 +266,53 @@ let
       };
     };
   };
+
+  extraHomeFiles = {
+    home.file = {
+      local-bin = {
+        source = ~/.dotfiles/local/bin;
+        target = ".local/bin";
+        recursive = true;
+      };
+    } // builtins.foldl' (a: x:
+      let
+        mkHomeFile = x: {
+          ${x} = {
+            source = ~/. + "/.dotfiles/${x}";
+            target = ".${x}";
+          };
+        };
+      in
+        a // mkHomeFile x) {} cfg.extraDotfiles;
+  };
+
+  sshFiles = {
+    home.file.ssh = {
+      source = ~/.dotfiles/ssh;
+      target = ".ssh";
+      recursive = true;
+    };
+  };
+
+  vimDevPlugins =
+    let
+      vim-ionide = pkgs.vimUtils.buildVimPlugin {
+          name = "vim-ionide";
+          src = ~/.dotfiles/vim-plugins/Ionide-vim;
+          buildInputs = [ pkgs.curl pkgs.which pkgs.unzip ];
+        };
+      devPlugins = with pkgs.vimPlugins; [
+          LanguageClient-neovim
+          idris-vim
+          neco-ghc
+          purescript-vim
+          vim-ionide
+          rust-vim
+          # vim-clojure-static
+          # vim-clojure-highlight
+        ];
+    in { programs.neovim.plugins = devPlugins; };
+
 in
 {
   options.dotfiles = {
@@ -326,11 +327,10 @@ in
   };
 
   config = mkMerge [
-    homeFiles
-
+    configuration
+    extraHomeFiles
     (mkIf cfg.sshFiles sshFiles)
-
-    (mkIf cfg.devel.vimDevPlugins vimPlugins)
+    (mkIf cfg.vimDevPlugins vimDevPlugins)
   ];
 }
 
