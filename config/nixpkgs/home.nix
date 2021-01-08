@@ -4,22 +4,38 @@
     desktop = {
       enable = false;
       dropbox.enable = false;
+      polybar = {
+      	interface = "eno1";
+      	laptop = false;
+      };
     };
     packages = {
       devel = {
         enable = true;
-        dotnet = true;
-        node = true;
-        rust = true;
-        db = true;
+        nix = true;
+        db = false;
+        dotnet = false;
+        node = false;
+        rust = false;
+        haskell = false;
+        python = false;
+        go = false;
+        java = false;
+        clojure = false;
       };
       desktop = {
-        wavebox = true;
-        zoom = true;
+        enable = false;
+        gnome = true;
+        x11 = true;
+        media = true;
+        chat = true;
+        graphics = true;
+        wavebox = false;
+        zoom = false;
       };
       kubernetes = true;
       cloud = true;
-      geo = true;
+      geo = false;
     };
     extraDotfiles = [
       "bcrc"
@@ -32,9 +48,7 @@
     vimDevPlugins = true;
   };
 
-  home.packages = with pkgs; [
-    openfortivpn
-  ];
+  home.packages = with pkgs; [];
 
   imports = [ ./modules ];
 }
