@@ -16,3 +16,6 @@
 [submodule "vim-plugins/vim-gnupg"]
 	path = vim-plugins/vim-gnupg
 	url = https://github.com/jamessan/vim-gnupg.git
+[submodule "vim-plugins/vim-singularity-syntax"]
+	path = vim-plugins/vim-singularity-syntax
+	url = https://github.com/rbberger/vim-singularity-syntax.git
