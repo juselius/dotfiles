@@ -61,7 +61,9 @@ let
   ];
 
   dotnet = {
-    home.sessionVariables.DOTNET_ROOT = pkgs.dotnetCorePackages.sdk_5_0;
+    home.sessionVariables = {
+      DOTNET_ROOT = pkgs.dotnetCorePackages.sdk_5_0;
+    };
     home.packages = [
       pkgs.dotnetCorePackages.sdk_5_0
     ];
