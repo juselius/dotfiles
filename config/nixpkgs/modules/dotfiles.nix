@@ -313,6 +313,25 @@ let
         ];
     in { programs.neovim.plugins = devPlugins; };
 
+  # settings when not running under NixOS
+  plainNix = {
+    home.sessionVariables = {
+      SSH_AUTH_SOCK = "$HOME/.gnupg/S.gpg-agent.ssh";
+      NIX_PATH = "$HOME/.nix-defexpr/channels/:$NIX_PATH";
+    };
+
+    services = {
+      gpg-agent = {
+        enable = true;
+        enableSshSupport = true;
+        defaultCacheTtl = 43200; # 12 hours
+        defaultCacheTtlSsh = 64800; # 18 hours
+        maxCacheTtl = 64800;
+        maxCacheTtlSsh = 64800;
+        pinentryFlavor = "curses";
+      };
+    };
+  };
 in
 {
   options.dotfiles = {
@@ -324,6 +343,8 @@ in
     sshFiles = mkEnableOption "Enable ssh files in ~/.dotfiles/ssh";
 
     vimDevPlugins = mkEnableOption "Enable vim devel plugins";
+
+    plainNix = mkEnableOption "Tweaks for non-NixOS systems";
   };
 
   config = mkMerge [
