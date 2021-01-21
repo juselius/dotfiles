@@ -293,14 +293,6 @@ let
         a // mkHomeFile x) {} cfg.extraDotfiles;
   };
 
-  sshFiles = {
-    home.file.ssh = {
-      source = ~/.dotfiles/ssh;
-      target = ".ssh";
-      recursive = true;
-    };
-  };
-
   vimDevPlugins =
     let
       vim-ionide = pkgs.vimUtils.buildVimPlugin {
@@ -340,8 +332,6 @@ in
       default = [];
     };
 
-    sshFiles = mkEnableOption "Enable ssh files in ~/.dotfiles/ssh";
-
     vimDevPlugins = mkEnableOption "Enable vim devel plugins";
 
     plainNix = mkEnableOption "Tweaks for non-NixOS systems";
@@ -350,7 +340,6 @@ in
   config = mkMerge [
     configuration
     extraHomeFiles
-    (mkIf cfg.sshFiles sshFiles)
     (mkIf cfg.vimDevPlugins vimDevPlugins)
   ];
 }

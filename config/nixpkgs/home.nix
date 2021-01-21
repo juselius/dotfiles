@@ -44,7 +44,6 @@
       "haskeline"
       "taskrc"
     ];
-    sshFiles = false;
     vimDevPlugins = false;
   };
 
