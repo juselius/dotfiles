@@ -33,6 +33,9 @@ let
     tomb
     sshuttle
     direnv
+    exa
+    ripgrep
+    fd
   ];
 
   enabledPackages =
