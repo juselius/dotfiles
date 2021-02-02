@@ -23,11 +23,13 @@ let
           omf theme j
         '';
         shellAliases = {
+          ls = "exa";
           ll = "ls -l";
           la = "ls -a";
           lla = "ls -la";
           ltr = "ls -ltr";
           vi = "vim";
+          grep = "ripgrep";
           diff = "diff -u";
           pssh = "parallel-ssh -t 0";
           xopen = "xdg-open";
