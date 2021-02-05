@@ -27,9 +27,9 @@ let
           ll = "ls -l";
           la = "ls -a";
           lla = "ls -la";
-          ltr = "ls -ltr";
-          vi = "vim";
-          grep = "ripgrep";
+          ltr = "ls -l --sort newest";
+          # ltr = "ls -ltr";
+          cat = "bat -p";
           diff = "diff -u";
           pssh = "parallel-ssh -t 0";
           xopen = "xdg-open";
