@@ -7,7 +7,7 @@ let
 in
 {
   vscode = super.vscode.overrideAttrs (attrs: rec {
-      version = "1.53.1";
+      version = "1.53.2";
       name = "vscode-${version}";
 
       src = super.fetchurl {
