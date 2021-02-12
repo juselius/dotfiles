@@ -13,7 +13,7 @@ in
       src = super.fetchurl {
         name = "VSCode_${version}_${plat}.${archive_fmt}";
         url = "https://vscode-update.azurewebsites.net/${version}/${plat}/stable";
-        sha256 = "00viilfynfr3zha6vpx2r888irq287k8bhdabvr3nyz4gbaix80w";
+        sha256 = "0c0m5qkqv3zhcxmwx72b7z67sjcd1miv8d10kxpk9vffyrxkmj93";
       };
       # postFixup = ''
       #     wrapProgram $out/bin/code --prefix PATH : ${lib.makeBinPath [hie]}
