@@ -36,6 +36,7 @@ let
     exa
     ripgrep
     fd
+    bat
   ];
 
   enabledPackages =
