@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-sshuttle -r regnekraft 10.1.0.0/16 10.253.0.0/16
