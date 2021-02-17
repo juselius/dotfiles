@@ -55,7 +55,10 @@ let
       screen-locker = {
         enable = true;
         inactiveInterval = 45;
-        lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+        lockCmd = ''
+          ${pkgs.i3lock-fancy}/bin/i3lock-fancy -n
+          ${pkgs.xorg.xmodmap}/bin/xmodmap $HOME/.Xmodmap
+        '';
       };
 
       network-manager-applet.enable = true;
