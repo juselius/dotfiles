@@ -27,7 +27,7 @@ let
   kubernetes = with pkgs; [
     kubernetes-helm
     kubectl
-    linkerd
+    # linkerd
   ];
 
   useIf = x: y: if x then y else [];
