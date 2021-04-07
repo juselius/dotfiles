@@ -43,7 +43,7 @@ let
         RestartSec = "10s";
       };
       Install = {
-        # WantedBy = [ "default.target" ];
+        WantedBy = [ "default.target" ];
       };
     };
 
@@ -55,10 +55,8 @@ let
       screen-locker = {
         enable = true;
         inactiveInterval = 45;
-        lockCmd = ''
-          ${pkgs.i3lock-fancy}/bin/i3lock-fancy -n
-          ${pkgs.xorg.xmodmap}/bin/xmodmap $HOME/.Xmodmap
-        '';
+        lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 444444";
+        # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
       };
 
       network-manager-applet.enable = true;
@@ -71,9 +69,13 @@ let
         defaultCacheTtlSsh = 43200;
         maxCacheTtl = 604800; # 7 days
         maxCacheTtlSsh = 604800;
-        extraConfig = ''
-          pinentry-program ${pkgs.pinentry-gtk2}/bin/pinentry
-        '';
+        pinentryFlavor = "gtk2";
+        # pinentryFlavor = "gnome3";
+      };
+
+      gnome-keyring = {
+        enable = true;
+        components = [ "pkcs11" "secrets" ];
       };
     };
 
