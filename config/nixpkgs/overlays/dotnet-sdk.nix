@@ -25,4 +25,5 @@ in
   dotnetCorePackages.aspnetcore_2_1 = {};
   dotnetCorePackages.netcore_2_1 = {};
   dotnetCorePackages.sdk_2_1 = {};
+  dotnetCorePackages.sdk_3_1 = {};
 }
