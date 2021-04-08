@@ -27,7 +27,8 @@ let
   kubernetes = with pkgs; [
     kubernetes-helm
     kubectl
-    # linkerd
+    linkerd
+    step-cli # cert swiss army knife
   ];
 
   useIf = x: y: if x then y else [];
