@@ -22,10 +22,10 @@ let
   };
 
   media = with pkgs; [
-    guvcview # for webcam
-    shotcut
+    # guvcview # webcam
+    # shotcut
+    inkscape
     obs-studio
-    simplescreenrecorder
     audacity
     xf86_input_wacom
     mpv
@@ -110,7 +110,6 @@ let
     pandoc
     pinentry
     polkit_gnome
-    steghide
     cdrtools
     innoextract
     tectonic
