@@ -33,19 +33,19 @@ let
       };
     };
 
-    systemd.user.services.pa-applet = {
-      Unit = {
-        Description = "PulseAudio volume applet";
-      };
-      Service = {
-        ExecStart = "${pkgs.pa_applet}/bin/pa-applet";
-        Restart = "on-failure";
-        RestartSec = "10s";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-    };
+    # systemd.user.services.pa-applet = {
+    #   Unit = {
+    #     Description = "PulseAudio volume applet";
+    #   };
+    #   Service = {
+    #     ExecStart = "${pkgs.pa_applet}/bin/pa-applet";
+    #     Restart = "on-failure";
+    #     RestartSec = "10s";
+    #   };
+    #   Install = {
+    #     WantedBy = [ "default.target" ];
+    #   };
+    # };
 
     services = {
       pasystray.enable = true;
@@ -69,8 +69,8 @@ let
         defaultCacheTtlSsh = 43200;
         maxCacheTtl = 604800; # 7 days
         maxCacheTtlSsh = 604800;
-        pinentryFlavor = "gtk2";
-        # pinentryFlavor = "gnome3";
+        # pinentryFlavor = "gtk2";
+        pinentryFlavor = "gnome3";
       };
 
       gnome-keyring = {
