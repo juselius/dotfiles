@@ -7,13 +7,13 @@ let
 in
 {
   vscode = super.vscode.overrideAttrs (attrs: rec {
-      version = "1.55.0";
+      version = "1.55.2";
       name = "vscode-${version}";
 
       src = super.fetchurl {
         name = "VSCode_${version}_${plat}.${archive_fmt}";
         url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
-        sha256 = "0z1diiiykv4ilsiljffz9sl2mlvrxq0xwm8ga2ralfvjwbhzr6dn";
+        sha256 = "08151qdhf4chg9gfbs0dl0v0k5vla2gz5dfy439jzdg1d022d5rw";
       };
       # src = /home/jonas/Downloads/code-stable-x64.tar.gz;
       # postFixup = ''
