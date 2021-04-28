@@ -118,6 +118,7 @@ let
     qrencode
     wkhtmltopdf
     zbar
+    yubikey-personalization
   ];
 
   chat = with pkgs; [
