@@ -14,10 +14,10 @@ in
   # });
 
   dotnetCorePackages.sdk_5_0 = super.dotnetCorePackages.sdk_3_1.overrideAttrs (attrs: rec {
-    version = "5.0.200";
+    version = "5.0.202";
     src = super.fetchurl {
       url = "https://dotnetcli.azureedge.net/dotnet/Sdk/${version}/${pname}-${version}-${platform}-${suffix}.tar.gz";
-      sha512 = "0g7zcmkcdwc11h42m6hq8d0w55nnvnsmj3dc16829q55cp7l7kggmjljnd9slx7r7nrsyi7yy8brwh8n4kfi5998pdyb09fzhq5w60d";
+      sha512 = "0w9hgfrbfiiz63bvwqqlkz9nwcm7lagxq6pl10ik7f03yg65mqlcq4y0f9kih7xasaw3fvx1s1rvqjwsm04klkkar08fj8q6vr5kv81";
     };
   });
 

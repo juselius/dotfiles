@@ -1,7 +1,7 @@
 self: super:
 with super.stdenv.lib;
 let
-  version = "10.0.487-2";
+  version = "10.0.503-2";
   tarball = "Wavebox_${version}.tar.gz";
   desktopItem = super.makeDesktopItem rec {
     name = "Wavebox";
@@ -17,7 +17,7 @@ in
     name = "wavebox-${version}";
     src = super.fetchurl {
       url = "https://download.wavebox.app/stable/linux/tar/${tarball}";
-      sha256 = "1mm03r91h80qlfvzf6m201k9lilgf1h6lz1ag7qs8grn8ahik7af";
+      sha256 = "1pwg5l4n8qsrxfi857391zymzbap8n5ddw2ilmk5pjqggiqqlza8";
     };
     buildInputs = attrs.buildInputs ++ [ super.xorg.libxshmfence ];
     installPhase = ''
