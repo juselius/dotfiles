@@ -31,6 +31,7 @@ let
           # ltr = "ls -ltr";
           cat = "bat -p";
           diff = "diff -u";
+          vimdiff = "nvim -d";
           pssh = "parallel-ssh -t 0";
           xopen = "xdg-open";
           lmod = "module";
@@ -151,7 +152,10 @@ let
         compression = false;
         forwardAgent = true;
         serverAliveInterval = 30;
-        extraConfig = "IPQoS throughput";
+        extraConfig = ''
+          IPQoS throughput
+          UpdateHostKeys no
+        '';
       };
 
       tmux = {
