@@ -20,7 +20,7 @@ let
           bind \cp push-line
         '';
         promptInit = ''
-          omf theme j
+          omf theme j2
         '';
         shellAliases = {
           ls = "exa";
@@ -243,8 +243,8 @@ let
         recursive = true;
       };
       nixpkgs = {
-        source = ~/.dotfiles/config/nixpkgs/overlays;
-        target = "nixpkgs/overlays";
+        source = ~/.dotfiles/config/nixpkgs;
+        target = "nixpkgs/";
         recursive = true;
       };
     };
@@ -261,6 +261,11 @@ let
       j = {
         source = ~/.dotfiles/config/fish/themes/j;
         target = "omf/themes/j";
+        recursive = false;
+      };
+      j2 = {
+        source = ~/.dotfiles/config/fish/themes/j2;
+        target = "omf/themes/j2";
         recursive = false;
       };
     };
