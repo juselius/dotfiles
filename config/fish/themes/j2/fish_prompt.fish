@@ -43,7 +43,7 @@ function fish_prompt
   if [ -z "$SSH_TTY" ]
       set -g arrow "λ"
   else
-      set -g arrow (set_color bryellow) "λ" (set_color normal)
+      set -g arrow $yellow "λ" $normal
   end
 
   set -g fish_prompt_pwd_dir_length 0
@@ -73,10 +73,8 @@ function fish_prompt
 
   set -l xu '╭'
   set -l xl '╰'
-  # set -l xu '╭─'
-  # set -l xl '╰─'
-  # set -l xd '─'
   set -l xd ' '
+  # set -l xd '─'
   if [ "$IN_NIX_SHELL" ]
      set -l xu $magenta $xu $normal
      set -l xl $magenta $xl $normal
@@ -84,12 +82,12 @@ function fish_prompt
   end
 
   if [ ! -z "$SSH_TTY" ]
-    set -l h (set_color green)"$hostname"(set_color normal)
-    set -l at (set_color white)"@"(set_color normal)
-    set -l u (set_color yellow)"$USER"(set_color normal)
-    echo $xu "$u$at$h $cwd" $normal
+    set -l u $yellow $USER $normal
+    set -l at $white @ $normal
+    set -l h $green $hostname $normal
+    echo -s $xu ' ' $u $at $h : $blue (pwd) $normal
   else
-    echo $xu "$cwd" $normal
+    echo -s $xu $cwd $normal
   end
 
   if [ -z "$git_info" ]
