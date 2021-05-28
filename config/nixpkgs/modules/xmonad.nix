@@ -22,6 +22,7 @@ let
     xsession = {
       enable = true;
       initExtra = ''
+        xrandr --output HDMI-3 --auto --output DP-1 --auto --right-of HDMI-3
         xsetroot -solid '#888888'
         xsetroot -cursor_name left_ptr
         ${pkgs.gnome3.gnome-settings-daemon}/libexec/gsd-xsettings &
@@ -31,6 +32,7 @@ let
         xset dpms 1800 2400 3600
         xmodmap $HOME/.dotfiles/Xmodmap
       '';
+      numlock.enable = true;
 
       windowManager.xmonad = {
         enable = true;
