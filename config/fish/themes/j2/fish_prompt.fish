@@ -85,7 +85,7 @@ function fish_prompt
     set -l u $yellow $USER $normal
     set -l at $white @ $normal
     set -l h $green $hostname $normal
-    echo -s $xu ' ' $u $at $h : $blue (pwd) $normal
+    echo -s $xu ' ' $u $at $h : $blue $cwd $normal
   else
     echo -s $xu $cwd $normal
   end
