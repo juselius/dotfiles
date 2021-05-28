@@ -87,7 +87,7 @@ function fish_prompt
     set -l h $green $hostname $normal
     echo -s $xu ' ' $u $at $h : $blue $cwd $normal
   else
-    echo -s $xu $cwd $normal
+    echo -s $xu ' ' $cwd $normal
   end
 
   if [ -z "$git_info" ]
