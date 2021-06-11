@@ -10,10 +10,19 @@ OUTS="gcc.cc.lib libunwind binutils.bintools_bin $DEPS"
 
 EXE_FILE_STR="$(file $(readlink $(which file)) | cut -d ':' -f 2 | cut -d ',' -f 1)"
 
+function ext-finder {
+   find ~/.$1/extensions/ -maxdepth 2 -type d -ipath "*/ms-dotnettools.csharp-*/$2"
+}
+
+function find-exts {
+    ext-finder $1 .omnisharp
+    ext-finder $1 .debugger
+    ext-finder $1 .razor
+}
+
 function find-extensions {
-    find ~/.vscode/extensions/ -maxdepth 2 -type d -ipath '*/ms-dotnettools.csharp-*/.omnisharp'
-    find ~/.vscode/extensions/ -maxdepth 2 -type d -ipath '*/ms-dotnettools.csharp-*/.debugger'
-    find ~/.vscode/extensions/ -maxdepth 2 -type d -ipath '*/ms-dotnettools.csharp-*/.razor'
+    [ -d ~/.vscode ] && find-exts vscode
+    [ -d ~/.vscode-server ] && find-exts vscode-server
 }
 
 function install-prereqs {
@@ -79,7 +88,13 @@ function patch {
     for EXT_DIR in $(find-extensions); do
         show-missing
     done
+    if [ -d ~/.vscode-server ]; then
+        echo "Patching vscode-server node..."
+        patchelf --set-rpath "\$ORIGIN/netcoredeps:$RPATH" ~/.vscode-server/bin/[0-9a-f]*/node
+        patchelf --set-interpreter "$(resolve glibc)/lib/ld-linux-x86-64.so.2" ~/.vscode-server/bin/[0-9a-f]*/node
 }
+
+
 
 if [[ $# -eq 0 ]]; then
     patch
