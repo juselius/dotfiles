@@ -12,6 +12,8 @@ EXE_FILE_STR="$(file $(readlink $(which file)) | cut -d ':' -f 2 | cut -d ',' -f
 
 function find-extensions {
     find ~/.vscode/extensions/ -maxdepth 2 -type d -ipath '*/ms-dotnettools.csharp-*/.omnisharp'
+    find ~/.vscode/extensions/ -maxdepth 2 -type d -ipath '*/ms-dotnettools.csharp-*/.debugger'
+    find ~/.vscode/extensions/ -maxdepth 2 -type d -ipath '*/ms-dotnettools.csharp-*/.razor'
 }
 
 function install-prereqs {
