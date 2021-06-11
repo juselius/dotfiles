@@ -30,6 +30,8 @@ function _is_git_stashed
   and echo "true"
 end
 
+function fish_mode_prompt
+end
 
 function fish_prompt
   set -l red (set_color red)
@@ -91,9 +93,9 @@ function fish_prompt
   end
 
   if [ -z "$git_info" ]
-      echo -n -s $xl ' ' $arrow ' '
+      echo -n -s $xl ' ' (fish_default_mode_prompt) $arrow ' '
   else
-      echo -n -s $xl ' ' $git_info $normal $xd $arrow ' '
+      echo -n -s $xl ' ' (fish_default_mode_prompt) $git_info $normal $xd $arrow ' '
   end
 end
 
