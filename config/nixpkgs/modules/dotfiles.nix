@@ -18,6 +18,14 @@ let
           set -e TMUX_TMPDIR
           set PATH ~/.local/bin $HOME/.nix-profile/bin ~/.dotnet/tools $PATH
           bind \cp push-line
+          bind -m insert \cp push-line
+
+          # for vi mode
+          fish_vi_key_bindings
+          set fish_cursor_default block
+          set fish_cursor_insert line
+          set fish_cursor_replace_one underscore
+          set fish_cursor_visual block
         '';
         promptInit = ''
           omf theme j2
