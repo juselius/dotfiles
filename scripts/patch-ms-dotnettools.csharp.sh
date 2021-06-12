@@ -2,7 +2,7 @@
 
 # TODO: Look at nixpkgs/pkgs/build-support/setup-hooks/auto-patchelf.sh
 
-set -eu
+# set -eu
 
 TOOLS="patchelf xsel"
 DEPS="utillinux.out openssl.out icu zlib curl.out lttng-ust libsecret libkrb5"
@@ -92,6 +92,7 @@ function patch {
         echo "Patching vscode-server node..."
         patchelf --set-rpath "\$ORIGIN/netcoredeps:$RPATH" ~/.vscode-server/bin/[0-9a-f]*/node
         patchelf --set-interpreter "$(resolve glibc)/lib/ld-linux-x86-64.so.2" ~/.vscode-server/bin/[0-9a-f]*/node
+    fi
 }
 
 
