@@ -173,12 +173,12 @@ let
         historyLimit = 5000;
         keyMode = "vi";
         plugins = with pkgs; [
-          (tmuxPlugins.mkDerivation {
+          (tmuxPlugins.mkTmuxPlugin {
             pluginName = "statusbar";
             version = "1.0";
             src = ../../../tmux-plugins;
           })
-          (tmuxPlugins.mkDerivation {
+          (tmuxPlugins.mkTmuxPlugin {
             pluginName = "current-pane-hostname";
             version = "master";
             src = fetchFromGitHub {
@@ -188,7 +188,7 @@ let
               sha256 = "1w1x8w351v9yppw37kcs985mm5ikpmdnckfjwqyhlqx90lf9sqdy";
             };
           })
-          (tmuxPlugins.mkDerivation {
+          (tmuxPlugins.mkTmuxPlugin {
             pluginName = "simple-git-status";
             version = "master";
             src = fetchFromGitHub {
@@ -209,14 +209,14 @@ let
 
       htop = {
         enable = true;
-        meters.left = [ "AllCPUs4" "Memory" "Swap" ];
-        meters.right = [ "Tasks" "LoadAverage" "Uptime" ];
+        settings.left_meter_modes = [ "AllCPUs4" "Memory" "Swap" ];
+        settings.right_meter_modes = [ "Tasks" "LoadAverage" "Uptime" ];
       };
 
 
       home-manager = {
         enable = true;
-        path = "https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz";
+        path = "https://github.com/nix-community/home-manager/archive/release-21.05.tar.gz";
       };
     };
 
