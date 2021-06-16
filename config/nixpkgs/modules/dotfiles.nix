@@ -7,7 +7,6 @@ let
     manual.manpages.enable = true;
 
     programs = {
-      htop.enable = true;
       man.enable = true;
       lesspipe.enable = false;
       dircolors.enable = true;
@@ -21,12 +20,11 @@ let
           bind -m insert \cp push-line
 
           # for vi mode
-          fish_vi_key_bindings
           set fish_cursor_default block
           set fish_cursor_insert line
           set fish_cursor_replace_one underscore
           set fish_cursor_visual block
-        '';
+        '' + (if cfg.fish.vi-mode then "fish_vi_key_bindings" else "");
         promptInit = ''
           omf theme j2
         '';
@@ -209,6 +207,13 @@ let
         '';
       };
 
+      htop = {
+        enable = true;
+        meters.left = [ "AllCPUs4" "Memory" "Swap" ];
+        meters.right = [ "Tasks" "LoadAverage" "Uptime" ];
+      };
+
+
       home-manager = {
         enable = true;
         path = "https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz";
@@ -354,6 +359,8 @@ in
     vimDevPlugins = mkEnableOption "Enable vim devel plugins";
 
     plainNix = mkEnableOption "Tweaks for non-NixOS systems";
+
+    fish.vi-mode = mkEnableOption "Enable vi-mode for fish";
   };
 
   config = mkMerge [
