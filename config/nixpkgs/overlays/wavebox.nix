@@ -1,5 +1,5 @@
 self: super:
-with super.stdenv.lib;
+with super.lib;
 let
   version = "10.0.548-2";
   tarball = "Wavebox_${version}.tar.gz";
