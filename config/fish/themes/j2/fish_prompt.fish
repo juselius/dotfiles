@@ -30,7 +30,47 @@ function _is_git_stashed
   and echo "true"
 end
 
+function git_ahead -a ahead behind diverged none
+  not git_is_repo; and return
+
+  set -l commit_count (command git rev-list --count --left-right "@{upstream}...HEAD" 2> /dev/null)
+
+  switch "$commit_count"
+  case ""
+    # no upstream
+  case "0"\t"0"
+    test -n "$none"; and echo "$none"; or echo ""
+  case "*"\t"0"
+    test -n "$behind"; and echo "$behind"; or echo "-"
+  case "0"\t"*"
+    test -n "$ahead"; and echo "$ahead"; or echo "+"
+  case "*"
+    test -n "$diverged"; and echo "$diverged"; or echo "±"
+  end
+end
+
 function fish_mode_prompt
+end
+
+function fish_custom_mode_prompt
+  switch $fish_bind_mode
+    case default
+      set_color --bold red
+      echo '[N] '
+    case insert
+      set_color --bold green
+      echo '[I] '
+    case replace_one
+      set_color --bold green
+      echo '[R] '
+    case visual
+      set_color --bold brmagenta
+      echo '[V] '
+    case '*'
+      set_color --bold red
+      echo '[?] '
+  end
+  set_color normal
 end
 
 function fish_prompt
@@ -42,10 +82,18 @@ function fish_prompt
   set -l magenta (set_color magenta)
   set -l normal (set_color normal)
 
+  set -l ahead    " (ahead)"
+  set -l behind   " (behind)"
+  set -l diverged " (diverged)"
+  set -l dirty    " (modified)"
+  set -l none     ""
+
+  set -l arrow
+
   if [ -z "$SSH_TTY" ]
-      set -g arrow "λ"
+      set arrow "λ"
   else
-      set -g arrow $yellow "λ" $normal
+      set arrow $yellow "λ" $normal
   end
 
   set -g fish_prompt_pwd_dir_length 0
@@ -66,36 +114,37 @@ function fish_prompt
     end
 
     if [ (_is_git_staged) ]
-      set git_info $git_info "+"
+      set git_info $git_info "#" (git_ahead)
     else if [ (_is_git_dirty) ]
-      set git_info $git_info "*"
+      set git_info $git_info "*" (git_ahead)
     end
 
   end
 
-  set -l xu '╭'
-  set -l xl '╰'
+  # set -l xu '╭'
+  # set -l xl '╰'
+  set -l xu ''
+  set -l xl ''
   set -l xd ' '
   # set -l xd '─'
-  if [ "$IN_NIX_SHELL" ]
-     set -l xu $magenta $xu $normal
-     set -l xl $magenta $xl $normal
-     set -l xd $magenta $xd $normal
+
+  if [ ! -z "$IN_NIX_SHELL" ]
+     set arrow ">"
   end
 
   if [ ! -z "$SSH_TTY" ]
     set -l u $yellow $USER $normal
-    set -l at $white @ $normal
-    set -l h $green $hostname $normal
+    set -l at $yellow @ $normal
+    set -l h $yellow $hostname $normal
     echo -s $xu ' ' $u $at $h : $blue $cwd $normal
   else
-    echo -s $xu ' ' $cwd $normal
+     echo -s $red $xu $USER '@' $hostname ':' $blue $cwd $normal
   end
 
   if [ -z "$git_info" ]
-      echo -n -s $xl ' ' (fish_default_mode_prompt) $arrow ' '
+      echo -n -s $xl '' (fish_custom_mode_prompt) $arrow ' '
   else
-      echo -n -s $xl ' ' (fish_default_mode_prompt) $git_info $normal $xd $arrow ' '
+      echo -n -s $xl '' (fish_custom_mode_prompt) $git_info $normal $xd $arrow ' '
   end
 end
 
