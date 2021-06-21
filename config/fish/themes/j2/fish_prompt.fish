@@ -133,12 +133,9 @@ function fish_prompt
   end
 
   if [ ! -z "$SSH_TTY" ]
-    set -l u $yellow $USER $normal
-    set -l at $yellow @ $normal
-    set -l h $yellow $hostname $normal
-    echo -s $xu ' ' $u $at $h : $blue $cwd $normal
-  else
      echo -s $red $xu $USER '@' $hostname ':' $blue $cwd $normal
+  else
+     echo -s $yellow $xu $USER '@' $hostname ':' $blue $cwd $normal
   end
 
   if [ -z "$git_info" ]
