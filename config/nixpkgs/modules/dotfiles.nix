@@ -17,7 +17,9 @@ let
           set -e TMUX_TMPDIR
           set PATH ~/.local/bin $HOME/.nix-profile/bin ~/.dotnet/tools $PATH
           bind \cp push-line
-          bind -m insert \cp push-line
+          bind -M insert \cp push-line
+          bind -M insert \ce end-of-line
+          bind -M insert \ca beginning-of-line
 
           # for vi mode
           set fish_cursor_default block
