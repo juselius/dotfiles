@@ -30,7 +30,7 @@ function _is_git_stashed
   and echo "true"
 end
 
-function git_ahead -a ahead behind diverged none
+function _git_ahead -a ahead behind diverged none
   not git_is_repo; and return
 
   set -l commit_count (command git rev-list --count --left-right "@{upstream}...HEAD" 2> /dev/null)
@@ -82,10 +82,11 @@ function fish_prompt
   set -l magenta (set_color magenta)
   set -l normal (set_color normal)
 
-  set -l ahead    " (ahead)"
-  set -l behind   " (behind)"
-  set -l diverged " (diverged)"
-  set -l dirty    " (modified)"
+  set -l ahead    "ahead"
+  set -l behind   "behind"
+  set -l diverged "diverged"
+  set -l unmerged "unmerged"
+  set -l stashed  "stash"
   set -l none     ""
 
   set -l arrow
@@ -101,47 +102,47 @@ function fish_prompt
 
   set -l git_info
   set -l git_branch (_git_branch_name)
+  set -l git_status
   if [ "$git_branch" ]
-
-    if [ (_is_git_unmerged) ]
-        set git_info $red $git_branch
-    else if [ (_is_git_stashed) ]
-        set git_info $blue $git_branch
-    else if [ (_is_git_untracked) ]
-        set git_info $yellow $git_branch
+    set git_info " on "
+    if [ (_is_git_untracked) ]
+        set git_info $git_info$yellow$git_branch
     else
-        set git_info $green $git_branch
+        set git_info $git_info$green$git_branch
     end
+
+    set -l ahead_status (_git_ahead)
+    [ (_is_git_unmerged) ] && set git_status $git_status $unmerged ','
+    [ (_is_git_stashed) ] && set git_status $git_status $stashed ','
+    [ ! -z $ahead_status ] && set git_status $git_status $ahead_status ','
 
     if [ (_is_git_staged) ]
-      set git_info $git_info "#" (git_ahead)
+      set git_info "$git_info#"$normal
     else if [ (_is_git_dirty) ]
-      set git_info $git_info "*" (git_ahead)
+      set git_info "$git_info*"$normal
     end
 
+    if [ ! -z "$git_status" ]
+        set git_info $git_info '('
+        for i in $git_status[1..-2]
+            set git_info "$git_info$i"
+        end
+        set git_info "$git_info)"
+    end
   end
 
   # set -l xu '╭'
   # set -l xl '╰'
-  set -l xu ''
-  set -l xl ''
-  set -l xd ' '
   # set -l xd '─'
 
   if [ ! -z "$IN_NIX_SHELL" ]
      set arrow ">"
   end
 
-  if [ ! -z "$SSH_TTY" ]
-     echo -s $red $xu $USER '@' $hostname ':' $blue $cwd $normal
-  else
-     echo -s $yellow $xu $USER '@' $hostname ':' $blue $cwd $normal
-  end
+  set -l cc $yellow
+  [ ! -z "$SSH_TTY" ] && set cc $red
 
-  if [ -z "$git_info" ]
-      echo -n -s $xl '' (fish_custom_mode_prompt) $arrow ' '
-  else
-      echo -n -s $xl '' (fish_custom_mode_prompt) $git_info $normal $xd $arrow ' '
-  end
+  echo -s $cc $USER '@' $hostname ':' $blue $cwd $normal $git_info $normal
+  echo -n -s (fish_custom_mode_prompt) $normal $arrow ' '
 end
 
