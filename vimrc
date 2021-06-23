@@ -1,8 +1,8 @@
 " == basic ==
-
 syntax on
 filetype plugin indent on
 
+set backspace=indent,eol,start
 set nocompatible
 set number
 set nowrap
@@ -17,29 +17,45 @@ set smarttab
 set smartindent
 set autoindent
 set expandtab
-set mouse=a
+set undofile
+set undolevels=1000
+set undoreload=10000
 set history=1000
+
+
+set undodir=~/.vimundo
+set viewdir=~/.vimviews
+set directory=~/.vimswap
+
+if !has('nvim')
+  set clipboard=unnamedplus,autoselect
+endif
+
+function! StripTrailingWhitespace()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " do the business:
+  %s/\s\+$//e
+  " clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+set textwidth=100
+set mouse=a
 set completeopt=menuone,menu,longest
 set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.cabal-sandbox
 set wildmode=longest,list,full
 set wildmenu
 set completeopt+=longest
 set cmdheight=1
-set undodir=~/.vimundo
-set viewdir=~/.vimviews
-set directory=~/.vimswap
-set undofile
-set undolevels=1000
-set undoreload=10000
-set backspace=indent,eol,start
-set shell=/bin/sh "fix for fish
 set nohlsearch
 set nofoldenable
 set termguicolors
 
-if !has('nvim')
-    set clipboard=unnamedplus,autoselect
-endif
+set shell=/bin/sh "fix for fish
 
 noremap <C-.> @:
 noremap <C-C> "+y
@@ -49,14 +65,12 @@ vnoremap <C-N> :normal.<CR>
 " zap the damned Ex mode.
 nnoremap Q <nop>
 
-" execute pathogen#infect()
-
 colorscheme NeoSolarized
 set background=dark
 let g:neosolarized_contrast = "high"
 let g:neosolarized_visibility = "normal"
 
-highlight MatchParen ctermbg=blue ctermfg=green guibg=lightblue guifg=green
+highlight MatchParen ctermbg=darkred ctermfg=darkyellow guibg=darkred guifg=darkyellow
 
 " == syntastic ==
 
@@ -152,6 +166,7 @@ let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 "
+
 " Strip whitespace {
 function! StripTrailingWhitespace()
     " Preparation: save last search, and cursor position.
@@ -167,6 +182,8 @@ endfunction
 " }
 
 autocmd FileType * autocmd BufWritePre <buffer> call StripTrailingWhitespace()
-autocmd VimEnter * NoMatchParen
+" autocmd VimEnter * NoMatchParen
 
 set updatetime=1500
+let g:snipMate = { 'snippet_version' : 1 }
+
