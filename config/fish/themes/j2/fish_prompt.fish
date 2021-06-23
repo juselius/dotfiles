@@ -33,8 +33,14 @@ end
 function _git_ahead -a ahead behind diverged none
   not git_is_repo; and return
 
-  set -l commit_count (command git rev-list --count --left-right "@{upstream}...HEAD" 2> /dev/null)
+  set -l ahead    "ahead"
+  set -l behind   "behind"
+  set -l diverged "diverged"
+  set -l unmerged "unmerged"
+  set -l stashed  "stash"
+  set -l none     ""
 
+  set -l commit_count (command git rev-list --count --left-right "@{upstream}...HEAD" 2> /dev/null)
   switch "$commit_count"
   case ""
     # no upstream
@@ -74,6 +80,7 @@ function fish_custom_mode_prompt
 end
 
 function fish_prompt
+  set -l arrow
   set -l red (set_color red)
   set -l blue (set_color blue)
   set -l green (set_color green)
@@ -81,15 +88,6 @@ function fish_prompt
   set -l cyan (set_color cyan)
   set -l magenta (set_color magenta)
   set -l normal (set_color normal)
-
-  set -l ahead    "ahead"
-  set -l behind   "behind"
-  set -l diverged "diverged"
-  set -l unmerged "unmerged"
-  set -l stashed  "stash"
-  set -l none     ""
-
-  set -l arrow
 
   if [ -z "$SSH_TTY" ]
       set arrow "λ"
@@ -131,16 +129,16 @@ function fish_prompt
     end
   end
 
-  # set -l xu '╭'
-  # set -l xl '╰'
-  # set -l xd '─'
-
   if [ ! -z "$IN_NIX_SHELL" ]
      set arrow ">"
   end
 
-  set -l cc $yellow
+  set -l cc (set_color brblack)
   [ ! -z "$SSH_TTY" ] && set cc $red
+
+  # set -l xu '╭'
+  # set -l xl '╰'
+  # set -l xd '─'
 
   echo -s $cc $USER '@' $hostname ':' $blue $cwd $normal $git_info $normal
   echo -n -s (fish_custom_mode_prompt) $normal $arrow ' '
