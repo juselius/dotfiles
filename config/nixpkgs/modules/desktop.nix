@@ -55,7 +55,7 @@ let
       screen-locker = {
         enable = true;
         inactiveInterval = 45;
-        lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 444444";
+        lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
         # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
       };
 
@@ -110,6 +110,15 @@ let
 
     programs.alacritty = {
       enable = true;
+      # settings = {
+      #   font.size = 11.0;
+      #   colors = {
+      #     primary = {
+      #       background = "";
+      #       dim_background = "";
+      #     };
+      #   };
+      # };
     };
   };
 
