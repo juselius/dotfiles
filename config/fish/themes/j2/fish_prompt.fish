@@ -61,8 +61,10 @@ end
 function fish_custom_mode_prompt
   switch $fish_bind_mode
     case default
-      set_color --bold red
-      echo '[N] '
+      if [ "$fish_key_bindings" = fish_vi_key_bindings ]
+          set_color --bold red
+          echo '[N] '
+      end
     case insert
       set_color --bold green
       echo '[I] '
@@ -112,7 +114,7 @@ function fish_prompt
     set -l ahead_status (_git_ahead)
     [ (_is_git_unmerged) ] && set git_status $git_status $unmerged ','
     [ (_is_git_stashed) ] && set git_status $git_status $stashed ','
-    [ ! -z $ahead_status ] && set git_status $git_status $ahead_status ','
+    [ ! -z "$ahead_status" ] && set git_status $git_status $ahead_status ','
 
     if [ (_is_git_staged) ]
       set git_info "$git_info#"$normal
