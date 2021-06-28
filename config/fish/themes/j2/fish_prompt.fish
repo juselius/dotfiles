@@ -117,7 +117,7 @@ function fish_prompt
     [ ! -z "$ahead_status" ] && set git_status $git_status $ahead_status ','
 
     if [ (_is_git_staged) ]
-      set git_info "$git_info#"$normal
+      set git_info "$git_info+"$normal
     else if [ (_is_git_dirty) ]
       set git_info "$git_info*"$normal
     end
