@@ -128,6 +128,9 @@ let
         };
         ignores = ["*~" "*.o" "*.a" "*.dll" "*.bak" "*.old"];
         extraConfig = {
+          init = {
+            defaultBranch = "main";
+          };
           merge = {
             tool = "meld";
           };
