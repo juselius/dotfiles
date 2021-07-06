@@ -70,7 +70,8 @@ set background=dark
 let g:neosolarized_contrast = "high"
 let g:neosolarized_visibility = "normal"
 
-highlight MatchParen ctermbg=lightblue ctermfg=grey guibg=lightblue guifg=grey
+" highlight MatchParen ctermbg=lightblue ctermfg=grey guibg=lightblue guifg=grey
+highlight MatchParen  cterm=underline gui=underline guibg=none guifg=none
 
 " == syntastic ==
 
