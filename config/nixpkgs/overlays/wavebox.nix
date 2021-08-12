@@ -1,7 +1,8 @@
 self: super:
 with super.lib;
 let
-  version = "10.0.554-2";
+  # version = "10.0.554-2";
+  version = "10.92.21-2";
   tarball = "Wavebox_${version}.tar.gz";
   desktopItem = super.makeDesktopItem rec {
     name = "Wavebox";
@@ -17,7 +18,7 @@ in
     name = "wavebox-${version}";
     src = super.fetchurl {
       url = "https://download.wavebox.app/stable/linux/tar/${tarball}";
-      sha256 = "0h2vadx4y899rp912jhvvl02ha70g8jkqnv8sd32nphpv9zbm539";
+      sha256 = "0gn0547qanb0lkh2y8ll2mg926yx6v4kpb3j454077y5kfnz02gi";
     };
     buildInputs =
       attrs.buildInputs ++ [
@@ -25,7 +26,9 @@ in
         super.xorg.libXdamage
         super.libdrm
         super.mesa
+        super.gtk4
       ];
+    runtimeDependencies = attrs.runtimeDependencies ++ [ super.gtk4 ];
     installPhase = ''
       mkdir -p $out/bin $out/opt/wavebox
       cp -r * $out/opt/wavebox
