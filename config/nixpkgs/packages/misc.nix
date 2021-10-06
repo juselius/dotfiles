@@ -29,6 +29,7 @@ let
     kubectl
     linkerd
     step-cli # cert swiss army knife
+    kubeseal
   ];
 
   useIf = x: y: if x then y else [];
