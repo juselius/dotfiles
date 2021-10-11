@@ -30,6 +30,7 @@ let
     linkerd
     step-cli # cert swiss army knife
     kubeseal
+    argocd
   ];
 
   useIf = x: y: if x then y else [];
