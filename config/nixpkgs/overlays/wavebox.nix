@@ -1,8 +1,7 @@
 self: super:
 with super.lib;
 let
-  # version = "10.0.554-2";
-  version = "10.94.19-2";
+  version = "10.94.24-2";
   tarball = "Wavebox_${version}.tar.gz";
   desktopItem = super.makeDesktopItem rec {
     name = "Wavebox";
@@ -18,7 +17,7 @@ in
     name = "wavebox-${version}";
     src = super.fetchurl {
       url = "https://download.wavebox.app/stable/linux/tar/${tarball}";
-      sha256 = "1p68yqlxgwwifripqpn2p9jqkf3nrh6rgzki535jhya3dx0ks7x2";
+      sha256 = "0ik4rc0nf9kn923ymv990hwhwsj3pwgbyrf6724ml0brc1i4yr8r";
     };
     buildInputs =
       attrs.buildInputs ++ [
