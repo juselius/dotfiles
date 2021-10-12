@@ -337,7 +337,6 @@ let
   # settings when not running under NixOS
   plainNix = {
     home.sessionVariables = {
-      SSH_AUTH_SOCK = "$HOME/.gnupg/S.gpg-agent.ssh";
       NIX_PATH = "$HOME/.nix-defexpr/channels/:$NIX_PATH";
     };
 
