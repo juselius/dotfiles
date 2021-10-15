@@ -61,6 +61,10 @@ noremap <C-.> @:
 noremap <C-C> "+y
 noremap <C-B> "+p
 vnoremap <C-N> :normal.<CR>
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR>
+inoremap <silent> <C-S>         <C-O>:update<CR>
+
 
 " zap the damned Ex mode.
 nnoremap Q <nop>
