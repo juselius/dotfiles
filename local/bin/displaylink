@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+xrandr --setprovideroutputsource 2 0
+xrandr --output DVI-I-1-1 --auto \
+       --output DVI-I-2-2 --auto --left-of DVI-I-1-1 \
+       --output eDP-1 --right-of DVI-I-1-1
+

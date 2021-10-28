@@ -1,0 +1,17 @@
+#!/usr/bin/env fish
+# vim: ft=fish
+
+set max (cat /sys/class/backlight/intel_backlight/max_brightness)
+
+set percent $argv[1]
+if [ $percent -gt 100 ]
+    set percent 100
+else if [ $percent -lt 0 ]
+    set percent 0
+end
+
+set bv (math "floor($percent / 100 * $max)")
+
+echo $bv | sudo tee /sys/class/backlight/intel_backlight/brightness
+
+
