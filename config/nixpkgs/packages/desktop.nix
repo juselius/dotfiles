@@ -8,6 +8,7 @@ let
       (import ../overlays/wavebox.nix)
       (import ../overlays/teams.nix)
       (import ../overlays/vscode.nix)
+      (import ../overlays/rider.nix)
     ];
 
     dotfiles.packages.desktop = {
