@@ -7,7 +7,7 @@ let
   hie = all-hies.selection { selector = p: { inherit (p) ghc865; }; };
 
   configuration = {
-    nixpkgs.overlays = [ (import ../overlays/dotnet-sdk.nix) ];
+    # nixpkgs.overlays = [ (import ../overlays/dotnet-sdk.nix) ];
 
     dotfiles.packages.devel = {
       nix = mkDefault true;
@@ -62,10 +62,10 @@ let
 
   dotnet = {
     home.sessionVariables = {
-      DOTNET_ROOT = pkgs.dotnetCorePackages.sdk_6_0;
+      DOTNET_ROOT = pkgs.dotnet-sdk_6;
     };
     home.packages = [
-      pkgs.dotnetCorePackages.sdk_6_0
+      pkgs.dotnet-sdk_6
       pkgs.rider
     ];
   };
