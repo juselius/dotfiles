@@ -16,6 +16,7 @@ let
     awscli
     minio-client
     vault-bin
+    morph
   ];
 
   geo = with pkgs; [
