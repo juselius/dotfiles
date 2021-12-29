@@ -1,12 +1,12 @@
 self: super:
 {
   rider = super.jetbrains.rider.overrideAttrs (attrs: rec {
-      version = "2021.3.1";
+      version = "2021.3.2";
       name = "rider-${version}";
 
       src = super.fetchurl {
         url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
-        sha256 = "0c788xvcd5b9jafz2yyllj1pzgc9ry3pg82qi8glghvimjnk1cfd";
+        sha256 = "0arnh9wlw874jqlgad00q0nf1kjp7pvb4xixwrb6v1l9fbr9nsan";
       };
   });
 }
