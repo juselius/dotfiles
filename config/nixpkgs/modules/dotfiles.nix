@@ -27,7 +27,7 @@ let
           set fish_cursor_replace_one underscore
           set fish_cursor_visual block
         '' + (if cfg.fish.vi-mode then "fish_vi_key_bindings" else "");
-        promptInit = ''
+        interactiveShellInit = ''
           omf theme j2
         '';
         shellAliases = {
