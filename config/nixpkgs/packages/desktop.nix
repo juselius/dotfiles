@@ -120,6 +120,7 @@ let
     wkhtmltopdf
     zbar
     yubikey-personalization
+    mailspring
   ];
 
   chat = with pkgs; [
