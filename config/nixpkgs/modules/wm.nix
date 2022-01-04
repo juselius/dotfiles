@@ -1,9 +1,31 @@
 { pkgs, config, lib, ...}:
 with lib;
 let
-  cfg = config.dotfiles.desktop.xmonad;
+  cfg = config.dotfiles.desktop;
 
-  configuration = {
+  xorg = {
+    xsession = {
+      enable = true;
+      initExtra = ''
+        xsetroot -solid '#888888'
+        xsetroot -cursor_name left_ptr
+        ${pkgs.gnome3.gnome-settings-daemon}/libexec/gsd-xsettings &
+        systemctl --user start gvfs-udisks2-volume-monitor.service
+        xset s 1800
+        xset +dpms
+        xset dpms 1800 2400 3600
+        xmodmap $HOME/.dotfiles/Xmodmap
+      '' + cfg.xsessionInitExtra;
+      numlock.enable = true;
+    };
+
+    home.packages = with pkgs; [
+      networkmanager
+      networkmanagerapplet
+    ];
+  };
+
+  xmonad = {
     home.file.xmobarrc = {
       source = ~/.xmonad/xmobarrc;
       target = ".xmobarrc";
@@ -19,52 +41,80 @@ let
 
     dotfiles.desktop.polybar.enable = mkDefault true;
 
-    xsession = {
+    xsession.windowManager.xmonad = {
       enable = true;
-      initExtra = ''
-        xsetroot -solid '#888888'
-        xsetroot -cursor_name left_ptr
-        ${pkgs.gnome3.gnome-settings-daemon}/libexec/gsd-xsettings &
-        systemctl --user start gvfs-udisks2-volume-monitor.service
-        xset s 1800
-        xset +dpms
-        xset dpms 1800 2400 3600
-        xmodmap $HOME/.dotfiles/Xmodmap
-      '' + cfg.initExtra;
-      numlock.enable = true;
-
-      windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-        extraPackages = self: [
-          self.yeganesh
-          self.xmobar
-          pkgs.dmenu
-          self.string-conversions
-        ];
-      };
+      enableContribAndExtras = true;
+      extraPackages = self: [
+        self.yeganesh
+        self.xmobar
+        pkgs.dmenu
+        self.string-conversions
+      ];
     };
 
     home.packages = with pkgs; [
       xmonad-log
       haskellPackages.yeganesh
       xmobar
-      networkmanager
-      networkmanagerapplet
       dmenu
     ];
   };
-in {
-  options.dotfiles.desktop.xmonad = {
-    enable = mkEnableOption "Enable XMonad";
 
-    initExtra = mkOption {
+  i3 = {
+    xsession.windowManager.i3 = {
+      enable = true;
+      config = {
+        window.titlebar = false;
+        # terminal = "alacritty --working-directory $($HOME/nixos-configuration/get-last-location.sh)";
+        terminal = "alacritty";
+        modifier = "Mod4";  # this is the "windows" key
+        defaultWorkspace = "workspace number 1";
+        assigns = {
+          "2: web" = [{ class = "^Firefox$"; }];
+        };
+        bars = [{
+          position = "top";
+        }];
+        floating.criteria = [ { title = "^zoom$"; } ];
+        startup = [
+          # { command = "$HOME/nixos-configuration/check-battery-level"; notification = false; }
+        ];
+        keybindings =
+          let modifier = config.xsession.windowManager.i3.config.modifier;
+          in lib.mkOptionDefault {
+            # "End" = "kill";
+          };
+      };
+    };
+
+    home.packages = with pkgs; [
+      dmenu
+      i3status
+      i3lock
+    ];
+  };
+
+in {
+  options.dotfiles.desktop = {
+    xmonad = {
+      enable = mkEnableOption "Enable XMonad";
+    };
+
+    i3 = {
+      enable = mkEnableOption "Enable i3";
+    };
+
+    xsessionInitExtra = mkOption {
       type = types.str;
       default = "";
     };
   };
 
-  config = mkIf cfg.enable configuration;
+  config = mkMerge [
+    (mkIf (cfg.xmonad.enable || cfg.i3.enable) xorg)
+    (mkIf cfg.xmonad.enable xmonad)
+    (mkIf cfg.i3.enable i3)
+  ];
 
   imports = [ ./polybar.nix ];
 }

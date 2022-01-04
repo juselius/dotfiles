@@ -6,7 +6,9 @@ let
   configuration = {
     dotfiles.packages.desktop.enable = mkDefault true;
 
-    dotfiles.desktop.xmonad.enable = mkDefault true;
+    dotfiles.desktop.onedrive.enable = mkDefault false;
+    dotfiles.desktop.xmonad.enable = mkDefault false;
+    dotfiles.desktop.i3.enable = mkDefault true;
 
     programs = {
       browserpass.enable = true;
@@ -126,17 +128,35 @@ let
     services.dropbox.enable = true;
     home.packages = with pkgs; [ dropbox-cli ];
   };
+
+  onedrive = {
+    systemd.user.services.onedrive = {
+      Unit = {
+        Description = "OneDrive sync";
+      };
+      Service = {
+        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor";
+        Restart = "on-failure";
+        RestartSec = "10s";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+    };
+  };
 in
 {
   options.dotfiles.desktop = {
     enable = mkEnableOption "Enable desktop";
     dropbox.enable = mkEnableOption "Enable Dropbox";
+    onedrive.enable = mkEnableOption "Enable OneDrive";
   };
 
   config = mkIf cfg.enable (mkMerge [
       configuration
       (mkIf cfg.dropbox.enable dropbox)
+      (mkIf cfg.onedrive.enable onedrive)
   ]);
 
-  imports = [ ./xmonad.nix ];
+  imports = [ ./wm.nix ];
 }
