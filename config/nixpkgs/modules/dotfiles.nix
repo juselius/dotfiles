@@ -144,7 +144,7 @@ let
             default = "current";
           };
           pull = {
-            rebase = true;
+            rebase = false;
           };
           core = {
             editor = "vim";
