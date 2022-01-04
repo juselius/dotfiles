@@ -1,6 +1,3 @@
-[submodule "local/share/omf"]
-	path = local/share/omf
-	url = https://github.com/oh-my-fish/oh-my-fish.git
 [submodule "vim-plugins/vim-gnupg"]
 	path = vim-plugins/vim-gnupg
 	url = https://github.com/jamessan/vim-gnupg.git
