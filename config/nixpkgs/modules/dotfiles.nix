@@ -269,22 +269,15 @@ let
 
     xdg.dataFile = {
       omf = {
-        source = ~/.dotfiles/local/share/omf;
+        source = "${pkgs.oh-my-fish}/share/oh-my-fish";
         target = "omf";
         recursive = true;
       };
-    };
 
-    xdg.dataFile = {
-      j = {
-        source = ~/.dotfiles/config/fish/themes/j;
-        target = "omf/themes/j";
-        recursive = false;
-      };
-      j2 = {
-        source = ~/.dotfiles/config/fish/themes/j2;
-        target = "omf/themes/j2";
-        recursive = false;
+      themes = {
+        source = ~/.dotfiles/config/fish/themes;
+        target = "omf/themes";
+        recursive = true;
       };
     };
 
