@@ -60,7 +60,7 @@ let
     ];
   };
 
-  i3 =
+  i3-sway =
     let
       base00 = "#101218";
       base01 = "#1f222d";
@@ -79,8 +79,6 @@ let
       base0E = "#c0b7f9";
       base0F = "#fcc09e";
     in {
-    xsession.windowManager.i3 = {
-      enable = true;
       config = {
         window.titlebar = false;
         # terminal = "alacritty --working-directory $($HOME/nixos-configuration/get-last-location.sh)";
@@ -125,7 +123,9 @@ let
           Return = "mode default";
         };
         startup = [
-          { command = "${pkgs.i3-auto-layout}/bin/i3-auto-layout"; always = true; notification = false; }
+          # { command = "${pkgs.i3-auto-layout}/bin/i3-auto-layout"; always = true; notification = false; }
+          { command = "${pkgs.autotiling}/bin/autotiling"; always = false; notification = true; }
+          { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
         ];
         keybindings =
           let
@@ -167,9 +167,9 @@ let
             "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
           };
       };
-    };
 
-    programs.i3status-rust = {
+
+    i3status-rust = {
       enable = true;
       bars = {
         default = {
@@ -240,9 +240,46 @@ let
 
     home.packages = with pkgs; [
       dmenu
+      gtk-engine-murrine
+      gtk_engines
+      gsettings-desktop-schemas
+      lxappearance
+    ];
+
+    programs.qt5ct.enable = true;
+  };
+
+  i3 = {
+    xsession.windowManager.i3 = {
+      enable = true;
+      config = i3-sway.config;
+    };
+
+    programs.i3status-rust = i3-sway.i3status-rust;
+
+    home.packages = with pkgs; [
       i3lock
-      i3-wk-switch
-      i3-auto-layout
+    ];
+  };
+
+  sway = {
+    wayland.windowManager.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true ;
+      config = i3-sway.config;
+    };
+
+    programs.i3status-rust = i3-sway.i3status-rust;
+
+    home.packages = with pkgs; [
+      swaylock
+      swayidle
+      wl-clipboard
+      mako
+      alacritty
+      wf-recorder
+      wofi
+      clipman
     ];
   };
 
@@ -256,6 +293,10 @@ in {
       enable = mkEnableOption "Enable i3";
     };
 
+    sway = {
+      enable = mkEnableOption "Enable sway";
+    };
+
     xsessionInitExtra = mkOption {
       type = types.str;
       default = "";
@@ -266,6 +307,7 @@ in {
     (mkIf (cfg.xmonad.enable || cfg.i3.enable) xorg)
     (mkIf cfg.xmonad.enable xmonad)
     (mkIf cfg.i3.enable i3)
+    (mkIf cfg.sway.enable sway)
   ];
 
   imports = [ ./polybar.nix ];
