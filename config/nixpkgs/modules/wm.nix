@@ -70,27 +70,47 @@ let
         modifier = "Mod4";  # this is the "windows" key
         defaultWorkspace = "workspace number 1";
         assigns = {
-          "2: web" = [{ class = "^Firefox$"; }];
+          "2:" = [{ class = "^Firefox$"; }];
         };
         bars = [{
           position = "top";
         }];
         floating.criteria = [ { title = "^zoom$"; } ];
         startup = [
-          # { command = "$HOME/nixos-configuration/check-battery-level"; notification = false; }
+          { command = "${pkgs.i3-auto-layout}/bin/i3-auto-layout"; always = true; notification = false; }
         ];
         keybindings =
-          let modifier = config.xsession.windowManager.i3.config.modifier;
+          let
+            mod = config.xsession.windowManager.i3.config.modifier;
+            switch = n: "exec --no-startup-id ${pkgs.i3-wk-switch}/bin/i3-wk-switch ${toString n}";
+            wk_switch =
+              builtins.foldl' (a: x:
+                a // { "${mod}+${x}" = switch x; }
+              ) {} (builtins.genList (x: toString x) 10);
           in lib.mkOptionDefault {
-            # "End" = "kill";
+            "${mod}+1" = switch 1;
+            "${mod}+2" = switch 2;
+            "${mod}+3" = switch 3;
+            "${mod}+4" = switch 4;
+            "${mod}+5" = switch 5;
+            "${mod}+6" = switch 6;
+            "${mod}+7" = switch 7;
+            "${mod}+8" = switch 8;
+            "${mod}+9" = switch 9;
+            "${mod}+0" = switch 0;
           };
       };
     };
 
+    programs.i3status-rust = {
+      enable = true;
+    };
+
     home.packages = with pkgs; [
       dmenu
-      i3status
       i3lock
+      i3-wk-switch
+      i3-auto-layout
     ];
   };
 
