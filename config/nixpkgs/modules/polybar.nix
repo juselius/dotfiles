@@ -45,7 +45,7 @@ let
         font-3 = "Noto Sans Symbols2:size=10";
         font-4 = "Noto Color Emoji:style=Regular:size=10";
         modules-right =
-          if cfg.laptop then
+          if config.dotfiles.desktop.laptop then
           "cpu memory net battery date powermenu"
           else
           "cpu memory net date powermenu";
@@ -171,8 +171,6 @@ in {
       default = null;
       description = "Interface for network monitor";
     };
-
-    laptop = mkEnableOption "Enable laptop features";
   };
 
   config = mkIf cfg.enable configuration;
