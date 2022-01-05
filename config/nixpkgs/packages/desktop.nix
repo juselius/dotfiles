@@ -9,7 +9,6 @@ let
       (import ../overlays/teams.nix)
       (import ../overlays/vscode.nix)
       (import ../overlays/rider.nix)
-      (import ../overlays/i3-auto-layout.nix)
     ];
 
     dotfiles.packages.desktop = {

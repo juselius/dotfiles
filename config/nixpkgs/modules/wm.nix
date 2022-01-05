@@ -123,7 +123,6 @@ let
           Return = "mode default";
         };
         startup = [
-          # { command = "${pkgs.i3-auto-layout}/bin/i3-auto-layout"; always = true; notification = false; }
           { command = "${pkgs.autotiling}/bin/autotiling"; always = false; notification = true; }
           { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
         ];
