@@ -187,10 +187,6 @@ let
             # {
             #   block = "temperature";
             # }
-            (if config.dotfiles.desktop.laptop then {
-              block = "battery";
-              allow_missing = true;
-            } else {})
             {
               block = "memory";
               display_type = "memory";
@@ -213,6 +209,10 @@ let
               format = "{1m}";
             }
             { block = "sound"; }
+            (if config.dotfiles.desktop.laptop then {
+              block = "battery";
+              allow_missing = true;
+            } else {})
             {
               block = "time";
               interval = 60;
