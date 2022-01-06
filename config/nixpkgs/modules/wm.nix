@@ -97,8 +97,9 @@ let
         };
         floating.criteria = [ { title = "^zoom$"; } ];
         bars = [{
+          id = "top";
           position = "top";
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
           fonts = {
             names = [ "DejaVu Sans Mono" "FontAwesome5Free" ];
             style = "Normal";
@@ -123,9 +124,16 @@ let
           Return = "mode default";
         };
         startup = [
-          { command = "${pkgs.autotiling}/bin/autotiling"; always = false; notification = true; }
+          { command = "${pkgs.autotiling}/bin/autotiling"; always = false; }
           { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
-        ];
+        ] ++ (if cfg.sway.enable then
+           [ { command = "${pkgs.swaybg}/bin/swaybg -c '#444444'"; always = false; }
+             { command = ''
+                  swayidle timeout 900 'swaylock -c 111111' \
+                           timeout 60 'swaymsg "output * dpms off"' \
+                           resume 'swaymsg "output * dpms on"' \
+                           before-sleep 'swaylock -c 111111' ''; always = false; }
+           ] else []);
         keybindings =
           let
             mod = config.xsession.windowManager.i3.config.modifier;
@@ -134,7 +142,7 @@ let
               builtins.foldl' (a: x:
                 a // { "${mod}+${x}" = switch x; }
               ) {} (builtins.genList (x: toString x) 10);
-          in lib.mkOptionDefault {
+          in lib.mkOptionDefault ({
             "${mod}+1" = switch "1";
             "${mod}+2" = switch "2";
             "${mod}+3" = switch "3";
@@ -164,14 +172,21 @@ let
             "XF86AudioPause" = "exec ${pkgs.playerctl}/bin/playerctl pause";
             "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
             "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
-          };
+          }
+          // (if cfg.sway.enable then
+              {
+                "${mod}+Ctrl+l" = "exec --no-startup-id ${pkgs.swaylock}/bin/swaylock -n -c 111111";
+                "${mod}+Shift+r" = "exec --no-startup-id ${pkgs.sway}/bin/sway reload";
+              }
+              else {})
+        );
       };
 
 
     i3status-rust = {
       enable = true;
       bars = {
-        default = {
+        top = {
           blocks = [
             (if config.dotfiles.desktop.laptop then {
               block = "battery";
@@ -268,8 +283,6 @@ let
       config = i3-sway.config;
     };
 
-    programs.i3status-rust = i3-sway.i3status-rust;
-
     home.packages = with pkgs; [
       swaylock
       swayidle
@@ -279,6 +292,9 @@ let
       wf-recorder
       wofi
       clipman
+      swaybg
+      networkmanager
+      networkmanagerapplet
     ];
   };
 
