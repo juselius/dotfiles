@@ -32,6 +32,7 @@ let
     step-cli # cert swiss army knife
     kubeseal
     argocd
+    k9s
   ];
 
   useIf = x: y: if x then y else [];
