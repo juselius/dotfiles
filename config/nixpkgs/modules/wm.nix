@@ -96,6 +96,7 @@ let
           ];
         };
         floating.criteria = [ { title = "^zoom$"; } ];
+        focus.mouseWrapping = false;
         bars = [{
           id = "top";
           position = "top";
