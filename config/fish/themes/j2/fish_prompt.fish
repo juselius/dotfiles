@@ -104,7 +104,7 @@ function fish_prompt
   set -l git_branch (_git_branch_name)
   set -l git_status
   if [ "$git_branch" ]
-    set git_info " on "
+    set git_info " - "
     if [ (_is_git_untracked) ]
         set git_info $git_info$yellow$git_branch
     else
