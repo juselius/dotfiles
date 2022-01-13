@@ -39,6 +39,11 @@ let
           # ltr = "ls -ltr";
           cat = "bat -p";
           diff = "diff -u";
+          ps = "procs";
+          du = "dust";
+          df = "duf";
+          sed = "sed -r";
+          top = "bottom";
           vimdiff = "nvim -d";
           pssh = "parallel-ssh -t 0";
           xopen = "xdg-open";

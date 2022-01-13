@@ -37,6 +37,12 @@ let
     ripgrep
     fd
     bat
+    procs
+    bottom
+    du-dust
+    duf
+    sd
+    zellij
   ];
 
   enabledPackages =
