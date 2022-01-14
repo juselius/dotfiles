@@ -148,6 +148,7 @@ let
   };
 
   onedrive = {
+    home.packages =[ pkgs.onedrive ];
     systemd.user.services.onedrive = {
       Unit = {
         Description = "OneDrive sync";
