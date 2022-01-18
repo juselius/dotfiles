@@ -195,6 +195,22 @@ let
               format = "{percentage} {time} {power}";
             } else {})
             {
+              block = "cpu";
+              interval = 1;
+              format = "{utilization} {frequency}";
+            }
+            {
+              block = "load";
+              interval = 1;
+              format = "{1m}";
+            }
+            {
+              block = "memory";
+              display_type = "memory";
+              format_mem = "{mem_used_percents}";
+              format_swap = "{swap_used_percents}";
+            }
+            {
               block = "disk_space";
               path = "/";
               alias = "/";
@@ -204,30 +220,14 @@ let
               warning = 20.0;
               alert = 10.0;
             }
-            # {
-            #   block = "temperature";
-            # }
-            {
-              block = "memory";
-              display_type = "memory";
-              format_mem = "{mem_used_percents}";
-              format_swap = "{swap_used_percents}";
-            }
-            {
-              block = "cpu";
-              interval = 1;
-              format = "{utilization} {frequency}";
-            }
             {
               block = "net";
               interval = 2;
               hide_inactive = true;
             }
-            {
-              block = "load";
-              interval = 1;
-              format = "{1m}";
-            }
+            # {
+            #   block = "temperature";
+            # }
             (if config.dotfiles.desktop.laptop then {
               block = "backlight";
             } else {})
