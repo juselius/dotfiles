@@ -58,6 +58,7 @@ let
           vim = "nvim";
           home-manager = "home-manager -f ~/.dotfiles/config/nixpkgs/home.nix";
           lock = "xset s activate";
+          tmux = "zellij";
         };
         functions = {
           push-line = ''
