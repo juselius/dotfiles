@@ -123,6 +123,7 @@ let
     zbar
     yubikey-personalization
     mailspring
+    rider
   ];
 
   chat = with pkgs; [

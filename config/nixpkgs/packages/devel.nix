@@ -66,7 +66,6 @@ let
     };
     home.packages = [
       pkgs.dotnet-sdk_6
-      pkgs.rider
     ];
   };
 
