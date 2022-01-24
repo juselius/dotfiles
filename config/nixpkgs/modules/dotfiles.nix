@@ -43,7 +43,7 @@ let
           du = "dust";
           df = "duf";
           sed = "sed -r";
-          top = "bottom";
+          top = "htop";
           vimdiff = "nvim -d";
           pssh = "parallel-ssh -t 0";
           xopen = "xdg-open";
