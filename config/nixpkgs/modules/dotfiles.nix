@@ -42,7 +42,7 @@ let
           ps = "procs";
           du = "dust";
           df = "duf";
-          sed = "sed -r";
+          # sed = "sed -r";
           top = "htop";
           vimdiff = "nvim -d";
           pssh = "parallel-ssh -t 0";
