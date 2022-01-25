@@ -7,11 +7,11 @@ set nocompatible
 set number
 set nowrap
 set showmode
-set textwidth=80
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set colorcolumn=80
+set textwidth=100
+set colorcolumn=120
 set smartcase
 set smarttab
 set smartindent
@@ -21,6 +21,17 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 set history=1000
+set mouse=a
+set completeopt=menuone,menu,longest
+set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.cabal-sandbox
+set wildmode=longest,list,full
+set wildmenu
+set completeopt+=longest
+set cmdheight=1
+set nohlsearch
+set nofoldenable
+set termguicolors
+
 
 
 set undodir=~/.vimundo
@@ -42,18 +53,6 @@ function! StripTrailingWhitespace()
   let @/=_s
   call cursor(l, c)
 endfunction
-
-set textwidth=100
-set mouse=a
-set completeopt=menuone,menu,longest
-set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.cabal-sandbox
-set wildmode=longest,list,full
-set wildmenu
-set completeopt+=longest
-set cmdheight=1
-set nohlsearch
-set nofoldenable
-set termguicolors
 
 set shell=/bin/sh "fix for fish
 
