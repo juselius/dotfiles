@@ -231,15 +231,6 @@ let
       };
     };
 
-    home.keyboard = {
-      layout = "us(altgr-intl)";
-      model = "pc104";
-      options = [
-        "eurosign:e"
-        "caps:none"
-      ];
-    };
-
     home.sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
