@@ -122,8 +122,6 @@ let
     wkhtmltopdf
     zbar
     yubikey-personalization
-    mailspring
-    rider
   ];
 
   chat = with pkgs; [
@@ -143,24 +141,18 @@ let
     useIf cfg.x11 x11 ++
     useIf cfg.media media ++
     useIf cfg.chat chat ++
-    useIf cfg.graphics graphics ++
-    useIf cfg.wavebox [ pkgs.wavebox ] ++
-    useIf cfg.zoom [ pkgs.zoom-us ];
+    useIf cfg.graphics graphics;
 
 in {
   options.dotfiles.packages.desktop = {
-    enable = mkEnableOption "Enable desktop packages";
     media = mkEnableOption "Enable media packages";
     chat = mkEnableOption "Enable chat clients";
     x11 = mkEnableOption "Enable x11 packages";
     gnome = mkEnableOption "Enable gnome packages";
     graphics = mkEnableOption "Enable graphics packages";
-    wavebox = mkEnableOption "Enable wavebox";
-    zoom = mkEnableOption "Enable zoom";
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    configuration
- ]);
+  config = mkIf config.dotfiles.desktop.enable (mkMerge [ configuration ]);
+
 
 }

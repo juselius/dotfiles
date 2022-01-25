@@ -4,8 +4,6 @@ let
   cfg = config.dotfiles.desktop;
 
   configuration = {
-    dotfiles.packages.desktop.enable = mkDefault true;
-
     dotfiles.desktop.onedrive.enable = mkDefault false;
     dotfiles.desktop.xmonad.enable = mkDefault false;
     dotfiles.desktop.i3.enable = mkDefault true;
