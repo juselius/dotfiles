@@ -1,13 +1,24 @@
-{pkgs, lib, ...}:
+{pkgs, lib, config, ...}:
+let
+  extraDesktopPackages =
+    if config.dotfiles.desktop.enable then
+      with pkgs; [
+        zoom
+        wavebox
+        rider
+        mailspring
+      ]
+    else [];
+in
 {
   dotfiles = {
     desktop = {
       enable = false;
       dropbox.enable = false;
-      polybar = {
-      	interface = "eno1";
-      	laptop = false;
-      };
+      onedrive.enable = false;
+      laptop = false;
+      xsessionInitExtra = ''
+      '';
     };
     packages = {
       devel = {
@@ -24,14 +35,11 @@
         clojure = false;
       };
       desktop = {
-        enable = false;
         gnome = true;
         x11 = true;
         media = true;
         chat = true;
         graphics = true;
-        wavebox = false;
-        zoom = false;
       };
       kubernetes = true;
       cloud = true;
@@ -47,7 +55,22 @@
     vimDevPlugins = false;
   };
 
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [
+  ] ++ extraDesktopPackages;
+
+  home.keyboard = {
+    layout = "us(altgr-intl)";
+    model = "pc104";
+    options = [
+      "eurosign:e"
+      "caps:none"
+    ];
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
 
   programs = {
     git = {
