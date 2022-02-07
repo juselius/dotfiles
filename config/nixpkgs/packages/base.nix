@@ -43,6 +43,15 @@ let
     duf
     sd
     zellij
+    dog
+    curlie
+    xh
+    gping
+    tldr
+    cheat
+    choose
+    ag
+    delta
   ];
 
   enabledPackages =

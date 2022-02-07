@@ -10,6 +10,7 @@ let
       man.enable = true;
       lesspipe.enable = false;
       dircolors.enable = true;
+      zoxide.enable = true;
 
       fish = {
         enable = true;
@@ -58,7 +59,7 @@ let
           vim = "nvim";
           home-manager = "home-manager -f ~/.dotfiles/config/nixpkgs/home.nix";
           lock = "xset s activate";
-          tmux = "zellij";
+          dig = "dog";
         };
         functions = {
           push-line = ''
@@ -137,8 +138,18 @@ let
           init = {
             defaultBranch = "main";
           };
+          core = {
+            editor = "vim";
+            pager = "${pkgs.delta}/bin/delta";
+          };
           merge = {
             tool = "meld";
+          };
+          interactive = {
+            diffFilter = "${pkgs.delta}/bin/delta --color-only";
+          };
+          delta = {
+            navigate = true;
           };
           color = {
             branch = "auto";
@@ -151,9 +162,6 @@ let
           };
           pull = {
             rebase = false;
-          };
-          core = {
-            editor = "vim";
           };
           help = {
             autocorrect = 1;
