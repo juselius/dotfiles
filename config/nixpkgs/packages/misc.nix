@@ -33,6 +33,7 @@ let
     kubeseal
     argocd
     k9s
+    starboard
   ];
 
   useIf = x: y: if x then y else [];

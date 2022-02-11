@@ -43,7 +43,7 @@ let
     duf
     sd
     zellij
-    dog
+    dogdns
     curlie
     xh
     gping
