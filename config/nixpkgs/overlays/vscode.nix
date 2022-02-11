@@ -7,17 +7,18 @@ let
 in
 {
   vscode = super.vscode.overrideAttrs (attrs: rec {
-      version = "1.63.2";
+      version = "1.64.2";
       name = "vscode-${version}";
 
       src = super.fetchurl {
         name = "VSCode_${version}_${plat}.${archive_fmt}";
         url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
-        sha256 = "1bglf1a8b5whv9pk811fdnx0mvfcfasjxbik73p67msp4yy68lm4";
+        sha256 = "0gv71l9cidkbbv7b1dsfyn7lnlwcmjds9qx6nrh7alymdm1xa2xr";
       };
 
       buildInputs = attrs.buildInputs ++ [ super.xorg.libxshmfence ];
-      # src = /home/jonas/Downloads/code-stable-x64.tar.gz;
+
+      postPatch = builtins.replaceStrings [ "vscode-ripgrep" ] [ "@vscode/ripgrep" ] attrs.postPatch;
       # postFixup = ''
       #     wrapProgram $out/bin/code --prefix PATH : ${lib.makeBinPath [hie]}
       # '';
