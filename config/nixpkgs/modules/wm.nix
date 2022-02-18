@@ -153,7 +153,9 @@ let
             "${mod}+7" = switch "7";
             "${mod}+8" = switch "8";
             "${mod}+9" = switch "9";
-            "${mod}+0" = switch "0";
+            "${mod}+0" = switch "10";
+
+            "${mod}+d"= "exec $(${pkgs.haskellPackages.yeganesh}/bin/yeganesh -x -- -fn 'DejaVu Sans Mono-11' -nb white -nf black)";
 
             "${mod}+Ctrl+l" = "exec --no-startup-id ${pkgs.i3lock}/bin/i3lock -n -c 111111";
             "${mod}+Ctrl+s" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
@@ -274,6 +276,8 @@ let
 
     home.packages = with pkgs; [
       i3lock
+      haskellPackages.yeganesh
+      dmenu
     ];
   };
 
