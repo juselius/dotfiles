@@ -243,7 +243,7 @@ let
       EDITOR = "nvim";
       VISUAL = "nvim";
       KUBE_EDITOR = "nvim";
-      LESS = "-MiScR";
+      LESS = "-MiSR";
       GIT_ALLOW_PROTOCOL = "ssh:https:keybase:file";
       LD_LIBRARY_PATH = "$HOME/.nix-profile/lib";
     };
