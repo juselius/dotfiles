@@ -95,6 +95,7 @@ let
           plugins = with vimPlugins; [
             jonas
             ctrlp
+            deoplete-nvim
             neocomplete
             nerdcommenter
             nerdtree
