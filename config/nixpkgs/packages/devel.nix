@@ -34,6 +34,8 @@ let
     automake
     autoconf
     libtool
+    git-filter-repo
+    bfg-repo-cleaner
     # sqsh
   ];
 
