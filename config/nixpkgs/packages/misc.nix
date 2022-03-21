@@ -34,6 +34,7 @@ let
     argocd
     k9s
     starboard
+    (pkgs.callPackage ./vcluster.nix {})
   ];
 
   useIf = x: y: if x then y else [];
