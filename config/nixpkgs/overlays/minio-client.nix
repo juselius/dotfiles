@@ -4,7 +4,7 @@ let
 
   buildGoModule rec {
     pname = "minio-client";
-    version = "2020-08-08T02-33-58Z";
+    version = "2022-03-17T20-25-06Z";
 
     src = fetchFromGitHub {
       owner = "minio";

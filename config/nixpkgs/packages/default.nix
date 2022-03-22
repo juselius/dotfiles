@@ -1,5 +1,5 @@
 {
-  nixpkgs.overlays = import ../overlays;
+  nixpkgs.overlays = import ./overlays.nix;
   imports = [
     ./base.nix
     ./devel.nix
