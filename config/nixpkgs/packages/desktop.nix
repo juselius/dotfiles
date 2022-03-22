@@ -4,13 +4,6 @@ let
   cfg = config.dotfiles.packages.desktop;
 
   configuration = {
-    nixpkgs.overlays = [
-      (import ../overlays/wavebox.nix)
-      (import ../overlays/teams.nix)
-      (import ../overlays/vscode.nix)
-      (import ../overlays/rider.nix)
-    ];
-
     dotfiles.packages.desktop = {
       media = mkDefault true;
       x11 = mkDefault true;

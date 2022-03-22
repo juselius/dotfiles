@@ -4,11 +4,6 @@ let
   cfg = config.dotfiles.packages;
 
   configuration = {
-    nixpkgs.overlays = [
-      (import ../overlays/linkerd.nix)
-      (import ../overlays/minio-client.nix)
-    ];
-
     home.packages = enabledPackages;
   };
 
