@@ -128,7 +128,19 @@ let
 
     programs.alacritty = {
       enable = true;
-      # settings = {
+      settings = {
+        hints.enabled = [
+          {
+            regex =
+              "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\\\s{-}\\\\^⟨⟩`]+";
+            command = "xdg-open";
+            post_processing = true;
+            mouse = {
+              enabled = true;
+              mods = "Control";
+            };
+          }
+        ];
       #   font.size = 11.0;
       #   colors = {
       #     primary = {
@@ -136,7 +148,7 @@ let
       #       dim_background = "";
       #     };
       #   };
-      # };
+      };
     };
   };
 
