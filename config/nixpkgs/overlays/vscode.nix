@@ -7,13 +7,13 @@ let
 in
 {
   vscode = super.vscode.overrideAttrs (attrs: rec {
-      version = "1.65.2";
+      version = "1.66.0";
       name = "vscode-${version}";
 
       src = super.fetchurl {
         name = "VSCode_${version}_${plat}.${archive_fmt}";
         url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
-        sha256 = "0x8vc6gj83mn767wi285k0hxhlh5gh1lcvq63na89vglja4ipna4";
+        sha256 = "077a847p8l2yk3dpn8qqwjdch5nqm8a7fxlnwg5xzx892lr6l4ax";
       };
 
       buildInputs = attrs.buildInputs ++ [ super.xorg.libxshmfence ];
