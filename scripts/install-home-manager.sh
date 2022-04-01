@@ -15,4 +15,4 @@ nix-shell '<home-manager>' -A install
 
 mkdir -p ~/.config/omf
 
-~/.nix-profile/bin/home-manager switch -f $top/config/nixpkgs/home.nix
+~/.nix-profile/bin/home-manager switch -f $top

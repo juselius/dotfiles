@@ -9,4 +9,4 @@ pki/*.pem
 vim/spell
 vim/.netrwhist
 vim-plugins/vim_fsharp_languageclient
-config/nixpkgs/home.nix
+home.nix

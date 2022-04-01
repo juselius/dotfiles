@@ -16,6 +16,6 @@ alias kc='kubectl'
 alias k='kubectl'
 alias tw='timew'
 alias vim=nvim
-alias home-manager='home-manager -f ~/.dotfiles/config/nixpkgs/home.nix'
+alias home-manager='home-manager -f ~/.dotfiles'
 alias lock='xset s activate'
 alias ctr='ctr --namespace k8s.io'

@@ -57,7 +57,7 @@ let
           k = "kubectl";
           tw = "timew";
           vim = "nvim";
-          home-manager = "home-manager -f ~/.dotfiles/config/nixpkgs/home.nix";
+          home-manager = "home-manager -f ~/.dotfiles";
           lock = "xset s activate";
           dig = "dog";
         };
@@ -76,17 +76,17 @@ let
           vimPlugins = pkgs.vimPlugins // {
             vim-gnupg = pkgs.vimUtils.buildVimPlugin {
               name = "vim-gnupg";
-              src = ~/.dotfiles/vim-plugins/vim-gnupg;
+              src = ~/.dotfiles/plugins/vim-plugins/vim-gnupg;
             };
             vim-singularity-syntax = pkgs.vimUtils.buildVimPlugin {
               name = "vim-singularity-syntax";
-              src = ~/.dotfiles/vim-plugins/vim-singularity-syntax;
+              src = ~/.dotfiles/plugins/vim-plugins/vim-singularity-syntax;
               buildPhase = ":";
               configurePhase = ":";
             };
             jonas = pkgs.vimUtils.buildVimPlugin {
               name = "jonas";
-              src = ~/.dotfiles/vim-plugins/jonas;
+              src = ~/.dotfiles/plugins/vim-plugins/jonas;
             };
           };
         in
@@ -119,7 +119,7 @@ let
             vim-gnupg
             vim-singularity-syntax
           ];
-          extraConfig = builtins.readFile ../../../vimrc;
+          extraConfig = builtins.readFile ../adhoc/vimrc;
         };
 
       git = {
@@ -196,7 +196,7 @@ let
           (tmuxPlugins.mkTmuxPlugin {
             pluginName = "statusbar";
             version = "1.0";
-            src = ../../../tmux-plugins;
+            src = ../plugins/tmux-plugins;
           })
           (tmuxPlugins.mkTmuxPlugin {
             pluginName = "current-pane-hostname";
@@ -266,9 +266,27 @@ let
         target = "fish";
         recursive = true;
       };
-      nixpkgs = {
-        source = ~/.dotfiles/config/nixpkgs;
-        target = "nixpkgs/";
+      "home.nix" = {
+        source = ~/.dotfiles/home.nix;
+        target = "nixpkgs/home.nix";
+      };
+      "config.nix" = {
+        source = ~/.dotfiles/config.nix;
+        target = "nixpkgs/config.nix";
+      };
+      modules = {
+        source = ~/.dotfiles/modules;
+        target = "nixpkgs/modules";
+        recursive = true;
+      };
+      packages = {
+        source = ~/.dotfiles/packages;
+        target = "nixpkgs/packages";
+        recursive = true;
+      };
+      overlays = {
+        source = ~/.dotfiles/overlays;
+        target = "nixpkgs/overlays";
         recursive = true;
       };
     };
@@ -306,7 +324,7 @@ let
       let
         mkHomeFile = x: {
           ${x} = {
-            source = ~/. + "/.dotfiles/${x}";
+            source = ~/. + "/.dotfiles/adhoc/${x}";
             target = ".${x}";
           };
         };
@@ -318,7 +336,7 @@ let
     let
       vim-ionide = pkgs.vimUtils.buildVimPlugin {
           name = "vim-ionide";
-          src = ~/.dotfiles/vim-plugins/Ionide-vim;
+          src = ~/.dotfiles/plugins/vim-plugins/Ionide-vim;
           buildInputs = [ pkgs.curl pkgs.which pkgs.unzip ];
         };
       devPlugins = with pkgs.vimPlugins; [

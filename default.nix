@@ -1,5 +1,5 @@
 {pkgs, lib, ...}:
 {
-  imports = [ ./config/nixpkgs/home.nix ];
+  imports = [ ./home.nix ];
 }
 
