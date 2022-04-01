@@ -26,6 +26,7 @@ let
     usbutils
     utillinux
     sshfs-fuse
+    xkcdpass
   ];
 
   user = with pkgs; [
