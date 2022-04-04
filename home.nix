@@ -13,13 +13,11 @@ in
 {
   dotfiles = {
     desktop = {
-      enable = true;
-      dropbox.enable = true;
-      onedrive.enable = true;
-      sway.enable = true;
-      laptop = true;
+      enable = false;
+      dropbox.enable = false;
+      onedrive.enable = false;
+      laptop = false;
       xsessionInitExtra = ''
-        # xrandr --output HDMI-3 --auto --output DP-1 --auto --right-of HDMI-3
       '';
     };
     packages = {
@@ -27,8 +25,8 @@ in
         enable = true;
         nix = true;
         db = false;
-        dotnet = true;
-        node = true;
+        dotnet = false;
+        node = false;
         rust = false;
         haskell = false;
         python = false;
@@ -45,7 +43,7 @@ in
       };
       kubernetes = true;
       cloud = true;
-      geo = true;
+      geo = false;
     };
     extraDotfiles = [
       "bcrc"
@@ -55,11 +53,9 @@ in
       "taskrc"
     ];
     vimDevPlugins = false;
-    fish.vi-mode = true;
   };
 
   home.packages = with pkgs; [
-    openfortivpn
   ] ++ extraDesktopPackages;
 
   home.keyboard = {
@@ -90,49 +86,6 @@ in
         user = "foo";
         hostname = "acme.com";
       };
-      "fs?-?" = {
-        user = "root";
-        hostname = "%h.itpartner.intern";
-      };
-      "k?-?" = {
-        user = "admin";
-        hostname = "%h.itpartner.intern";
-      };
-      "xor" = {
-        user = "admin";
-        hostname = "%h.itpartner.intern";
-      };
-      stokes = {
-        hostname = "stokes.regnekraft.io";
-      };
-      radon = {
-        hostname = "radon.chem.helsinki.fi";
-      };
-      ib-switch-0 = {
-        user = "admin";
-        hostname = "10.1.60.10";
-        extraOptions = {
-          KexAlgorithms = "+diffie-hellman-group14-sha1";
-        };
-      };
-      ads1 = {
-        user = "root";
-        hostname = "10.255.168.199";
-      };
-        # lambda-by-proxy = {
-        #     proxyCommand = "ssh -q jju000@hss.cc.uit.no nc lambda.cc.uit.no 22";
-        # };
-        # "c*-*" = {
-        #     proxyCommand = "ssh -W %h:%p stallo";
-        # };
-        # stallo-forward = {
-        #    hostname = "ssh2.cc.uit.no";
-        #    user = "jju000";
-        #    extraOptions = {
-        #     "PermitLocalCommand" = "yes";
-        #     "LocalCommand" =  "ssh stallo.uit.no";
-        #    };
-        # };
     };
   };
 
