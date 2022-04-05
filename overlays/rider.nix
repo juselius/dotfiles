@@ -1,6 +1,6 @@
 self: super:
 let
-  eap = "EAP8-221.5080.72.Checked";
+  eap = "EAP9-221.5080.110.Checked";
 in
 {
   rider = super.jetbrains.rider.overrideAttrs (attrs: rec {
@@ -19,7 +19,7 @@ in
 
       src = super.fetchurl {
         url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}-${eap}.tar.gz";
-        sha256 = "0fp4wf268avpdccnx0rxycrwy000ap3iscqxp8da37yccigc0pcd";
+        sha256 = "0hrvcl0jfmhhijvnbyd8m4slk15gbh70a2fyiinx724bm85y196b";
       };
   });
 }
