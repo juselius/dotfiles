@@ -18,6 +18,8 @@ let
     ncview
     netcdf
     nco
+    qgis
+    gdal
   ];
 
   kubernetes = with pkgs; [
