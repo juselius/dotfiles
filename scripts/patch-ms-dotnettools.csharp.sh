@@ -8,7 +8,8 @@ TOOLS="patchelf xsel"
 DEPS="utillinux.out openssl.out icu zlib curl.out lttng-ust libsecret libkrb5"
 OUTS="gcc.cc.lib libunwind binutils.bintools_bin $DEPS"
 
-EXE_FILE_STR="$(file $(readlink $(which file)) | cut -d ':' -f 2 | cut -d ',' -f 1)"
+# EXE_FILE_STR="$(file $(readlink $(which file)) | cut -d ':' -f 2 | cut -d ',' -f 1)"
+EXE_FILE_STR="ELF 64-bit LSB \(pie\)\? executable"
 
 function ext-finder {
    find ~/.$1/extensions/ -maxdepth 2 -type d -ipath "*/ms-dotnettools.csharp-*/$2"
@@ -36,7 +37,7 @@ function get-exes {
 }
 
 function ldd-all {
-    get-exes | xargs -n 1 ldd
+    get-exes | xargs -r -n 1 ldd
     find $EXT_DIR -iname '*.so' -exec ldd '{}' 2>&1 \;
 }
 
@@ -76,9 +77,9 @@ function patch {
 
         echo "Patching exes..."
         get-exes
-        get-exes | xargs -n 1 chmod u+x
-        get-exes | xargs -n 1 patchelf --set-rpath "\$ORIGIN/netcoredeps:$RPATH"
-        get-exes | xargs -n 1 patchelf --set-interpreter "$(resolve glibc)/lib/ld-linux-x86-64.so.2"
+        get-exes | xargs -r -n 1 chmod u+x
+        get-exes | xargs -r -n 1 patchelf --set-rpath "\$ORIGIN/netcoredeps:$RPATH"
+        get-exes | xargs -r -n 1 patchelf --set-interpreter "$(resolve glibc)/lib/ld-linux-x86-64.so.2"
 
         echo "Patching libs..."
         find $EXT_DIR -iname '*.so' -ls -exec chmod u+x '{}' \; -exec patchelf --set-rpath $RPATH '{}' \;
