@@ -3,10 +3,10 @@ let
 in
 {
   teams = super.teams.overrideAttrs (attrs: rec {
-      version = "1.4.00.26453";
+      version = "1.5.00.10453";
       src = super.fetchurl {
       url = "https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_${version}_amd64.deb";
-      sha256 = "0ndqk893l17m42hf5fiiv6mka0v7v8r54kblvb67jsxajdvva5gf";
+      sha256 = "1w0midg7rnxj5wdk9rcgqmimhd70n47qwww4d9pfncajmkcp1dbw";
       };
   });
 }
