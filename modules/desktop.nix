@@ -117,7 +117,12 @@ let
 
     programs.vscode = {
       enable = true;
-      extensions = [];
+      extensions = with pkgs.vscode-extensions; [
+        vscodevim.vim
+        ms-vsliveshare.vsliveshare
+        ms-dotnettools.csharp
+        ionide.ionide-fsharp
+      ];
       haskell = {
         enable = false;
         hie.enable = false;
