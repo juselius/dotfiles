@@ -124,6 +124,7 @@ let
 
       git = {
         enable = true;
+        lfs.enable = true;
         aliases = {
           ll = "log --stat --abbrev-commit --decorate";
           history = "log --graph --abbrev-commit --decorate --all";
