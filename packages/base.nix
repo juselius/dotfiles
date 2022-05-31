@@ -51,7 +51,7 @@ let
     tldr
     cheat
     choose
-    ag
+    silver-searcher
     delta
   ];
 

@@ -22,7 +22,7 @@ let
     gnumake
     cmake
     libxml2
-    docker_compose
+    docker-compose
     gettext
     gnum4
     chromedriver # for selenium

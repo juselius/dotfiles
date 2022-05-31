@@ -9,7 +9,7 @@ let
     icon = "wavebox";
     desktopName = name;
     genericName = name;
-    categories = "Network;";
+    categories = [ ];
   };
 in
 {

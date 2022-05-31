@@ -63,7 +63,6 @@ let
     gnome-bluetooth
     seahorse
     nautilus
-    dconf
     gnome-disk-utility
     gnome-tweaks
     eog
@@ -115,6 +114,7 @@ let
     wkhtmltopdf
     zbar
     yubikey-personalization
+    dconf
   ];
 
   chat = with pkgs; [

@@ -50,7 +50,7 @@ let
     services = {
       pasystray.enable = true;
       flameshot.enable =  true;
-      clipmenu.enable =  true;
+      clipmenu.enable =  false;
 
       screen-locker = {
         enable = true;
