@@ -6,10 +6,10 @@ let
 in
 {
   dotnet-sdk_6 = super.dotnetCorePackages.sdk_6_0.overrideAttrs (attrs: rec {
-    version = "6.0.103";
+    version = "6.0.300";
     src = super.fetchurl {
       url = "https://dotnetcli.azureedge.net/dotnet/Sdk/${version}/${pname}-${version}-${platform}-${suffix}.tar.gz";
-      sha512 = "18lniiclybpwd6zdhdfn3ar7n5cl61ghziay5x1x51i6zy0sddqinfh17al4xcsmq2px6zh3klvs3b74mb9f6v5ak11a8v03k15b61m";
+      sha512 = "sha512-Utcg6Qz7iJqS1gXWTm0OkLliCeG9fqsA2rHVZwF9elpP9K28Va/0z/zqSxv5K7jTUYWdANjrZQWe7F5EmIbJOA==";
     };
   });
 
