@@ -11,17 +11,17 @@ let
       };
   });
 
-  eap = "EAP4-222.2964.37.Checked";
+  eap = "EAP5-222.3048.11.Checked";
   rider-eap = super.jetbrains.rider.overrideAttrs (attrs: rec {
       version = "2022.2";
       name = "rider-${version}";
 
       src = super.fetchurl {
         url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}-${eap}.tar.gz";
-        sha256 = "sha256-ywx/0Ux4QqkoseE/U54XTUJ06/ruJGVbafwN/TgNfXY=";
+        sha256 = "sha256-e5wrW9pkfqKFoSGZJ+O42n0LpgHoT93BZV6/pmCyVd0=";
       };
   });
 in
 {
-  rider = rider-stable;
+  rider = rider-eap;
 }
