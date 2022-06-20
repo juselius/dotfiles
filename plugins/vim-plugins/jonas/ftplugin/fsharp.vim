@@ -3,9 +3,9 @@
 "   \ }
 
 if has('nvim') && exists('*nvim_open_win')
-  augroup FSharpShowTooltip
-    autocmd!
-    autocmd CursorHold * call fsharp#showTooltip()
-  augroup END
+  " augroup FSharpShowTooltip
+  "   autocmd!
+  "   autocmd CursorHold * call fsharp#showTooltip()
+  " augroup END
 endif
 
