@@ -11,14 +11,14 @@ let
       };
   });
 
-  eap = "EAP5-222.3048.11.Checked";
+  eap = "EAP6-222.3153.9.Checked";
   rider-eap = super.jetbrains.rider.overrideAttrs (attrs: rec {
       version = "2022.2";
       name = "rider-${version}";
 
       src = super.fetchurl {
         url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}-${eap}.tar.gz";
-        sha256 = "sha256-e5wrW9pkfqKFoSGZJ+O42n0LpgHoT93BZV6/pmCyVd0=";
+        sha256 = "sha256-A8ouyQuE4FcplCywILmX4qb+kX6Vf5KSk6UFEUtxlRA=";
       };
   });
 in
