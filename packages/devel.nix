@@ -35,6 +35,7 @@ let
     git-filter-repo
     bfg-repo-cleaner
     # sqsh
+    squashfsTools
   ];
 
   haskell = with pkgs; [
