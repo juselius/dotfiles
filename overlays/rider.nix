@@ -23,5 +23,5 @@ let
   });
 in
 {
-  rider = rider-eap;
+  rider = rider-stable;
 }
