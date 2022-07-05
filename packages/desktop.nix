@@ -105,7 +105,7 @@ let
     pandoc
     pinentry
     polkit_gnome
-    cdrtools
+    # cdrtools
     innoextract
     tectonic
     unrtf
@@ -119,11 +119,15 @@ let
 
   chat = with pkgs; [
     teams
-    discord
     signal-desktop
+    # discord
     # slack
     # pidgin
     # pidginsipe
+  ];
+
+  devel = with pkgs; [
+      sqlitebrowser
   ];
 
   useIf = x: y: if x then y else [];
@@ -134,7 +138,9 @@ let
     useIf cfg.x11 x11 ++
     useIf cfg.media media ++
     useIf cfg.chat chat ++
-    useIf cfg.graphics graphics;
+    useIf cfg.graphics graphics ++
+    useIf config.dotfiles.packages.devel.enable devel;
+
 
 in {
   options.dotfiles.packages.desktop = {
