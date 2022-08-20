@@ -80,10 +80,13 @@ let
         '';
 
       postInstall = ''
-        cd $out/rider/lib/ReSharperHost/linux-x64
-        rm -rf dotnet
-        ln -s ${super.dotnet-sdk_6} dotnet
-        cd ..
+        cd $out/rider/lib/ReSharperHost/linux-x64/dotnet
+        # rm -rf dotnet
+        # ln -s ${super.dotnet-sdk_6} dotnet
+        ln -s ${super.dotnet-sdk_6}/host .
+        ln -s ${super.dotnet-sdk_6}/shared/Microsoft.NETCore.App/6.0.5/libhostpolicy.so .
+        cd ../..
+        ln -s ${super.dotnet-sdk_6}/host .
         ln -s ${super.dotnet-sdk_6}/shared/Microsoft.NETCore.App/6.0.5/libhostpolicy.so .
       '';
   });
