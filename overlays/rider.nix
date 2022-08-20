@@ -76,21 +76,21 @@ let
         do patchelf --set-interpreter $interpreter $i; done
         sed -i '
             s/runtime\.sh/runtime-dotnet.sh/;
-            /^set/a export DOTNET_ROOT=${super.dotnet-sdk_6}' lib/ReSharperHost/Rider.Backend.sh
+            /^set/a export _DOTNET_ROOT=${super.dotnet-sdk_5}' lib/ReSharperHost/Rider.Backend.sh
         '';
 
       postInstall = ''
         cd $out/rider/lib/ReSharperHost/linux-x64/dotnet
-        # rm -rf dotnet
-        # ln -s ${super.dotnet-sdk_6} dotnet
+        rm dotnet
+        ln -s ${super.dotnet-sdk_5}/dotnet .
         ln -s ${super.dotnet-sdk_6}/host .
-        ln -s ${super.dotnet-sdk_6}/shared/Microsoft.NETCore.App/6.0.5/libhostpolicy.so .
-        cd ../..
-        ln -s ${super.dotnet-sdk_6}/host .
-        ln -s ${super.dotnet-sdk_6}/shared/Microsoft.NETCore.App/6.0.5/libhostpolicy.so .
+        ln -s ${super.dotnet-sdk_6}/shared .
+        ln -s ${super.dotnet-sdk_6}/shared/Microsoft.NETCore.App/6.0.8/libhostpolicy.so .
+        ln -s ${super.dotnet-sdk_6}/shared/Microsoft.NETCore.App/6.0.8/libcoreclr.so .
       '';
   });
 in
 {
   rider = rider-latest;
+  rider-stable = rider-stable;
 }
