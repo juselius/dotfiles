@@ -74,19 +74,14 @@ let
             plugins/remote-dev-server/selfcontained/bin/Xvfb \
             plugins/remote-dev-server/selfcontained/bin/xkbcomp; \
         do patchelf --set-interpreter $interpreter $i; done
-        sed -i '
-            s/runtime\.sh/runtime-dotnet.sh/;
-            /^set/a export _DOTNET_ROOT=${super.dotnet-sdk_5}' lib/ReSharperHost/Rider.Backend.sh
+        sed -i 's/runtime\.sh/runtime-dotnet.sh/' lib/ReSharperHost/Rider.Backend.sh
         '';
 
       postInstall = ''
         cd $out/rider/lib/ReSharperHost/linux-x64/dotnet
-        rm dotnet
-        ln -s ${super.dotnet-sdk_5}/dotnet .
-        ln -s ${super.dotnet-sdk_6}/host .
-        ln -s ${super.dotnet-sdk_6}/shared .
-        ln -s ${super.dotnet-sdk_6}/shared/Microsoft.NETCore.App/6.0.8/libhostpolicy.so .
-        ln -s ${super.dotnet-sdk_6}/shared/Microsoft.NETCore.App/6.0.8/libcoreclr.so .
+        ln -sf ${super.dotnet-sdk_5}/dotnet .
+        ln -s ${super.dotnet-sdk_5}/host .
+        ln -s ${super.dotnet-sdk_5}/shared .
       '';
   });
 in
