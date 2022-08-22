@@ -61,12 +61,21 @@ let
     # glirc
   ];
 
+  dotnetCombined =
+    with pkgs.dotnetCorePackages; combinePackages [
+      pkgs.dotnet-sdk_5
+      pkgs.dotnet-sdk_6
+    ];
+
   dotnet = {
     home.sessionVariables = {
       DOTNET_ROOT = pkgs.dotnet-sdk_6;
     };
     home.packages = [
-      pkgs.dotnet-sdk_6
+      (if cfg.devel.dotnetCombined then
+          dotnetCombined
+      else
+          pkgs.dotnet-sdk_6)
     ];
   };
 
@@ -145,6 +154,7 @@ in {
     devel = {
       enable = mkEnableOption "Enable development packages";
       dotnet = mkEnableOption "Enable dotnet sdk";
+      dotnetCombined = mkEnableOption "Enable combined dotnet sdk";
       node = mkEnableOption "Enable Node.js";
       nix = mkEnableOption "Enable nix";
       rust = mkEnableOption "Enable Rust";
@@ -155,6 +165,7 @@ in {
       java = mkEnableOption "Enable Java";
       db = mkEnableOption "Enable database cli tools";
     };
+
   };
 
   config = mkIf cfg.devel.enable (mkMerge [
