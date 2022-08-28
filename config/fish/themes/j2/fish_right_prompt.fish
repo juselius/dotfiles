@@ -1,6 +1,7 @@
 function fish_right_prompt -d "Write out the right prompt"
   set -l _status $status
-  set -l _ctx (kubectl config current-context 2> /dev/null)
+  # set -l _ctx (kubectl config current-context 2> /dev/null)
+  set -l _ctx (kubectl config get-contexts |grep '^*' | choose 1 4 |sed -r 's, ,/,' 2> /dev/null)
   if [ -n "$_ctx" ]
       set _ctx "#$_ctx"
   end
