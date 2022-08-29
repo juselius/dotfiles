@@ -1,6 +1,6 @@
 self: super:
 let
-  version = "stable-2.11.1";
+  version = "stable-2.12.0";
   srcfile="linkerd2-cli-${version}-Linux-amd64";
 in {
   linkerd = super.stdenv.mkDerivation {
@@ -8,7 +8,7 @@ in {
 
       src = super.fetchurl {
         url="https://github.com/linkerd/linkerd2/releases/download/${version}/${srcfile}";
-        sha256 = "1sjlrkyvi19vhklpwiw5dkil2mcwkjap1aba3vpl1bgnnrq8bh4n";
+        sha256 = "sha256-nGCARKoRvezXkxUcvqRfEu2H2aiROre+F5Xns8mTRyQ=";
       };
 
       buildCommand = ''
