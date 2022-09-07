@@ -15,5 +15,6 @@ nix-shell '<home-manager>' -A install
 
 mkdir -p ~/.config/omf
 rm ~/.config/nixpkgs/home.nix
+rm ~/.config/fish/config.fish
 
 ~/.nix-profile/bin/home-manager switch -f $top
