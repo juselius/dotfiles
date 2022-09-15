@@ -29,12 +29,12 @@ let
 
   rpath = with super; super.lib.makeLibraryPath [ stdenv.cc.cc.lib zlib ];
   rider-latest = super.jetbrains.rider.overrideAttrs (attrs: rec {
-      version = "2022.2.2";
+      version = "2022.2.3";
       name = "rider-${version}";
 
       src = super.fetchurl {
         url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
-        sha256 = "sha256-WX+JdpvdeYZE3eM4YW9kJFcuRwRAFNpresg7laPWez8=";
+        sha256 = "sha256-L9/4YW/RV0oO97qu2FWqOaElTqFkt00bTdoRJB5Yqy0=";
       };
 
       postPatch =
