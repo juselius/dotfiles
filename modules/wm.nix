@@ -100,6 +100,7 @@ let
         bars = [{
           id = "top";
           position = "top";
+          trayOutput = cfg.i3.trayOutput;
           statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
           fonts = {
             names = [ "DejaVu Sans Mono" "FontAwesome5Free" ];
@@ -311,6 +312,10 @@ in {
 
     i3 = {
       enable = mkEnableOption "Enable i3";
+      trayOutput = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+      };
     };
 
     sway = {
