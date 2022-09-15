@@ -93,8 +93,8 @@ let
         # gtk-theme-name = "Sierra-compact-light";
         # gtk-icon-theme-name = "ePapirus";
         # gtk-font-name = "Ubuntu 11";
-        gtk-cursor-theme-name = "Deepin";
-        gtk-cursor-theme-size = 0;
+        # gtk-cursor-theme-name = "Deepin";
+        # gtk-cursor-theme-size = 0;
         gtk-toolbar-style = "GTK_TOOLBAR_BOTH";
         gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
         gtk-button-images = 1;
