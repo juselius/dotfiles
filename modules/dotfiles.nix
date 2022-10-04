@@ -346,7 +346,7 @@ let
           neco-ghc
           purescript-vim
           rust-vim
-          # vim-ionide
+          vim-ionide
           # vim-clojure-static
           # vim-clojure-highlight
         ];
