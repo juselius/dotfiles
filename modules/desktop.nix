@@ -86,8 +86,8 @@ let
     gtk = {
       enable = true;
       font.name = "DejaVu Sans 11";
-      iconTheme.name = "Ubuntu-mono-dark";
-      theme.name = "Adwaita";
+      # iconTheme.name = "Ubuntu-mono-dark";
+      # theme.name = "Adwaita";
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = 0;
         # gtk-theme-name = "Sierra-compact-light";
