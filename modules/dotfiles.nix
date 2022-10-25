@@ -2,6 +2,28 @@
 with lib;
 let
   cfg = config.dotfiles;
+  k8s-aliases =
+     if cfg.packages.kubernetes then
+        {
+           ctr = "ctr --namespace k8s.io";
+           k = "kubectl";
+           kc = "kubectl";
+           ked = "kubectl edit";
+           kex = "kubectl exec -ti";
+           kl = "kubectl logs";
+           kg = "kubectl get";
+           kgp = "kubectl get pods";
+           kgd = "kubectl get deployments";
+           kgs = "kubectl get secrets";
+           kgc = "kubectl get configmaps";
+           kgi = "kubectl get ingress";
+           kgn = "kubectl get nodes";
+           kd = "kubectl describe";
+           kdp = "kubectl describe pod";
+           kdd = "kubectl describe deployment";
+           kdn = "kubectl describe node";
+         }
+     else {};
 
   configuration = {
     manual.manpages.enable = true;
@@ -50,17 +72,12 @@ let
           xopen = "xdg-open";
           lmod = "module";
           unhist = "unset HISTFILE";
-          nix-zsh = ''nix-shell --command "exec zsh"'';
-          nix-fish = ''nix-shell --command "exec fish"'';
           halt = "halt -p";
-          kc = "kubectl";
-          k = "kubectl";
-          tw = "timew";
           vim = "nvim";
           home-manager = "home-manager -f ~/.dotfiles";
           lock = "xset s activate";
           dig = "dog";
-        };
+        } // k8s-aliases;
         functions = {
           push-line = ''
             commandline -f kill-whole-line
