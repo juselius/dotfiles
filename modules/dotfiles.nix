@@ -8,6 +8,8 @@ let
            ctr = "ctr --namespace k8s.io";
            k = "kubectl";
            kc = "kubectl";
+           kcc = "kubectl config use-context";
+           kcn = "kubectl config set-context --current --namespace";
            ked = "kubectl edit";
            kex = "kubectl exec -ti";
            kl = "kubectl logs";
@@ -64,7 +66,7 @@ let
           diff = "diff -u";
           ps = "procs";
           du = "dust";
-          df = "duf";
+          df = "duf --only local,network";
           # sed = "sed -r";
           top = "htop";
           vimdiff = "nvim -d";
