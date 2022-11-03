@@ -280,6 +280,10 @@ let
       allowUnfree = true;
     };
 
+    home.activation = {
+        linkOverlays = "cp -srf ~/.dotfiles/overlays ~/.config/nixpkgs";
+    };
+
     xdg.configFile = {
       fish = {
         source = ~/.dotfiles/config/fish;
@@ -304,11 +308,11 @@ let
         target = "nixpkgs/packages";
         recursive = true;
       };
-      overlays = {
-        source = ~/.dotfiles/overlays;
-        target = "nixpkgs/overlays";
-        recursive = true;
-      };
+      # overlays = {
+      #   source = ~/.dotfiles/overlays;
+      #   target = "nixpkgs/overlays";
+      #   recursive = true;
+      # };
     };
 
     xdg.dataFile = {
