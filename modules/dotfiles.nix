@@ -253,12 +253,13 @@ let
         settings.right_meter_modes = [ "Tasks" "LoadAverage" "Uptime" ];
       };
 
-
       home-manager = {
         enable = true;
-        path = "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+        path = "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
       };
     };
+
+    home.stateVersion = "22.11";
 
     home.sessionVariables = {
       EDITOR = "nvim";

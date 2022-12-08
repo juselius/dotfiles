@@ -78,9 +78,9 @@ let
 
       postInstall = ''
         cd $out/rider/lib/ReSharperHost/linux-x64/dotnet
-        ln -sf ${super.dotnet-sdk_6}/dotnet .
-        ln -s ${super.dotnet-sdk_6}/host .
-        ln -s ${super.dotnet-sdk_6}/shared .
+        # ln -sf ${super.dotnet-sdk_6}/dotnet .
+        # ln -s ${super.dotnet-sdk_6}/host .
+        # ln -s ${super.dotnet-sdk_6}/shared .
       '';
   });
 in
