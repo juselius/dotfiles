@@ -1,5 +1,7 @@
 self: super:
 let
+  rpath = with super; super.lib.makeLibraryPath [ stdenv.cc.cc.lib zlib ];
+
   patch = attrs:
         attrs.postPatch + ''
         patchelf --set-interpreter $interpreter lib/ReSharperHost/linux-x64/Rider.Backend
@@ -42,6 +44,7 @@ let
 
   jetbrainsNix = "/nix/var/nix/profiles/per-user/root/channels/nixos/pkgs/applications/editors/jetbrains";
   jetbrains = super.callPackage jetbrainsNix { jdk = super.jdk; };
+
   eap = "EAP9-223.7571.128";
   rider-eap = jetbrains.rider.overrideAttrs (attrs: rec {
       version = "2022.3";
@@ -62,8 +65,7 @@ let
       '';
   });
 
-  rpath = with super; super.lib.makeLibraryPath [ stdenv.cc.cc.lib zlib ];
-  rider-latest = super.jetbrains.rider.overrideAttrs (attrs: rec {
+  rider-latest = jetbrains.rider.overrideAttrs (attrs: rec {
       version = "2022.3";
       name = "rider-${version}";
 
@@ -76,9 +78,9 @@ let
 
       postInstall = ''
         cd $out/rider/lib/ReSharperHost/linux-x64/dotnet
-        ln -sf ${super.dotnet-sdk_5}/dotnet .
-        ln -s ${super.dotnet-sdk_5}/host .
-        ln -s ${super.dotnet-sdk_5}/shared .
+        ln -sf ${super.dotnet-sdk_6}/dotnet .
+        ln -s ${super.dotnet-sdk_6}/host .
+        ln -s ${super.dotnet-sdk_6}/shared .
       '';
   });
 in
