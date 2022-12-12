@@ -14,7 +14,7 @@ export NIX_PATH="home-manager=$HOME/.nix-defexpr/channels/home-manager${NIX_PATH
 nix-shell '<home-manager>' -A install
 
 mkdir -p ~/.config/omf
-rm ~/.config/nixpkgs/home.nix
-#rm ~/.config/fish/config.fish
+[ -e ~/.config/nixpkgs/home.nix ] && rm ~/.config/nixpkgs/home.nix
+[ -e ~/.config/fish/config.fish ] && rm ~/.config/fish/config.fish
 
 ~/.nix-profile/bin/home-manager switch -f $top
