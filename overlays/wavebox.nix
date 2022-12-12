@@ -26,7 +26,7 @@ in
         super.libdrm
         super.mesa
         super.gtk4
-        super.libsForQt5.full
+        # super.libsForQt5.full
       ];
     runtimeDependencies = attrs.runtimeDependencies ++ [ super.gtk4 ];
     installPhase = ''
@@ -37,6 +37,7 @@ in
       mkdir -p $out/share/applications $out/share/pixmaps
       ln -s ${desktopItem}/share/applications/* $out/share/applications
       ln -s $out/opt/wavebox/wavebox_icon.png $out/share/pixmaps/wavebox.png
+      rm $out/opt/wavebox/libqt5_shim.so
     '';
     postFixup = ''
       makeWrapper $out/opt/wavebox/wavebox $out/bin/wavebox \
