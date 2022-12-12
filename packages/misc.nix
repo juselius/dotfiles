@@ -15,10 +15,10 @@ let
   ];
 
   geo = with pkgs; [
-    ncview
     netcdf
-    nco
-    qgis
+    # ncview
+    # nco
+    # qgis
     gdal
   ];
 

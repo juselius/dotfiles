@@ -111,7 +111,6 @@ let
     unrtf
     virtmanager
     qrencode
-    wkhtmltopdf
     zbar
     yubikey-personalization
     dconf
