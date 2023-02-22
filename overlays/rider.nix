@@ -52,7 +52,7 @@ let
 
       src = super.fetchurl {
         url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}-${eap}.Checked.tar.gz";
-        sha256 = "sha256-vp7yqXbkQTa9xj6cHOlefj8tSYjrjRFyd6LQL4U4Pd8=";
+        sha256 = "sha256-OsTluTay0Mo94maCY5kq8Ol3SlcnYnHS+AYkm3oXBEA=";
       };
 
       postPatch = patch attrs;
