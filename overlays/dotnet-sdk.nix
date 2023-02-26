@@ -14,10 +14,10 @@ in
   });
 
   dotnet-sdk_7 = super.dotnetCorePackages.sdk_6_0.overrideAttrs (attrs: rec {
-    version = "7.0.102";
+    version = "7.0.201";
     src = super.fetchurl {
       url = "https://dotnetcli.azureedge.net/dotnet/Sdk/${version}/${pname}-${version}-${platform}-${suffix}.tar.gz";
-      sha256 = "sha256-KLTUghvKLFsS1p5qRQnyuXW0eVRtiNcU3+XrzMPY4w8=";
+      sha256 = "sha256-50zMaaKZsOkmf4Espr1g6qR53F+ESzvmiwQ1ig9OEPM=";
     };
   });
 
