@@ -6,7 +6,6 @@ let
         zoom
         wavebox
         rider
-        mailspring
       ]
     else [];
 in
@@ -25,7 +24,10 @@ in
         enable = true;
         nix = true;
         db = false;
-        dotnet = false;
+        dotnet = {
+            enable = true;
+            combined = true;
+        };
         node = false;
         rust = false;
         haskell = false;
