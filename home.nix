@@ -10,6 +10,9 @@ let
     else [];
 in
 {
+  home.username = "nobody";
+  home.homeDirectory = "/home/nobody";
+
   dotfiles = {
     desktop = {
       enable = false;
