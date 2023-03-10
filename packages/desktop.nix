@@ -117,7 +117,7 @@ let
   ];
 
   chat = with pkgs; [
-    teams
+    # teams
     signal-desktop
     # discord
     # slack
