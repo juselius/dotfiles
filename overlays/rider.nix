@@ -45,14 +45,14 @@ let
   jetbrainsNix = "/nix/var/nix/profiles/per-user/root/channels/nixos/pkgs/applications/editors/jetbrains";
   jetbrains = super.callPackage jetbrainsNix { jdk = super.jdk; };
 
-  eap = "EAP8-231.8109.48";
+  eap = "EAP9-231.8109.136";
   rider-eap = jetbrains.rider.overrideAttrs (attrs: rec {
       version = "2023.1";
       name = "rider-${version}";
 
       src = super.fetchurl {
         url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}-${eap}.Checked.tar.gz";
-        sha256 = "sha256-EJlCrcsayc/bckMSVk0qJk6pA0yIyd3Wr5Ie3pBS9pk=";
+        sha256 = "sha256-EdAhP2zx1vboQVBXp7Mv3vhiiYZuHi7phjyqZysWWp4=";
       };
 
       postPatch = patch attrs;
