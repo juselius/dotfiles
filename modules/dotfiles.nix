@@ -107,19 +107,29 @@ let
               name = "jonas";
               src = ~/.dotfiles/plugins/vim-plugins/jonas;
             };
+            treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [ p.c p.cpp p.nix p.javascript p.bash p.bibtex p.c_sharp p.css p.dockerfile p.fish p.git_rebase p.gitattributes p.gitignore p.glsl p.html p.latex p.lua p.markdown p.markdown_inline p.rust p.sql p.typescript p.vim p.yaml p.go ]);
           };
         in
         {
           enable = true;
           plugins = with vimPlugins; [
             jonas
-            ctrlp
-            deoplete-nvim
-            neocomplete
+            cmp-buffer
+            cmp-cmdline
+            cmp-nvim-lsp
+            cmp-path
+            cmp-vsnip
+            markdown-preview-nvim
+            nvim-cmp
+            nvim-lspconfig
+            treesitter
+            # ctrlp
+            # deoplete-nvim
+            # neocomplete
             nerdcommenter
-            nerdtree
-            supertab
-            syntastic
+            # nerdtree
+            # supertab
+            # syntastic
             tabular
             tlib_vim
             vim-addon-mw-utils
@@ -128,17 +138,17 @@ let
             NeoSolarized
             vim-commentary
             vim-fish
-            vim-markdown
+            # vim-markdown
             vim-nix
             vimproc
-            vim-sensible
-            vim-snipmate
+            # vim-sensible
+            # vim-snipmate
             vim-surround
             vim-unimpaired
             vim-gnupg
             vim-singularity-syntax
           ];
-          extraConfig = builtins.readFile ../adhoc/vimrc;
+          extraConfig = builtins.readFile ../config/nvim/init.vim;
         };
 
       git = {

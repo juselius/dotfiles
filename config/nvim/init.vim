@@ -33,7 +33,6 @@ set nofoldenable
 set termguicolors
 
 
-
 set undodir=~/.vimundo
 set viewdir=~/.vimviews
 set directory=~/.vimswap
@@ -189,5 +188,149 @@ autocmd FileType * autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 " autocmd VimEnter * NoMatchParen
 
 set updatetime=1500
-let g:snipMate = { 'snippet_version' : 1 }
+" let g:snipMate = { 'snippet_version' : 1 }
 
+"
+" nvim-cmp: completions
+"
+function! s:nvim_cmp()
+lua << EOF
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-y>']     = cmp.mapping.confirm({ select = true }),
+      ['<C-u>']     = cmp.mapping.scroll_docs(-4),
+      ['<C-d>']     = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+    }),
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' },
+      }, {
+        { name = 'path' },
+        { name = 'buffer' },
+      })
+  })
+
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+EOF
+endfunction
+
+"
+" nvim-lsp
+"
+function! s:nvim_lsp()
+lua << EOF
+    local on_attach = function(client, bufnr)
+        local function buf_set_keymap(...)
+            vim.api.nvim_buf_set_keymap(bufnr, ...)
+        end
+
+        local opts = { noremap=true, silent=true }
+        buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        buf_set_keymap('n', 'gh', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+        buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+        buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    end
+
+
+    local capabilites =
+      require('cmp_nvim_lsp')
+        .default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+    local setup = function(server)
+        server.setup {
+            autostart = true,
+            on_attach = on_attach,
+            flags = {
+                debounce_text_changes = 150,
+            },
+            capabilites = capabilites
+        }
+    end
+
+    local lspconfig = require('lspconfig')
+    setup(require('ionide'))
+    setup(lspconfig.ccls)
+    -- setup(lspconfig.clangd)
+    setup(lspconfig.tsserver)
+    setup(lspconfig.rnix)
+    setup(lspconfig.gopls)
+    -- setup(lspconfig.rust_analyzer)
+
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover, { focusable = false }
+    )
+EOF
+endfunction
+
+" fsharp
+" autocmd BufNewFile,BufRead *.fs,*.fsx,*.fsi set filetype=fsharp
+" lua require('lspconfig').fsautocomplete.setup{}
+
+function! s:fsharp()
+  let g:fsharp#lsp_auto_setup = 0
+  let g:fsharp#lsp_codelens = 0
+
+  autocmd FileType fsharp set signcolumn=yes tw=119 ts=4 sw=4 number relativenumber list
+
+  let g:fsharp#exclude_project_directories = ['paket_files']
+  let g:fsharp#fsautocomplete_command = ['fsautocomplete']
+endfunction
+
+" nix
+" lua require('lspconfig').rnix-lsp.setup{}
+
+function! s:nvim_treesitter()
+lua << EOF
+    require'nvim-treesitter.configs'.setup {
+        sync_install = false,
+        auto_install = false,
+        ignore_install = {},
+        highlight = {
+            enable = true,
+            disable = { "latex" },
+            additional_vim_regex_highlighting = false,
+        },
+    }
+EOF
+endfunction
+
+call s:fsharp()
+call s:nvim_cmp()
+call s:nvim_lsp()
+call s:nvim_treesitter()
+
+set statusline=
+set statusline+=%#PmenuSel#
+set statusline+=\ %f
+set statusline+=\ %2*[%M%R%H%W]%*
+" Right side of statusline
+set statusline+=%#CursorColumn#
+set statusline+=%=
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
