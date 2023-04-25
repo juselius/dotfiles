@@ -123,26 +123,20 @@ let
             nvim-cmp
             nvim-lspconfig
             treesitter
-            # ctrlp
-            # deoplete-nvim
-            # neocomplete
+            ctrlp
             nerdcommenter
-            # nerdtree
-            # supertab
-            # syntastic
+            supertab
             tabular
             tlib_vim
             vim-addon-mw-utils
             vim-airline
             vim-airline-themes
             NeoSolarized
-            vim-commentary
             vim-fish
-            # vim-markdown
+            vim-markdown
             vim-nix
             vimproc
-            # vim-sensible
-            # vim-snipmate
+            vim-sensible
             vim-surround
             vim-unimpaired
             vim-gnupg

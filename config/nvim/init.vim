@@ -75,19 +75,6 @@ let g:neosolarized_visibility = "normal"
 " highlight MatchParen ctermbg=lightblue ctermfg=grey guibg=lightblue guifg=grey
 highlight MatchParen  cterm=underline gui=underline guibg=none guifg=none
 
-" == syntastic ==
-
-map <Leader>s :SyntasticToggleMode<CR>
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
 " airline
 let g:airline_theme="cool"
 "let g:airline_theme="airlinje"
@@ -248,6 +235,7 @@ lua << EOF
 
         local opts = { noremap=true, silent=true }
         buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
         buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
         buf_set_keymap('n', 'gh', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
         buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)

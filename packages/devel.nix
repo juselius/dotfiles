@@ -123,6 +123,7 @@ let
     lorri
     nix-prefetch-scripts
     patchelf
+    rnix-lsp
   ];
 
   db = with pkgs; [
