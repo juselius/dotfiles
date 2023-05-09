@@ -124,7 +124,9 @@ let
             nvim-lspconfig
             treesitter
             ctrlp
+            # telescope-nvim
             nerdcommenter
+            commentary
             supertab
             tabular
             tlib_vim
