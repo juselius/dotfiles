@@ -9,6 +9,7 @@ let
     ../overlays/vscode.nix
     ../overlays/wavebox.nix
     ../overlays/vcluster.nix
+    ../overlays/tilt.nix
   ];
 in builtins.map import overlays
 
