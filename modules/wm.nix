@@ -78,6 +78,7 @@ let
       base0D = "#97bbf7";
       base0E = "#c0b7f9";
       base0F = "#fcc09e";
+
     in {
       config = {
         window.titlebar = false;
@@ -192,66 +193,75 @@ let
       bars = {
         top = {
           blocks = [
-            (if config.dotfiles.desktop.laptop then {
-              block = "battery";
-              allow_missing = true;
-              format = "{percentage} {time} {power}";
-            } else {})
             {
               block = "cpu";
               interval = 1;
-              format = "{utilization} {frequency}";
+              format = " $icon $utilization";
+              format_alt = " $icon $frequency{ $boost|} ";
             }
             {
               block = "load";
               interval = 1;
-              format = "{1m}";
+              format = " $icon $1m.eng(w:4) ";
             }
             {
               block = "memory";
-              display_type = "memory";
-              format_mem = "{mem_used_percents}";
-              format_swap = "{swap_used_percents}";
+              format = " $icon $mem_used_percents.eng(w:1) ";
+              format_alt = " $icon_swap $swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M)($swap_used_percents.eng(w:2)) ";
+              interval = 30;
+              warning_mem = 70;
+              critical_mem = 70;
             }
             {
               block = "disk_space";
               path = "/";
-              alias = "/";
-              info_type = "available";
-              unit = "GB";
               interval = 60;
               warning = 20.0;
               alert = 10.0;
+              info_type = "available";
             }
             {
               block = "net";
               interval = 2;
-              hide_inactive = true;
+              inactive_format = " $icon down ";
             }
             # {
             #   block = "temperature";
+            #   format = " $icon $max ";
+            #   format_alt = " $icon $max ($average) ";
+            #   interval = 10;
+            #   chip = "*-isa-*";
             # }
             (if config.dotfiles.desktop.laptop then {
-              block = "backlight";
+              block = "battery";
+              format = " $icon $percentage {$time |}";
+              device = "DisplayDevice";
+              driver = "upower";
             } else {})
-            { block = "sound"; }
+            (if config.dotfiles.desktop.laptop then {
+              block = "backlight";
+              device = "intel_backlight";
+            } else {})
             {
               block = "time";
               interval = 60;
-              format = "%a %d-%m-%Y %R";
+              format = " $timestamp.datetime(f:' %d-%m-%Y %R') ";
             }
+            # { block = "sound"; }
           ];
+
           settings = {
             theme =  {
-              name = "nord-dark";
+              theme = "nord-dark";
               overrides = {
                 idle_bg = base01;
                 # idle_fg = "#abcdef";
               };
             };
+            icons = {
+              icons = "awesome5";
+            };
           };
-          icons = "awesome5";
-          theme = "nord-dark";
         };
       };
     };

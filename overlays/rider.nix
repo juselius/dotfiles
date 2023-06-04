@@ -74,7 +74,7 @@ let
         sha256 = "sha256-UOst6zAxYtx3yALEQCwnNL2uOKR6tTSSHgZKEH3ChK4=";
       };
 
-      postPatch = patch attrs;
+      # postPatch = patch attrs;
 
       postInstall = ''
         cd $out/rider/lib/ReSharperHost/linux-x64/dotnet
