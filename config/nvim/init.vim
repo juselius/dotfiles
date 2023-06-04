@@ -134,6 +134,9 @@ vmap s <Plug>Sneak_s
 map <S-UP> <UP>
 map <S-DOWN> <DOWN>
 map <S-TAB> :tabnext<nl>
+nmap <F1> <nop>
+map <F1> <ESC>
+imap <F1> <ESC>
 "nmap <Leader>n :NumbersToggle<cr>
 
 " Enable omni completion.
