@@ -45,17 +45,17 @@ let
   jetbrainsNix = "/nix/var/nix/profiles/per-user/root/channels/nixos/pkgs/applications/editors/jetbrains";
   jetbrains = super.callPackage jetbrainsNix { jdk = super.jdk; };
 
-  eap = "EAP10-231.8109.192";
+  eap = "EAP4-232.7295.15.Checked";
   rider-eap = jetbrains.rider.overrideAttrs (attrs: rec {
-      version = "2023.1";
+      version = "2023.2";
       name = "rider-${version}";
 
       src = super.fetchurl {
         url = "https://download-cdn.jetbrains.com/rider/JetBrains.Rider-${version}-${eap}.tar.gz";
-        sha256 = "sha256-POS8bVyRpjITRI9WdVQNzXTPEfkxcKx9gdspMpVCtYU=";
+        sha256 = "sha256-OVu7QVplfjQSv5E6Tg+kcLzPW4STYlugYU3wFhrsy1A=";
       };
 
-      postPatch = patch attrs;
+      # postPatch = patch attrs;
 
       postInstall = ''
         cd $out/rider/lib/ReSharperHost/linux-x64/dotnet
