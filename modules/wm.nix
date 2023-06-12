@@ -188,11 +188,9 @@ let
       };
 
 
-    i3status-rust = {
-      enable = true;
-      bars = {
-        top = {
-          blocks = [
+    i3status-rust =
+      let
+          first-block = [
             {
               block = "cpu";
               interval = 1;
@@ -225,30 +223,43 @@ let
               interval = 2;
               inactive_format = " $icon down ";
             }
-            # {
-            #   block = "temperature";
-            #   format = " $icon $max ";
-            #   format_alt = " $icon $max ($average) ";
-            #   interval = 10;
-            #   chip = "*-isa-*";
-            # }
-            (if config.dotfiles.desktop.laptop then {
-              block = "battery";
-              format = " $icon $percentage {$time |}";
-              device = "DisplayDevice";
-              driver = "upower";
-            } else {})
-            (if config.dotfiles.desktop.laptop then {
-              block = "backlight";
-              device = "intel_backlight";
-            } else {})
-            {
+          ];
+          time = {
               block = "time";
               interval = 60;
               format = " $timestamp.datetime(f:' %d-%m-%Y %R') ";
-            }
-            # { block = "sound"; }
-          ];
+          };
+          temperature = {
+              block = "temperature";
+              format = " $icon $max ";
+              format_alt = " $icon $max ($average) ";
+              interval = 10;
+              chip = "*-isa-*";
+          };
+          last-block =
+              if config.dotfiles.desktop.laptop then
+              [
+                  {
+                      block = "battery";
+                      format = " $icon $percentage {$time |}";
+                      device = "DisplayDevice";
+                      driver = "upower";
+                  }
+                  {
+                      block = "backlight";
+                      device = "intel_backlight";
+                  }
+                  time
+              ]
+              else [
+                  time
+                  # { block = "sound"; }
+              ];
+      in {
+      enable = true;
+      bars = {
+        top = {
+          blocks = first-block ++ last-block;
 
           settings = {
             theme =  {
