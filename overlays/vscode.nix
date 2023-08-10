@@ -7,16 +7,16 @@ let
 in
 {
   vscode = super.vscode.overrideAttrs (attrs: rec {
-      version = "1.75.1";
+      version = "1.81.0";
       name = "vscode-${version}";
 
       src = super.fetchurl {
         name = "VSCode_${version}_${plat}.${archive_fmt}";
         url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
-        sha256 = "sha256-EKymgkThZwnRY1e3XxVJ9yDnN8rYeWZcibd1SdnEwRg=";
+        sha256 = "sha256-DpMedHDQVlxjj+xU5VwMIOhfbSFX1vH94823CrO7gUE=";
       };
 
-      buildInputs = attrs.buildInputs ++ [ super.xorg.libxshmfence ];
+      buildInputs = attrs.buildInputs ++ [ super.xorg.libxshmfence super.krb5 ];
 
       postPatch = builtins.replaceStrings [ "vscode-ripgrep" ] [ "@vscode/ripgrep" ] attrs.postPatch;
       # postFixup = ''
