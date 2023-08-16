@@ -32,6 +32,7 @@ let
     k9s
     starboard
     vcluster
+    krew
   ];
 
   useIf = x: y: if x then y else [];
