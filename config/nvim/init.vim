@@ -67,7 +67,7 @@ inoremap <silent> <C-S>         <C-O>:update<CR>
 " zap the damned Ex mode.
 nnoremap Q <nop>
 
-colorscheme NeoSolarized
+colorscheme zephyr
 set background=dark
 let g:neosolarized_contrast = "high"
 let g:neosolarized_visibility = "normal"

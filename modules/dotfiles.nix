@@ -124,6 +124,7 @@ let
             nvim-lspconfig
             treesitter
             ctrlp
+            zephyr-nvim
             # telescope-nvim
             nerdcommenter
             commentary
