@@ -3,4 +3,4 @@
 conn=$1
 shift
 
-exec sudo openfortivpn -c ~/.vpn/$conn $@
+exec sudo openfortivpn -c ~/.vpn/$conn -p `pass itp.no | head -1` $@
