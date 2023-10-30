@@ -1,13 +1,17 @@
+# nix-prefetch-git https://github.com/tilt-dev/tilt --rev v0.33.5
 self: super:
 {
-  tilt = super.tilt.overrideAttrs (attrs: rec {
-      version = "0.33.4";
+  untilt = super.tilt.overrideAttrs (attrs: rec {
+      version = "0.33.5";
 
       src = super.fetchFromGitHub {
           owner  = "tilt-dev";
           repo   = attrs.pname;
           rev    = "v${version}";
-          sha256 = "sha256-rQ5g5QyGyuJAHmE8zGFzqtpqW2xEju5JV386y9Cn+cs=";
+          sha256 = "10p6qbc890kj50d529zylkz8n7qcpz6ghd78c5fin58a2l9krlas";
       };
   });
+
+  tilt = super.callPackage ./tilt/default.nix {};
 }
+
