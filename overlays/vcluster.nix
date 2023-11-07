@@ -8,7 +8,7 @@ in {
 
     src = super.fetchurl {
       url = "https://github.com/loft-sh/vcluster/releases/download/v${version}/vcluster-linux-amd64";
-      sha256 = "sha256-vV/sakxqzhFs7OfYR+vE9Ep4CKN9sZFaIYYTJ14+zCQ=";
+      sha256 = "sha256-rV6LkJ9g24u4ZKu50xIh1nZyaEN9RUuyzSx4IJ/K9kI=";
     };
 
     buildCommand = ''
