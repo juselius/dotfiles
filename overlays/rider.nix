@@ -47,12 +47,12 @@ let
   });
 
   rider-latest = jetbrains.rider.overrideAttrs (attrs: rec {
-    version = "2023.3.1";
+    version = "2023.3.2";
     name = "rider-${version}";
 
     src = super.fetchurl {
       url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
-      sha256 = "sha256-B9+9wnfSvv2ycA9RUWe5vLZGTdbZ/ln5gUfAMjO2qnU=";
+      sha256 = "sha256-IqNZmRRr5mdyYOYDz2rwbbv6TC1ubsZTsqnjIvlUkk0=";
     };
 
     postPatch = patch attrs;
