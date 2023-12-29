@@ -216,8 +216,8 @@ let
               block = "disk_space";
               path = "/";
               interval = 60;
-              warning = 20.0;
-              alert = 10.0;
+              warning = 10.0;
+              alert = 5.0;
               info_type = "available";
             }
             {

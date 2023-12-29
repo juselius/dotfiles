@@ -56,7 +56,7 @@ let
           omf theme j2
         '';
         shellAliases = {
-          ls = "exa";
+          ls = "eza";
           ll = "ls -l";
           la = "ls -a";
           lla = "ls -la";

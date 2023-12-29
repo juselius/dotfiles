@@ -109,7 +109,7 @@ let
     innoextract
     tectonic
     unrtf
-    virtmanager
+    # virt-manager
     qrencode
     zbar
     yubikey-personalization

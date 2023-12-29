@@ -34,7 +34,7 @@ let
     tomb
     sshuttle
     direnv
-    exa
+    eza
     ripgrep
     fd
     bat

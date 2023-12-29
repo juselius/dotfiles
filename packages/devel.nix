@@ -64,8 +64,8 @@ let
   dotnetPackage =
     if cfg.devel.dotnet.combined then
         with pkgs.dotnetCorePackages; combinePackages [
-          pkgs.dotnet-sdk_6
           pkgs.dotnet-sdk_7
+          pkgs.dotnet-sdk_8
         ]
     else
           pkgs.dotnet-sdk_6;
