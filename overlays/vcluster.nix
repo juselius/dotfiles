@@ -1,14 +1,14 @@
 self: super:
 let
   stdenv = super.stdenv;
-  version = "0.17.1";
+  version = "0.18.1";
 in {
   vcluster = stdenv.mkDerivation {
     name = "vcluster-${version}";
 
     src = super.fetchurl {
       url = "https://github.com/loft-sh/vcluster/releases/download/v${version}/vcluster-linux-amd64";
-      sha256 = "sha256-paEXvnjHDHvlqUzcQOpqDPSc+PLvC8BgpMeNzjq/YO8=";
+      sha256 = "sha256-/IWQXnvVVJS4ltrCsmm65g3Y7CujdSjX1Po+deK6BDI=";
     };
 
     buildCommand = ''
