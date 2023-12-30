@@ -1,7 +1,7 @@
 self: super:
 let
   stdenv = super.stdenv;
-  version = "0.17.1";
+  version = "0.18.1";
 in {
   vcluster = stdenv.mkDerivation {
     name = "vcluster-${version}";

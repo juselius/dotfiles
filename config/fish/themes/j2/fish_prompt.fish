@@ -21,7 +21,7 @@ function _is_git_unmerged
 end
 
 function _is_git_untracked
-  command git status -s --ignore-submodules=dirty 2> /dev/null | grep -q '^\?'
+  command git status -s --ignore-submodules=dirty 2> /dev/null | grep -q '^[?]'
   and echo "true"
 end
 

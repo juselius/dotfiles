@@ -3,10 +3,10 @@ let
   overlays = [
     ../overlays/dotnet-sdk.nix
     ../overlays/linkerd.nix
-    # ../overlays/minio-client.nix
+    ## ../overlays/minio-client.nix
     ../overlays/rider.nix
-    #../overlays/teams.nix
-    ../overlays/vscode.nix
+    ##../overlays/teams.nix
+    #../overlays/vscode.nix
     ../overlays/wavebox.nix
     ../overlays/vcluster.nix
     ../overlays/tilt.nix
