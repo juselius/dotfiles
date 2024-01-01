@@ -1,11 +1,12 @@
 # nix-prefetch-git https://github.com/tilt-dev/tilt --rev v0.33.5
 self: super:
 let
+  version = "0.33.8";
   args = rec {
       /* Do not use "dev" as a version. If you do, Tilt will consider itself
         running in development environment and try to serve assets from the
         source tree, which is not there once build completes.  */
-      version = "0.33.6";
+      inherit version;
 
       src = super.fetchFromGitHub {
         owner = "tilt-dev";
@@ -19,7 +20,7 @@ let
 in
 {
   untilt = super.tilt.overrideAttrs (attrs: rec {
-      version = "0.33.5";
+      inherit version;
 
       src = super.fetchFromGitHub {
           owner  = "tilt-dev";
@@ -29,6 +30,6 @@ in
       };
   });
 
-  tilt = super.callPackage ./tilt/binary.nix (args // { inherit tilt-assets; });
+  tilt = super.callPackage ./tilt/binary.nix (args // { inherit tilt-assets; inherit version; });
 }
 
