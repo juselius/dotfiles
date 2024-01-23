@@ -366,18 +366,12 @@ let
 
   vimDevPlugins =
     let
-      vim-ionide = pkgs.vimUtils.buildVimPlugin {
-          name = "vim-ionide";
-          src = ~/.dotfiles/plugins/vim-plugins/Ionide-vim;
-          buildInputs = [ pkgs.curl pkgs.which pkgs.unzip ];
-        };
       devPlugins = with pkgs.vimPlugins; [
           LanguageClient-neovim
-          idris-vim
-          neco-ghc
-          purescript-vim
           rust-vim
-          vim-ionide
+          # idris-vim
+          # neco-ghc
+          # purescript-vim
           # vim-clojure-static
           # vim-clojure-highlight
         ];
@@ -409,7 +403,11 @@ in
       default = [];
     };
 
-    vimDevPlugins = mkEnableOption "Enable vim devel plugins";
+    vimDevPlugins = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable vim devel plugins";
+    };
 
     plainNix = mkEnableOption "Tweaks for non-NixOS systems";
 

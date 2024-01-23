@@ -27,6 +27,7 @@ let
     utillinux
     sshfs-fuse
     xkcdpass
+    inotify-tools
   ];
 
   user = with pkgs; [

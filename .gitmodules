@@ -1,9 +1,6 @@
 [submodule "plugins/vim-plugins/vim-gnupg"]
 	path = plugins/vim-plugins/vim-gnupg
 	url = https://github.com/jamessan/vim-gnupg.git
-[submodule "plugins/vim-plugins/Ionide-vim"]
-	path = plugins/vim-plugins/Ionide-vim
-	url = https://github.com/ionide/Ionide-vim.git
 [submodule "plugins/vim-plugins/vim-singularity-syntax"]
 	path = plugins/vim-plugins/vim-singularity-syntax
 	url = https://github.com/rbberger/vim-singularity-syntax.git

@@ -262,7 +262,6 @@ lua << EOF
     end
 
     local lspconfig = require('lspconfig')
-    setup(require('ionide'))
     setup(lspconfig.ccls)
     -- setup(lspconfig.clangd)
     setup(lspconfig.tsserver)
