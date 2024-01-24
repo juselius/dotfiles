@@ -27,7 +27,7 @@ let
     gnum4
     chromedriver # for selenium
     jq
-    yq
+    yq-go
     websocat
     meld
     automake
