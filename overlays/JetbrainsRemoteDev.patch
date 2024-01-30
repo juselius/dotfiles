@@ -1,0 +1,11 @@
+--- a/plugins/remote-dev-server/bin/launcher.sh
++++ b/plugins/remote-dev-server/bin/launcher.sh
+@@ -351,6 +351,8 @@
+ # -------------------------------------------------------------------------------------
+ # Patch JBR to make self-contained JVM (requires nothing from host system except glibc)
+ # -------------------------------------------------------------------------------------
++REMOTE_DEV_SERVER_USE_SELF_CONTAINED_LIBS=0
++
+ if [ -n "${REMOTE_DEV_SERVER_USE_SELF_CONTAINED_LIBS:-}" ]; then
+   # already set by environment
+   echo "\$REMOTE_DEV_SERVER_USE_SELF_CONTAINED_LIBS=$REMOTE_DEV_SERVER_USE_SELF_CONTAINED_LIBS"

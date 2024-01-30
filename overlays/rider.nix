@@ -2,8 +2,62 @@ self: super:
 let
   rpath = with super; super.lib.makeLibraryPath [ stdenv.cc.cc.lib zlib ];
 
+  loName = super.lib.toLower "Rider";
+  hiName = super.lib.toUpper "Rider";
+  vmoptsName = loName
+    + super.lib.optionalString super.stdenv.hostPlatform.is64bit "64"
+    + ".vmoptions";
+
+  postPatch = with super; ''
+    get_file_size() {
+      local fname="$1"
+      echo $(ls -l $fname | cut -d ' ' -f5)
+    }
+
+    munge_size_hack() {
+      local fname="$1"
+      local size="$2"
+      strip $fname
+      truncate --size=$size $fname
+    }
+
+    rm -rf jbr
+    # When using the IDE as a remote backend using gateway, it expects the jbr directory to contain the jdk
+    ln -s ${jdk.home} jbr
+
+    interpreter=$(echo ${stdenv.cc.libc}/lib/ld-linux*.so.2)
+    if [[ "${stdenv.hostPlatform.system}" == "x86_64-linux" && -e bin/fsnotifier64 ]]; then
+      target_size=$(get_file_size bin/fsnotifier64)
+      patchelf --set-interpreter "$interpreter" bin/fsnotifier64
+      munge_size_hack bin/fsnotifier64 $target_size
+    else
+      target_size=$(get_file_size bin/fsnotifier)
+      patchelf --set-interpreter "$interpreter" bin/fsnotifier
+      munge_size_hack bin/fsnotifier $target_size
+    fi
+
+    if [ -d "plugins/remote-dev-server" ]; then
+      patch -p1 < ${./JetbrainsRemoteDev.patch}
+    fi
+
+    vmopts_file=bin/linux/${vmoptsName}
+    if [[ ! -f $vmopts_file ]]; then
+      vmopts_file=bin/${vmoptsName}
+      if [[ ! -f $vmopts_file ]]; then
+        echo "ERROR: $vmopts_file not found"
+        exit 1
+      fi
+    fi
+    echo -Djna.library.path=${lib.makeLibraryPath ([
+      libsecret e2fsprogs libnotify
+      # Required for Help -> Collect Logs
+      # in at least rider and goland
+      udev
+    ])} >> $vmopts_file
+  '';
+
   patch = attrs:
-        attrs.postPatch + ''
+        postPatch + ''
         patchelf --set-interpreter $interpreter lib/ReSharperHost/linux-x64/Rider.Backend
         patchelf --set-rpath ${rpath} lib/ReSharperHost/linux-x64/Rider.Backend
         for i in \
@@ -17,10 +71,10 @@ let
         do patchelf --set-interpreter $interpreter $i; done
         sed -i 's/runtime\.sh/runtime-dotnet.sh/' lib/ReSharperHost/Rider.Backend.sh
 
-        # NOTE(simkir): Replacing their net6 dotnet with our net7. Wasn't allowed
+        # NOTE(simkir): Replacing their net7 dotnet with our net8. Wasn't allowed
         # to do this in the postInstall step, so doing it here.
         rm -rf lib/ReSharperHost/linux-x64/dotnet
-        ln -sf ${super.dotnet-sdk_7} lib/ReSharperHost/linux-x64/dotnet
+        ln -sf ${super.dotnet-sdk_8} lib/ReSharperHost/linux-x64/dotnet
         '';
 
   jetbrainsNix = "/nix/var/nix/profiles/per-user/root/channels/nixos/pkgs/applications/editors/jetbrains";
@@ -47,12 +101,12 @@ let
   });
 
   rider-latest = jetbrains.rider.overrideAttrs (attrs: rec {
-    version = "2023.3.2";
+    version = "2023.3.3";
     name = "rider-${version}";
 
     src = super.fetchurl {
       url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
-      sha256 = "sha256-IqNZmRRr5mdyYOYDz2rwbbv6TC1ubsZTsqnjIvlUkk0=";
+      sha256 = "sha256-5LNR2QoZjEc7muXZQnqALI6dkjZExK/5zGwWzMmU69A=";
     };
 
     postPatch = patch attrs;
