@@ -5,6 +5,7 @@ let
 
   configuration = {
     home.packages = enabledPackages;
+    programs.k9s = k9s;
   };
 
   cloud = with pkgs; [
@@ -22,6 +23,20 @@ let
     gdal
   ];
 
+  k9s =
+      if cfg.kubernetes then
+          {
+              enable = true;
+              aliases = {
+                 # cp = "kyverno.io/v1/clusterpolicies";
+              };
+              settings.k9s = {
+                enableMouse = true;
+                logoless = true;
+              };
+          }
+        else { enable = false; };
+
   kubernetes = with pkgs; [
     kubernetes-helm
     kubectl
@@ -29,7 +44,6 @@ let
     step-cli # cert swiss army knife
     kubeseal
     argocd
-    k9s
     starboard
     vcluster
     krew
