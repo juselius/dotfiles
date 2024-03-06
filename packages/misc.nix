@@ -5,7 +5,6 @@ let
 
   configuration = {
     home.packages = enabledPackages;
-    programs.k9s = k9s;
   };
 
   cloud = with pkgs; [
@@ -13,6 +12,7 @@ let
     minio-client
     vault-bin
     colmena
+    k9s
   ];
 
   geo = with pkgs; [
@@ -22,20 +22,6 @@ let
     # qgis
     gdal
   ];
-
-  k9s =
-      if cfg.kubernetes then
-          {
-              enable = true;
-              aliases = {
-                 # cp = "kyverno.io/v1/clusterpolicies";
-              };
-              settings.k9s = {
-                enableMouse = true;
-                logoless = true;
-              };
-          }
-        else { enable = false; };
 
   kubernetes = with pkgs; [
     kubernetes-helm
