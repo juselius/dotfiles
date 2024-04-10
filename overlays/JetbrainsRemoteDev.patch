@@ -1,14 +1,5 @@
 --- a/plugins/remote-dev-server/bin/launcher.sh
 +++ b/plugins/remote-dev-server/bin/launcher.sh
-@@ -228,7 +228,7 @@
-     exit 1
-   fi
-
--  FONTS_CONFIGURATION_SOURCE_PATH="$FONTS_CONFIGURATION_BASE_PATH/patched"
-+  FONTS_CONFIGURATION_SOURCE_PATH="$HOME/.cache/JetBrains/fonts"
-   mkdir -p "$FONTS_CONFIGURATION_SOURCE_PATH"
-   sed -e "s|PATH_FONTS|$FONTS_CONFIGURATION_BASE_PATH/fonts|" -e "s|PATH_JBR|$IDE_HOME/jbr/lib/fonts|" "$FONTS_CONFIGURATION_BASE_PATH/fonts.conf" > "$FONTS_CONFIGURATION_SOURCE_PATH/fonts.conf"
-
 @@ -366,6 +366,8 @@
    REMOTE_DEV_SERVER_USE_SELF_CONTAINED_LIBS=1
  fi
