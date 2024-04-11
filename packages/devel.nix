@@ -124,7 +124,7 @@ let
     lorri
     nix-prefetch-scripts
     patchelf
-    rnix-lsp
+    # rnix-lsp
   ];
 
   db = with pkgs; [

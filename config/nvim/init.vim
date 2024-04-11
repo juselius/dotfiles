@@ -265,7 +265,7 @@ lua << EOF
     setup(lspconfig.ccls)
     -- setup(lspconfig.clangd)
     setup(lspconfig.tsserver)
-    setup(lspconfig.rnix)
+    -- setup(lspconfig.rnix)
     setup(lspconfig.gopls)
     -- setup(lspconfig.rust_analyzer)
 
