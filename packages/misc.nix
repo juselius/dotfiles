@@ -10,7 +10,6 @@ let
   cloud = with pkgs; [
     awscli
     minio-client
-    vault-bin
     colmena
     k9s
   ];
