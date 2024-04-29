@@ -124,7 +124,6 @@ let
     lorri
     nix-prefetch-scripts
     patchelf
-    # rnix-lsp
   ];
 
   db = with pkgs; [
@@ -138,10 +137,20 @@ let
     ant
   ];
 
+  lsp = with pkgs; [
+    nil
+    lua-language-server
+    yaml-language-server
+    gopls
+    nodePackages.pyright
+    nodePackages.typescript-language-server
+    marksman
+  ];
+
   useIf = x: y: if x then y else [];
 
   enabledPackages =
-    base ++
+    base ++ lsp ++
     useIf cfg.devel.node node ++
     useIf cfg.devel.rust rust ++
     useIf cfg.devel.haskell haskell ++

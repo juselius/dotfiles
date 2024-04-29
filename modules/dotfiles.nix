@@ -92,6 +92,18 @@ let
 
       neovim =
         let
+          fsharp-grammar = pkgs.tree-sitter.buildGrammar {
+            language = "fsharp";
+            version = "0.0.0+rev=a4d418e";
+            src = pkgs.fetchFromGitHub {
+              owner = "Nsidorenco";
+              repo = "tree-sitter-fsharp";
+              rev = "a4d418e426c555e85e32e638c0333fe3e555aeea";
+              hash = "sha256-bMBIz8rQ4X21jtH6nvAgc8Wtr7PkZ5HyfGDossJqN5U=";
+            };
+            generate = false;
+            meta.homepage = "https://github.com/Nsidorenco/tree-sitter-fsharp";
+          };
           vimPlugins = pkgs.vimPlugins // {
             vim-gnupg = pkgs.vimUtils.buildVimPlugin {
               name = "vim-gnupg";
@@ -103,11 +115,46 @@ let
               buildPhase = ":";
               configurePhase = ":";
             };
+            treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
+              # NOTE: Recommended to be in "ensure_installed"
+              p.c
+              p.lua
+              p.vim
+              p.vimdoc
+              p.query
+
+              fsharp-grammar
+              p.bash
+              p.bibtex
+              p.c_sharp
+              p.cue
+              p.cpp
+              p.css
+              p.dhall
+              p.dockerfile
+              p.fish
+              p.git_rebase
+              p.gitattributes
+              p.gitignore
+              p.glsl
+              p.go
+              p.html
+              p.javascript
+              p.latex
+              p.markdown
+              p.markdown_inline
+              p.nix
+              p.python
+              p.rust
+              p.sql
+              p.typescript
+              p.yaml
+              p.zig
+            ]);
             jonas = pkgs.vimUtils.buildVimPlugin {
               name = "jonas";
               src = ~/.dotfiles/plugins/vim-plugins/jonas;
             };
-            treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [ p.c p.cpp p.nix p.javascript p.bash p.bibtex p.c_sharp p.css p.dockerfile p.fish p.git_rebase p.gitattributes p.gitignore p.glsl p.html p.latex p.lua p.markdown p.markdown_inline p.rust p.sql p.typescript p.vim p.yaml p.go ]);
           };
         in
         {
@@ -115,37 +162,34 @@ let
           plugins = with vimPlugins; [
             jonas
             cmp-buffer
-            cmp-cmdline
+            cmp_luasnip
             cmp-nvim-lsp
+            cmp-nvim-lua
             cmp-path
-            cmp-vsnip
+            friendly-snippets
+            fugitive
+            Ionide-vim
+            lsp-zero-nvim
+            luasnip
             markdown-preview-nvim
-            nvim-cmp
-            nvim-lspconfig
-            treesitter
-            ctrlp
-            zephyr-nvim
-            # telescope-nvim
-            nerdcommenter
-            commentary
-            supertab
-            tabular
-            tlib_vim
-            vim-addon-mw-utils
-            vim-airline
-            vim-airline-themes
             NeoSolarized
-            vim-fish
-            vim-markdown
-            vim-nix
-            vimproc
-            vim-sensible
-            vim-surround
-            vim-unimpaired
+            nerdcommenter
+            nvim-cmp
+            nvim-dap
+            nvim-lspconfig
+            nvim-treesitter-context
+            plenary-nvim
+            telescope-nvim
+            treesitter
             vim-gnupg
-            vim-singularity-syntax
+            vim-nix
+          # vim-singularity-syntax
+            vim-surround
+            vimtex
+            vim-vsnip
+            zephyr-nvim
           ];
-          extraConfig = builtins.readFile ../config/nvim/init.vim;
+          #extraConfig = builtins.readFile ../config/nvim/init.lua;
         };
 
       git = {
@@ -260,6 +304,41 @@ let
         settings.right_meter_modes = [ "Tasks" "LoadAverage" "Uptime" ];
       };
 
+      # k9s = {
+      #     enable = true;
+      #     plugin = {
+      #       debug = {
+      #         shortCut = "Shit-D";
+      #         confirm = true;
+      #         description = "Add debug container";
+      #         scopes = [ "containers" ];
+      #         command = "kubectl";
+      #         background = false;
+      #         args = [
+      #             "debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME"
+      #             "--image=nicolaka/netshoot:v0.12 --share-processes -- bash"
+      #         ];
+      #       };
+      #       stern = {
+      #         shortCut = "Ctrl-L";
+      #         confirm = false;
+      #         description = "Logs <Stern>";
+      #         scopes = [ "pods" ];
+      #         command = "stern";
+      #         background = false;
+      #         args = [
+      #             "--tail"
+      #             "50"
+      #             "$FILTER"
+      #             "-n"
+      #             "$NAMESPACE"
+      #             "--context"
+      #             "$CONTEXT"
+      #         ];
+      #       };
+      #     };
+      # };
+
       home-manager = {
         enable = true;
         path = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
@@ -296,6 +375,11 @@ let
       fish = {
         source = ~/.dotfiles/config/fish;
         target = "fish";
+        recursive = true;
+      };
+      nvim = {
+        source = ~/.dotfiles/config/nvim;
+        target = "nvim";
         recursive = true;
       };
       "home.nix" = {
