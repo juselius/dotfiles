@@ -166,6 +166,7 @@ let
             cmp-nvim-lsp
             cmp-nvim-lua
             cmp-path
+            commentary
             friendly-snippets
             fugitive
             Ionide-vim
@@ -173,7 +174,6 @@ let
             luasnip
             markdown-preview-nvim
             NeoSolarized
-            nerdcommenter
             nvim-cmp
             nvim-dap
             nvim-lspconfig
