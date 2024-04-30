@@ -5,5 +5,5 @@ telescope.setup()
 
 vim.keymap.set("n", "<C-p>", builtin.git_files, {})
 vim.keymap.set("n", "<leader>p", builtin.find_files, {})
-
+vim.keymap.set("n", "<leader>rg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>ff", builtin.live_grep, {})

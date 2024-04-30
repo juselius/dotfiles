@@ -23,10 +23,16 @@ vim.opt.history = 1000
 vim.opt.cmdheight = 1
 vim.opt.hlsearch = false
 vim.opt.foldenable = false
+vim.opt.laststatus = 2
+vim.opt.ttimeoutlen = 50
 
 vim.g.indent_guides_enable_on_vim_startup = 0
 vim.g.indent_guides_start_level = 2
 vim.g.indent_guides_guide_size = 1
+
+vim.g.airline_theme = "cool"
+vim.g.airline_powerline_fonts = 1
+-- vim.g.airline_theme= "airlinje"
 
 -- vim.opt.wildmode = "longest,list,full"
 -- vim.opt.wildmenu = true

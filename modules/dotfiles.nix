@@ -161,6 +161,8 @@ let
           enable = true;
           plugins = with vimPlugins; [
             jonas
+            vim-airline
+            vim-airline-themes
             cmp-buffer
             cmp_luasnip
             cmp-nvim-lsp
