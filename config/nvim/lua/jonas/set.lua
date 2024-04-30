@@ -28,8 +28,6 @@ vim.g.indent_guides_enable_on_vim_startup = 0
 vim.g.indent_guides_start_level = 2
 vim.g.indent_guides_guide_size = 1
 
-vim.g.lsp_zero_extend_lspconfig = 0
-
 -- vim.opt.wildmode = "longest,list,full"
 -- vim.opt.wildmenu = true
 -- vim.opt.compatible = false

@@ -1,6 +1,8 @@
 -- My lsp configs...
+vim.g.lsp_zero_extend_lspconfig = 0
+
 local lsp_zero = require("lsp-zero")
-lsp_zero.extend_lspconfig()
+-- lsp_zero.extend_lspconfig()
 
 local cmp = require'cmp'
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
