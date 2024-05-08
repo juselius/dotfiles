@@ -15,9 +15,9 @@ local cmp_mappings = lsp_zero.defaults.cmp_mappings({
     ['<C-Space>'] = cmp.mapping.complete(),
 })
 
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
-cmp_mappings['<CR>'] = nil
+-- cmp_mappings['<Tab>'] = nil
+-- cmp_mappings['<S-Tab>'] = nil
+-- cmp_mappings['<CR>'] = nil
 
 lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })

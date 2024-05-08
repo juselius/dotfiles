@@ -179,7 +179,6 @@ let
             nvim-cmp
             nvim-dap
             nvim-lspconfig
-            nvim-treesitter-context
             plenary-nvim
             telescope-nvim
             treesitter
