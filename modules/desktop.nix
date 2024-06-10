@@ -69,8 +69,7 @@ let
         defaultCacheTtlSsh = 43200;
         maxCacheTtl = 604800; # 7 days
         maxCacheTtlSsh = 604800;
-        # pinentryFlavor = "gtk2";
-        pinentryFlavor = "gnome3";
+        pinentryPackage = pkgs.pinentry-gnome3;
       };
 
       gnome-keyring = {

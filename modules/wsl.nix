@@ -12,7 +12,7 @@ let
         defaultCacheTtlSsh = 64800; # 18 hours
         maxCacheTtl = 64800;
         maxCacheTtlSsh = 64800;
-        pinentryFlavor = "curses";
+        pinentryPackage = pkgs.pinentry-curses;
         extraConfig = ''
           pinentry-program ${pkgs.pinentry-curses}/bin/pinentry
         '';

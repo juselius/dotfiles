@@ -342,7 +342,7 @@ let
 
       home-manager = {
         enable = true;
-        path = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+        path = "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
       };
     };
 
@@ -476,7 +476,7 @@ let
         defaultCacheTtlSsh = 64800; # 18 hours
         maxCacheTtl = 64800;
         maxCacheTtlSsh = 64800;
-        pinentryFlavor = "curses";
+        pinentryPackage = pkgs.pinentry-curses;
       };
     };
   };
