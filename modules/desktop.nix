@@ -130,8 +130,48 @@ let
       };
     };
 
-    programs.alacritty = {
+    programs.wezterm = {
       enable = true;
+      extraConfig = ''
+         local wezterm = require 'wezterm'
+         local act = wezterm.action
+         local config = {}
+
+         return {
+            font = wezterm.font("JetBrains Mono"),
+            font_size = 11.0,
+            color_scheme = "Classic Dark (base16)",
+            hide_tab_bar_if_only_one_tab = true,
+            mouse_bindings = {
+              -- Disable the default click behavior
+              {
+                event = { Up = { streak = 1, button = "Left"} },
+                mods = "NONE",
+                action = wezterm.action.DisableDefaultAssignment,
+              },
+              -- Bind 'Up' event of CTRL-Click to open hyperlinks
+              {
+                event = { Up = { streak = 1, button = 'Left' } },
+                mods = 'CTRL',
+                action = act.OpenLinkAtMouseCursor,
+              },
+              -- Disable the 'Down' event of CTRL-Click to avoid weird program behaviors
+              {
+                event = { Down = { streak = 1, button = 'Left' } },
+                mods = 'CTRL',
+                action = act.Nop,
+              },
+            },
+           -- default_prog = { "zsh", "--login", "-c", "tmux attach -t dev || tmux new -s dev" },
+           -- keys = {
+           --  {key="n", mods="SHIFT|CTRL", action="ToggleFullScreen"},
+           -- }
+         }
+      '';
+    };
+
+    programs.alacritty = {
+      enable = false;
       settings = {
         hints.enabled = [
           {

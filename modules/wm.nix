@@ -83,7 +83,7 @@ let
       config = {
         window.titlebar = false;
         # terminal = "alacritty --working-directory $($HOME/nixos-configuration/get-last-location.sh)";
-        terminal = "alacritty";
+        terminal = "wezterm";
         modifier = "Mod4";  # this is the "windows" key
         defaultWorkspace = "workspace number 1";
         assigns = {
@@ -318,7 +318,7 @@ let
       swayidle
       wl-clipboard
       mako
-      alacritty
+      wezterm
       wf-recorder
       wofi
       clipman
