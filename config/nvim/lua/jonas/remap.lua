@@ -23,7 +23,7 @@ vim.keymap.set('n', "Q", "<nop>", { remap = false })
 
 vim.keymap.set({ 'n', 'i', 'v' }, "<C-L>", ":noh<cr>")
 vim.keymap.set({ 'n', 'i', 'v' }, "x", "<Plug>Commentary<space>")
-vim.keymap.set({ 'n', 'i', 'v' }, "<C-_>", "<Plug>Commentary<space>")
+vim.keymap.set({ 'n', 'i', 'v' }, "<C-/>", "<Plug>Commentary<space>")
 vim.keymap.set('n', "s", "<Plug>Sneak_s")
 vim.keymap.set('v', "s", "<Plug>Sneak_s")
 vim.keymap.set({ 'n', 'i', 'v' }, "<S-UP>", "<UP>")
