@@ -101,12 +101,12 @@ let
   });
 
   rider-latest = jetbrains.rider.overrideAttrs (attrs: rec {
-    version = "2024.1.5";
+    version = "2024.2.1";
     name = "rider-${version}";
 
     src = super.fetchurl {
       url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
-      sha256 = "sha256-IjR5ErRr4pw+WF5Hd0/tqumotO9c2rn5eU/wzJizB5M=";
+      sha256 = "sha256-LRSRfVJxIKmMHXG5S6Qw/pu38jWCkHENdP0SFCbP+k4=";
     };
 
     postPatch = patch attrs;
