@@ -3,15 +3,13 @@ let
   overlays = [
     ../overlays/dotnet-sdk.nix
     ../overlays/linkerd.nix
-    ## ../overlays/minio-client.nix
     ../overlays/rider.nix
-    ##../overlays/teams.nix
-    #../overlays/vscode.nix
-    # ../overlays/wavebox.nix
+    ../overlays/vscode.nix
     ../overlays/ferdium.nix
     ../overlays/vcluster.nix
-    # ../overlays/tilt.nix
     ../overlays/fcitx.nix
+    # ../overlays/wavebox.nix
+    # ../overlays/tilt.nix
   ];
 in builtins.map import overlays
 
