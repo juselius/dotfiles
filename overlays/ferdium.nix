@@ -1,14 +1,14 @@
 self: super:
 let
     arch = "amd64";
-    version = "6.7.8-nightly.6";
+    version = "6.7.8-nightly.11";
 in
 {
   ferdium = super.ferdium.overrideAttrs (attrs: rec {
       inherit version;
       src = super.fetchurl {
         url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-${arch}.deb";
-        hash = "sha256-yNQy/4j11MNObW4B58mjkAXCBwdYcIQxsJ4tdDnL6+w=";
+        hash = "sha256-4KJaqws6U0fMW9Jhk+9bAq0I2zm5bJ2z4Q9whsSm900=";
       };
   });
 }
