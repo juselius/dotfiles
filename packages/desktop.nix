@@ -100,6 +100,8 @@ let
     gparted
     # calibre
     fira-code
+    # font-awesome
+    font-awesome_5
     keybase
     keybase-gui
     pandoc

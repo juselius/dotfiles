@@ -102,9 +102,10 @@ let
           id = "top";
           position = "top";
           trayOutput = cfg.i3.trayOutput;
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
+          # statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
+          command = "${pkgs.waybar}/bin/waybar";
           fonts = {
-            names = [ "DejaVu Sans Mono" "FontAwesome5Free" ];
+            names = [ "DejaVu Sans Mono" "FontAwesome5Free" "FontAwesome" "JetBrainsMono" ];
             style = "Normal";
             size = 9.0;
           };
@@ -129,11 +130,11 @@ let
         startup = [
           { command = "${pkgs.autotiling}/bin/autotiling"; always = false; }
           { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
-        ] ++ (if cfg.sway.enable then
+        ] ++ (if cfg.wayland.enable then
            [ { command = "${pkgs.swaybg}/bin/swaybg -c '#444444'"; always = false; }
              { command = ''
                   swayidle timeout 900 'swaylock -c 111111' \
-                           timeout 60 'swaymsg "output * dpms off"' \
+                           timeout 120 'swaymsg "output * dpms off"' \
                            resume 'swaymsg "output * dpms on"' \
                            before-sleep 'swaylock -c 111111' ''; always = false; }
            ] else []);
@@ -162,7 +163,8 @@ let
             # "${mod}+d"= "exec $(${pkgs.ulauncher}/bin/ulauncher)";
 
             "${mod}+Ctrl+l" = "exec --no-startup-id ${pkgs.i3lock}/bin/i3lock -n -c 111111";
-            "${mod}+Ctrl+s" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
+            # "${mod}+Ctrl+s" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
+            "Print" = "exec grimshot savecopy anything";
             "${mod}+Ctrl+n" = "exec --no-startup-id ${pkgs.gnome3.nautilus}/bin/nautilus";
 
             # Pulse Audio controls
@@ -180,7 +182,7 @@ let
             "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
             "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
           }
-          // (if cfg.sway.enable then
+          // (if cfg.wayland.enable then
               {
                 "${mod}+Ctrl+l" = "exec --no-startup-id ${pkgs.swaylock}/bin/swaylock -n -c 111111";
                 "${mod}+Shift+r" = "exec --no-startup-id ${pkgs.sway}/bin/sway reload";
@@ -239,7 +241,7 @@ let
               chip = "*-isa-*";
           };
           last-block =
-              if config.dotfiles.desktop.laptop then
+              if cfg.laptop then
               [
                   {
                       block = "battery";
@@ -290,6 +292,125 @@ let
     programs.qt5ct.enable = true;
   };
 
+  waybar = {
+    programs.waybar = {
+      enable = true;
+      style = builtins.readFile ./waybar.css;
+      settings = {
+        mainBar =
+          let
+            baseBar = {
+              layer = "bottom";
+              position = "top";
+              height = 20;
+
+              modules-left = [
+                "sway/workspaces"
+              ];
+              modules-center = [ "sway/window" ];
+              modules-right = [
+                (if cfg.laptop then "battery" else "")
+                "disk"
+                "cpu"
+                "memory"
+                "idle_inhibitor"
+                "wireplumber"
+                "network"
+                "clock"
+                "tray"
+            ];
+
+            "sway/window" = {
+              format = "{title}";
+              max-length = 50;
+              # NOTE: Long dash used by some sway windows: —
+              rewrite = {
+                "(.*) — Mozilla Firefox" = "󰈹 $1";
+                "(.*) - Discord" = "  $1";
+                "Ferdium - (.*)" = " $1";
+              };
+            };
+
+            "tray" = {
+              icon-size = 20;
+              spacing = 10;
+            };
+
+            "clock" = {
+              format = "  {:%a %d/%m %R}";
+              interval = 60;
+            };
+
+            "network" = {
+              format-wifi = "  ";
+              format-ethernet = "󰛳 ";
+              format-disconnected = "󰲛 ";
+              tooltip-format-wifi = "{essid} ({signalStrength}%)";
+              tooltip-format-ethernet = "{ifname}";
+              # TODO: Pass in terminal emulator as a binding for better modularity
+              on-click = "networkmanager_dmenu";
+              max-length = 20;
+            };
+
+            "wireplumber" = {
+              format = "{icon}  {volume}% ";
+              format-muted = "󰝟 ";
+              format-icons = [
+                ""
+                ""
+                ""
+              ];
+              on-click = "pavucontrol";
+            };
+
+            "memory" = {
+              format = "  {}%";
+              interval = 5;
+              on-click = "alacritty -e btop";
+            };
+
+            "cpu" = {
+              format = "  {usage}%";
+              interval = 5;
+              on-click = "alacritty -e btop";
+            };
+
+            "disk" = {
+              format = "󰆼  {free}";
+              unit = "GB";
+              interval = 30;
+            };
+
+            "idle_inhibitor" = {
+              format = "{icon}";
+              format-icons = {
+                activated = "󰒳 ";
+                deactivated = "󰒲 ";
+              };
+            };
+          };
+          laptopModules = {
+            "battery" = {
+              format = "  {icon}  {capacity}%";
+              format-icons = [
+                ""
+                ""
+                ""
+                ""
+                ""
+              ];
+              interval = 60;
+            };
+          };
+      in
+        lib.mkMerge [
+          baseBar
+          (lib.mkIf cfg.laptop laptopModules)
+        ];
+      };
+    };
+  };
+
   i3 = {
     xsession.windowManager.i3 = {
       enable = true;
@@ -310,23 +431,122 @@ let
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true ;
-      config = i3-sway.config;
+      config = i3-sway.config // {
+        input = {
+          "*" = {
+            xkb_layout = "us(altgr-intl)";
+            xkb_model = "pc104";
+            xkb_options = "eurosign:e,caps:none";
+          };
+        };
+      };
+    };
+  };
+
+  river = {
+    wayland.windowManager.river = {
+      enable = true;
+      settings =               {
+        border-width = 2;
+        declare-mode = [
+          "locked"
+          "normal"
+          "passthrough"
+        ];
+        input = {
+          pointer-foo-bar = {
+            accel-profile = "flat";
+            events = true;
+            pointer-accel = -0.3;
+            tap = false;
+          };
+        };
+        map = {
+          normal = {
+            "Alt Q" = "close";
+          };
+        };
+        rule-add = {
+          "-app-id" = {
+            "'bar'" = "csd";
+            "'float*'" = {
+              "-title" = {
+                "'foo'" = "float";
+              };
+            };
+          };
+        };
+        set-cursor-warp = "on-output-change";
+        set-repeat = "50 300";
+        spawn = [
+          "firefox"
+          "'foot -a terminal'"
+        ];
+        xcursor-theme = "someGreatTheme 12";
+      };
+    };
+  };
+
+  hyprland = {
+    wayland.windowManager.hyprland = {
+      enable = true;
+      settings =               {
+         decoration = {
+           shadow_offset = "0 5";
+           "col.shadow" = "rgba(00000099)";
+         };
+
+         "$mod" = "SUPER";
+         "$terminal" = "wezterm";
+         "$fileManager" = "dolphin";
+         "$menu" = "wofi --show drun";
+
+         exec-once = "waybar & hyprpaper & firefox";
+         bindm = [
+           # mouse movements
+           "$mod, Enter, exec, $terminal"
+           "$mod, D, exec, $menu"
+           "$mod, mouse:272, movewindow"
+           "$mod, mouse:273, resizewindow"
+           "$mod ALT, mouse:272, resizewindow"
+         ];
+       };
+    };
+
+    services.mako = {
+      enable = true;
+      borderSize = 2;
+      defaultTimeout = 2500;
+    };
+  };
+
+  wayland = {
+    home.sessionVariables = {
+      _JAVA_AWT_WM_NONREPARENTING = 1;
     };
 
     home.packages = with pkgs; [
       swaylock
       swayidle
       wl-clipboard
-      mako
       wezterm
       wf-recorder
       wofi
+      sway-contrib.grimshot
       clipman
       swaybg
       networkmanager
       networkmanagerapplet
     ];
+
+    services.mako = {
+      enable = true;
+      borderSize = 2;
+      defaultTimeout = 2500;
+    };
+
   };
+
 
 in {
   options.dotfiles.desktop = {
@@ -342,8 +562,8 @@ in {
       };
     };
 
-    sway = {
-      enable = mkEnableOption "Enable sway";
+    wayland = {
+      enable = mkEnableOption "Enable wayland";
     };
 
     xsessionInitExtra = mkOption {
@@ -356,7 +576,9 @@ in {
     (mkIf (cfg.xmonad.enable || cfg.i3.enable) xorg)
     (mkIf cfg.xmonad.enable xmonad)
     (mkIf cfg.i3.enable i3)
-    (mkIf cfg.sway.enable sway)
+    (mkIf cfg.wayland.enable wayland)
+    (mkIf cfg.wayland.enable waybar)
+    (mkIf cfg.wayland.enable sway)
   ];
 
   imports = [ ./polybar.nix ];
