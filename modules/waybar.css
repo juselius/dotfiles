@@ -42,7 +42,7 @@ window#waybar.chromium {
 } */
 
 #workspaces button {
-    padding: 0 0.4em;
+    padding: 0 0.6em;
     /* background-color: transparent; */
     color: #ffffff;
     /* Use box-shadow instead of border so the text isn't offset */
@@ -82,8 +82,8 @@ window#waybar.chromium {
 #mode,
 #idle_inhibitor,
 #mpd {
-    padding: 0 10px;
-    margin: 6px 3px;
+    padding: 0 0px;
+    margin: 3px 10px;
     color: #000000;
 }
 
@@ -196,16 +196,16 @@ label:focus {
 }
 
 #tray {
-    background-color: #2980b9;
+    /* background-color: #2980b9; */
+    background-color: #282828;
 }
 
 #idle_inhibitor {
-    background-color: #2d3436;
+    color: grey;
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    color: yellow;
 }
 
 #mpd {

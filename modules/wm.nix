@@ -78,7 +78,7 @@ let
       base0D = "#97bbf7";
       base0E = "#c0b7f9";
       base0F = "#fcc09e";
-
+      wallpaper = "${pkgs.nixos-artwork.wallpapers.binary-blue}/share/backgrounds/nixos/nix-wallpaper-binary-blue.png";
     in {
       config = {
         window.titlebar = false;
@@ -131,12 +131,13 @@ let
           { command = "${pkgs.autotiling}/bin/autotiling"; always = false; }
           { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
         ] ++ (if cfg.wayland.enable then
-           [ { command = "${pkgs.swaybg}/bin/swaybg -c '#444444'"; always = false; }
+            [ { command =
+             "${pkgs.swaybg}/bin/swaybg -c '#444444' -i ${wallpaper} -m fill"; always = false; }
              { command = ''
                   swayidle timeout 900 'swaylock -c 111111' \
-                           timeout 120 'swaymsg "output * dpms off"' \
+                           timeout 180 'swaymsg "output * dpms off"' \
                            resume 'swaymsg "output * dpms on"' \
-                           before-sleep 'swaylock -c 111111' ''; always = false; }
+                           before-sleep 'swaylock' ''; always = false; }
            ] else []);
         keybindings =
           let
@@ -184,7 +185,7 @@ let
           }
           // (if cfg.wayland.enable then
               {
-                "${mod}+Ctrl+l" = "exec --no-startup-id ${pkgs.swaylock}/bin/swaylock -n -c 111111";
+                "${mod}+Ctrl+l" = "exec --no-startup-id ${pkgs.swaylock}/bin/swaylock";
                 "${mod}+Shift+r" = "exec --no-startup-id ${pkgs.sway}/bin/sway reload";
               }
               else {})
@@ -302,7 +303,7 @@ let
             baseBar = {
               layer = "bottom";
               position = "top";
-              height = 20;
+              height = 30;
 
               modules-left = [
                 "sway/workspaces"
@@ -520,9 +521,27 @@ let
     };
   };
 
-  wayland = {
+  wayland =
+  let
+    wallpaper = "${pkgs.nixos-artwork.wallpapers.binary-black}/share/backgrounds/nixos/nix-wallpaper-binary-black.png";
+  in
+  {
     home.sessionVariables = {
       _JAVA_AWT_WM_NONREPARENTING = 1;
+    };
+
+    programs.swaylock = {
+      enable = true;
+      settings = {
+           color = "202020";
+           image = wallpaper;
+           scaling = "fill";
+           font-size = 24;
+           indicator-idle-visible = false;
+           indicator-radius = 75;
+           line-color = "ffffff";
+           show-failed-attempts = true;
+      };
     };
 
     home.packages = with pkgs; [

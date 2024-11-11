@@ -76,8 +76,8 @@ let
 
   graphics = with pkgs; [
     imagemagick
-    scrot
-    krita
+    # scrot
+    # krita
     # inkscape
   ];
 
@@ -103,7 +103,7 @@ let
     # font-awesome
     font-awesome_5
     keybase
-    keybase-gui
+    # keybase-gui
     pandoc
     pinentry
     polkit_gnome
