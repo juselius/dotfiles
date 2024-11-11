@@ -343,7 +343,7 @@ let
             };
 
             "network" = {
-              format-wifi = "  ";
+              format-wifi = " ";
               format-ethernet = "󰛳 ";
               format-disconnected = "󰲛 ";
               tooltip-format-wifi = "{essid} ({signalStrength}%)";
@@ -357,33 +357,33 @@ let
               format = "{icon}  {volume}% ";
               format-muted = "󰝟 ";
               format-icons = [
-                ""
-                ""
-                ""
+                " "
+                " "
+                " "
               ];
               on-click = "pavucontrol";
             };
 
             "memory" = {
-              format = "  {}%";
+              format = "   {}%";
               interval = 5;
               on-click = "alacritty -e btop";
             };
 
             "cpu" = {
-              format = "  {usage}%";
+              format = "   {usage}%";
               interval = 5;
               on-click = "alacritty -e btop";
             };
 
             "disk" = {
-              format = "󰆼  {free}";
+              format = "󰆼   {free}";
               unit = "GB";
               interval = 30;
             };
 
             "idle_inhibitor" = {
-              format = "{icon}";
+              format = "{icon} ";
               format-icons = {
                 activated = "󰒳 ";
                 deactivated = "󰒲 ";
@@ -392,13 +392,13 @@ let
           };
           laptopModules = {
             "battery" = {
-              format = "  {icon}  {capacity}%";
+              format = "{icon}  {capacity}%";
               format-icons = [
-                ""
-                ""
-                ""
-                ""
-                ""
+                "<span color='#dd532e'></span>"
+                "<span color='#ffffa5'></span>"
+                "<span color='#ffffff'></span>"
+                "<span color='#ffffff'></span>"
+                "<span color='#ffffff'></span>"
               ];
               interval = 60;
             };
@@ -433,6 +433,7 @@ let
       enable = true;
       wrapperFeatures.gtk = true ;
       config = i3-sway.config // {
+        output = cfg.sway.output;
         input = {
           "*" = {
             xkb_layout = "us(altgr-intl)";
@@ -551,6 +552,8 @@ let
       wezterm
       wf-recorder
       wofi
+      wlr-randr
+      wdisplays
       sway-contrib.grimshot
       clipman
       swaybg
@@ -578,6 +581,18 @@ in {
       trayOutput = mkOption {
         type = types.nullOr types.str;
         default = null;
+      };
+    };
+
+    sway = {
+      enable = mkEnableOption "Enable sway";
+      trayOutput = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+      };
+      output = mkOption {
+        type = types.attrsOf (types.attrsOf types.str);
+        default = {};
       };
     };
 
