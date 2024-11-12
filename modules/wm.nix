@@ -370,7 +370,7 @@ let
 
             network = {
               # TODO: Pass in terminal emulator as a binding for better modularity
-              on-click = "networkmanager_dmenu";
+              # on-click = "networkmanager_dmenu";
               rotate = 0;
               interval = 2;
               format-wifi = " ";
@@ -629,7 +629,8 @@ let
       sway-contrib.grimshot
       clipman
       swaybg
-      networkmanager
+      # networkmanager
+      networkmanager_dmenu
       networkmanagerapplet
     ];
 

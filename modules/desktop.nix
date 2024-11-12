@@ -59,7 +59,7 @@ let
         # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
       # };
 
-      network-manager-applet.enable = true;
+      network-manager-applet.enable = true; #!cfg.wayland.enable;
       blueman-applet.enable = true;
 
       kanshi = {
