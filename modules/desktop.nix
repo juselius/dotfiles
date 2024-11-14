@@ -62,9 +62,9 @@ let
       network-manager-applet.enable = true; #!cfg.wayland.enable;
       blueman-applet.enable = true;
 
-      kanshi = {
-        enable = true;
-      };
+      # kanshi = {
+      #  enable = true;
+      # };
       gpg-agent = {
         enable = true;
         enableSshSupport = true;

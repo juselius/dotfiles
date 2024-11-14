@@ -79,6 +79,7 @@ let
       base0E = "#c0b7f9";
       base0F = "#fcc09e";
       wallpaper = "${pkgs.nixos-artwork.wallpapers.binary-blue}/share/backgrounds/nixos/nix-wallpaper-binary-blue.png";
+      screen_timeout = if cfg.laptop then 240 else 900;
     in {
       config = {
         window.titlebar = false;
@@ -134,8 +135,8 @@ let
             [ { command =
              "${pkgs.swaybg}/bin/swaybg -c '#444444' -i ${wallpaper} -m fill"; always = false; }
              { command = ''
-                  swayidle timeout 900 'swaylock -c 111111' \
-                           timeout 180 'swaymsg "output * dpms off"' \
+                  swayidle timeout 600 'swaylock -c 111111' \
+                           timeout ${builtins.toString screen_timeout} 'swaymsg "output * dpms off"' \
                            resume 'swaymsg "output * dpms on"' \
                            before-sleep 'swaylock' ''; always = false; }
            ] else []);
