@@ -29,6 +29,14 @@ in
   #   };
   # });
 
+  dotnet-sdk_9 = super.dotnetCorePackages.sdk_8_0.overrideAttrs (attrs: rec {
+    version = "9.0.100";
+    src = super.fetchurl {
+      url = "https://dotnetcli.azureedge.net/dotnet/Sdk/${version}/${pname}-${version}-${platform}-${suffix}.tar.gz";
+      sha256 = "sha256-TJcayAYV+qgG3oLwqzBz5QrrtAK3msJlq5d2XJop7VY=";
+    };
+  });
+
 # workaround for a bug in nixpkgs
   # dotnetCorePackages.aspnetcore_2_1 = {};
   # dotnetCorePackages.netcore_2_1 = {};

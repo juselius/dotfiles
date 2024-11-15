@@ -73,8 +73,8 @@ let
 
         # NOTE(simkir): Replacing their net7 dotnet with our net8. Wasn't allowed
         # to do this in the postInstall step, so doing it here.
-        rm -rf lib/ReSharperHost/linux-x64/dotnet
-        ln -sf ${super.dotnet-sdk_8} lib/ReSharperHost/linux-x64/dotnet
+        # rm -rf lib/ReSharperHost/linux-x64/dotnet
+        # ln -sf ${super.dotnet-sdk_9} lib/ReSharperHost/linux-x64/dotnet
         '';
 
   jetbrainsNix = "/nix/var/nix/profiles/per-user/root/channels/nixos/pkgs/applications/editors/jetbrains";
@@ -110,6 +110,11 @@ let
     };
 
     postPatch = patch attrs;
+    postInstall = attrs.postInstall + ''
+        rm -rf lib/ReSharperHost/linux-x64/dotnet
+        ln -sf ${super.dotnet-sdk_9} lib/ReSharperHost/linux-x64/dotnet
+    '';
+
   });
 in
 {
