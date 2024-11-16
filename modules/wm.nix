@@ -396,8 +396,8 @@ let
               # format = "   {}%";
               format = "󰾆  {used}GB";
               format-m = "󰾅  {used}GB";
-              format-h = "󰓅  {used}GB";
-              format-c = "  {used}GB";
+              format-h = "<span color='#ffffa5'>󰓅 </span>  {used}GB";
+              format-c = "<span color='#dd532e'> </span>  {used}GB";
               format-alt = "󰾆  {percentage}%";
               rotate = 0;
               max-length = 10;
