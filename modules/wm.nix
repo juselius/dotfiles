@@ -307,7 +307,8 @@ let
               height = 30;
 
               modules-left = [
-                "sway/workspaces"
+                "custom/os_button"
+                (if cfg.hyprland.enable then "hyprland/workspaces" else "sway/workspaces")
               ];
               modules-center = [
                 # "sway/window"
@@ -324,6 +325,12 @@ let
                 "tray"
                 "clock"
             ];
+
+            "custom/os_button" = {
+              format = "";
+              "on-click" = "wofi --show drun";
+              tooltip = false;
+            };
 
             "sway/window" = {
               format = "{title}";
@@ -518,88 +525,10 @@ let
     };
   };
 
-  river = {
-    wayland.windowManager.river = {
-      enable = true;
-      settings =               {
-        border-width = 2;
-        declare-mode = [
-          "locked"
-          "normal"
-          "passthrough"
-        ];
-        input = {
-          pointer-foo-bar = {
-            accel-profile = "flat";
-            events = true;
-            pointer-accel = -0.3;
-            tap = false;
-          };
-        };
-        map = {
-          normal = {
-            "Alt Q" = "close";
-          };
-        };
-        rule-add = {
-          "-app-id" = {
-            "'bar'" = "csd";
-            "'float*'" = {
-              "-title" = {
-                "'foo'" = "float";
-              };
-            };
-          };
-        };
-        set-cursor-warp = "on-output-change";
-        set-repeat = "50 300";
-        spawn = [
-          "firefox"
-          "'foot -a terminal'"
-        ];
-        xcursor-theme = "someGreatTheme 12";
-      };
-    };
-  };
-
-  hyprland = {
-    wayland.windowManager.hyprland = {
-      enable = true;
-      settings =               {
-         decoration = {
-           shadow_offset = "0 5";
-           "col.shadow" = "rgba(00000099)";
-         };
-
-         "$mod" = "SUPER";
-         "$terminal" = "wezterm";
-         "$fileManager" = "dolphin";
-         "$menu" = "wofi --show drun";
-
-         exec-once = "waybar & hyprpaper & firefox";
-         bindm = [
-           # mouse movements
-           "$mod, Enter, exec, $terminal"
-           "$mod, D, exec, $menu"
-           "$mod, mouse:272, movewindow"
-           "$mod, mouse:273, resizewindow"
-           "$mod ALT, mouse:272, resizewindow"
-         ];
-       };
-    };
-
-    services.mako = {
-      enable = true;
-      borderSize = 2;
-      defaultTimeout = 2500;
-    };
-  };
-
   wayland =
   let
     wallpaper = "${pkgs.nixos-artwork.wallpapers.binary-black}/share/backgrounds/nixos/nix-wallpaper-binary-black.png";
-  in
-  {
+  in {
     home.sessionVariables = {
       _JAVA_AWT_WM_NONREPARENTING = 1;
     };
@@ -876,115 +805,6 @@ let
           ];
         };
       };
-
-      waybar = {
-        enable = true;
-        systemd.enable = true;
-        style = builtins.readFile ./style.css;
-        settings = {
-          mainBar = {
-            name = "main-bar";
-            layer = "top";
-            position = "bottom";
-            height = 30;
-
-            modules-left = [
-              "custom/os_button"
-              "hyprland/workspaces"
-            ];
-
-            modules-center = [];
-
-            modules-right = [
-              "hyprland/language"
-              "temperature"
-              "cpu"
-              "memory"
-              "network"
-              "pulseaudio"
-              "backlight"
-              "battery"
-              "tray"
-              "clock"
-            ];
-
-            "custom/os_button" = {
-              format = "";
-              "on-click" = "wofi --show drun";
-              tooltip = false;
-            };
-
-            "hyprland/language" = {
-              format = "{short} ({variant})";
-            };
-
-            cpu = {
-              format = "  {usage}%";
-            };
-
-            memory = {
-              format = "  {percentage}%";
-            };
-
-            network = {
-              "format-wifi" = "   {signalStrength}%";
-              "format-ethernet" = " {ifname}";
-              "tooltip-format" = " {ifname} via {gwaddr}";
-              "format-linked" = " {ifname} (No IP)";
-              "format-disconnected" = "Disconnected ⚠ {ifname}";
-              "format-alt" = " {ifname}: {ipaddr}/{cidr}";
-            };
-
-            pulseaudio = {
-              "format" = "{icon}   {volume}% ";
-              "format-icons" = {
-                "headphone" = "";
-                "phone" = "";
-                "portable" = "";
-                "car" = "";
-                "default" = [
-                  ""
-                  ""
-                  ""
-                ];
-              };
-              "on-click" = "pavucontrol";
-            };
-
-            backlight = {
-              "device" = "intel_backlight";
-              "format" = "{icon}   {percent}% ";
-              "format-icons" = [
-                ""
-                ""
-              ];
-            };
-
-            battery = {
-              "states" = {
-                "warning" = 30;
-                "critical" = 15;
-              };
-              "format" = "{icon}   {capacity}%";
-              "format-charging" = " {capacity}%";
-              "format-plugged" = " {capacity}%";
-              "format-alt" = "{icon} {time}";
-              "format-icons" = [
-                ""
-                ""
-                ""
-                ""
-                ""
-              ];
-            };
-
-            tray = {
-              "icon-size" = 18;
-              spacing = 3;
-            };
-          };
-        };
-      };
     };
 
     services = {
@@ -1020,7 +840,7 @@ let
       hyprpaper =
         # TODO: Expose wallpapers as option
         let
-          mosaic = $"{pkgs.nix-artwork.wallpapers.mosaic-blue}/share/backgrounds/nixos/nix-wallpaper-mosaic-blue.png";
+          mosaic ="${pkgs.nix-artwork.wallpapers.mosaic-blue}/share/backgrounds/nixos/nix-wallpaper-mosaic-blue.png";
         in
         {
           enable = true;
