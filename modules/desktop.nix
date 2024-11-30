@@ -174,7 +174,7 @@ let
     };
 
     programs.alacritty = {
-      enable = false;
+      enable = true;
       settings = {
         hints.enabled = [
           {
@@ -188,7 +188,7 @@ let
             };
           }
         ];
-      #   font.size = 11.0;
+        font.size = 13.0;
       #   colors = {
       #     primary = {
       #       background = "";
