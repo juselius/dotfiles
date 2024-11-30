@@ -122,7 +122,7 @@ let
           "$mainMod, D, exec, $menu"
           "$mainMod SHIFT, D, exec, wofi-pass -c -s"
           "$mainMod, W, togglegroup, "
-          "$mainMod CTRL, L, exec, hyprlock"
+          "$mainMod SHIFT, L, exec, hyprlock --immidiate"
           # TODO: Screenshot
 
           # "focus with mainMod + vim keys"
@@ -202,7 +202,7 @@ let
         settings = {
           general = {
             disable_loading_bar = true;
-            grace = 300;
+            grace = 10;
             hide_cursor = true;
             no_fade_in = false;
           };
@@ -211,7 +211,7 @@ let
             {
               path = "screenshot";
               blur_passes = 3;
-              blur_size = 8;
+              blur_size = 4;
             }
           ];
 
