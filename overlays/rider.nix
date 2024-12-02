@@ -36,9 +36,9 @@ let
       munge_size_hack bin/fsnotifier $target_size
     fi
 
-    if [ -d "plugins/remote-dev-server" ]; then
-      patch -p1 < ${./JetbrainsRemoteDev.patch}
-    fi
+    #if [ -d "plugins/remote-dev-server" ]; then
+    #  patch -p1 < ${./JetbrainsRemoteDev.patch}
+    #fi
 
     vmopts_file=bin/linux/${vmoptsName}
     if [[ ! -f $vmopts_file ]]; then
@@ -74,13 +74,10 @@ let
         # NOTE(simkir): Replacing their net7 dotnet with our net8. Wasn't allowed
         # to do this in the postInstall step, so doing it here.
         # rm -rf lib/ReSharperHost/linux-x64/dotnet
-        # ln -sf {super.dotnet-sdk_9} lib/ReSharperHost/linux-x64/dotnet
+        # ln -sf ${super.dotnet_9.sdk} lib/ReSharperHost/linux-x64/dotnet
         '';
 
-  jetbrainsNix = "/nix/var/nix/profiles/per-user/root/channels/nixos/pkgs/applications/editors/jetbrains";
-  jetbrains = super.callPackage jetbrainsNix { };
-
-  rider-latest = jetbrains.rider.overrideAttrs (attrs: rec {
+  rider-latest = super.jetbrains.rider.overrideAttrs (attrs: rec {
     version = "2024.3";
     name = "rider-${version}";
 
@@ -89,15 +86,24 @@ let
       sha256 = "sha256-75thwYhRtvPvK/o/4UezSsGRYi9lpB8rU7OmCfm/82A=";
     };
 
-    postPatch = patch attrs;
-    postInstall = attrs.postInstall + ''
-        rm -rf lib/ReSharperHost/linux-x64/dotnet
-        ln -sf ${super.dotnetCorePackages.dotnet_9.sdk} lib/ReSharperHost/linux-x64/dotnet
-    '';
+    #postPatch = patch attrs;
+    postInstall = ''
+      cd $out/rider
 
+      ls -d $PWD/plugins/cidr-debugger-plugin/bin/lldb/linux/*/lib/python3.8/lib-dynload/* |
+      xargs patchelf \
+        --replace-needed libssl.so.10 libssl.so \
+        --replace-needed libcrypto.so.10 libcrypto.so \
+        --replace-needed libcrypt.so.1 libcrypt.so
+
+      for dir in lib/ReSharperHost/linux-*; do
+        rm -rf $dir/dotnet
+        ln -s ${super.dotnetCorePackages.dotnet_9.sdk.unwrapped}/share/dotnet $dir/dotnet
+      done
+    '';
   });
 in
 {
   rider = rider-latest;
-  rider-stable = rider-latest;
+  # rider-stable = rider-latest;
 }

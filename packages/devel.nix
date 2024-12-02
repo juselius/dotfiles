@@ -67,9 +67,12 @@ let
         with pkgs.dotnetCorePackages; combinePackages [
           dotnet_9.sdk
           pkgs.dotnet-sdk
+          pkgs.dotnet-sdk_7
+          pkgs.dotnet-sdk_6
         ]
     else
-          pkgs.dotnet-sdk;
+          pkgs.dotnetCorePackages.dotnet_9.sdk;
+
 
   dotnet = {
     home.sessionVariables = {
@@ -77,6 +80,7 @@ let
     };
     home.packages = [
         dotnetPackage
+        pkgs.fsautocomplete
     ];
   };
 

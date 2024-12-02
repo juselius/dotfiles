@@ -92,18 +92,33 @@ let
 
       neovim =
         let
-          fsharp-grammar = pkgs.tree-sitter.buildGrammar {
-            language = "fsharp";
-            version = "0.0.0+rev=a4d418e";
-            src = pkgs.fetchFromGitHub {
-              owner = "Nsidorenco";
-              repo = "tree-sitter-fsharp";
-              rev = "a4d418e426c555e85e32e638c0333fe3e555aeea";
-              hash = "sha256-bMBIz8rQ4X21jtH6nvAgc8Wtr7PkZ5HyfGDossJqN5U=";
-            };
-            generate = false;
-            meta.homepage = "https://github.com/Nsidorenco/tree-sitter-fsharp";
-          };
+          fsharp-grammar =
+            let
+              drv = pkgs.tree-sitter.buildGrammar {
+                language = "fsharp";
+                version = "0.1.0-alpha.4";
+                location = "fsharp";
+                src = pkgs.fetchFromGitHub {
+                  owner = "ionide";
+                  repo = "tree-sitter-fsharp";
+                  rev = "971da5ff0266bfe4a6ecfb94616548032d6d1ba0";
+                  hash = "sha256-0jrbznAXcjXrbJ5jnxWMzPKxRopxKCtoQXGl80R1M0M=";
+                };
+                meta.homepage = "https://github.com/ionide/tree-sitter-fsharp";
+              };
+            in
+            drv.overrideAttrs (attrs: {
+              installPhase = ''
+                runHook preInstall
+                mkdir $out
+                mv parser $out/
+                if [[ -d ../queries ]]; then
+                  cp -r ../queries $out
+                fi
+                runHook postInstall
+              '';
+            });
+
           vimPlugins = pkgs.vimPlugins // {
             vim-gnupg = pkgs.vimUtils.buildVimPlugin {
               name = "vim-gnupg";
