@@ -232,6 +232,16 @@ let
               shadow_passes = 2;
             }
           ];
+
+          label = [
+            {
+              position = "100, 0";
+              halign = "center";
+              valign = "center";
+              font_size = 26;
+              text = "cmd[update:1000] echo \"<span foreground='white'>$(date +\"%a %d/%m %H:%m:%S\")</span>\"";
+            }
+          ];
         };
       };
     };
