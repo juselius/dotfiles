@@ -123,7 +123,8 @@ let
           "$mainMod SHIFT, D, exec, $wofipass -c -s"
           "$mainMod, W, togglegroup, "
           "$mainMod SHIFT, L, exec, $lock"
-          # TODO: Screenshot
+          "$mainMod, Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
+          "$mainMod SHIFT, Print, exec, ${pkgs.grimblast}/bin/grimblast savecopy area"
 
           # "focus with mainMod + vim keys"
           "$mainMod,  left, movefocus, l"
