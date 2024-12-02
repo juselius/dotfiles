@@ -2,7 +2,7 @@
   allowUnfree = true;
 
   permittedInsecurePackages = [
-    "openssl-1.0.2u"
+    "dotnet-sdk-wrapped-7.0.410"
   ];
 
   packageOverrides = pkgs: with pkgs; {

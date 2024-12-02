@@ -36,7 +36,7 @@ let
 
             "custom/os_button" = {
               format = "";
-              "on-click" = "wofi --show drun";
+              "on-click" = "${pkgs.wofi}/bin/wofi --show drun";
               tooltip = false;
             };
 

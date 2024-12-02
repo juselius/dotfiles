@@ -74,31 +74,11 @@ let
         # NOTE(simkir): Replacing their net7 dotnet with our net8. Wasn't allowed
         # to do this in the postInstall step, so doing it here.
         # rm -rf lib/ReSharperHost/linux-x64/dotnet
-        # ln -sf ${super.dotnet-sdk_9} lib/ReSharperHost/linux-x64/dotnet
+        # ln -sf {super.dotnet-sdk_9} lib/ReSharperHost/linux-x64/dotnet
         '';
 
   jetbrainsNix = "/nix/var/nix/profiles/per-user/root/channels/nixos/pkgs/applications/editors/jetbrains";
   jetbrains = super.callPackage jetbrainsNix { };
-
-  eap = "EAP4-232.7295.15.Checked";
-  rider-eap = jetbrains.rider.overrideAttrs (attrs: rec {
-      version = "2023.2";
-      name = "rider-${version}";
-
-      src = super.fetchurl {
-        url = "https://download-cdn.jetbrains.com/rider/JetBrains.Rider-${version}-${eap}.tar.gz";
-        sha256 = "sha256-OVu7QVplfjQSv5E6Tg+kcLzPW4STYlugYU3wFhrsy1A=";
-      };
-
-      # postPatch = patch attrs;
-
-      postInstall = ''
-        cd $out/rider/lib/ReSharperHost/linux-x64/dotnet
-        # ln -sf ${super.dotnet-sdk_6}/dotnet .
-        # ln -s ${super.dotnet-sdk_6}/host .
-        # ln -s ${super.dotnet-sdk_6}/shared .
-      '';
-  });
 
   rider-latest = jetbrains.rider.overrideAttrs (attrs: rec {
     version = "2024.3";
@@ -112,7 +92,7 @@ let
     postPatch = patch attrs;
     postInstall = attrs.postInstall + ''
         rm -rf lib/ReSharperHost/linux-x64/dotnet
-        ln -sf ${super.dotnet-sdk_9} lib/ReSharperHost/linux-x64/dotnet
+        ln -sf ${super.dotnetCorePackages.dotnet_9.sdk} lib/ReSharperHost/linux-x64/dotnet
     '';
 
   });
@@ -120,5 +100,4 @@ in
 {
   rider = rider-latest;
   rider-stable = rider-latest;
-  rider-eap = rider-eap;
 }

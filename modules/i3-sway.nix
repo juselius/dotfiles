@@ -110,7 +110,7 @@ let
             "${mod}+Ctrl+l" = "exec --no-startup-id ${pkgs.i3lock}/bin/i3lock -n -c 111111";
             # "${mod}+Ctrl+s" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
             "Print" = "exec grimshot savecopy anything";
-            "${mod}+Ctrl+n" = "exec --no-startup-id ${pkgs.gnome3.nautilus}/bin/nautilus";
+            "${mod}+Ctrl+n" = "exec --no-startup-id ${pkgs.nautilus}/bin/nautilus";
 
             # Pulse Audio controls
             "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";

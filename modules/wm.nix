@@ -9,7 +9,7 @@ let
       initExtra = ''
         xsetroot -solid '#888888'
         xsetroot -cursor_name left_ptr
-        ${pkgs.gnome3.gnome-settings-daemon}/libexec/gsd-xsettings &
+        ${pkgs.gnome-settings-daemon}/libexec/gsd-xsettings &
         systemctl --user start gvfs-udisks2-volume-monitor.service
         xset s 1800
         xset +dpms

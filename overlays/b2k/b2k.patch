@@ -1,0 +1,44 @@
+diff --git a/src/dsc/dsc.csproj b/src/dsc/dsc.csproj
+index e7d0302..b5289b5 100644
+--- a/src/dsc/dsc.csproj
++++ b/src/dsc/dsc.csproj
+@@ -17,7 +17,7 @@
+     <RootNamespace>Microsoft.BridgeToKubernetes.Exe</RootNamespace>
+     <AssemblyVersion>1.0</AssemblyVersion>
+     <HighEntropyVA>True</HighEntropyVA>
+-    <ConsumeEndpointManager Condition=" '$(ConsumeEndpointManager)' == '' ">true</ConsumeEndpointManager>
++    <ConsumeEndpointManager Condition=" '$(ConsumeEndpointManager)' == '' ">false</ConsumeEndpointManager>
+     <IsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</IsWindows>
+     <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+     <IsOSXarm64 Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true' And '$(Configuration)|$(Platform)' == 'arm64'">true</IsOSXarm64>
+diff --git a/src/endpointmanager/HostsFile/HostsFileManager.cs b/src/endpointmanager/HostsFile/HostsFileManager.cs
+index c811e33..52e675d 100644
+--- a/src/endpointmanager/HostsFile/HostsFileManager.cs
++++ b/src/endpointmanager/HostsFile/HostsFileManager.cs
+@@ -53,7 +53,18 @@ namespace Microsoft.BridgeToKubernetes.EndpointManager
+                 }
+                 else if (platform.IsLinux)
+                 {
+-                    path = "/etc/hosts";
++                    if (System.IO.Directory.Exists("/etc/nixos"))
++                    {
++                        if (!System.IO.File.Exists("/etc/hosts.adhoc"))
++                        {
++                            System.IO.File.Create("/etc/hosts.adhoc");
++                        }
++                        path = "/etc/hosts.adhoc";
++                    }
++                    else
++                    {
++                        path = "/etc/hosts";
++                    }
+                 }
+                 else
+                 {
+@@ -320,4 +331,4 @@ namespace Microsoft.BridgeToKubernetes.EndpointManager
+ 
+         #endregion private members
+     }
+-}
+\ No newline at end of file
++}

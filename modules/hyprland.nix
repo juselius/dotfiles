@@ -15,13 +15,13 @@ let
       hyprland.enable = true;
       hyprland.settings = {
         # TODO: Set your monitor here. See hyprctl monitors and https://wiki.hyprland.org/Configuring/Monitors/
-        monitor = [
-          ", preferred, 0x0, 1.0"
-        ];
+        monitor = cfg.hyprland.monitor;
 
         "$terminal" = "${pkgs.alacritty}/bin/alacritty";
-        "$fileManager" = "nautilus";
-        "$menu" = "wofi --show drun";
+        "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
+        "$lock" = "${pkgs.hyprlock}/bin/hyprlock";
+        "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
+        "$wofipass" = "${pkgs.wofi-pass}/bin/wofi-pass";
 
         general = {
           gaps_in = 0;
@@ -47,14 +47,14 @@ let
 
           # Change transparency of focused and unfocused windows
           active_opacity = 1.0;
-          inactive_opacity = 0.92;
+          inactive_opacity = 0.90;
 
-          # shadow = {
-          #   enabled = true;
-          #   range = 4;
-          #   render_power = 3;
-          #   color = "rgba(1a1a1aee)";
-          # };
+          shadow = {
+            enabled = true;
+            range = 4;
+            render_power = 3;
+            color = "rgba(1a1a1aee)";
+          };
 
           # https://wiki.hyprland.org/Configuring/Variables/#blur
           blur = {
@@ -120,9 +120,9 @@ let
           "$mainMod, V, togglefloating,"
           "$mainMod, F, fullscreen,"
           "$mainMod, D, exec, $menu"
-          "$mainMod SHIFT, D, exec, wofi-pass -c -s"
+          "$mainMod SHIFT, D, exec, $wofipass -c -s"
           "$mainMod, W, togglegroup, "
-          "$mainMod SHIFT, L, exec, hyprlock --immidiate"
+          "$mainMod SHIFT, L, exec, $lock"
           # TODO: Screenshot
 
           # "focus with mainMod + vim keys"
@@ -142,16 +142,16 @@ let
           "$mainMod, Tab, changegroupactive, f"
 
           # "h workspaces with mainMod + [0-9]"
-          "$mainMod, 1, workspace, 1"
-          "$mainMod, 2, workspace, 2"
-          "$mainMod, 3, workspace, 3"
-          "$mainMod, 4, workspace, 4"
-          "$mainMod, 5, workspace, 5"
-          "$mainMod, 6, workspace, 6"
-          "$mainMod, 7, workspace, 7"
-          "$mainMod, 8, workspace, 8"
-          "$mainMod, 9, workspace, 9"
-          "$mainMod, 0, workspace, 10"
+          "$mainMod, 1, focusworkspaceoncurrentmonitor, 1"
+          "$mainMod, 2, focusworkspaceoncurrentmonitor, 2"
+          "$mainMod, 3, focusworkspaceoncurrentmonitor, 3"
+          "$mainMod, 4, focusworkspaceoncurrentmonitor, 4"
+          "$mainMod, 5, focusworkspaceoncurrentmonitor, 5"
+          "$mainMod, 6, focusworkspaceoncurrentmonitor, 6"
+          "$mainMod, 7, focusworkspaceoncurrentmonitor, 7"
+          "$mainMod, 8, focusworkspaceoncurrentmonitor, 8"
+          "$mainMod, 9, focusworkspaceoncurrentmonitor, 9"
+          "$mainMod, 0, focusworkspaceoncurrentmonitor, 10"
 
           # active window to a workspace with mainMod + SHIFT + [0-9]
           "$mainMod SHIFT, 0, movetoworkspace, 0"
@@ -189,7 +189,7 @@ let
         ];
 
         bindl = [
-          ", switch:Lid Switch, exec, hyprlock"
+          ", switch:Lid Switch, exec, $lock"
         ];
 
         windowrulev2 = "suppressevent maximize, class:.*"; # You'll probably like this.
@@ -235,10 +235,10 @@ let
 
           label = [
             {
-              position = "100, 0";
+              position = "0, 250";
               halign = "center";
               valign = "center";
-              font_size = 26;
+              font_size = 30;
               text = "cmd[update:1000] echo \"<span foreground='white'>$(date +\"%a %d/%m %H:%m:%S\")</span>\"";
             }
           ];
@@ -256,7 +256,7 @@ let
         settings = {
           general = {
             ignore_dbus_inhibit = false;
-            lock_cmd = "pidof hyprlock || hyprlock";
+            lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
             before_sleep_cmd = "loginctl lock-session";
             after_sleep_cmd = "hyprctl dispatch dpms on";
           };
@@ -300,6 +300,11 @@ in {
   options.dotfiles.desktop = {
     hyprland = {
       enable = mkEnableOption "Enable Hyprland";
+      monitor = mkOption {
+        type = types.listOf types.str;
+        default = [ ", preferred, 0x0, 1.0" ];
+
+      };
     };
   };
 

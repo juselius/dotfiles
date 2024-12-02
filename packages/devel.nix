@@ -65,12 +65,11 @@ let
   dotnetPackage =
     if cfg.devel.dotnet.combined then
         with pkgs.dotnetCorePackages; combinePackages [
-          pkgs.dotnet-sdk_9
-          pkgs.dotnet-sdk_8
-          # pkgs.dotnet-sdk_7
+          dotnet_9.sdk
+          pkgs.dotnet-sdk
         ]
     else
-          pkgs.dotnet-sdk_8;
+          pkgs.dotnet-sdk;
 
   dotnet = {
     home.sessionVariables = {
@@ -143,7 +142,6 @@ let
     lua-language-server
     yaml-language-server
     gopls
-    nodePackages.pyright
     nodePackages.typescript-language-server
     marksman
   ];

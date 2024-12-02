@@ -53,7 +53,7 @@ let
     pkgs.arandr
   ];
 
-  gnome = with pkgs.gnome3; [
+  gnome = with pkgs; [
     gnome-settings-daemon
     gnome-font-viewer
     adwaita-icon-theme
@@ -84,7 +84,7 @@ let
   desktop = with pkgs; [
     #wireshark-qt
     google-chrome
-    firefox
+    #firefox
     drive
     rdesktop
     remmina
