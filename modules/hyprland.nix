@@ -27,7 +27,7 @@ let
           gaps_in = 0;
           gaps_out = 0;
 
-          border_size = 1;
+          border_size = 2;
 
           # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
           "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
@@ -193,7 +193,10 @@ let
           ", switch:Lid Switch, exec, $lock"
         ];
 
-        windowrulev2 = "suppressevent maximize, class:.*"; # You'll probably like this.
+        windowrulev2 = [
+          "suppressevent maximize, class:.*" # You'll probably like this.
+          "opacity 1.0 override 1.0 override 1.0 override, class:(google-chrome|firefox|ferdium)"
+        ];
       };
     };
 
