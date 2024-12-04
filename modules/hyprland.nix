@@ -218,7 +218,7 @@ let
 
           input-field = [
             {
-              size = "200, 50";
+              size = "300, 50";
               position = "0, -80";
               monitor = "";
               dots_center = true;
@@ -230,17 +230,17 @@ let
               placeholder_text = ''
                 <span foreground="##cad3f5">Password...</span>
               '';
-              shadow_passes = 2;
+              shadow_passes = 1;
             }
           ];
 
           label = [
             {
-              position = "0, 250";
-              halign = "center";
-              valign = "center";
-              font_size = 30;
-              text = "cmd[update:1000] echo \"<span foreground='white'>$(date +\"%a %d/%m %H:%m:%S\")</span>\"";
+              position = "-130, -70";
+              halign = "right";
+              valign = "top";
+              font_size = 70;
+              text = "cmd[update:1000] echo \"<span foreground='white'>$(date +\"%T\")</span>\"";
             }
           ];
         };
