@@ -139,8 +139,12 @@ let
           "$mainMod SHIFT, right, movewindoworgroup, r"
 
           # Window cycling
-          "$mainMod, Tab, layoutmsg, swapwithmaster"
+          "$mainMod, Tab, cyclenext,"
           "$mainMod, Tab, changegroupactive, f"
+
+          # Master
+          "$mainMod, SPACE, layoutmsg, swapwithmaster"
+          "$mainMod SHIFT, SPACE, layoutmsg, orientationnext"
 
           # "h workspaces with mainMod + [0-9]"
           "$mainMod, 1, focusworkspaceoncurrentmonitor, 1"
