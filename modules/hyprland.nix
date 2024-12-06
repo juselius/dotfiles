@@ -200,6 +200,7 @@ let
         windowrulev2 = [
           "suppressevent maximize, class:.*" # You'll probably like this.
           "opacity 1.0 override 1.0 override 1.0 override, class:(google-chrome|firefox|ferdium)"
+          "stayfocused, class:(gcr-prompter)"
         ];
       };
     };
@@ -217,16 +218,17 @@ let
 
           background = [
             {
-              path = "screenshot";
-              blur_passes = 3;
-              blur_size = 4;
+              path = "${pkgs.nixos-artwork.wallpapers.binary-black}/share/backgrounds/nixos/nix-wallpaper-binary-black.png";
+              # path = "screenshot";
+              blur_passes = 2;
+              blur_size = 1;
             }
           ];
 
           input-field = [
             {
               size = "300, 50";
-              position = "0, -80";
+              position = "0, -10";
               monitor = "";
               dots_center = true;
               fade_on_empty = false;
@@ -235,7 +237,7 @@ let
               outer_color = "rgb(24, 25, 38)";
               outline_thickness = 5;
               placeholder_text = ''
-                <span foreground="##cad3f5">Password...</span>
+                <span foreground="##cad3f5">Enter password...</span>
               '';
               shadow_passes = 1;
             }
