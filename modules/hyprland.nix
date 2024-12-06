@@ -221,7 +221,7 @@ let
               path = "${pkgs.nixos-artwork.wallpapers.binary-black}/share/backgrounds/nixos/nix-wallpaper-binary-black.png";
               # path = "screenshot";
               blur_passes = 2;
-              blur_size = 1;
+              blur_size = 2;
             }
           ];
 
