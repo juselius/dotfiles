@@ -92,7 +92,7 @@ let
               format-wifi = " ";
               format-ethernet = "󰈀  ";
               format-linked = "󰈀   {ifname} (No IP)";
-              format-disconnected = "󰖪  ";
+              format-disconnected = "󰖪";
               format-alt = "<span foreground='#99ffdd'>   {bandwidthDownBytes} </span> <span foreground='#ffcc66'>   {bandwidthUpBytes}</span>";
               tooltip-format = "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>";
               tooltip-format-disconnected = "Disconnected";

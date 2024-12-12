@@ -28,7 +28,7 @@ let
      else {};
 
   configuration = {
-    manual.manpages.enable = true;
+    manual.manpages.enable = false;
 
     programs = {
       man.enable = true;
@@ -383,9 +383,9 @@ let
       allowUnfree = true;
     };
 
-    home.activation = {
-        linkOverlays = "cp -srf ~/.dotfiles/overlays ~/.config/nixpkgs";
-    };
+    # home.activation = {
+        # linkOverlays = "cp -srf ~/.dotfiles/overlays ~/.config/nixpkgs";
+    # };
 
     xdg.configFile = {
       fish = {

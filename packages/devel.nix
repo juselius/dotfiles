@@ -65,10 +65,8 @@ let
   dotnetPackage =
     if cfg.devel.dotnet.combined then
         with pkgs.dotnetCorePackages; combinePackages [
-          dotnet_9.sdk
-          pkgs.dotnet-sdk
-          pkgs.dotnet-sdk_7
-          pkgs.dotnet-sdk_6
+          sdk_9_0
+          sdk_8_0
         ]
     else
           pkgs.dotnetCorePackages.dotnet_9.sdk;
@@ -76,7 +74,7 @@ let
 
   dotnet = {
     home.sessionVariables = {
-        DOTNET_ROOT = dotnetPackage;
+        DOTNET_ROOT = "${dotnetPackage}/share/dotnet";
     };
     home.packages = [
         dotnetPackage
