@@ -101,6 +101,8 @@ let
         ln -s ${super.dotnetCorePackages.dotnet_9.sdk.unwrapped}/share/dotnet $dir/dotnet
       done
     '';
+
+    buildInputs = attrs.buildInputs ++ [ super.kubelogin ];
   });
 in
 {

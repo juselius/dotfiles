@@ -8,6 +8,7 @@ let
     ../overlays/ferdium.nix
     ../overlays/vcluster.nix
     ../overlays/fcitx.nix
+    ../overlays/kubelogin.nix
     # ../overlays/wavebox.nix
     # ../overlays/tilt.nix
   ];
