@@ -116,6 +116,7 @@ let
     zbar
     yubikey-personalization
     dconf
+    typst
   ];
 
   chat = with pkgs; [
