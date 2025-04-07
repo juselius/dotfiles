@@ -137,6 +137,7 @@ let
               p.vim
               p.vimdoc
               p.query
+              p.typst
 
               fsharp-grammar
               p.bash

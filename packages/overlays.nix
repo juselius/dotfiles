@@ -4,11 +4,11 @@ let
     ../overlays/dotnet-sdk.nix
     ../overlays/linkerd.nix
     ../overlays/rider.nix
-    ../overlays/vscode.nix
     ../overlays/ferdium.nix
     ../overlays/vcluster.nix
     ../overlays/fcitx.nix
     ../overlays/kubelogin.nix
+    # ../overlays/vscode.nix
     # ../overlays/wavebox.nix
     # ../overlays/tilt.nix
   ];
