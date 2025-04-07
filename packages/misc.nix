@@ -29,7 +29,7 @@ let
     step-cli # cert swiss army knife
     kubeseal
     argocd
-    starboard
+    # starboard
     vcluster
     krew
   ];
