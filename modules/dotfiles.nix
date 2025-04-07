@@ -229,6 +229,22 @@ let
           core = {
             editor = "vim";
             pager = "${pkgs.delta}/bin/delta";
+            # excludesfile = "~/.gitignore";
+          };
+          column = {
+            ui = "auto";
+          };
+          branch = {
+            sort = "-committerdate";
+          };
+          tag = {
+            sort = "version:refname";
+          };
+          diff = {
+            algorithm = "histogram";
+            colorMoved = "plain";
+            mnemonicPrefix = true;
+            renames = true;
           };
           merge = {
             tool = "meld";
@@ -246,13 +262,32 @@ let
           };
           push = {
             # matching, tracking or current
-            default = "current";
+            default = "simple";
+            autoSetupRemote = true;
+            followTags = true;
+          };
+          fetch = {
+            prune = true;
+            pruneTags = true;
+            all = true;
           };
           pull = {
             rebase = false;
           };
+          commit = {
+            verbose = true;
+          };
+          rerere = {
+            enabled = true;
+            autoupdate = true;
+          };
+          rebase = {
+            autoSquash = true;
+            autoStash = true;
+            updateRefs = true;
+          };
           help = {
-            autocorrect = 1;
+            autocorrect = "prompt";
           };
           http = {
             sslVerify = false;
