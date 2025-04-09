@@ -48,20 +48,23 @@ let
     # };
 
     services = {
-      pasystray.enable = true;
-      flameshot.enable =  true;
+      # pasystray.enable = true;
+      # flameshot.enable =  true;
       clipmenu.enable =  false;
 
-      screen-locker = {
-        enable = true;
-        inactiveInterval = 45;
-        lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
+      # screen-locker = {
+        # enable = true;
+        # inactiveInterval = 45;
+        # lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
         # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
-      };
+      # };
 
-      network-manager-applet.enable = true;
+      network-manager-applet.enable = true; #!cfg.wayland.enable;
       blueman-applet.enable = true;
 
+      # kanshi = {
+      #  enable = true;
+      # };
       gpg-agent = {
         enable = true;
         enableSshSupport = true;
@@ -171,7 +174,7 @@ let
     };
 
     programs.alacritty = {
-      enable = false;
+      enable = true;
       settings = {
         hints.enabled = [
           {
@@ -185,7 +188,7 @@ let
             };
           }
         ];
-      #   font.size = 11.0;
+        font.size = 13.0;
       #   colors = {
       #     primary = {
       #       background = "";
@@ -208,7 +211,7 @@ let
         Description = "OneDrive sync";
       };
       Service = {
-        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor";
+        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor --disable-notifications";
         Restart = "on-failure";
         RestartSec = "10s";
       };

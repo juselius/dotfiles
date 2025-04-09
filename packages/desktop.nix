@@ -53,7 +53,7 @@ let
     pkgs.arandr
   ];
 
-  gnome = with pkgs.gnome3; [
+  gnome = with pkgs; [
     gnome-settings-daemon
     gnome-font-viewer
     adwaita-icon-theme
@@ -76,15 +76,15 @@ let
 
   graphics = with pkgs; [
     imagemagick
-    scrot
-    krita
+    # scrot
+    # krita
     # inkscape
   ];
 
   desktop = with pkgs; [
     #wireshark-qt
     google-chrome
-    firefox
+    #firefox
     drive
     rdesktop
     remmina
@@ -100,8 +100,10 @@ let
     gparted
     # calibre
     fira-code
+    # font-awesome
+    font-awesome_5
     keybase
-    keybase-gui
+    # keybase-gui
     pandoc
     pinentry
     polkit_gnome
@@ -114,6 +116,7 @@ let
     zbar
     yubikey-personalization
     dconf
+    typst
   ];
 
   chat = with pkgs; [

@@ -36,9 +36,9 @@ let
       munge_size_hack bin/fsnotifier $target_size
     fi
 
-    if [ -d "plugins/remote-dev-server" ]; then
-      patch -p1 < ${./JetbrainsRemoteDev.patch}
-    fi
+    #if [ -d "plugins/remote-dev-server" ]; then
+    #  patch -p1 < ${./JetbrainsRemoteDev.patch}
+    #fi
 
     vmopts_file=bin/linux/${vmoptsName}
     if [[ ! -f $vmopts_file ]]; then
@@ -73,47 +73,39 @@ let
 
         # NOTE(simkir): Replacing their net7 dotnet with our net8. Wasn't allowed
         # to do this in the postInstall step, so doing it here.
-        rm -rf lib/ReSharperHost/linux-x64/dotnet
-        ln -sf ${super.dotnet-sdk_8} lib/ReSharperHost/linux-x64/dotnet
+        # rm -rf lib/ReSharperHost/linux-x64/dotnet
+        # ln -sf ${super.dotnet_9.sdk} lib/ReSharperHost/linux-x64/dotnet
         '';
 
-  jetbrainsNix = "/nix/var/nix/profiles/per-user/root/channels/nixos/pkgs/applications/editors/jetbrains";
-  jetbrains = super.callPackage jetbrainsNix { };
-
-  eap = "EAP4-232.7295.15.Checked";
-  rider-eap = jetbrains.rider.overrideAttrs (attrs: rec {
-      version = "2023.2";
-      name = "rider-${version}";
-
-      src = super.fetchurl {
-        url = "https://download-cdn.jetbrains.com/rider/JetBrains.Rider-${version}-${eap}.tar.gz";
-        sha256 = "sha256-OVu7QVplfjQSv5E6Tg+kcLzPW4STYlugYU3wFhrsy1A=";
-      };
-
-      # postPatch = patch attrs;
-
-      postInstall = ''
-        cd $out/rider/lib/ReSharperHost/linux-x64/dotnet
-        # ln -sf ${super.dotnet-sdk_6}/dotnet .
-        # ln -s ${super.dotnet-sdk_6}/host .
-        # ln -s ${super.dotnet-sdk_6}/shared .
-      '';
-  });
-
-  rider-latest = jetbrains.rider.overrideAttrs (attrs: rec {
-    version = "2024.3";
+  rider-latest = super.jetbrains.rider.overrideAttrs (attrs: rec {
+    version = "2024.3.7";
     name = "rider-${version}";
 
     src = super.fetchurl {
       url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
-      sha256 = "sha256-75thwYhRtvPvK/o/4UezSsGRYi9lpB8rU7OmCfm/82A=";
+      sha256 = "sha256-z/y2Fpjw44HcQZDP0y7x3ZPHAncWUGJtIygdwVHllnI=";
     };
 
-    postPatch = patch attrs;
+    #postPatch = patch attrs;
+    postInstall = ''
+      cd $out/rider
+
+      ls -d $PWD/plugins/cidr-debugger-plugin/bin/lldb/linux/*/lib/python3.8/lib-dynload/* |
+      xargs patchelf \
+        --replace-needed libssl.so.10 libssl.so \
+        --replace-needed libcrypto.so.10 libcrypto.so \
+        --replace-needed libcrypt.so.1 libcrypt.so
+
+      for dir in lib/ReSharperHost/linux-*; do
+        rm -rf $dir/dotnet
+        ln -s ${super.dotnetCorePackages.dotnet_9.sdk.unwrapped}/share/dotnet $dir/dotnet
+      done
+    '';
+
+    buildInputs = attrs.buildInputs ++ [ super.kubelogin ];
   });
 in
 {
   rider = rider-latest;
-  rider-stable = rider-latest;
-  rider-eap = rider-eap;
+  # rider-stable = rider-latest;
 }

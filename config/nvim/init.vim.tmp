@@ -203,7 +203,7 @@ lua << EOF
     setup(lspconfig.fsautocomplete)
     setup(lspconfig.ccls)
     -- setup(lspconfig.clangd)
-    setup(lspconfig.tsserver)
+    setup(lspconfig.ts_ls)
     setup(lspconfig.rnix)
     setup(lspconfig.gopls)
     setup(lspconfig.tailwindcss)

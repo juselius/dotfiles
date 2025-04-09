@@ -30,7 +30,7 @@ lsp_zero.setup_servers({
     'ionide',
     'marksman',
     'nil_ls',
-    'tsserver',
+    'ts_ls',
     'pyright',
     -- 'clangd',
     -- 'dhall_lsp_server',

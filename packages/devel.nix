@@ -65,18 +65,21 @@ let
   dotnetPackage =
     if cfg.devel.dotnet.combined then
         with pkgs.dotnetCorePackages; combinePackages [
-          pkgs.dotnet-sdk_8
-          # pkgs.dotnet-sdk_7
+          sdk_9_0
+          sdk_8_0
         ]
     else
-          pkgs.dotnet-sdk_8;
+          pkgs.dotnetCorePackages.dotnet_9.sdk;
+
 
   dotnet = {
     home.sessionVariables = {
-        DOTNET_ROOT = dotnetPackage;
+        DOTNET_ROOT = "${dotnetPackage}/share/dotnet";
     };
     home.packages = [
         dotnetPackage
+        pkgs.fsautocomplete
+        pkgs.dotnet-outdated
     ];
   };
 
@@ -142,7 +145,6 @@ let
     lua-language-server
     yaml-language-server
     gopls
-    nodePackages.pyright
     nodePackages.typescript-language-server
     marksman
   ];
