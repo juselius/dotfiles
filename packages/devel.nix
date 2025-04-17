@@ -23,6 +23,7 @@ let
     cmake
     libxml2
     docker-compose
+    dive # explore docker layers
     gettext
     gnum4
     chromedriver # for selenium
