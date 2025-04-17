@@ -50,7 +50,7 @@ let
     pkgs.glxinfo
     pkgs.xclip
     pkgs.xsel
-    pkgs.arandr
+    # pkgs.arandr
   ];
 
   gnome = with pkgs; [
