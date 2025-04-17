@@ -64,7 +64,7 @@ let
           # ltr = "ls -ltr";
           cat = "bat -p";
           diff = "diff -u";
-          ps = "procs";
+          # ps = "procs";
           du = "dust";
           df = "duf --only local,network";
           # sed = "sed -r";
