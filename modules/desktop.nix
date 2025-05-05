@@ -3,6 +3,21 @@ with lib;
 let
   cfg = config.dotfiles.desktop;
 
+  x11services =
+    if !cfg.desktop.wayland.enable then
+      {
+        pasystray.enable = true;
+        flameshot.enable =  true;
+
+        screen-locker = {
+          enable = true;
+          inactiveInterval = 45;
+          lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
+          # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
+        };
+      }
+    else {};
+
   configuration = {
     dotfiles.desktop.onedrive.enable = mkDefault false;
     dotfiles.desktop.xmonad.enable = mkDefault false;
@@ -48,16 +63,7 @@ let
     # };
 
     services = {
-      # pasystray.enable = true;
-      # flameshot.enable =  true;
       clipmenu.enable =  false;
-
-      # screen-locker = {
-        # enable = true;
-        # inactiveInterval = 45;
-        # lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
-        # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
-      # };
 
       network-manager-applet.enable = true; #!cfg.wayland.enable;
       blueman-applet.enable = true;
@@ -79,7 +85,7 @@ let
         enable = true;
         components = [ "pkcs11" "secrets" ];
       };
-    };
+    } // x11services;
 
     systemd.user.sessionVariables = {
       GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
@@ -114,7 +120,7 @@ let
     xresources.properties = {
       "Xclip.selection" = "clipboard";
       "Xcursor.theme" = "cursor-theme";
-      "Xcursor.size" = 16;
+      "Xcursor.size" = 18;
     };
 
     programs.vscode = {

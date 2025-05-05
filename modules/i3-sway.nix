@@ -23,6 +23,11 @@ let
       base0F = "#fcc09e";
       wallpaper = "${pkgs.nixos-artwork.wallpapers.binary-blue}/share/backgrounds/nixos/nix-wallpaper-binary-blue.png";
       screen_timeout = if cfg.laptop then 240 else 900;
+      statusbar =
+        if (!cfg.wayland.enable && cfg.i3.enable) then
+          { statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml"; }
+        else
+          { command = "${pkgs.waybar}/bin/waybar"; };
     in {
       config = {
         window.titlebar = false;
@@ -42,12 +47,10 @@ let
         };
         floating.criteria = [ { title = "^zoom$"; } ];
         focus.mouseWarping = false;
-        bars = [{
+        bars = [({
           id = "top";
           position = "top";
           trayOutput = cfg.i3.trayOutput;
-          # statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
-          command = "${pkgs.waybar}/bin/waybar";
           fonts = {
             names = [ "DejaVu Sans Mono" "FontAwesome5Free" "FontAwesome" "JetBrainsMono" ];
             style = "Normal";
@@ -62,7 +65,7 @@ let
             inactiveWorkspace = { background = base01; border = base01; text = base03; };
             urgentWorkspace   = { background = base01; border = base01; text = base08; };
           };
-        }];
+        } // statusbar) ];
         modes.resize = {
           Up = "resize shrink height 5 px or 5 ppt";
           Down = "resize grow height 5 px or 5 ppt";
@@ -294,7 +297,7 @@ in {
   };
 
   config = mkMerge [
-    (mkIf cfg.i3.enable i3)
-    (mkIf cfg.sway.enable sway)
+    (mkIf (!cfg.wayland.enable && cfg.i3.enable) i3)
+    (mkIf (cfg.wayland.enable && (cfg.sway.enable || cfg.i3.enable)) sway)
   ];
 }
