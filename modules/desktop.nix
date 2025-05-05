@@ -4,7 +4,7 @@ let
   cfg = config.dotfiles.desktop;
 
   x11services =
-    if !cfg.desktop.wayland.enable then
+    if !cfg.wayland.enable then
       {
         pasystray.enable = true;
         flameshot.enable =  true;
