@@ -205,6 +205,7 @@ let
             vimtex
             vim-vsnip
             zephyr-nvim
+            vim-helm
           ];
           #extraConfig = builtins.readFile ../config/nvim/init.lua;
         };
