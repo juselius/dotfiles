@@ -394,7 +394,7 @@ let
 
       home-manager = {
         enable = true;
-        path = "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
+        path = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
       };
     };
 

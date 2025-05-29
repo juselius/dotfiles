@@ -102,8 +102,10 @@ let
 
     services.mako = {
       enable = true;
-      borderSize = 2;
-      defaultTimeout = 2500;
+      settings = {
+        border-size = 2;
+        default-timeout = 2500;
+      };
     };
 
   };

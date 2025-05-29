@@ -78,7 +78,7 @@ let
         defaultCacheTtlSsh = 43200;
         maxCacheTtl = 604800; # 7 days
         maxCacheTtlSsh = 604800;
-        pinentryPackage = pkgs.pinentry-gnome3;
+        pinentry.package = pkgs.pinentry-gnome3;
       };
 
       gnome-keyring = {
@@ -125,17 +125,19 @@ let
 
     programs.vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        vscodevim.vim
-        ms-vsliveshare.vsliveshare
-        ms-dotnettools.csharp
-        ionide.ionide-fsharp
-      ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          vscodevim.vim
+          ms-vsliveshare.vsliveshare
+          ms-dotnettools.csharp
+          ionide.ionide-fsharp
+        ];
+        userSettings = {
+        };
+      };
       haskell = {
         enable = false;
         hie.enable = false;
-      };
-      userSettings = {
       };
     };
 
