@@ -96,13 +96,13 @@ let
             let
               drv = pkgs.tree-sitter.buildGrammar {
                 language = "fsharp";
-                version = "0.1.0-alpha.4";
+                version = "0.1.x";
                 location = "fsharp";
                 src = pkgs.fetchFromGitHub {
                   owner = "ionide";
                   repo = "tree-sitter-fsharp";
-                  rev = "971da5ff0266bfe4a6ecfb94616548032d6d1ba0";
-                  hash = "sha256-0jrbznAXcjXrbJ5jnxWMzPKxRopxKCtoQXGl80R1M0M=";
+                  rev = "f29605148f24199cf4d9c4a203a5debc0cbcc648";
+                  hash = "sha256-xcejOUhJvECH9taGV0BR5TmTVluF6FSaO68Lg9wlTEc=";
                 };
                 meta.homepage = "https://github.com/ionide/tree-sitter-fsharp";
               };
