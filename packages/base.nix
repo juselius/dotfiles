@@ -49,11 +49,13 @@ let
     curlie
     xh
     gping
-    tldr
     cheat
     choose
     silver-searcher
     delta
+    zoxide
+    tealdeer
+    pay-respects
   ];
 
   enabledPackages =

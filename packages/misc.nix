@@ -11,7 +11,9 @@ let
     awscli
     minio-client
     colmena
-    k9s
+    azure-cli
+    dapr-cli
+    openfga-cli
   ];
 
   geo = with pkgs; [
@@ -32,6 +34,11 @@ let
     # starboard
     vcluster
     krew
+    k9s
+    hubble
+    kubelogin
+    cilium-cli
+    talosctl
   ];
 
   useIf = x: y: if x then y else [];
