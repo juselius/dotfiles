@@ -86,9 +86,23 @@ let
       sha256 = "sha256-f84gd/vTy0yA5Wr0YHwkUNuBpye5PMQeFVs6s3ede5A=";
     };
 
-    #postPatch = patch attrs;
-    postInstall = ''
+    postInstall =
+      with super;
+      let
+        WLlibs = lib.makeLibraryPath ([
+          stdenv.cc.cc.lib
+          zlib
+          wayland
+          freetype
+          fontconfig
+        ]);
+      in
+    ''
       cd $out/rider
+
+      sed -i 's|-Djna\.library.path=.*|&:${WLlibs}|' bin/${vmoptsName}
+      echo "-Dawt.toolkit.name=WLToolkit" >> bin/${vmoptsName}
+      echo "-Dsun.java2d.vulkan=true" >> bin/${vmoptsName}
 
       ls -d $PWD/plugins/cidr-debugger-plugin/bin/lldb/linux/*/lib/python3.8/lib-dynload/* |
       xargs patchelf \
