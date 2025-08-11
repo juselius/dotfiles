@@ -116,7 +116,11 @@ let
       done
     '';
 
-    buildInputs = attrs.buildInputs ++ [ super.kubelogin ];
+    buildInputs = attrs.buildInputs ++ [
+      super.kubelogin
+      super.libGL
+      super.xorg.libX11
+    ];
   });
 in
 {
