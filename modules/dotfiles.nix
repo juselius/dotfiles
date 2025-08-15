@@ -90,6 +90,16 @@ let
         };
       };
 
+      atuin = {
+        enable = true;
+        enableFishIntegration = true;
+        settings = {
+          workspace = true;
+          # TODO: auto_sync etc
+          update_check = false;
+        };
+      };
+
       neovim =
         let
           fsharp-grammar =
