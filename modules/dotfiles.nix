@@ -91,12 +91,15 @@ let
       };
 
       atuin = {
-        enable = true;
+        enable = cfg.atuin;
         enableFishIntegration = true;
         settings = {
           workspace = true;
           # TODO: auto_sync etc
           update_check = false;
+          exit_mode = "return-query";
+          enter_accept = true;
+          filter_mode = "directory";
         };
       };
 
@@ -557,6 +560,8 @@ in
     };
 
     plainNix = mkEnableOption "Tweaks for non-NixOS systems";
+
+    atuin = mkEnableOption "Enable atuin";
 
     fish.vi-mode = mkEnableOption "Enable vi-mode for fish";
   };
