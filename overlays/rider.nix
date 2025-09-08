@@ -122,8 +122,10 @@ let
       super.xorg.libX11
     ];
   });
+  jetbrains = super.callPackage ../../src/nixpkgs/pkgs/applications/editors/jetbrains/default.nix {};
 in
 {
   rider = rider-latest;
+  # rider = jetbrains.rider;
   # rider-stable = rider-latest;
 }
