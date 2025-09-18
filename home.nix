@@ -3,9 +3,10 @@ let
   extraDesktopPackages =
     if config.dotfiles.desktop.enable then
       with pkgs; [
-        zoom
-        wavebox
-        rider
+        # zoom-us
+        # rider
+        # ferdium
+        # discord
       ]
     else [];
 in
@@ -13,9 +14,21 @@ in
   home.username = "nobody";
   home.homeDirectory = "/home/nobody";
 
+  home.packages = with pkgs; [
+  ] ++ extraDesktopPackages;
+
   dotfiles = {
     desktop = {
       enable = false;
+      wayland.enable = true;
+      hyprland = {
+        enable = true;
+        monitor = [
+          # "DP-1, preferred, 0x0, 1.25"
+          # "HDMI-A-1, preferred, 2048x0, 1.25"
+        ];
+      };
+      sway.enable = true;
       dropbox.enable = false;
       onedrive.enable = false;
       laptop = false;
@@ -31,7 +44,7 @@ in
             enable = true;
             combined = true;
         };
-        node = false;
+        node = true;
         rust = false;
         haskell = false;
         python = false;
@@ -57,11 +70,10 @@ in
       "haskeline"
       "taskrc"
     ];
-    vimDevPlugins = false;
+    vimDevPlugins = true;
+    fish.vi-mode = false;
+    atuin = false;
   };
-
-  home.packages = with pkgs; [
-  ] ++ extraDesktopPackages;
 
   home.keyboard = {
     layout = "us(altgr-intl)";
@@ -79,10 +91,10 @@ in
 
   programs = {
     git = {
-      userEmail = "jonas.juselius@tromso.serit.no";
+      userEmail = "jonas.juselius@oceanbox.io";
       userName = "Jonas Juselius";
       signing = {
-        key = "jonas@juselius.io";
+        key = "jonas.juselius@juselius.io";
       };
     };
 
@@ -93,6 +105,8 @@ in
       };
     };
   };
+
+  services.lorri.enable = true;
 
   imports = [ ./modules ];
 }
