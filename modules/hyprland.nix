@@ -2,6 +2,14 @@
 with lib;
 let
   cfg = config.dotfiles.desktop;
+  toggle-layout = pkgs.writeShellScript "hyprland-toggle-layout" ''
+    ${pkgs.hyprland}/bin/hyprctl getoption general:layout | grep -q master
+    if [ $? = 0 ]; then
+      ${pkgs.hyprland}/bin/hyprctl keyword general:layout dwindle
+    else
+      ${pkgs.hyprland}/bin/hyprctl keyword general:layout master
+    fi
+  '';
 
   hyprland = {
     home.packages = with pkgs; [
@@ -89,7 +97,8 @@ let
         };
 
         master = {
-          new_status = "slave";
+          new_status = "inherit";
+          mfact = 0.52;
         };
 
         input = {
@@ -126,6 +135,8 @@ let
           "$mainMod, Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
           "$mainMod SHIFT, Print, exec, ${pkgs.grimblast}/bin/grimblast savecopy area"
 
+          "$mainMod, W, togglegroup, "
+
           # "focus with mainMod + vim keys"
           "$mainMod,  left, movefocus, l"
           "$mainMod,  down, movefocus, d"
@@ -143,7 +154,8 @@ let
           "$mainMod, Tab, changegroupactive, f"
 
           # Master
-          "$mainMod, SPACE, layoutmsg, swapwithmaster"
+          # "$mainMod, SPACE, layoutmsg, swapwithmaster"
+          "$mainMod, SPACE, exec, ${toggle-layout}"
           "$mainMod SHIFT, SPACE, layoutmsg, orientationnext"
 
           # "h workspaces with mainMod + [0-9]"
