@@ -68,7 +68,7 @@ let
           du = "dust";
           df = "duf --only local,network";
           # sed = "sed -r";
-          top = "htop";
+          top = "btop";
           vimdiff = "nvim -d";
           pssh = "parallel-ssh -t 0";
           xopen = "xdg-open";
@@ -133,6 +133,15 @@ let
             });
 
           vimPlugins = pkgs.vimPlugins // {
+            copilot = pkgs.vimUtils.buildVimPlugin {
+              name = "copilot.vim";
+              src = pkgs.fetchFromGitHub {
+                  owner = "github";
+                  repo = "copilot.vim";
+                  rev = "main";
+                  hash = "sha256-dL+yxTPSjX5PDJ4LgqFoS1HtkZV9G1S6VD+w+CPhil8=";
+                };
+            };
             vim-gnupg = pkgs.vimUtils.buildVimPlugin {
               name = "vim-gnupg";
               src = ~/.dotfiles/plugins/vim-plugins/vim-gnupg;
@@ -190,6 +199,7 @@ let
           enable = true;
           plugins = with vimPlugins; [
             jonas
+            copilot
             vim-airline
             vim-airline-themes
             cmp-buffer
@@ -364,10 +374,14 @@ let
         '';
       };
 
-      htop = {
+      # htop = {
+      #   enable = true;
+      #   settings.left_meter_modes = [ "AllCPUs4" "Memory" "Swap" ];
+      #   settings.right_meter_modes = [ "Tasks" "LoadAverage" "Uptime" ];
+      # };
+
+      btop = {
         enable = true;
-        settings.left_meter_modes = [ "AllCPUs4" "Memory" "Swap" ];
-        settings.right_meter_modes = [ "Tasks" "LoadAverage" "Uptime" ];
       };
 
       # k9s = {

@@ -48,4 +48,19 @@ vim.g.airline_powerline_fonts = 1
 -- vim.opt.viewdir = "~/.vimviews"
 -- vim.opt.directory = "~/.vimswap"
 
-
+vim.g.copilot_filetypes = {
+       [ "*" ] = false,
+       fsharp = true,
+       fortran = true,
+       html = true,
+       nix = true,
+       css = true,
+       yaml = true,
+       json = true,
+       js = true,
+       ts = true,
+       lua = true,
+       python = true,
+       julia = true,
+       rust = true,
+   }
