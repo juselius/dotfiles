@@ -1,6 +1,6 @@
 return {
   "vim-airline/vim-airline",
-  enabled = true,
+  enabled = false,
   lazy = false,
   priority = 1000,
   dependencies = {
