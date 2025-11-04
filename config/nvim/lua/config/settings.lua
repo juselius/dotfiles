@@ -10,7 +10,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.textwidth = 100
-vim.opt.colorcolumn = "+20"
+vim.opt.colorcolumn = "+1"
 vim.opt.smartcase = true
 vim.opt.smarttab = true
 vim.opt.smartindent = true
@@ -30,10 +30,6 @@ vim.g.indent_guides_enable_on_vim_startup = 0
 vim.g.indent_guides_start_level = 2
 vim.g.indent_guides_guide_size = 1
 
-vim.g.airline_theme = "cool"
-vim.g.airline_powerline_fonts = 1
--- vim.g.airline_theme= "airlinje"
-
 -- vim.opt.wildmode = "longest,list,full"
 -- vim.opt.wildmenu = true
 -- vim.opt.compatible = false
@@ -48,19 +44,7 @@ vim.g.airline_powerline_fonts = 1
 -- vim.opt.viewdir = "~/.vimviews"
 -- vim.opt.directory = "~/.vimswap"
 
-vim.g.copilot_filetypes = {
-       [ "*" ] = false,
-       fsharp = true,
-       fortran = true,
-       html = true,
-       nix = true,
-       css = true,
-       yaml = true,
-       json = true,
-       js = true,
-       ts = true,
-       lua = true,
-       python = true,
-       julia = true,
-       rust = true,
-   }
+vim.opt.backupdir = vim.fn.stdpath('data') .. '/backup//'
+vim.opt.backup = true
+vim.opt.undofile = true
+vim.opt.swapfile = true
