@@ -3,6 +3,8 @@ with lib;
 let
   cfg = config.dotfiles.desktop;
 
+  useIf = x: y: if x then y else [];
+
   x11services =
     if !cfg.wayland.enable then
       {
@@ -17,6 +19,145 @@ let
         };
       }
     else {};
+
+  dropbox = {
+    services.dropbox.enable = true;
+    home.packages = with pkgs; [ dropbox-cli ];
+  };
+
+  onedrive = {
+    home.packages =[ pkgs.onedrive ];
+    systemd.user.services.onedrive = {
+      Unit = {
+        Description = "OneDrive sync";
+      };
+      Service = {
+        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor --disable-notifications";
+        Restart = "on-failure";
+        RestartSec = "10s";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+    };
+  };
+
+  media = with pkgs; [
+    # guvcview # webcam
+    # shotcut
+    inkscape
+    obs-studio
+    audacity
+    xf86_input_wacom
+    mpv
+  ];
+
+  x11 = with pkgs.xorg; [
+    appres
+    editres
+    listres
+    viewres
+    luit
+    xdpyinfo
+    xdriinfo
+    xev
+    xfd
+    xfontsel
+    xkill
+    xlsatoms
+    xlsclients
+    xlsfonts
+    xmessage
+    xprop
+    xvinfo
+    xwininfo
+    xmessage
+    xvinfo
+    xmodmap
+    pkgs.glxinfo
+    pkgs.xclip
+    pkgs.xsel
+    # pkgs.arandr
+  ];
+
+  gnome = with pkgs; [
+    gnome-settings-daemon
+    gnome-font-viewer
+    adwaita-icon-theme
+    gnome-themes-extra
+    evince
+    gnome-calendar
+    gnome-bluetooth
+    seahorse
+    nautilus
+    gnome-disk-utility
+    gnome-tweaks
+    eog
+    networkmanager-fortisslvpn
+    gnome-keyring
+    dconf-editor
+    pkgs.desktop-file-utils
+    pkgs.gcolor3
+    pkgs.lxappearance
+  ];
+
+  graphics = with pkgs; [
+    imagemagick
+    # scrot
+    # krita
+    # inkscape
+  ];
+
+  desktop = with pkgs; [
+    #wireshark-qt
+    google-chrome
+    #firefox
+    drive
+    rdesktop
+    remmina
+    # googleearth
+    # taskwarrior
+    # timewarrior
+    pass
+    pavucontrol
+    # spotify
+    # ledger
+    # browserpass
+    blueman
+    gparted
+    # calibre
+    fira-code
+    # font-awesome
+    font-awesome_5
+    keybase
+    # keybase-gui
+    pandoc
+    pinentry
+    polkit_gnome
+    # cdrtools
+    innoextract
+    tectonic
+    unrtf
+    # virt-manager
+    qrencode
+    zbar
+    yubikey-personalization
+    dconf
+    typst
+  ];
+
+  chat = with pkgs; [
+    # teams
+    signal-desktop
+    # discord
+    # slack
+    # pidgin
+    # pidginsipe
+  ];
+
+  devel = with pkgs; [
+      sqlitebrowser
+  ];
 
   configuration = {
     dotfiles.desktop.onedrive.enable = mkDefault false;
@@ -181,8 +322,16 @@ let
       '';
     };
 
-    programs.alacritty = {
+    programs.ghostty = {
       enable = true;
+      enableFishIntegration = true;
+      settings = {
+        font-size = 12;
+      };
+    };
+
+    programs.alacritty = {
+      enable = false;
       settings = {
         hints.enabled = [
           {
@@ -205,29 +354,17 @@ let
       #   };
       };
     };
+
+    home.packages =
+      desktop ++
+      useIf cfg.packages.gnome gnome ++
+      useIf cfg.packages.x11 x11 ++
+      useIf cfg.packages.media media ++
+      useIf cfg.packages.chat chat ++
+      useIf cfg.packages.graphics graphics ++
+      useIf config.dotfiles.devel.enable devel;
   };
 
-  dropbox = {
-    services.dropbox.enable = true;
-    home.packages = with pkgs; [ dropbox-cli ];
-  };
-
-  onedrive = {
-    home.packages =[ pkgs.onedrive ];
-    systemd.user.services.onedrive = {
-      Unit = {
-        Description = "OneDrive sync";
-      };
-      Service = {
-        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor --disable-notifications";
-        Restart = "on-failure";
-        RestartSec = "10s";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-    };
-  };
 in
 {
   options.dotfiles.desktop = {
@@ -235,6 +372,14 @@ in
     laptop = mkEnableOption "Enable laptop features";
     dropbox.enable = mkEnableOption "Enable Dropbox";
     onedrive.enable = mkEnableOption "Enable OneDrive";
+
+    packages = {
+      media = mkEnableOption "Enable media packages";
+      chat = mkEnableOption "Enable chat clients";
+      x11 = mkEnableOption "Enable x11 packages";
+      gnome = mkEnableOption "Enable gnome packages";
+      graphics = mkEnableOption "Enable graphics packages";
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [

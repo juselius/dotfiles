@@ -119,7 +119,7 @@ let
               tooltip = true;
               tooltip-format = "󰾆  {percentage}%\n  {used:0.1f}GB/{total:0.1f}GB";
               interval = 10;
-              on-click = "alacritty -e btop";
+              on-click = "ghostty -e btop";
               states = {
                 c = 90; # critical
                 h = 60; # high

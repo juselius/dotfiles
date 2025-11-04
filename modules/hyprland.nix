@@ -25,7 +25,7 @@ let
         # TODO: Set your monitor here. See hyprctl monitors and https://wiki.hyprland.org/Configuring/Monitors/
         monitor = cfg.hyprland.monitor;
 
-        "$terminal" = "${pkgs.alacritty}/bin/alacritty";
+        "$terminal" = "${pkgs.ghostty}/bin/ghostty";
         "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
         "$lock" = "${pkgs.hyprlock}/bin/hyprlock";
         "$menu" = "${pkgs.wofi}/bin/wofi --show drun";

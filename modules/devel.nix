@@ -1,18 +1,12 @@
 { pkgs, config, lib, ... }:
 with lib;
 let
-  cfg = config.dotfiles.packages;
+  cfg = config.dotfiles.devel;
+
+  useIf = x: y: if x then y else [];
 
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
   hie = all-hies.selection { selector = p: { inherit (p) ghc865; }; };
-
-  configuration = {
-    dotfiles.packages.devel = {
-      nix = mkDefault true;
-    };
-
-    home.packages = enabledPackages;
-  };
 
   base = with pkgs; [
     git
@@ -64,7 +58,7 @@ let
   ];
 
   dotnetPackage =
-    if cfg.devel.dotnet.combined then
+    if cfg.dotnet.combined then
         with pkgs.dotnetCorePackages; combinePackages [
           sdk_9_0
           sdk_8_0
@@ -150,21 +144,26 @@ let
     marksman
   ];
 
-  useIf = x: y: if x then y else [];
+  configuration = {
+    dotfiles.devel = {
+      nix = mkDefault true;
+    };
 
-  enabledPackages =
-    base ++ lsp ++
-    useIf cfg.devel.node node ++
-    useIf cfg.devel.rust rust ++
-    useIf cfg.devel.haskell haskell ++
-    useIf cfg.devel.python python ++
-    useIf cfg.devel.go go ++
-    useIf cfg.devel.clojure clojure ++
-    useIf cfg.devel.nix nix ++
-    useIf cfg.devel.java java ++
-    useIf cfg.devel.db db;
+    home.packages =
+      base ++ lsp ++
+      useIf cfg.node node ++
+      useIf cfg.rust rust ++
+      useIf cfg.haskell haskell ++
+      useIf cfg.python python ++
+      useIf cfg.go go ++
+      useIf cfg.clojure clojure ++
+      useIf cfg.nix nix ++
+      useIf cfg.java java ++
+      useIf cfg.db db;
+  };
+
 in {
-  options.dotfiles.packages = {
+  options.dotfiles = {
     devel = {
       enable = mkEnableOption "Enable development packages";
       dotnet = {
@@ -181,12 +180,10 @@ in {
       java = mkEnableOption "Enable Java";
       db = mkEnableOption "Enable database cli tools";
     };
-
   };
 
-  config = mkIf cfg.devel.enable (mkMerge [
-    configuration
-    (mkIf cfg.devel.dotnet.enable dotnet)
-  ]);
-
+  config = mkMerge [
+    (mkIf cfg.enable configuration)
+    (mkIf (cfg.enable && cfg.dotnet.enable) dotnet)
+  ];
 }

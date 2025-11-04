@@ -103,136 +103,6 @@ let
         };
       };
 
-      neovim =
-        let
-          fsharp-grammar =
-            let
-              drv = pkgs.tree-sitter.buildGrammar {
-                language = "fsharp";
-                version = "0.1.x";
-                location = "fsharp";
-                src = pkgs.fetchFromGitHub {
-                  owner = "ionide";
-                  repo = "tree-sitter-fsharp";
-                  rev = "f29605148f24199cf4d9c4a203a5debc0cbcc648";
-                  hash = "sha256-xcejOUhJvECH9taGV0BR5TmTVluF6FSaO68Lg9wlTEc=";
-                };
-                meta.homepage = "https://github.com/ionide/tree-sitter-fsharp";
-              };
-            in
-            drv.overrideAttrs (attrs: {
-              installPhase = ''
-                runHook preInstall
-                mkdir $out
-                mv parser $out/
-                if [[ -d ../queries ]]; then
-                  cp -r ../queries $out
-                fi
-                runHook postInstall
-              '';
-            });
-
-          vimPlugins = pkgs.vimPlugins // {
-            copilot = pkgs.vimUtils.buildVimPlugin {
-              name = "copilot.vim";
-              src = pkgs.fetchFromGitHub {
-                  owner = "github";
-                  repo = "copilot.vim";
-                  rev = "main";
-                  hash = "sha256-dL+yxTPSjX5PDJ4LgqFoS1HtkZV9G1S6VD+w+CPhil8=";
-                };
-            };
-            vim-gnupg = pkgs.vimUtils.buildVimPlugin {
-              name = "vim-gnupg";
-              src = ~/.dotfiles/plugins/vim-plugins/vim-gnupg;
-            };
-            vim-singularity-syntax = pkgs.vimUtils.buildVimPlugin {
-              name = "vim-singularity-syntax";
-              src = ~/.dotfiles/plugins/vim-plugins/vim-singularity-syntax;
-              buildPhase = ":";
-              configurePhase = ":";
-            };
-            treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
-              # NOTE: Recommended to be in "ensure_installed"
-              p.c
-              p.lua
-              p.vim
-              p.vimdoc
-              p.query
-              p.typst
-
-              fsharp-grammar
-              p.bash
-              p.bibtex
-              p.c_sharp
-              p.cue
-              p.cpp
-              p.css
-              p.dhall
-              p.dockerfile
-              p.fish
-              p.git_rebase
-              p.gitattributes
-              p.gitignore
-              p.glsl
-              p.go
-              p.html
-              p.javascript
-              p.latex
-              p.markdown
-              p.markdown_inline
-              p.nix
-              p.python
-              p.rust
-              p.sql
-              p.typescript
-              p.yaml
-              p.zig
-            ]);
-            jonas = pkgs.vimUtils.buildVimPlugin {
-              name = "jonas";
-              src = ~/.dotfiles/plugins/vim-plugins/jonas;
-            };
-          };
-        in
-        {
-          enable = true;
-          plugins = with vimPlugins; [
-            jonas
-            copilot
-            vim-airline
-            vim-airline-themes
-            cmp-buffer
-            cmp_luasnip
-            cmp-nvim-lsp
-            cmp-nvim-lua
-            cmp-path
-            commentary
-            friendly-snippets
-            fugitive
-            Ionide-vim
-            lsp-zero-nvim
-            luasnip
-            markdown-preview-nvim
-            NeoSolarized
-            nvim-cmp
-            nvim-dap
-            nvim-lspconfig
-            plenary-nvim
-            telescope-nvim
-            treesitter
-            vim-gnupg
-            vim-nix
-          # vim-singularity-syntax
-            vim-surround
-            vimtex
-            vim-vsnip
-            zephyr-nvim
-            vim-helm
-          ];
-          #extraConfig = builtins.readFile ../config/nvim/init.lua;
-        };
-
       git = {
         enable = true;
         lfs.enable = true;
@@ -457,11 +327,6 @@ let
         target = "fish";
         recursive = true;
       };
-      nvim = {
-        source = ~/.dotfiles/config/nvim;
-        target = "nvim";
-        recursive = true;
-      };
       "home.nix" = {
         source = ~/.dotfiles/home.nix;
         target = "nixpkgs/home.nix";
@@ -470,21 +335,6 @@ let
         source = ~/.dotfiles/config.nix;
         target = "nixpkgs/config.nix";
       };
-      modules = {
-        source = ~/.dotfiles/modules;
-        target = "nixpkgs/modules";
-        recursive = true;
-      };
-      packages = {
-        source = ~/.dotfiles/packages;
-        target = "nixpkgs/packages";
-        recursive = true;
-      };
-      # overlays = {
-      #   source = ~/.dotfiles/overlays;
-      #   target = "nixpkgs/overlays";
-      #   recursive = true;
-      # };
     };
 
     xdg.dataFile = {
@@ -528,19 +378,6 @@ let
         a // mkHomeFile x) {} cfg.extraDotfiles;
   };
 
-  vimDevPlugins =
-    let
-      devPlugins = with pkgs.vimPlugins; [
-          LanguageClient-neovim
-          rust-vim
-          # idris-vim
-          # neco-ghc
-          # purescript-vim
-          # vim-clojure-static
-          # vim-clojure-highlight
-        ];
-    in { programs.neovim.plugins = devPlugins; };
-
   # settings when not running under NixOS
   plainNix = {
     home.sessionVariables = {
@@ -567,12 +404,6 @@ in
       default = [];
     };
 
-    vimDevPlugins = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable vim devel plugins";
-    };
-
     plainNix = mkEnableOption "Tweaks for non-NixOS systems";
 
     atuin = mkEnableOption "Enable atuin";
@@ -583,7 +414,6 @@ in
   config = mkMerge [
     configuration
     extraHomeFiles
-    (mkIf cfg.vimDevPlugins vimDevPlugins)
   ];
 }
 
