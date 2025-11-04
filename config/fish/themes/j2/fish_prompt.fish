@@ -135,14 +135,25 @@ function fish_prompt
      set arrow ">"
   end
 
-  set -l cc (set_color brblack)
-  [ ! -z "$SSH_TTY" ] && set cc $red
-
   # set -l xu '╭'
   # set -l xl '╰'
   # set -l xd '─'
 
-  echo -s $cc $USER '@' $hostname ':' $blue $cwd $normal $git_info $normal
+  if [ ! -z "$SSH_TTY" ]
+     set hc $cyan
+  else
+     set hc $yellow
+  end
+
+  if [ "$USER" = "root" ]
+      set uc $red
+  else if [ "$USER" = "admin" ]
+      set uc $blue
+  else
+      set uc $green
+  end
+
+  echo -s $uc $USER $normal '@' $hc $hostname ':' $blue $cwd $normal $git_info $normal
   echo -n -s (fish_custom_mode_prompt) $normal $arrow ' '
 end
 
