@@ -325,8 +325,9 @@ let
     programs.ghostty = {
       enable = true;
       enableFishIntegration = true;
-      settings = {
-        font-size = 12;
+      settings = lib.mkDefault {
+        font-size = 13;
+        theme = "zenwritten_dark";
       };
     };
 
