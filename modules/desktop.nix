@@ -327,7 +327,7 @@ let
       enableFishIntegration = true;
       settings = lib.mkDefault {
         font-size = 13;
-        theme = "zenwritten_dark";
+        theme = "terafox";
       };
     };
 

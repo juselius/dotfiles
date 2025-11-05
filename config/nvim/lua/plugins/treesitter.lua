@@ -1,13 +1,27 @@
--- return {
---   "nvim-treesitter/nvim-treesitter",
---   config = function()
---     local configs = require("nvim-treesitter.configs")
---
---     configs.setup {
---       auto_install = true,
---       highlight = {
---         enable = true,
---       },
---     }
---   end,
--- }
+return {
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "fish",
+        "bash",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "query",
+        "regex",
+        "tsx",
+        "typescript",
+        "vim",
+        "yaml",
+        "rust",
+        "fsharp",
+        "nix"
+      },
+    },
+  },
+}

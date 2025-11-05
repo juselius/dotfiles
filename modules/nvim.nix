@@ -1,12 +1,12 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.dotfiles;
-  nvim = {
-    programs.neovim =
-      {
-        enable = true;
-        plugins = with vimPlugins; [
+  configuration = {
+    programs.neovim = {
+      enable = true;
+      plugins = with vimPlugins;
+        [
           # nvim-cmp
           # plenary-nvim
           # vim-gnupg
@@ -28,29 +28,16 @@ let
     };
     home.packages = with pkgs; [
       tree-sitter
+      fish-lsp
+      nil
+      fsautocomplete
+      lua-language-server
+      statix
+      nixfmt
     ];
   };
+in {
+  options.dotfiles = { };
 
-  lazyvim = {
-    programs.neovim = {
-      enable = true;
-    };
-    xdg.configFile = {
-      nvim = {
-        source = ~/.dotfiles/config/lazyvim;
-        target = "nvim";
-        recursive = true;
-      };
-    };
-  };
-in
-{
-  options.dotfiles = {
-    lazyvim = mkEnableOption "Enable lazyvim IDE";
-  };
-
-  config = mkMerge [
-    (mkIf cfg.lazyvim lazyvim)
-    (mkIf (!cfg.lazyvim) nvim)
-  ];
+  config = mkMerge [ configuration ];
 }
