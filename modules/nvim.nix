@@ -1,24 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.dotfiles;
   configuration = {
-    programs.neovim = {
-      enable = true;
-      plugins = with vimPlugins;
-        [
-          # nvim-cmp
-          # plenary-nvim
-          # vim-gnupg
-          # vim-nix
-          # vim-surround
-          # vimtex
-          # vim-vsnip
-          # vim-helm
-          # friendly-snippets
-          # luasnip
-        ];
-    };
+    programs.neovim = { enable = true; };
     xdg.configFile = {
       nvim = {
         source = ~/.dotfiles/config/nvim;
@@ -33,7 +17,7 @@ let
       fsautocomplete
       lua-language-server
       statix
-      nixfmt
+      nixfmt-rfc-style
     ];
   };
 in {
