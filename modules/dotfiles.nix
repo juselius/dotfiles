@@ -1,31 +1,64 @@
-{ config, lib, pkgs, ...}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.dotfiles;
+
   k8s-aliases =
-     if cfg.packages.kubernetes then
-        {
-           ctr = "ctr --namespace k8s.io";
-           k = "kubectl";
-           kc = "kubectl";
-           kcc = "kubectl config use-context";
-           kcn = "kubectl config set-context --current --namespace";
-           ked = "kubectl edit";
-           kex = "kubectl exec -ti";
-           kl = "kubectl logs";
-           kg = "kubectl get";
-           kgp = "kubectl get pods";
-           kgd = "kubectl get deployments";
-           kgs = "kubectl get secrets";
-           kgc = "kubectl get configmaps";
-           kgi = "kubectl get ingress";
-           kgn = "kubectl get nodes";
-           kd = "kubectl describe";
-           kdp = "kubectl describe pod";
-           kdd = "kubectl describe deployment";
-           kdn = "kubectl describe node";
-         }
-     else {};
+    if cfg.packages.kubernetes then
+      {
+        ctr = "ctr --namespace k8s.io";
+        k = "kubectl";
+        kc = "kubectl";
+        kcc = "kubectl config use-context";
+        kcn = "kubectl config set-context --current --namespace";
+        ked = "kubectl edit";
+        kex = "kubectl exec -ti";
+        kl = "kubectl logs";
+        kg = "kubectl get";
+        kgp = "kubectl get pods";
+        kgd = "kubectl get deployments";
+        kgs = "kubectl get secrets";
+        kgc = "kubectl get configmaps";
+        kgi = "kubectl get ingress";
+        kgn = "kubectl get nodes";
+        kd = "kubectl describe";
+        kdp = "kubectl describe pod";
+        kdd = "kubectl describe deployment";
+        kdn = "kubectl describe node";
+      }
+    else
+      { };
+
+  shellAliases = {
+    ls = "eza";
+    la = "ls -a";
+    lla = "ls -la";
+    ltr = "ls -l --sort newest";
+    nix-fish = "nix-shell --run fish";
+    cat = "bat -p";
+    diff = "diff -u";
+    du = "dust";
+    df = "duf --only local,network";
+    top = "btop";
+    vimdiff = "nvim -d";
+    pssh = "parallel-ssh -t 0";
+    xopen = "xdg-open";
+    lmod = "module";
+    unhist = "unset HISTFILE";
+    halt = "halt -p";
+    vim = "nvim";
+    home-manager = "home-manager -f ~/.dotfiles";
+    lock = "xset s activate";
+    dig = "dog";
+    # ps = "procs";
+    # sed = "sed -r";
+  }
+  // k8s-aliases;
 
   configuration = {
     manual.manpages.enable = false;
@@ -51,35 +84,12 @@ let
           set fish_cursor_insert line
           set fish_cursor_replace_one underscore
           set fish_cursor_visual block
-        '' + (if cfg.fish.vi-mode then "fish_vi_key_bindings" else "");
+        ''
+        + (if cfg.fish.vi-mode then "fish_vi_key_bindings" else "");
         interactiveShellInit = ''
           omf theme j2
         '';
-        shellAliases = {
-          ls = "eza";
-          ll = "ls -l";
-          la = "ls -a";
-          lla = "ls -la";
-          ltr = "ls -l --sort newest";
-          # ltr = "ls -ltr";
-          cat = "bat -p";
-          diff = "diff -u";
-          # ps = "procs";
-          du = "dust";
-          df = "duf --only local,network";
-          # sed = "sed -r";
-          top = "btop";
-          vimdiff = "nvim -d";
-          pssh = "parallel-ssh -t 0";
-          xopen = "xdg-open";
-          lmod = "module";
-          unhist = "unset HISTFILE";
-          halt = "halt -p";
-          vim = "nvim";
-          home-manager = "home-manager -f ~/.dotfiles";
-          lock = "xset s activate";
-          dig = "dog";
-        } // k8s-aliases;
+        inherit shellAliases;
         functions = {
           push-line = ''
             commandline -f kill-whole-line
@@ -116,7 +126,14 @@ let
           pick = "cherry-pick";
           ltr = "branch --sort=-committerdate";
         };
-        ignores = ["*~" "*.o" "*.a" "*.dll" "*.bak" "*.old"];
+        ignores = [
+          "*~"
+          "*.o"
+          "*.a"
+          "*.dll"
+          "*.bak"
+          "*.old"
+        ];
         extraConfig = {
           init = {
             defaultBranch = "main";
@@ -312,13 +329,12 @@ let
       GIT_ALLOW_PROTOCOL = "ssh:https:keybase:file";
     };
 
-
     nixpkgs.config = {
       allowUnfree = true;
     };
 
     # home.activation = {
-        # linkOverlays = "cp -srf ~/.dotfiles/overlays ~/.config/nixpkgs";
+    # linkOverlays = "cp -srf ~/.dotfiles/overlays ~/.config/nixpkgs";
     # };
 
     xdg.configFile = {
@@ -354,7 +370,10 @@ let
     services.unison = {
       enable = false;
       pairs = {
-        docs = [ "/home/$USER/Documents"  "ssh://example/Documents" ];
+        docs = [
+          "/home/$USER/Documents"
+          "ssh://example/Documents"
+        ];
       };
     };
   };
@@ -366,16 +385,7 @@ let
         target = ".local/bin";
         recursive = true;
       };
-    } // builtins.foldl' (a: x:
-      let
-        mkHomeFile = x: {
-          ${x} = {
-            source = ~/. + "/.dotfiles/adhoc/${x}";
-            target = ".${x}";
-          };
-        };
-      in
-        a // mkHomeFile x) {} cfg.extraDotfiles;
+    };
   };
 
   # settings when not running under NixOS
@@ -401,7 +411,7 @@ in
   options.dotfiles = {
     extraDotfiles = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
     };
 
     plainNix = mkEnableOption "Tweaks for non-NixOS systems";
@@ -416,4 +426,3 @@ in
     extraHomeFiles
   ];
 }
-
