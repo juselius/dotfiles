@@ -1,5 +1,7 @@
 -- vim.cmd("colorscheme habamax")
 
+vim.opt.foldenable = false
+vim.opt.clipboard = ""
 -- vim.opt.guicursor = "a:block"
 -- vim.opt.incsearch = true
 -- vim.opt.number = true;
@@ -24,7 +26,6 @@
 -- vim.opt.history = 1000
 -- vim.opt.cmdheight = 1
 -- vim.opt.hlsearch = false
-vim.opt.foldenable = false
 -- vim.opt.laststatus = 2
 -- vim.opt.ttimeoutlen = 50
 --

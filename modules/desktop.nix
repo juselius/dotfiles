@@ -3,22 +3,20 @@ with lib;
 let
   cfg = config.dotfiles.desktop;
 
-  useIf = x: y: if x then y else [];
+  useIf = x: y: if x then y else [ ];
 
-  x11services =
-    if !cfg.wayland.enable then
-      {
-        pasystray.enable = true;
-        flameshot.enable =  true;
+  x11services = if !cfg.wayland.enable then {
+    pasystray.enable = true;
+    flameshot.enable = true;
 
-        screen-locker = {
-          enable = true;
-          inactiveInterval = 45;
-          lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
-          # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
-        };
-      }
-    else {};
+    screen-locker = {
+      enable = true;
+      inactiveInterval = 45;
+      lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
+      # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
+    };
+  } else
+    { };
 
   dropbox = {
     services.dropbox.enable = true;
@@ -26,19 +24,16 @@ let
   };
 
   onedrive = {
-    home.packages =[ pkgs.onedrive ];
+    home.packages = [ pkgs.onedrive ];
     systemd.user.services.onedrive = {
-      Unit = {
-        Description = "OneDrive sync";
-      };
+      Unit = { Description = "OneDrive sync"; };
       Service = {
-        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor --disable-notifications";
+        ExecStart =
+          "${pkgs.onedrive}/bin/onedrive --monitor --disable-notifications";
         Restart = "on-failure";
         RestartSec = "10s";
       };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
+      Install = { WantedBy = [ "default.target" ]; };
     };
   };
 
@@ -101,12 +96,13 @@ let
     pkgs.lxappearance
   ];
 
-  graphics = with pkgs; [
-    imagemagick
-    # scrot
-    # krita
-    # inkscape
-  ];
+  graphics = with pkgs;
+    [
+      imagemagick
+      # scrot
+      # krita
+      # inkscape
+    ];
 
   desktop = with pkgs; [
     #wireshark-qt
@@ -146,18 +142,17 @@ let
     typst
   ];
 
-  chat = with pkgs; [
-    # teams
-    signal-desktop
-    # discord
-    # slack
-    # pidgin
-    # pidginsipe
-  ];
+  chat = with pkgs;
+    [
+      # teams
+      signal-desktop
+      # discord
+      # slack
+      # pidgin
+      # pidginsipe
+    ];
 
-  devel = with pkgs; [
-      sqlitebrowser
-  ];
+  devel = with pkgs; [ sqlitebrowser ];
 
   configuration = {
     dotfiles.desktop.onedrive.enable = mkDefault false;
@@ -170,9 +165,7 @@ let
       firefox.enable = true;
       gpg = {
         enable = true;
-        settings = {
-          use-agent = true;
-        };
+        settings = { use-agent = true; };
       };
     };
 
@@ -204,9 +197,9 @@ let
     # };
 
     services = {
-      clipmenu.enable =  false;
+      clipmenu.enable = false;
 
-      network-manager-applet.enable = true; #!cfg.wayland.enable;
+      network-manager-applet.enable = true; # !cfg.wayland.enable;
       blueman-applet.enable = true;
 
       # kanshi = {
@@ -273,8 +266,7 @@ let
           ms-dotnettools.csharp
           ionide.ionide-fsharp
         ];
-        userSettings = {
-        };
+        userSettings = { };
       };
       haskell = {
         enable = false;
@@ -285,40 +277,40 @@ let
     programs.wezterm = {
       enable = true;
       extraConfig = ''
-         local wezterm = require 'wezterm'
-         local act = wezterm.action
-         local config = {}
+        local wezterm = require 'wezterm'
+        local act = wezterm.action
+        local config = {}
 
-         return {
-            font = wezterm.font("JetBrains Mono"),
-            font_size = 11.0,
-            color_scheme = "Classic Dark (base16)",
-            hide_tab_bar_if_only_one_tab = true,
-            mouse_bindings = {
-              -- Disable the default click behavior
-              {
-                event = { Up = { streak = 1, button = "Left"} },
-                mods = "NONE",
-                action = wezterm.action.DisableDefaultAssignment,
-              },
-              -- Bind 'Up' event of CTRL-Click to open hyperlinks
-              {
-                event = { Up = { streak = 1, button = 'Left' } },
-                mods = 'CTRL',
-                action = act.OpenLinkAtMouseCursor,
-              },
-              -- Disable the 'Down' event of CTRL-Click to avoid weird program behaviors
-              {
-                event = { Down = { streak = 1, button = 'Left' } },
-                mods = 'CTRL',
-                action = act.Nop,
-              },
-            },
-           -- default_prog = { "zsh", "--login", "-c", "tmux attach -t dev || tmux new -s dev" },
-           -- keys = {
-           --  {key="n", mods="SHIFT|CTRL", action="ToggleFullScreen"},
-           -- }
-         }
+        return {
+           font = wezterm.font("JetBrains Mono"),
+           font_size = 11.0,
+           color_scheme = "Classic Dark (base16)",
+           hide_tab_bar_if_only_one_tab = true,
+           mouse_bindings = {
+             -- Disable the default click behavior
+             {
+               event = { Up = { streak = 1, button = "Left"} },
+               mods = "NONE",
+               action = wezterm.action.DisableDefaultAssignment,
+             },
+             -- Bind 'Up' event of CTRL-Click to open hyperlinks
+             {
+               event = { Up = { streak = 1, button = 'Left' } },
+               mods = 'CTRL',
+               action = act.OpenLinkAtMouseCursor,
+             },
+             -- Disable the 'Down' event of CTRL-Click to avoid weird program behaviors
+             {
+               event = { Down = { streak = 1, button = 'Left' } },
+               mods = 'CTRL',
+               action = act.Nop,
+             },
+           },
+          -- default_prog = { "zsh", "--login", "-c", "tmux attach -t dev || tmux new -s dev" },
+          -- keys = {
+          --  {key="n", mods="SHIFT|CTRL", action="ToggleFullScreen"},
+          -- }
+        }
       '';
     };
 
@@ -334,40 +326,33 @@ let
     programs.alacritty = {
       enable = false;
       settings = {
-        hints.enabled = [
-          {
-            regex =
-              "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\\\s{-}\\\\^⟨⟩`]+";
-            command = "xdg-open";
-            post_processing = true;
-            mouse = {
-              enabled = true;
-              mods = "Control";
-            };
-          }
-        ];
+        hints.enabled = [{
+          regex = ''
+            (ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>"\\s{-}\\^⟨⟩`]+'';
+          command = "xdg-open";
+          post_processing = true;
+          mouse = {
+            enabled = true;
+            mods = "Control";
+          };
+        }];
         font.size = 13.0;
-      #   colors = {
-      #     primary = {
-      #       background = "";
-      #       dim_background = "";
-      #     };
-      #   };
+        #   colors = {
+        #     primary = {
+        #       background = "";
+        #       dim_background = "";
+        #     };
+        #   };
       };
     };
 
-    home.packages =
-      desktop ++
-      useIf cfg.packages.gnome gnome ++
-      useIf cfg.packages.x11 x11 ++
-      useIf cfg.packages.media media ++
-      useIf cfg.packages.chat chat ++
-      useIf cfg.packages.graphics graphics ++
-      useIf config.dotfiles.devel.enable devel;
+    home.packages = desktop ++ useIf cfg.packages.gnome gnome
+      ++ useIf cfg.packages.x11 x11 ++ useIf cfg.packages.media media
+      ++ useIf cfg.packages.chat chat ++ useIf cfg.packages.graphics graphics
+      ++ useIf config.dotfiles.devel.enable devel;
   };
 
-in
-{
+in {
   options.dotfiles.desktop = {
     enable = mkEnableOption "Enable desktop";
     laptop = mkEnableOption "Enable laptop features";
@@ -384,9 +369,9 @@ in
   };
 
   config = mkIf cfg.enable (mkMerge [
-      configuration
-      (mkIf cfg.dropbox.enable dropbox)
-      (mkIf cfg.onedrive.enable onedrive)
+    configuration
+    (mkIf cfg.dropbox.enable dropbox)
+    (mkIf cfg.onedrive.enable onedrive)
   ]);
 
   imports = [ ./wm.nix ];

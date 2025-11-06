@@ -19,17 +19,17 @@ return {
   config = function(_, opts)
     Snacks.indent.disable()
   end,
-  keys = {
-    {
-      "<leader>ii",
-      function()
-        if Snacks.indent.enabled then
-          Snacks.indent.disable()
-        else
-          Snacks.indent.enable()
-        end
-      end,
-      desc = "Toggle Snacks Indent",
-    }
-  }
+  -- keys = {
+  --   {
+  --     "<leader>ii",
+  --     function()
+  --       if Snacks.indent.enabled then
+  --         Snacks.indent.disable()
+  --       else
+  --         Snacks.indent.enable()
+  --       end
+  --     end,
+  --     desc = "Toggle Snacks Indent",
+  --   }
+  -- }
 }
