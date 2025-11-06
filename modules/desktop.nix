@@ -1,22 +1,30 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.dotfiles.desktop;
 
   useIf = x: y: if x then y else [ ];
 
-  x11services = if !cfg.wayland.enable then {
-    pasystray.enable = true;
-    flameshot.enable = true;
+  x11services =
+    if !cfg.wayland.enable then
+      {
+        pasystray.enable = true;
+        flameshot.enable = true;
 
-    screen-locker = {
-      enable = true;
-      inactiveInterval = 45;
-      lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
-      # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
-    };
-  } else
-    { };
+        screen-locker = {
+          enable = true;
+          inactiveInterval = 45;
+          lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
+          # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
+        };
+      }
+    else
+      { };
 
   dropbox = {
     services.dropbox.enable = true;
@@ -26,14 +34,17 @@ let
   onedrive = {
     home.packages = [ pkgs.onedrive ];
     systemd.user.services.onedrive = {
-      Unit = { Description = "OneDrive sync"; };
+      Unit = {
+        Description = "OneDrive sync";
+      };
       Service = {
-        ExecStart =
-          "${pkgs.onedrive}/bin/onedrive --monitor --disable-notifications";
+        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor --disable-notifications";
         Restart = "on-failure";
         RestartSec = "10s";
       };
-      Install = { WantedBy = [ "default.target" ]; };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
     };
   };
 
@@ -96,13 +107,12 @@ let
     pkgs.lxappearance
   ];
 
-  graphics = with pkgs;
-    [
-      imagemagick
-      # scrot
-      # krita
-      # inkscape
-    ];
+  graphics = with pkgs; [
+    imagemagick
+    # scrot
+    # krita
+    # inkscape
+  ];
 
   desktop = with pkgs; [
     #wireshark-qt
@@ -142,15 +152,14 @@ let
     typst
   ];
 
-  chat = with pkgs;
-    [
-      # teams
-      signal-desktop
-      # discord
-      # slack
-      # pidgin
-      # pidginsipe
-    ];
+  chat = with pkgs; [
+    # teams
+    signal-desktop
+    # discord
+    # slack
+    # pidgin
+    # pidginsipe
+  ];
 
   devel = with pkgs; [ sqlitebrowser ];
 
@@ -165,20 +174,9 @@ let
       firefox.enable = true;
       gpg = {
         enable = true;
-        settings = { use-agent = true; };
-      };
-    };
-
-    home.file = {
-      icons = {
-        source = ~/.dotfiles/icons;
-        target = ".icons";
-        recursive = true;
-      };
-      xmodmap = {
-        source = ~/.dotfiles/adhoc/Xmodmap;
-        target = ".Xmodmap";
-        recursive = false;
+        settings = {
+          use-agent = true;
+        };
       };
     };
 
@@ -217,9 +215,13 @@ let
 
       gnome-keyring = {
         enable = true;
-        components = [ "pkcs11" "secrets" ];
+        components = [
+          "pkcs11"
+          "secrets"
+        ];
       };
-    } // x11services;
+    }
+    // x11services;
 
     systemd.user.sessionVariables = {
       GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
@@ -318,6 +320,7 @@ let
       enable = true;
       enableFishIntegration = true;
       settings = lib.mkDefault {
+        terminal = "xterm-256color";
         font-size = 13;
         theme = "terafox";
       };
@@ -326,16 +329,17 @@ let
     programs.alacritty = {
       enable = false;
       settings = {
-        hints.enabled = [{
-          regex = ''
-            (ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>"\\s{-}\\^⟨⟩`]+'';
-          command = "xdg-open";
-          post_processing = true;
-          mouse = {
-            enabled = true;
-            mods = "Control";
-          };
-        }];
+        hints.enabled = [
+          {
+            regex = ''(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>"\\s{-}\\^⟨⟩`]+'';
+            command = "xdg-open";
+            post_processing = true;
+            mouse = {
+              enabled = true;
+              mods = "Control";
+            };
+          }
+        ];
         font.size = 13.0;
         #   colors = {
         #     primary = {
@@ -346,13 +350,18 @@ let
       };
     };
 
-    home.packages = desktop ++ useIf cfg.packages.gnome gnome
-      ++ useIf cfg.packages.x11 x11 ++ useIf cfg.packages.media media
-      ++ useIf cfg.packages.chat chat ++ useIf cfg.packages.graphics graphics
+    home.packages =
+      desktop
+      ++ useIf cfg.packages.gnome gnome
+      ++ useIf cfg.packages.x11 x11
+      ++ useIf cfg.packages.media media
+      ++ useIf cfg.packages.chat chat
+      ++ useIf cfg.packages.graphics graphics
       ++ useIf config.dotfiles.devel.enable devel;
   };
 
-in {
+in
+{
   options.dotfiles.desktop = {
     enable = mkEnableOption "Enable desktop";
     laptop = mkEnableOption "Enable laptop features";
