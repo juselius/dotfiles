@@ -409,11 +409,6 @@ let
 in
 {
   options.dotfiles = {
-    extraDotfiles = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-    };
-
     plainNix = mkEnableOption "Tweaks for non-NixOS systems";
 
     atuin = mkEnableOption "Enable atuin";

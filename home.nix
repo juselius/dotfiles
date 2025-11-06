@@ -8,9 +8,9 @@ let
     if config.dotfiles.desktop.enable then
       with pkgs;
       [
+        ferdium
         # zoom-us
         # rider
-        # ferdium
         # discord
       ]
     else
@@ -18,10 +18,38 @@ let
 in
 {
   home = {
-    username = "jonas";
-    homeDirectory = "/home/jonas";
+    username = "nobody";
+    homeDirectory = "/home/nobody";
 
     packages = with pkgs; [ ] ++ extraDesktopPackages;
+
+    keyboard = {
+      layout = "us(altgr-intl)";
+      model = "pc104";
+      options = [
+        "eurosign:e"
+        "caps:none"
+      ];
+    };
+
+    home.sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+  };
+
+  programs = {
+    git = {
+      userEmail = "";
+      userName = "";
+    };
+
+    ssh.matchBlocks = {
+      example = {
+        user = "foo";
+        hostname = "acme.com";
+      };
+    };
   };
 
   dotfiles = {
@@ -68,43 +96,8 @@ in
       cloud = false;
       geo = false;
     };
-    extraDotfiles = [
-      "bcrc"
-      "codex"
-      "ghci"
-      "haskeline"
-      "taskrc"
-    ];
     fish.vi-mode = false;
     atuin = false;
-  };
-
-  home.keyboard = {
-    layout = "us(altgr-intl)";
-    model = "pc104";
-    options = [
-      "eurosign:e"
-      "caps:none"
-    ];
-  };
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-  };
-
-  programs = {
-    git = {
-      userEmail = "";
-      userName = "";
-    };
-
-    ssh.matchBlocks = {
-      example = {
-        user = "foo";
-        hostname = "acme.com";
-      };
-    };
   };
 
   services.lorri.enable = true;
