@@ -227,6 +227,28 @@ let
       GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
     };
 
+    # NOTE(simkir): In some desktop environments, GUI apps and their *.desktop files are 
+    # not always registered correctly when installed through home-manager. So, in KDE
+    # plasma, for example, if you add a an in the usual way and rebuild, you cannot find
+    # the entry in your usual app launcher. This trick ensures they are copied to a path
+    # where the DE can find them after every switch.
+    #
+    # Taken from: https://discourse.nixos.org/t/kde-plasma-6-wont-show-applications-after-install-using-home-manager/40638/4
+    home.activation.linkDesktopApplications = {
+      after = [  "writeBoundry" "createXdgUserDirectories" ];
+      before = [ ];
+      data = ''
+        rm -rf ${config.xdg.dataHome}/nix-desktop-files/applications
+        mkdir -p ${config.xdg.dataHome}/nix-desktop-files/applications
+        cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/nix-desktop-files/applications/
+      '';
+    };
+
+    xdg = {
+      enable = true;
+      systemDirs.data = [ "${config.xdg.dataHome}/nix-desktop-files" ];
+    };
+
     gtk = {
       enable = true;
       font.name = "DejaVu Sans 11";
