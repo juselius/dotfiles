@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ...}:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.dotfiles.desktop;
@@ -15,7 +20,8 @@ let
         xset +dpms
         xset dpms 1800 2400 3600
         xmodmap $HOME/.dotfiles/Xmodmap
-      '' + cfg.xsessionInitExtra;
+      ''
+      + cfg.xsessionInitExtra;
       numlock.enable = true;
     };
 
@@ -58,59 +64,60 @@ let
     ];
   };
 
-
   wayland =
-  let
-    wallpaper = "${pkgs.nixos-artwork.wallpapers.binary-black}/share/backgrounds/nixos/nix-wallpaper-binary-black.png";
-  in {
-    home.sessionVariables = {
-      _JAVA_AWT_WM_NONREPARENTING = 1;
-    };
-
-    programs.swaylock = {
-      enable = true;
-      settings = {
-           color = "202020";
-           image = wallpaper;
-           scaling = "fill";
-           font-size = 24;
-           indicator-idle-visible = false;
-           indicator-radius = 75;
-           line-color = "ffffff";
-           show-failed-attempts = true;
+    let
+      wallpaper = "${pkgs.nixos-artwork.wallpapers.binary-black}/share/backgrounds/nixos/nix-wallpaper-binary-black.png";
+    in
+    {
+      home.sessionVariables = {
+        _JAVA_AWT_WM_NONREPARENTING = 1;
       };
-    };
 
-    home.packages = with pkgs; [
-      swaylock
-      swayidle
-      wl-clipboard
-      wezterm
-      wf-recorder
-      wev
-      wofi
-      wofi-pass
-      wlr-randr
-      wdisplays
-      sway-contrib.grimshot
-      clipman
-      swaybg
-      # networkmanager
-      networkmanager_dmenu
-      networkmanagerapplet
-    ];
-
-    services.mako = {
-      enable = true;
-      settings = {
-        border-size = 2;
-        default-timeout = 2500;
+      programs.swaylock = {
+        enable = true;
+        settings = {
+          color = "202020";
+          image = wallpaper;
+          scaling = "fill";
+          font-size = 24;
+          indicator-idle-visible = false;
+          indicator-radius = 75;
+          line-color = "ffffff";
+          show-failed-attempts = true;
+        };
       };
+
+      home.packages = with pkgs; [
+        swaylock
+        swayidle
+        wl-clipboard
+        wezterm
+        wf-recorder
+        wev
+        wofi
+        wofi-pass
+        wlr-randr
+        wdisplays
+        sway-contrib.grimshot
+        clipman
+        swaybg
+        # networkmanager
+        networkmanager_dmenu
+        networkmanagerapplet
+      ];
+
+      services.mako = {
+        enable = true;
+        settings = {
+          border-size = 2;
+          default-timeout = 2500;
+        };
+      };
+
     };
 
-  };
-
-in {
+in
+{
   options.dotfiles.desktop = {
     xmonad = {
       enable = mkEnableOption "Enable XMonad";
@@ -138,4 +145,3 @@ in {
     ./i3-sway.nix
   ];
 }
-

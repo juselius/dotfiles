@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ...}:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.dotfiles.desktop;
@@ -22,6 +27,7 @@ let
     wayland.windowManager = {
       hyprland.enable = true;
       hyprland.settings = {
+        exec-once = "${pkgs.hyprland}/bin/hyprctl setcursor Vanilla-DMZ 2";
         # TODO: Set your monitor here. See hyprctl monitors and https://wiki.hyprland.org/Configuring/Monitors/
         monitor = cfg.hyprland.monitor;
 
@@ -318,7 +324,8 @@ let
         };
     };
   };
-in {
+in
+{
   options.dotfiles.desktop = {
     hyprland = {
       enable = mkEnableOption "Enable Hyprland";

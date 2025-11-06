@@ -89,7 +89,6 @@ let
   gnome = with pkgs; [
     gnome-settings-daemon
     gnome-font-viewer
-    adwaita-icon-theme
     gnome-themes-extra
     evince
     gnome-calendar
@@ -227,7 +226,7 @@ let
       GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
     };
 
-    # NOTE(simkir): In some desktop environments, GUI apps and their *.desktop files are 
+    # NOTE(simkir): In some desktop environments, GUI apps and their *.desktop files are
     # not always registered correctly when installed through home-manager. So, in KDE
     # plasma, for example, if you add a an in the usual way and rebuild, you cannot find
     # the entry in your usual app launcher. This trick ensures they are copied to a path
@@ -235,7 +234,10 @@ let
     #
     # Taken from: https://discourse.nixos.org/t/kde-plasma-6-wont-show-applications-after-install-using-home-manager/40638/4
     home.activation.linkDesktopApplications = {
-      after = [  "writeBoundry" "createXdgUserDirectories" ];
+      after = [
+        "writeBoundry"
+        "createXdgUserDirectories"
+      ];
       before = [ ];
       data = ''
         rm -rf ${config.xdg.dataHome}/nix-desktop-files/applications
@@ -252,33 +254,24 @@ let
     gtk = {
       enable = true;
       font.name = "DejaVu Sans 11";
-      iconTheme.name = "Ubuntu-mono-dark";
-      theme.name = "Adwaita";
-      gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = 0;
-        # gtk-theme-name = "Sierra-compact-light";
-        # gtk-icon-theme-name = "ePapirus";
-        gtk-font-name = "Ubuntu 11";
-        gtk-cursor-theme-name = "Adwaita";
-        # gtk-cursor-theme-size = 0;
-        gtk-toolbar-style = "GTK_TOOLBAR_BOTH";
-        gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
-        gtk-button-images = 1;
-        gtk-menu-images = 1;
-        gtk-enable-event-sounds = 1;
-        gtk-enable-input-feedback-sounds = 1;
-        gtk-xft-antialias = 1;
-        gtk-xft-hinting = 1;
-        gtk-xft-hintstyle = "hintfull";
-        gtk-xft-rgba = "rgb";
-        gtk-modules = "gail:atk-bridge";
+      theme = {
+        name = "Adwaita";
+        package = pkgs.gnome-themes-extra;
+      };
+      iconTheme = {
+        name = "Adwaita";
+        package = pkgs.gnome-themes-extra;
+      };
+      cursorTheme = {
+        name = "Vanilla-DMZ";
+        package = pkgs.vanilla-dmz;
       };
     };
 
     xresources.properties = {
-      "Xclip.selection" = "clipboard";
-      "Xcursor.theme" = "cursor-theme";
-      "Xcursor.size" = 18;
+      # "Xclip.selection" = "clipboard";
+      # "Xcursor.theme" = "cursor-theme";
+      # "Xcursor.size" = 18;
     };
 
     programs.vscode = {
