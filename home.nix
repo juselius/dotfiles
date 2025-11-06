@@ -1,21 +1,28 @@
-{pkgs, lib, config, ...}:
+{
+  pkgs,
+  config,
+  ...
+}:
 let
   extraDesktopPackages =
     if config.dotfiles.desktop.enable then
-      with pkgs; [
+      with pkgs;
+      [
         # zoom-us
         # rider
         # ferdium
         # discord
       ]
-    else [];
+    else
+      [ ];
 in
 {
-  home.username = "nobody";
-  home.homeDirectory = "/home/nobody";
+  home = {
+    username = "jonas";
+    homeDirectory = "/home/jonas";
 
-  home.packages = with pkgs; [
-  ] ++ extraDesktopPackages;
+    packages = with pkgs; [ ] ++ extraDesktopPackages;
+  };
 
   dotfiles = {
     desktop = {
@@ -28,39 +35,37 @@ in
           # "HDMI-A-1, preferred, 2048x0, 1.25"
         ];
       };
-      sway.enable = true;
+      sway.enable = false;
       dropbox.enable = false;
       onedrive.enable = false;
       laptop = false;
-      xsessionInitExtra = ''
-      '';
-    };
-    packages = {
-      devel = {
-        enable = true;
-        nix = true;
-        db = false;
-        dotnet = {
-            enable = true;
-            combined = true;
-        };
-        node = true;
-        rust = false;
-        haskell = false;
-        python = false;
-        go = false;
-        java = false;
-        clojure = false;
-      };
-      desktop = {
+      packages = {
         gnome = true;
-        x11 = true;
+        x11 = false;
         media = true;
         chat = true;
         graphics = true;
       };
-      kubernetes = true;
-      cloud = true;
+    };
+    devel = {
+      enable = true;
+      nix = true;
+      db = false;
+      dotnet = {
+        enable = false;
+        combined = true;
+      };
+      node = false;
+      rust = false;
+      haskell = false;
+      python = false;
+      go = false;
+      java = false;
+      clojure = false;
+    };
+    packages = {
+      kubernetes = false;
+      cloud = false;
       geo = false;
     };
     extraDotfiles = [
@@ -70,7 +75,6 @@ in
       "haskeline"
       "taskrc"
     ];
-    vimDevPlugins = true;
     fish.vi-mode = false;
     atuin = false;
   };
@@ -91,11 +95,8 @@ in
 
   programs = {
     git = {
-      userEmail = "jonas.juselius@oceanbox.io";
-      userName = "Jonas Juselius";
-      signing = {
-        key = "jonas.juselius@juselius.io";
-      };
+      userEmail = "";
+      userName = "";
     };
 
     ssh.matchBlocks = {
