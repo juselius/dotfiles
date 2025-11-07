@@ -252,6 +252,18 @@ let
     xdg = {
       enable = true;
       systemDirs.data = [ "${config.xdg.dataHome}/nix-desktop-files" ];
+      mimeApps.defaultApplications = {
+        "application/pdf" = [
+          "papers.desktop"
+          "evince.desktop"
+        ];
+      };
+      mimeApps.associations.added = {
+        "application/pdf" = [
+          "papers.desktop"
+          "evince.desktop"
+        ];
+      };
     };
 
     gtk = {
