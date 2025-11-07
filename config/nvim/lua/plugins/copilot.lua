@@ -16,6 +16,7 @@ return {
     -- },
     -- panel = { enabled = false },
     filetypes = {
+      ["*"] = false,
       fsharp = true,
       lua = true,
     },

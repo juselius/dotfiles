@@ -1,2 +1,2 @@
-vim.lsp.enable("tinymist")
+vim.lsp.enable("nil_ls")
 Snacks.indent.enable()

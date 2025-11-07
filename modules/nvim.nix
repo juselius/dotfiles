@@ -2,7 +2,9 @@
 with lib;
 let
   configuration = {
-    programs.neovim = { enable = true; };
+    programs.neovim = {
+      enable = true;
+    };
     xdg.configFile = {
       nvim = {
         source = ~/.dotfiles/config/nvim;
@@ -18,9 +20,11 @@ let
       lua-language-server
       statix
       nixfmt-rfc-style
+      tinymist
     ];
   };
-in {
+in
+{
   options.dotfiles = { };
 
   config = mkMerge [ configuration ];
