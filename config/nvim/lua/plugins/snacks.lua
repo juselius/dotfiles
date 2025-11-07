@@ -16,20 +16,14 @@ return {
     statuscolumn = { enabled = true },
     words = { enabled = true },
   },
-  config = function(_, opts)
-    Snacks.indent.disable()
-  end,
-  -- keys = {
-  --   {
-  --     "<leader>ii",
-  --     function()
-  --       if Snacks.indent.enabled then
-  --         Snacks.indent.disable()
-  --       else
-  --         Snacks.indent.enable()
-  --       end
-  --     end,
-  --     desc = "Toggle Snacks Indent",
-  --   }
-  -- }
+  -- config = function(_, opts)
+  --   Snacks.indent.disable()
+  -- end,
+  keys = {
+    {
+      "<c-p>",
+      function() Snacks.picker.git_files() end,
+      desc = "Toggle Snacks Indent",
+    }
+  }
 }
