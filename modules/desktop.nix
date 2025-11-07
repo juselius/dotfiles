@@ -163,9 +163,11 @@ let
   devel = with pkgs; [ sqlitebrowser ];
 
   configuration = {
-    dotfiles.desktop.onedrive.enable = mkDefault false;
-    dotfiles.desktop.xmonad.enable = mkDefault false;
-    dotfiles.desktop.i3.enable = mkDefault true;
+    dotfiles.desktop = {
+      onedrive.enable = mkDefault false;
+      xmonad.enable = mkDefault false;
+      i3.enable = mkDefault true;
+    };
 
     programs = {
       browserpass.enable = true;
@@ -255,12 +257,12 @@ let
       enable = true;
       font.name = "DejaVu Sans 11";
       theme = {
-        name = "Adwaita";
-        package = pkgs.gnome-themes-extra;
+        name = "Fluent-Light";
+        package = pkgs.fluent-gtk-theme;
       };
       iconTheme = {
-        name = "Adwaita";
-        package = pkgs.gnome-themes-extra;
+        name = "Fluent-light";
+        package = pkgs.fluent-icon-theme;
       };
       cursorTheme = {
         name = "Vanilla-DMZ";
@@ -268,11 +270,11 @@ let
       };
     };
 
-    xresources.properties = {
-      # "Xclip.selection" = "clipboard";
-      # "Xcursor.theme" = "cursor-theme";
-      # "Xcursor.size" = 18;
-    };
+    #  xresources.properties = {
+    #   "Xclip.selection" = "clipboard";
+    #   "Xcursor.theme" = "cursor-theme";
+    #   "Xcursor.size" = 18;
+    # };
 
     programs.vscode = {
       enable = true;
