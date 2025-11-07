@@ -4,6 +4,10 @@
   ...
 }:
 let
+  username = "";
+  fullname = "";
+  email = "";
+
   extraDesktopPackages =
     if config.dotfiles.desktop.enable then
       with pkgs;
@@ -18,8 +22,8 @@ let
 in
 {
   home = {
-    username = "nobody";
-    homeDirectory = "/home/nobody";
+    inherit username;
+    homeDirectory = "/home/${username}";
 
     packages = with pkgs; [ ] ++ extraDesktopPackages;
 
@@ -32,7 +36,7 @@ in
       ];
     };
 
-    home.sessionVariables = {
+    sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
@@ -40,13 +44,13 @@ in
 
   programs = {
     git = {
-      userEmail = "";
-      userName = "";
+      userEmail = email;
+      userName = fullname;
     };
 
     ssh.matchBlocks = {
       example = {
-        user = "foo";
+        user = "nobody";
         hostname = "acme.com";
       };
     };
