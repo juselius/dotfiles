@@ -1,7 +1,9 @@
--- vim.cmd("colorscheme habamax")
-
 vim.opt.foldenable = false
 vim.opt.clipboard = ""
+vim.opt.textwidth = 100
+vim.opt.colorcolumn = "+1"
+vim.opt.cursorline = true
+
 -- vim.opt.guicursor = "a:block"
 -- vim.opt.incsearch = true
 -- vim.opt.number = true;
@@ -13,8 +15,6 @@ vim.opt.clipboard = ""
 -- vim.opt.tabstop = 4
 -- vim.opt.shiftwidth = 4
 -- vim.opt.softtabstop = 4
--- vim.opt.textwidth = 100
--- vim.opt.colorcolumn = "+1"
 -- vim.opt.smartcase = true
 -- vim.opt.smarttab = true
 -- vim.opt.smartindent = true

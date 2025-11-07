@@ -7,6 +7,7 @@ return {
       groups = {
         all = {
           WinSeparator = { fg = "#666666", bg = "NONE" },
+          Visual = { fg = "NONE", bg = "#666666" },
         },
       },
     },
