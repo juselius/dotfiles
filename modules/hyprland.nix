@@ -16,6 +16,9 @@ let
     fi
   '';
 
+  # wallpaper = builtins.fetchurl "https://github.com/vinceliuice/Fluent-gtk-theme/blob/Wallpaper/wallpaper-4k/Fluent-mountain-night.png?raw=true";
+  wallpaper = "${pkgs.nixos-artwork.wallpapers.binary-blue}/share/backgrounds/nixos/nix-wallpaper-binary-blue.png";
+
   hyprland = {
     home.packages = with pkgs; [
       wev
@@ -61,7 +64,7 @@ let
 
           # Change transparency of focused and unfocused windows
           active_opacity = 1.0;
-          inactive_opacity = 0.90;
+          inactive_opacity = 0.97;
 
           shadow = {
             enabled = true;
@@ -308,7 +311,7 @@ let
         # TODO: Expose wallpapers as option
         let
           #mosaic = $"{pkgs.nix-artwork.wallpapers.mosaic-blue}/share/backgrounds/nixos/nix-wallpaper-mosaic-blue.png";
-          wallpaper = "${pkgs.nixos-artwork.wallpapers.binary-blue}/share/backgrounds/nixos/nix-wallpaper-binary-blue.png";
+          inherit wallpaper;
         in
         {
           enable = true;
