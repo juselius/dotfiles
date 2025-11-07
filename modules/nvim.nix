@@ -21,6 +21,7 @@ let
       statix
       nixfmt-rfc-style
       tinymist
+      nodePackages.vscode-json-languageserver
     ];
   };
 in
