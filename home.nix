@@ -58,10 +58,10 @@ in
       wayland.enable = true;
       hyprland = {
         enable = true;
-        monitor = [
-          # "DP-1, preferred, 0x0, 1.25"
-          # "HDMI-A-1, preferred, 2048x0, 1.25"
-        ];
+        # monitor = [
+        #   "DP-1, preferred, 0x0, 1.25"
+        #   "HDMI-A-1, preferred, 2048x0, 1.25"
+        # ];
       };
       sway.enable = false;
       dropbox.enable = false;
