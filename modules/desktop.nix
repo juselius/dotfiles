@@ -91,6 +91,7 @@ let
     gnome-font-viewer
     gnome-themes-extra
     evince
+    papers
     gnome-calendar
     gnome-bluetooth
     seahorse

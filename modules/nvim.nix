@@ -15,7 +15,7 @@ let
     home.packages = with pkgs; [
       tree-sitter
       fish-lsp
-      nil
+      nixd
       fsautocomplete
       lua-language-server
       statix
