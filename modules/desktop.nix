@@ -252,17 +252,23 @@ let
     xdg = {
       enable = true;
       systemDirs.data = [ "${config.xdg.dataHome}/nix-desktop-files" ];
-      mimeApps.defaultApplications = {
-        "application/pdf" = [
-          "papers.desktop"
-          "evince.desktop"
-        ];
-      };
-      mimeApps.associations.added = {
-        "application/pdf" = [
-          "papers.desktop"
-          "evince.desktop"
-        ];
+      mimeApps = {
+        enable = true;
+        defaultApplications = {
+          "x-scheme-handler/http" = [
+            "firefox.desktop"
+            "google-chrome.desktop"
+          ];
+          "x-scheme-handler/https" = [
+            "firefox.desktop"
+            "google-chrome.desktop"
+          ];
+          "application/pdf" = [
+            "papers.desktop"
+            "evince.desktop"
+          ];
+        };
+        associations.added = { };
       };
     };
 
