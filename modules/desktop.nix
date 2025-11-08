@@ -268,7 +268,12 @@ let
             "evince.desktop"
           ];
         };
-        associations.added = { };
+        associations.added = {
+          "application/pdf" = [
+            "papers.desktop"
+            "evince.desktop"
+          ];
+        };
       };
     };
 
