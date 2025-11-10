@@ -30,7 +30,7 @@ let
     wayland.windowManager = {
       hyprland.enable = true;
       hyprland.settings = {
-        exec-once = "${pkgs.hyprland}/bin/hyprctl setcursor Vanilla-DMZ 2";
+        exec-once = "${pkgs.hyprland}/bin/hyprctl setcursor Vanilla-DMZ ${builtins.toString cfg.cursorSize}";
         # TODO: Set your monitor here. See hyprctl monitors and https://wiki.hyprland.org/Configuring/Monitors/
         monitor = cfg.hyprland.monitor;
 

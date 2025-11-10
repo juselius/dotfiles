@@ -291,6 +291,7 @@ let
       cursorTheme = {
         name = "Vanilla-DMZ";
         package = pkgs.vanilla-dmz;
+        size = cfg.cursorSize;
       };
     };
 
@@ -360,10 +361,12 @@ let
     programs.ghostty = {
       enable = true;
       enableFishIntegration = true;
-      settings = lib.mkDefault {
-        terminal = "xterm-256color";
-        font-size = 13;
-        theme = "terafox";
+      settings = {
+        term = "xterm-256color";
+        shell-integration-features = "cursor, sudo";
+        # shell-integration-features = "ssh-env, cursor, sudo";
+        font-size = lib.mkDefault 13;
+        theme = lib.mkDefault "terafox";
         app-notifications = "no-clipboard-copy";
       };
     };
@@ -407,6 +410,10 @@ in
   options.dotfiles.desktop = {
     enable = mkEnableOption "Enable desktop";
     laptop = mkEnableOption "Enable laptop features";
+    cursorSize = mkOption {
+      type = types.int;
+      default = 16;
+    };
     dropbox.enable = mkEnableOption "Enable Dropbox";
     onedrive.enable = mkEnableOption "Enable OneDrive";
 
