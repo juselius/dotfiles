@@ -364,6 +364,7 @@ let
         terminal = "xterm-256color";
         font-size = 13;
         theme = "terafox";
+        app-notifications = "no-clipboard-copy";
       };
     };
 
