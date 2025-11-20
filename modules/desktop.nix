@@ -257,21 +257,17 @@ let
         defaultApplications = {
           "x-scheme-handler/http" = [
             "firefox.desktop"
-            "google-chrome.desktop"
           ];
           "x-scheme-handler/https" = [
             "firefox.desktop"
-            "google-chrome.desktop"
           ];
           "application/pdf" = [
-            "papers.desktop"
-            "evince.desktop"
+            "org.gnome.Papers.desktop"
           ];
         };
         associations.added = {
           "application/pdf" = [
-            "papers.desktop"
-            "evince.desktop"
+            "org.gnome.Papers.desktop"
           ];
         };
       };
