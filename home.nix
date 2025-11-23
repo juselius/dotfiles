@@ -4,17 +4,22 @@
   ...
 }:
 let
+  sources = import ./npins;
+  unstable = import sources.nixpkgs {
+    inherit (pkgs) system;
+    config.allowUnfree = true;
+  };
+
   username = "";
   fullname = "";
   email = "";
 
   extraDesktopPackages =
     if config.dotfiles.desktop.enable then
-      with pkgs;
-      [
+      with pkgs; [
         ferdium
+        unstable.jetbrains.rider
         # zoom-us
-        # rider
         # discord
       ]
     else
