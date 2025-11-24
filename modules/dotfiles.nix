@@ -218,8 +218,26 @@ let
         '';
       };
 
-      tmux = {
+      zellij = {
         enable = true;
+        enableFishIntegration = true;
+        settings = {
+          simplified_ui = false;
+          default_shell = "fish";
+          pane_frames = false;
+          default_layout = lib.mkDefault "default";
+          show_startup_tips = false;
+          theme = lib.mkDefault "nightfox";
+          ui = {
+            pane_frames = {
+              hide_session_name = true;
+            };
+          };
+        };
+      };
+
+      tmux = {
+        enable = lib.mkDefault false;
         baseIndex = 1;
         clock24 = true;
         escapeTime = 10;
