@@ -1,5 +1,5 @@
 {
-  nixpkgs.overlays = import ./overlays.nix;
+  nixpkgs.overlays = import ../overlays;
   imports = [
     ./dotfiles.nix
     ./nvim.nix
