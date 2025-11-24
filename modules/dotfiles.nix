@@ -220,7 +220,7 @@ let
 
       zellij = {
         enable = true;
-        enableFishIntegration = true;
+        enableFishIntegration = false;
         settings = {
           simplified_ui = false;
           default_shell = "fish";
