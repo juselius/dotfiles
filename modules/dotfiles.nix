@@ -225,9 +225,10 @@ let
           simplified_ui = false;
           default_shell = "fish";
           pane_frames = false;
-          default_layout = lib.mkDefault "default";
+          default_layout = lib.mkDefault "compact";
           show_startup_tips = false;
-          theme = lib.mkDefault "nightfox";
+          theme = lib.mkDefault "catppuccin-frappe";
+
           ui = {
             pane_frames = {
               hide_session_name = true;
