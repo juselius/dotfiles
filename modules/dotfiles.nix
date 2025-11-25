@@ -220,14 +220,14 @@ let
 
       zellij = {
         enable = true;
-        enableFishIntegration = false;
         settings = {
-          simplified_ui = false;
+          simplified_ui = lib.mkDefault false;
           default_shell = "fish";
           pane_frames = false;
-          default_layout = lib.mkDefault "compact";
+          layout_dir = "${config.xdg.configHome}/zellij/layouts";
+          default_layout = lib.mkDefault "compact-top";
           show_startup_tips = false;
-          theme = lib.mkDefault "catppuccin-frappe";
+          theme = lib.mkDefault "nord";
 
           ui = {
             pane_frames = {
@@ -330,6 +330,15 @@ let
         path = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
       };
     };
+
+    xdg.configFile."zellij/layouts/compact-top.kdl".text = ''
+      layout {
+           pane size=1 borderless=true {
+             plugin location="compact-bar"
+           }
+           pane
+      }
+    '';
 
     home.stateVersion = "24.11";
 
