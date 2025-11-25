@@ -275,7 +275,8 @@ let
 
     gtk = {
       enable = true;
-      font.name = "DejaVu Sans 11";
+      font.name = lib.mkDefault "DejaVu Sans";
+      font.size = lib.mkDefault 11;
       theme = {
         name = "Fluent-Light";
         package = pkgs.fluent-gtk-theme;
