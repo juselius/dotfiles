@@ -254,7 +254,7 @@ let
       systemDirs.data = [ "${config.xdg.dataHome}/nix-desktop-files" ];
       mimeApps = {
         enable = true;
-        defaultApplications = {
+        defaultApplications = lib.mkDefault {
           "x-scheme-handler/http" = [
             "firefox.desktop"
           ];
