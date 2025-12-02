@@ -138,7 +138,6 @@ let
     keybase
     # keybase-gui
     pandoc
-    pinentry
     polkit_gnome
     # cdrtools
     innoextract
@@ -363,7 +362,7 @@ let
         shell-integration-features = "cursor, sudo";
         # shell-integration-features = "ssh-env, cursor, sudo";
         font-size = lib.mkDefault 13;
-        theme = lib.mkDefault "terafox";
+        theme = lib.mkDefault "Terafox";
         app-notifications = "no-clipboard-copy";
       };
     };

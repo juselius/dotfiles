@@ -22,7 +22,7 @@ let
     pciutils
     pwgen
     usbutils
-    utillinux
+    util-linux
     sshfs-fuse
     xkcdpass
     inotify-tools
@@ -39,7 +39,7 @@ let
     bat
     procs
     bottom
-    du-dust
+    dust
     duf
     sd
     zellij

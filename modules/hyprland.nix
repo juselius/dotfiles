@@ -124,9 +124,9 @@ let
           };
         };
 
-        gestures = {
-          workspace_swipe = false;
-        };
+        # gestures = {
+        # workspace_swipe = false;
+        # };
 
         "$mainMod" = "SUPER";
 

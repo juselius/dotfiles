@@ -116,25 +116,17 @@ let
       git = {
         enable = true;
         lfs.enable = true;
-        aliases = {
-          ll = "log --stat --abbrev-commit --decorate";
-          history = "log --graph --abbrev-commit --decorate --all";
-          co = "checkout";
-          ci = "commit";
-          st = "status";
-          unstage = "reset HEAD";
-          pick = "cherry-pick";
-          ltr = "branch --sort=-committerdate";
-        };
-        ignores = [
-          "*~"
-          "*.o"
-          "*.a"
-          "*.dll"
-          "*.bak"
-          "*.old"
-        ];
-        extraConfig = {
+        settings = {
+          alias = {
+            ll = "log --stat --abbrev-commit --decorate";
+            history = "log --graph --abbrev-commit --decorate --all";
+            co = "checkout";
+            ci = "commit";
+            st = "status";
+            unstage = "reset HEAD";
+            pick = "cherry-pick";
+            ltr = "branch --sort=-committerdate";
+          };
           init = {
             defaultBranch = "main";
           };
@@ -205,17 +197,28 @@ let
             sslVerify = false;
           };
         };
+        ignores = [
+          "*~"
+          "*.o"
+          "*.a"
+          "*.dll"
+          "*.bak"
+          "*.old"
+        ];
       };
 
       ssh = {
         enable = true;
-        compression = false;
-        forwardAgent = true;
-        serverAliveInterval = 30;
-        extraConfig = ''
-          IPQoS throughput
-          UpdateHostKeys no
-        '';
+        enableDefaultConfig = false;
+        matchBlocks."*" = {
+          compression = false;
+          forwardAgent = true;
+          serverAliveInterval = 30;
+          extraOptions = {
+            IPQoS = "throughput";
+            UpdateHostKeys = "no";
+          };
+        };
       };
 
       zellij = {
@@ -327,7 +330,7 @@ let
 
       home-manager = {
         enable = true;
-        path = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+        path = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
       };
     };
 

@@ -88,10 +88,8 @@ let
   ];
 
   node = with pkgs.nodePackages; [
-    pkgs.nodejs
+    # pkgs.nodejs
     npm
-    yarn
-    webpack
     # node2nix
     # gulp
     # bundler
