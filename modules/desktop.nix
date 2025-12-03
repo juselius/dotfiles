@@ -359,6 +359,8 @@ let
       enableFishIntegration = true;
       settings = {
         term = "xterm-256color";
+        working-directory = "home";
+        window-inherit-working-directory = false;
         shell-integration-features = "cursor, sudo";
         # shell-integration-features = "ssh-env, cursor, sudo";
         font-size = lib.mkDefault 13;
