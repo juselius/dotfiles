@@ -110,10 +110,10 @@ let
           mfact = 0.52;
         };
 
-        input = {
-          kb_layout = "us(altgr-intl)";
-          kb_model = "pc104";
-          kb_options = "eurosign:e,caps:none";
+        input = with config.dotfiles.keyboard; {
+          kb_layout = layout;
+          kb_model = model;
+          kb_options = builtins.foldl' (a: x: a + x + ",") "" options;
 
           follow_mouse = 1;
 

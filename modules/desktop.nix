@@ -166,7 +166,7 @@ let
     dotfiles.desktop = {
       onedrive.enable = mkDefault false;
       xmonad.enable = mkDefault false;
-      i3.enable = mkDefault true;
+      i3.enable = mkDefault false;
     };
 
     programs = {

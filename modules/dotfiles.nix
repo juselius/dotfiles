@@ -61,7 +61,9 @@ let
   // k8s-aliases;
 
   configuration = {
-    manual.manpages.enable = false;
+    manual.manpages.enable = lib.mkDefault true;
+
+    home.keyboard = cfg.keyboard;
 
     programs = {
       man.enable = true;
@@ -440,6 +442,24 @@ let
 in
 {
   options.dotfiles = {
+    keyboard = {
+      layout = mkOption {
+        type = types.str;
+        default = "us(altgr-intl)";
+      };
+      model = mkOption {
+        type = types.str;
+        default = "pc104";
+      };
+      options = mkOption {
+        type = types.listOf types.str;
+        default = [
+          "eurosign:e"
+          "caps:none"
+        ];
+      };
+
+    };
     plainNix = mkEnableOption "Tweaks for non-NixOS systems";
 
     atuin = mkEnableOption "Enable atuin";
