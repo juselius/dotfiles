@@ -1,9 +1,9 @@
 let
   overlays = [
     ./ferdium.nix
-    ./vcluster.nix
     ./fcitx.nix
-    ./kubelogin.nix
+    # ./kubelogin.nix
+    # ./vcluster.nix
     # ./rider.nix
     # ./dotnet-sdk.nix
     # ./linkerd.nix

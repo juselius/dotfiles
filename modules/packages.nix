@@ -1,9 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.dotfiles.packages;
 
-  useIf = x: y: if x then y else [];
+  useIf = x: y: if x then y else [ ];
 
   sys = with pkgs; [
     dpkg
@@ -85,22 +90,18 @@ let
     krew
     k9s
     hubble
-    kubelogin
+    kubelogin-oidc
     cilium-cli
     talosctl
   ];
 
-
   configuration = {
     home.packages =
-      sys ++
-      user ++
-      useIf cfg.cloud cloud ++
-      useIf cfg.kubernetes kubernetes ++
-      useIf cfg.geo geo;
+      sys ++ user ++ useIf cfg.cloud cloud ++ useIf cfg.kubernetes kubernetes ++ useIf cfg.geo geo;
   };
 
-in {
+in
+{
   options.dotfiles.packages = {
     cloud = mkEnableOption "Enable cloud cli tools";
     kubernetes = mkEnableOption "Enable Kuberntes cli tools";
