@@ -39,6 +39,7 @@ let
         "$lock" = "${pkgs.hyprlock}/bin/hyprlock";
         "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
         "$wofipass" = "${pkgs.wofi-pass}/bin/wofi-pass";
+        "$logout" = "${pkgs.wlogout}/bin/wlogout";
 
         general = {
           gaps_in = 0;
@@ -133,7 +134,7 @@ let
         bind = [
           "$mainMod, return, exec, $terminal"
           "$mainMod SHIFT, Q, killactive,"
-          "$mainMod SHIFT, E, exit,"
+          "$mainMod SHIFT, E, exec, $logout"
           "$mainMod SHIFT, N, exec, $fileManager"
           "$mainMod, V, togglefloating,"
           "$mainMod, F, fullscreen,"
