@@ -5,6 +5,19 @@
       "name": "nixpkgs-unstable",
       "url": "https://releases.nixos.org/nixpkgs/nixpkgs-25.11pre898874.a8d610af3f1a/nixexprs.tar.xz",
       "hash": "0c6xkxlszx0js6imwqf8parm1nidxyhrakz5kzr0k7fr2j7nj42p"
+    },
+    "spent": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "juselius",
+        "repo": "Spent"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "bee5a16b327b578c0c6c0f2810693463c3f7f43c",
+      "url": "https://github.com/juselius/Spent/archive/bee5a16b327b578c0c6c0f2810693463c3f7f43c.tar.gz",
+      "hash": "0dbhfnlzk4kpgb7b8slfbq419y8ra02srhiiwjn1zswk136nc26c"
     }
   },
   "version": 5
