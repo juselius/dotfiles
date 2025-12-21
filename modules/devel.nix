@@ -1,11 +1,16 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.dotfiles.devel;
 
-  useIf = x: y: if x then y else [];
+  useIf = x: y: if x then y else [ ];
 
-  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") { };
   hie = all-hies.selection { selector = p: { inherit (p) ghc865; }; };
 
   base = with pkgs; [
@@ -59,32 +64,34 @@ let
 
   dotnetPackage =
     if cfg.dotnet.combined then
-        with pkgs.dotnetCorePackages; combinePackages [
-          sdk_9_0
-          sdk_8_0
-        ]
+      with pkgs.dotnetCorePackages;
+      combinePackages [
+        sdk_10_0
+        sdk_9_0
+      ]
     else
-          pkgs.dotnetCorePackages.dotnet_9.sdk;
-
+      pkgs.dotnetCorePackages.sdk_10_0;
 
   dotnet = {
     home.sessionVariables = {
-        DOTNET_ROOT = "${dotnetPackage}/share/dotnet";
+      DOTNET_ROOT = "${dotnetPackage}/share/dotnet";
     };
     home.packages = [
-        dotnetPackage
-        pkgs.fsautocomplete
-        pkgs.dotnet-outdated
+      dotnetPackage
+      pkgs.fsautocomplete
+      pkgs.dotnet-outdated
     ];
   };
 
   python = with pkgs; [
-    (python3.withPackages (ps: with ps; [
+    (python3.withPackages (
+      ps: with ps; [
         numpy
         matplotlib
         tkinter
         virtualenv
-      ]))
+      ]
+    ))
   ];
 
   node = with pkgs.nodePackages; [
@@ -148,25 +155,27 @@ let
     };
 
     home.packages =
-      base ++ lsp ++
-      useIf cfg.node node ++
-      useIf cfg.rust rust ++
-      useIf cfg.haskell haskell ++
-      useIf cfg.python python ++
-      useIf cfg.go go ++
-      useIf cfg.clojure clojure ++
-      useIf cfg.nix nix ++
-      useIf cfg.java java ++
-      useIf cfg.db db;
+      base
+      ++ lsp
+      ++ useIf cfg.node node
+      ++ useIf cfg.rust rust
+      ++ useIf cfg.haskell haskell
+      ++ useIf cfg.python python
+      ++ useIf cfg.go go
+      ++ useIf cfg.clojure clojure
+      ++ useIf cfg.nix nix
+      ++ useIf cfg.java java
+      ++ useIf cfg.db db;
   };
 
-in {
+in
+{
   options.dotfiles = {
     devel = {
       enable = mkEnableOption "Enable development packages";
       dotnet = {
-          enable = mkEnableOption "Enable dotnet sdk";
-          combined = mkEnableOption "Enable combined dotnet sdk";
+        enable = mkEnableOption "Enable dotnet sdk";
+        combined = mkEnableOption "Enable combined dotnet sdk";
       };
       node = mkEnableOption "Enable Node.js";
       nix = mkEnableOption "Enable nix";
