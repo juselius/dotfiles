@@ -22,6 +22,7 @@ let
       nixfmt-rfc-style
       tinymist
       nodePackages.vscode-json-languageserver
+      hadolint
     ];
   };
 in
