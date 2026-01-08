@@ -141,6 +141,7 @@ in
 
   imports = [
     ./waybar.nix
+    ./noctalia.nix
     ./hyprland.nix
     ./i3-sway.nix
   ];

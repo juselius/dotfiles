@@ -6,6 +6,22 @@
       "url": "https://releases.nixos.org/nixpkgs/nixpkgs-25.11pre898874.a8d610af3f1a/nixexprs.tar.xz",
       "hash": "0c6xkxlszx0js6imwqf8parm1nidxyhrakz5kzr0k7fr2j7nj42p"
     },
+    "noctalia-shell": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v3.8.2",
+      "revision": "646a6142b2cad304f4ab8e9fe21d52a6971940cd",
+      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/v3.8.2",
+      "hash": "0jqfvyy14jhxkyjaj3mvy3lh7z60jacmjiy57yb9f72gnm0msfv6"
+    },
     "spent": {
       "type": "Git",
       "repository": {
