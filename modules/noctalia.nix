@@ -11,6 +11,7 @@ let
   noctalia = pkgs.callPackage "${sources.noctalia-shell}/nix/package.nix" { };
   noctalia-shell = {
 
+    programs.noctalia-shell.systemd.enable = true;
     programs.noctalia-shell = {
       enable = true;
       package = noctalia;
