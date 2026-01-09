@@ -59,6 +59,7 @@ let
     zoxide
     tealdeer
     pay-respects
+    xdg-utils
   ];
 
   cloud = with pkgs; [
