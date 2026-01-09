@@ -37,9 +37,11 @@ let
         "$terminal" = "${pkgs.ghostty}/bin/ghostty";
         "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
         "$lock" = "${pkgs.hyprlock}/bin/hyprlock";
-        "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
+        "$menu" = "noctalia-shell ipc call launcher toggle";
         "$wofipass" = "${pkgs.wofi-pass}/bin/wofi-pass";
-        "$logout" = "${pkgs.wlogout}/bin/wlogout";
+        "$logout" = "noctalia-shell ipc call sessionMenu toggle";
+        # "$logout" = "${pkgs.wlogout}/bin/wlogout";
+        # "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
 
         general = {
           gaps_in = 0;
@@ -232,7 +234,7 @@ let
         enable = true;
         settings = {
           general = {
-            disable_loading_bar = true;
+            disable_loading_bar = false;
             grace = 10;
             hide_cursor = true;
             no_fade_in = false;
