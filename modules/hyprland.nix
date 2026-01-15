@@ -36,12 +36,10 @@ let
 
         "$terminal" = "${pkgs.ghostty}/bin/ghostty";
         "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
-        "$lock" = "${pkgs.hyprlock}/bin/hyprlock";
+        "$lock" = "noctalia-shell ipc call lockScreen lock";
         "$menu" = "noctalia-shell ipc call launcher toggle";
         "$wofipass" = "${pkgs.wofi-pass}/bin/wofi-pass";
         "$logout" = "noctalia-shell ipc call sessionMenu toggle";
-        # "$logout" = "${pkgs.wlogout}/bin/wlogout";
-        # "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
 
         general = {
           gaps_in = 0;
@@ -231,7 +229,7 @@ let
 
     programs = {
       hyprlock = {
-        enable = true;
+        enable = false;
         settings = {
           general = {
             disable_loading_bar = false;
@@ -282,7 +280,7 @@ let
 
     services = {
       # Notification engine using gnome
-      swaync.enable = true;
+      swaync.enable = false;
 
       # For sleeping Zzz
       hypridle = {
@@ -290,7 +288,8 @@ let
         settings = {
           general = {
             ignore_dbus_inhibit = false;
-            lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+            # lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+            lock_cmd = "noctalia-shell ipc call lockScreen lock";
             before_sleep_cmd = "loginctl lock-session";
             after_sleep_cmd = "hyprctl dispatch dpms on";
           };
