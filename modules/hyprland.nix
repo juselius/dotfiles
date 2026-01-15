@@ -79,7 +79,6 @@ let
             enabled = true;
             size = 3;
             passes = 1;
-
             vibrancy = 0.4696;
           };
         };
@@ -289,7 +288,7 @@ let
           general = {
             ignore_dbus_inhibit = false;
             # lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
-            lock_cmd = "noctalia-shell ipc call lockScreen lock";
+            lock_cmd = "~/.nix-profile/bin/noctalia-shell ipc call lockScreen lock";
             before_sleep_cmd = "loginctl lock-session";
             after_sleep_cmd = "hyprctl dispatch dpms on";
           };
