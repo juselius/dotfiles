@@ -6,7 +6,7 @@
 let
   sources = import ./npins;
   unstable = import sources.nixpkgs {
-    inherit (pkgs) system;
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
 
@@ -14,13 +14,14 @@ let
   fullname = "";
   email = "";
 
+  keyboard = "us(altgr-intl)";
   extraDesktopPackages =
     if config.dotfiles.desktop.enable then
-      with pkgs; [
+      with pkgs;
+      [
+        zoom-us
         ferdium
         unstable.jetbrains.rider
-        # zoom-us
-        # discord
       ]
     else
       [ ];
@@ -30,10 +31,22 @@ in
     inherit username;
     homeDirectory = "/home/${username}";
 
-    packages = with pkgs; [ ] ++ extraDesktopPackages;
+    packages =
+      with pkgs;
+      [
+        python3
+      ]
+      ++ extraDesktopPackages;
 
+    sessionVariables = {
+      # EDITOR = "nvim";
+      # VISUAL = "nvim";
+    };
+  };
+
+  dotfiles = {
     keyboard = {
-      layout = "us(altgr-intl)";
+      layout = keyboard;
       model = "pc104";
       options = [
         "eurosign:e"
@@ -41,27 +54,6 @@ in
       ];
     };
 
-    sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
-  };
-
-  programs = {
-    git = {
-      userEmail = email;
-      userName = fullname;
-    };
-
-    ssh.matchBlocks = {
-      example = {
-        user = "nobody";
-        hostname = "acme.com";
-      };
-    };
-  };
-
-  dotfiles = {
     desktop = {
       enable = false;
       wayland.enable = true;
@@ -72,10 +64,13 @@ in
         #   "HDMI-A-1, preferred, 2048x0, 1.25"
         # ];
       };
+      noctalia-shell.enable = true;
+      waybar.enable = false;
       sway.enable = false;
       dropbox.enable = false;
       onedrive.enable = false;
       laptop = false;
+      cursorSize = 24;
       packages = {
         gnome = true;
         x11 = false;
@@ -110,6 +105,29 @@ in
   };
 
   services.lorri.enable = true;
+
+  programs = {
+    git.settings = {
+      user = {
+        inherit email;
+        name = fullname;
+      };
+    };
+    difftastic = {
+      enable = false;
+      git = {
+        enable = true;
+        diffToolMode = true;
+      };
+    };
+
+    ssh.matchBlocks = {
+      example = {
+        user = "nobody";
+        hostname = "acme.com";
+      };
+    };
+  };
 
   imports = [ ./modules ];
 }
