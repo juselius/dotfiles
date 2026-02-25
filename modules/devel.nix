@@ -15,6 +15,7 @@ let
 
   base = with pkgs; [
     git
+    lazygit
     binutils
     gcc
     gdb
@@ -88,6 +89,8 @@ let
     (python3.withPackages (
       ps: with ps; [
         numpy
+        netcdf4
+        pyproj
         matplotlib
         tkinter
         virtualenv
@@ -110,6 +113,7 @@ let
   ];
 
   rust = with pkgs; [
+    rustc
     cargo
   ];
 
