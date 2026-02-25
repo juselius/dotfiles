@@ -475,6 +475,6 @@ in
   ];
 
   imports = [
-    (import "${sources.nix-index-database}/home-manager-module.nix" { })
+    (import "${sources.nix-index-database}/home-manager-module.nix" { inherit pkgs config lib; })
   ];
 }
