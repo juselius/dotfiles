@@ -39,8 +39,8 @@ in
       ++ extraDesktopPackages;
 
     sessionVariables = {
-      # EDITOR = "nvim";
-      # VISUAL = "nvim";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
     };
   };
 
@@ -56,6 +56,7 @@ in
 
     desktop = {
       enable = false;
+      laptop = false;
       wayland.enable = true;
       hyprland = {
         enable = true;
@@ -69,7 +70,6 @@ in
       sway.enable = false;
       dropbox.enable = false;
       onedrive.enable = false;
-      laptop = false;
       cursorSize = 24;
       packages = {
         gnome = true;
@@ -84,10 +84,10 @@ in
       nix = true;
       db = false;
       dotnet = {
-        enable = false;
+        enable = true;
         combined = true;
       };
-      node = false;
+      node = true;
       rust = false;
       haskell = false;
       python = false;
@@ -96,9 +96,9 @@ in
       clojure = false;
     };
     packages = {
-      kubernetes = false;
-      cloud = false;
-      geo = false;
+      kubernetes = true;
+      cloud = true;
+      geo = true;
     };
     fish.vi-mode = false;
     atuin = false;
