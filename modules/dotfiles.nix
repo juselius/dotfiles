@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.dotfiles;
+  sources = import ../npins;
 
   k8s-aliases =
     if cfg.packages.kubernetes then
@@ -70,6 +71,7 @@ let
       lesspipe.enable = false;
       dircolors.enable = true;
       zoxide.enable = true;
+      nix-index-database.comma.enable = true;
 
       fish = {
         enable = true;
@@ -470,5 +472,9 @@ in
   config = mkMerge [
     configuration
     extraHomeFiles
+  ];
+
+  imports = [
+    (import "${sources.nix-index-database}/home-manager-module.nix" { })
   ];
 }
