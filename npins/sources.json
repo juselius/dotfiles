@@ -9,15 +9,31 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8f590b832326ab9699444f3a48240595954a4b10",
-      "url": "https://github.com/nix-community/nix-index-database/archive/8f590b832326ab9699444f3a48240595954a4b10.tar.gz",
-      "hash": "sha256-/phvMgr1yutyAMjKnZlxkVplzxHiz60i4rc+gKzpwhg="
+      "revision": "8faeb68130df077450451b6734a221ba0d6cde42",
+      "url": "https://github.com/nix-community/nix-index-database/archive/8faeb68130df077450451b6734a221ba0d6cde42.tar.gz",
+      "hash": "sha256-mHSRNrT1rjeYBgkAlj07dW3+1nFEgAd8Gu6lgyfT9DU="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre953762.ea7f1f06811c/nixexprs.tar.xz",
-      "hash": "sha256-lJiQtL47xYV37Vod9KgPS7dmi1x51A5+chJE48qKimw="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre963857.f8573b9c935c/nixexprs.tar.xz",
+      "hash": "sha256-YgVQzPaKa5eVf/rGA5Rn7BWJcP0T98JkE+2KuKVTyzA="
+    },
+    "noctalia-qs": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-qs"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.0.9",
+      "revision": "3962ff1e0b59ef067c57199d31271ddbf23b29cd",
+      "url": "https://api.github.com/repos/noctalia-dev/noctalia-qs/tarball/refs/tags/v0.0.9",
+      "hash": "sha256-oRqz+5AbNKfUWWwN5c83CsSOsUWVGITh0HZg+wX5Q/8="
     },
     "noctalia-shell": {
       "type": "GitRelease",
@@ -30,10 +46,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v4.5.0",
-      "revision": "dbfe3634df0c57faf9772cecae1f2e92bd04de66",
-      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v4.5.0",
-      "hash": "sha256-Y5P0RYO9NKxa4UZBoGmmxtz3mEwJrBOfvdLJRGjV2Os="
+      "version": "v4.6.7",
+      "revision": "da221445187b8de728c0be36ec318f0be2b7c88e",
+      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v4.6.7",
+      "hash": "sha256-6fuxf185uga/AaeFgN6VUygGE8bUEkzZSA1UQ1FFes4="
     },
     "spent": {
       "type": "Git",
