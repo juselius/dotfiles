@@ -1,8 +1,11 @@
-with import (import ./npins { }).nixpkgs { };
+with import <nixpkgs> { };
+let
+  unstable = import (import ./npins { }).unstable { };
+in
 mkShell {
   nativeBuildInputs = [ ];
 
   buildInputs = [
-    npins
+    unstable.npins
   ];
 }
