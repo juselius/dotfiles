@@ -152,6 +152,7 @@ let
     gopls
     nodePackages.typescript-language-server
     marksman
+    sqlfluff
   ];
 
   configuration = {
