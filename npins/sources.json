@@ -9,21 +9,15 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8faeb68130df077450451b6734a221ba0d6cde42",
-      "url": "https://github.com/nix-community/nix-index-database/archive/8faeb68130df077450451b6734a221ba0d6cde42.tar.gz",
-      "hash": "sha256-mHSRNrT1rjeYBgkAlj07dW3+1nFEgAd8Gu6lgyfT9DU="
+      "revision": "55b588747fa3d7fc351a11831c4b874dab992862",
+      "url": "https://github.com/nix-community/nix-index-database/archive/55b588747fa3d7fc351a11831c4b874dab992862.tar.gz",
+      "hash": "sha256-gdYe9wTPl4ignDyXUl1LlICWj41+S0GB5lG1fKP17+A="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-25.11",
-      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.7766.fea3b367d61c/nixexprs.tar.xz",
-      "hash": "sha256-mzgnItm0yK1PcmhALIWc5v2iZCuYjKdgKJ+vo7XhbHY="
-    },
-    "unstable": {
-      "type": "Channel",
-      "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre963857.f8573b9c935c/nixexprs.tar.xz",
-      "hash": "sha256-YgVQzPaKa5eVf/rGA5Rn7BWJcP0T98JkE+2KuKVTyzA="
+      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.7849.812b3986fd15/nixexprs.tar.xz",
+      "hash": "sha256-d2Q5VNbc91GloTZNByC4u3JS8Tj5BjfuOF19/vuJ/iM="
     },
     "noctalia-qs": {
       "type": "GitRelease",
@@ -52,10 +46,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v4.6.7",
-      "revision": "da221445187b8de728c0be36ec318f0be2b7c88e",
-      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v4.6.7",
-      "hash": "sha256-6fuxf185uga/AaeFgN6VUygGE8bUEkzZSA1UQ1FFes4="
+      "version": "v4.7.0",
+      "revision": "16c6181baeaf8faed75a419ffd9e95e75dee2a26",
+      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v4.7.0",
+      "hash": "sha256-reOWZQkykkID4G3Kg5ola8WTf1GlZFfUYOGs3M+41GM="
     },
     "spent": {
       "type": "Git",
@@ -69,6 +63,12 @@
       "revision": "6c1cdb74acb8742e497add34695d9f117f6acd21",
       "url": "https://github.com/juselius/Spent/archive/6c1cdb74acb8742e497add34695d9f117f6acd21.tar.gz",
       "hash": "sha256-jEQ0uW4iBvxugIvi8ri4ONndo8Vru2XSLs39shNGViA="
+    },
+    "unstable": {
+      "type": "Channel",
+      "name": "nixpkgs-unstable",
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre964972.9cf7092bdd60/nixexprs.tar.xz",
+      "hash": "sha256-SpvueJPdKD+U/Q2btT3e3rAYgbPQP6nbcYYfK3BJQDA="
     }
   },
   "version": 7
