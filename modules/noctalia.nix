@@ -9,12 +9,14 @@ with lib;
 let
   cfg = config.dotfiles.desktop;
   sources = import ../npins;
-  noctalia-qs = pkgs.callPackage "${sources.noctalia-qs}/default.nix" { };
+  noctalia-qs = pkgs.callPackage "${sources.noctalia-qs}/nix/package.nix" {
+    gitRev = sources.noctalia-qs.revision;
+    version = sources.noctalia-qs.revision;
+  };
   noctalia = pkgs.callPackage "${sources.noctalia-shell}/nix/package.nix" {
     quickshell = noctalia-qs;
   };
   noctalia-shell = {
-
     programs.noctalia-shell.systemd.enable = true;
     programs.noctalia-shell = {
       enable = true;
