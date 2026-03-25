@@ -17,6 +17,18 @@ let
     quickshell = noctalia-qs;
   };
   noctalia-shell = {
+    home.packages = with pkgs; [
+      grim
+      slurp
+      wl-clipboard
+      tesseract
+      imagemagick
+      zbar
+      translate-shell
+      wf-recorder
+      ffmpeg
+      gifski
+    ];
     programs.noctalia-shell.systemd.enable = true;
     programs.noctalia-shell = {
       enable = true;
