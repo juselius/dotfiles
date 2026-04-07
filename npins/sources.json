@@ -1,5 +1,19 @@
 {
   "pins": {
+    "claude-vm": {
+      "type": "Git",
+      "repository": {
+        "type": "Forgejo",
+        "server": "https://git.oceanbox.io/",
+        "owner": "oceanbox",
+        "repo": "claude-vm"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "bb76859d6d2d7dd0cb68288243681c991539ab6f",
+      "url": "https://git.oceanbox.io/oceanbox/claude-vm/archive/bb76859d6d2d7dd0cb68288243681c991539ab6f.tar.gz",
+      "hash": "sha256-mCG/0VqrojVNJ+fqU6VOhuX6qupFj1X//8BOMplhZPk="
+    },
     "nix-index-database": {
       "type": "Git",
       "repository": {
@@ -9,15 +23,15 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "55b588747fa3d7fc351a11831c4b874dab992862",
-      "url": "https://github.com/nix-community/nix-index-database/archive/55b588747fa3d7fc351a11831c4b874dab992862.tar.gz",
-      "hash": "sha256-gdYe9wTPl4ignDyXUl1LlICWj41+S0GB5lG1fKP17+A="
+      "revision": "cef5cf82671e749ac87d69aadecbb75967e6f6c3",
+      "url": "https://github.com/nix-community/nix-index-database/archive/cef5cf82671e749ac87d69aadecbb75967e6f6c3.tar.gz",
+      "hash": "sha256-DgH5mveLoau20CuTnaU5RXZWgFQWn56onQ4Du2CqYoI="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-25.11",
-      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.8023.4590696c8693/nixexprs.tar.xz",
-      "hash": "sha256-mw80nQK4uJ8wJWiQnZ32j/BQlRx4QByvli8EP7/2hGE="
+      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.8801.36a601196c4e/nixexprs.tar.xz",
+      "hash": "sha256-wsWYpb+aiRhI2hzMOCkwfyA01ErraKXJc0vSMvnOH7c="
     },
     "noctalia-qs": {
       "type": "GitRelease",
@@ -30,10 +44,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.0.10",
-      "revision": "12dba9653ae2c0dd24bf2633e2572a8093b0df5e",
-      "url": "https://api.github.com/repos/noctalia-dev/noctalia-qs/tarball/refs/tags/v0.0.10",
-      "hash": "sha256-tscUYNjBfi52Uwu40epdAhoFztsmroKBEBvr22oCnv4="
+      "version": "v0.0.12",
+      "revision": "e7224b756dcd10eec040df818a4c7a0fda5d6eff",
+      "url": "https://api.github.com/repos/noctalia-dev/noctalia-qs/tarball/refs/tags/v0.0.12",
+      "hash": "sha256-79JP2QTdvp1jg7HGxAW+xzhzhLnlKUi8yGXq9nDCeH0="
     },
     "noctalia-shell": {
       "type": "GitRelease",
@@ -46,29 +60,16 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v4.7.1",
-      "revision": "0b8b4fec43a7a5a685aa761b576f7bc09624d717",
-      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v4.7.1",
-      "hash": "sha256-h5jMVGjgrfVPufMG3AMj/HGfU/EqU/4WEK7HCKhMN2E="
-    },
-    "spent": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "juselius",
-        "repo": "Spent"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "6c1cdb74acb8742e497add34695d9f117f6acd21",
-      "url": "https://github.com/juselius/Spent/archive/6c1cdb74acb8742e497add34695d9f117f6acd21.tar.gz",
-      "hash": "sha256-jEQ0uW4iBvxugIvi8ri4ONndo8Vru2XSLs39shNGViA="
+      "version": "v4.7.5",
+      "revision": "8b0c7c288063e5048a439ca308dd65f7044f42b6",
+      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v4.7.5",
+      "hash": "sha256-0xoCuJSRSWcn4mCX382lCxqLbnuOrrqS4dOcdpoUmZg="
     },
     "unstable": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre968143.4724d5647207/nixexprs.tar.xz",
-      "hash": "sha256-mfxnx78wXFjuGbZ1bc/nb9JDxJKf4Aq85WzvXKpI7CM="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre976459.dc72a9d22820/nixexprs.tar.xz",
+      "hash": "sha256-lODQ+GV/YuvQ3VKe0wbHSq/DrKqCfB1O31JtOiJHM78="
     }
   },
   "version": 7

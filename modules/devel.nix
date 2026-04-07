@@ -69,7 +69,6 @@ let
       combinePackages [
         sdk_10_0
         sdk_9_0
-        sdk_8_0
       ]
     else
       pkgs.dotnetCorePackages.sdk_10_0;
@@ -98,9 +97,8 @@ let
     ))
   ];
 
-  node = with pkgs.nodePackages; [
-    # pkgs.nodejs
-    npm
+  node = with pkgs; [
+    nodejs
     # node2nix
     # gulp
     # bundler
@@ -150,7 +148,7 @@ let
     lua-language-server
     yaml-language-server
     gopls
-    nodePackages.typescript-language-server
+    typescript-language-server
     marksman
     sqlfluff
   ];
