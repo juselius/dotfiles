@@ -47,7 +47,6 @@ let
     dust
     duf
     sd
-    zellij
     dogdns
     curlie
     xh

@@ -6,8 +6,13 @@
 }:
 with lib;
 let
-  cfg = config.dotfiles;
   sources = import ../npins;
+  unstable = import sources.unstable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    config.allowUnfree = true;
+  };
+
+  cfg = config.dotfiles;
 
   k8s-aliases =
     if cfg.packages.kubernetes then
@@ -227,6 +232,7 @@ let
 
       zellij = {
         enable = true;
+        package = unstable.zellij;
         settings = {
           simplified_ui = lib.mkDefault false;
           default_shell = "fish";
