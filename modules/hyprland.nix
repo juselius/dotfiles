@@ -29,6 +29,7 @@ let
 
     wayland.windowManager = {
       hyprland.enable = true;
+      hyprland.configType = "hyprlang";
       hyprland.settings = {
         exec-once = "${pkgs.hyprland}/bin/hyprctl setcursor Vanilla-DMZ ${builtins.toString cfg.cursorSize}";
         # TODO: Set your monitor here. See hyprctl monitors and https://wiki.hyprland.org/Configuring/Monitors/
@@ -101,7 +102,7 @@ let
 
         dwindle = {
           # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-          pseudotile = true;
+          # pseudotile = true;
           preserve_split = true; # You probably want this
         };
 
@@ -218,11 +219,11 @@ let
           ", switch:Lid Switch, exec, $lock"
         ];
 
-        windowrulev2 = [
-          "suppressevent maximize, class:.*" # You'll probably like this.
-          "opacity 1.0 override 1.0 override 1.0 override, class:(google-chrome|firefox|ferdium)"
-          "stayfocused, class:(gcr-prompter)"
-        ];
+        # windowrulev2 = [
+        #   "suppressevent maximize, class:.*" # You'll probably like this.
+        #   "opacity 1.0 override 1.0 override 1.0 override, class:(google-chrome|firefox|ferdium)"
+        #   "stayfocused, class:(gcr-prompter)"
+        # ];
       };
     };
 

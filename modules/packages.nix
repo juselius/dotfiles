@@ -47,7 +47,7 @@ let
     dust
     duf
     sd
-    dogdns
+    doggo
     curlie
     xh
     gping

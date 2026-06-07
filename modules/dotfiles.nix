@@ -87,6 +87,7 @@ let
           bind -M insert \cp push-line
           bind -M insert \ce end-of-line
           bind -M insert \ca beginning-of-line
+          bind \cd true
 
           # for vi mode
           set fish_cursor_default block
@@ -219,14 +220,12 @@ let
       ssh = {
         enable = true;
         enableDefaultConfig = false;
-        matchBlocks."*" = {
-          compression = false;
-          forwardAgent = true;
-          serverAliveInterval = 30;
-          extraOptions = {
-            IPQoS = "throughput";
-            UpdateHostKeys = "no";
-          };
+        settings."*" = {
+          Compression = false;
+          ForwardAgent = true;
+          ServerAliveInterval = 30;
+          IPQoS = "throughput";
+          UpdateHostKeys = "no";
         };
       };
 
@@ -340,7 +339,7 @@ let
 
       home-manager = {
         enable = true;
-        path = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
+        path = "https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz";
       };
     };
 
@@ -353,7 +352,7 @@ let
       }
     '';
 
-    home.stateVersion = "24.11";
+    home.stateVersion = "26.05";
 
     home.sessionVariables = {
       EDITOR = "nvim";

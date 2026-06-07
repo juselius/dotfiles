@@ -19,7 +19,7 @@ let
       fsautocomplete
       lua-language-server
       statix
-      nixfmt-rfc-style
+      nixfmt
       tinymist
       vscode-json-languageserver
       hadolint
