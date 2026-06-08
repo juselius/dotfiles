@@ -29,7 +29,7 @@ let
       ffmpeg
       gifski
     ];
-    programs.noctalia-shell.systemd.enable = true;
+    programs.noctalia-shell.systemd.enable = false;
     programs.noctalia-shell = {
       enable = true;
       package = noctalia;

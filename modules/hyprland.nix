@@ -31,7 +31,10 @@ let
       hyprland.enable = true;
       hyprland.configType = "hyprlang";
       hyprland.settings = {
-        exec-once = "${pkgs.hyprland}/bin/hyprctl setcursor Vanilla-DMZ ${builtins.toString cfg.cursorSize}";
+        exec-once = [
+          "noctalia-shell"
+          "${pkgs.hyprland}/bin/hyprctl setcursor Vanilla-DMZ ${builtins.toString cfg.cursorSize}"
+        ];
         # TODO: Set your monitor here. See hyprctl monitors and https://wiki.hyprland.org/Configuring/Monitors/
         monitor = cfg.hyprland.monitor;
 
@@ -316,11 +319,11 @@ let
           inherit wallpaper;
         in
         {
-          enable = true;
+          enable = false;
           settings = {
             ipc = "on";
             splash = false;
-            splash_offset = 2.0;
+            splash_offset = 2;
 
             preload = [ wallpaper ];
 
