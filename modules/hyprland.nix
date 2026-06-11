@@ -222,11 +222,11 @@ let
           ", switch:Lid Switch, exec, $lock"
         ];
 
-        # windowrulev2 = [
-        #   "suppressevent maximize, class:.*" # You'll probably like this.
-        #   "opacity 1.0 override 1.0 override 1.0 override, class:(google-chrome|firefox|ferdium)"
-        #   "stayfocused, class:(gcr-prompter)"
-        # ];
+        windowrule = [
+          "match:class ^(.*)$, suppress_event maximize" # You'll probably like this.
+          "match:class ^(google-chrome|firefox|ferdium)$, opacity 1.0 override 1.0 override 1.0 override"
+          "match:class ^(gcr-prompter)$, stay_focused 1"
+        ];
       };
     };
 
