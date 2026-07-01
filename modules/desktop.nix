@@ -153,7 +153,7 @@ let
 
   chat = with pkgs; [
     # teams
-    signal-desktop
+    # signal-desktop
     # discord
     # slack
     # pidgin
