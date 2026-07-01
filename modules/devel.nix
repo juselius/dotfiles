@@ -80,6 +80,7 @@ let
     home.packages = [
       dotnetPackage
       pkgs.fsautocomplete
+      pkgs.fantomas
       pkgs.dotnet-outdated
     ];
   };

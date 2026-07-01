@@ -35,7 +35,6 @@ autocmd('LspAttach', {
   group = augroup('my.lsp', {}),
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-
     print("Attaching", client.name, "LSP")
 
     vim.opt.completeopt = { "menuone", "popup", "noselect" }
@@ -46,10 +45,15 @@ autocmd('LspAttach', {
       end,
     })
 
+    if client.name == "fsautocomplete" then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+
     if client:supports_method('textDocument/definition') then
       -- Create a keymap for vim.lsp.buf.definition ...
       vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end)
     end
+
     if client:supports_method('textDocument/inlayHint') then
       -- Create a keymap for vim.lsp.buf.definition ...
       vim.keymap.set('n', 'gih', function()
