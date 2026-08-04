@@ -237,9 +237,10 @@ let
           default_shell = "fish";
           pane_frames = false;
           layout_dir = "${config.xdg.configHome}/zellij/layouts";
-          default_layout = lib.mkDefault "compact-top";
+          default_layout = lib.mkDefault "compact";
           show_startup_tips = false;
           theme = lib.mkDefault "nord";
+          focus_follows_mouse = true;
 
           ui = {
             pane_frames = {
