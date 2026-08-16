@@ -206,7 +206,7 @@ let
       # };
       gpg-agent = {
         enable = true;
-        enableSshSupport = true;
+        enableSshSupport = false;
         defaultCacheTtl = 43200; # 12 hours
         defaultCacheTtlSsh = 43200;
         maxCacheTtl = 604800; # 7 days
