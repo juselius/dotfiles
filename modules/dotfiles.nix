@@ -186,7 +186,7 @@ let
             all = true;
           };
           pull = {
-            rebase = false;
+            rebase = true;
           };
           commit = {
             verbose = true;
@@ -438,7 +438,7 @@ let
     services = {
       gpg-agent = {
         enable = true;
-        enableSshSupport = true;
+        enableSshSupport = false;
         defaultCacheTtl = 43200; # 12 hours
         defaultCacheTtlSsh = 64800; # 18 hours
         maxCacheTtl = 64800;
