@@ -66,6 +66,20 @@
       "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v4.7.7",
       "hash": "sha256-QszLpoDPD7JEv8B/w1U2u1ksBw/CYBDmwUTLhJrekF0="
     },
+    "obx-pkgs": {
+      "type": "Git",
+      "repository": {
+        "type": "Forgejo",
+        "server": "https://git.oceanbox.io/",
+        "owner": "oceanbox",
+        "repo": "obx-pkgs"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "c01d5e50cf82b71addb22e0cb4a2c28570c5e7ca",
+      "url": "https://git.oceanbox.io/oceanbox/obx-pkgs/archive/c01d5e50cf82b71addb22e0cb4a2c28570c5e7ca.tar.gz",
+      "hash": "sha256-5ggxiw8sa+wKUdH3zhjAuaH3bOTn1StQ5XP+6T0Io5g="
+    },
     "unstable": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
