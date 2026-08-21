@@ -18,7 +18,7 @@ vim.keymap.set({ 'n', 'i', 'v' }, "<silent> <C-S>", ":update<CR>", { remap = fal
 vim.keymap.set('v', "<silent> <C-S>", "<C-C>:update<CR>", { remap = false })
 vim.keymap.set('i', "<silent> <C-S>", "<C-O>:update<CR>", { remap = false })
 
- -- zap the damned Ex mode.
+-- zap the damned Ex mode.
 vim.keymap.set('n', "Q", "<nop>", { remap = false })
 
 -- vim.keymap.set({ 'n', 'i', 'v' }, "<C-L>", ":noh<cr>")
@@ -34,3 +34,7 @@ vim.keymap.set('i', "<F1>", "<ESC>")
 
 vim.keymap.set('n', "<C-/>", "gcc", { remap = true })
 vim.keymap.set('v', "<C-/>", "gc", { remap = true })
+
+-- fix irritating lazyvim <gv mappign
+vim.keymap.set("v", "<", "<")
+vim.keymap.set("v", ">", ">")
