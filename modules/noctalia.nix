@@ -9,13 +9,7 @@ with lib;
 let
   cfg = config.dotfiles.desktop;
   sources = import ../npins;
-  noctalia-qs = pkgs.callPackage "${sources.noctalia-qs}/nix/package.nix" {
-    gitRev = sources.noctalia-qs.revision;
-    version = sources.noctalia-qs.revision;
-  };
-  noctalia = pkgs.callPackage "${sources.noctalia-shell}/nix/package.nix" {
-    quickshell = noctalia-qs;
-  };
+  noctalia = pkgs.callPackage "${sources.noctalia-shell}/nix/package.nix" { };
   noctalia-shell = {
     home.packages = with pkgs; [
       grim
@@ -29,8 +23,8 @@ let
       ffmpeg
       gifski
     ];
-    programs.noctalia-shell.systemd.enable = false;
-    programs.noctalia-shell = {
+    programs.noctalia.systemd.enable = false;
+    programs.noctalia = {
       enable = true;
       package = noctalia;
       # settings = {
