@@ -32,7 +32,7 @@ let
       hyprland.configType = "hyprlang";
       hyprland.settings = {
         exec-once = [
-          "noctalia-shell"
+          "noctalia"
           "${pkgs.hyprland}/bin/hyprctl setcursor Vanilla-DMZ ${builtins.toString cfg.cursorSize}"
         ];
         # TODO: Set your monitor here. See hyprctl monitors and https://wiki.hyprland.org/Configuring/Monitors/
@@ -40,10 +40,10 @@ let
 
         "$terminal" = "${pkgs.ghostty}/bin/ghostty";
         "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
-        "$lock" = "noctalia-shell ipc call lockScreen lock";
-        "$menu" = "noctalia-shell ipc call launcher toggle";
+        "$lock" = "noctalia msg session lock";
+        "$menu" = "noctalia msg panel-toggle launcher";
         "$wofipass" = "${pkgs.wofi-pass}/bin/wofi-pass";
-        "$logout" = "noctalia-shell ipc call sessionMenu toggle";
+        "$logout" = "noctalia msg session logout";
 
         general = {
           gaps_in = 0;
@@ -284,6 +284,7 @@ let
     services = {
       # Notification engine using gnome
       swaync.enable = false;
+      hyprpolkitagent.enable = true;
 
       # For sleeping Zzz
       hypridle = {
@@ -292,7 +293,7 @@ let
           general = {
             ignore_dbus_inhibit = false;
             # lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
-            lock_cmd = "~/.nix-profile/bin/noctalia-shell ipc call lockScreen lock";
+            lock_cmd = "~/.nix-profile/bin/noctalia msg session lock";
             before_sleep_cmd = "loginctl lock-session";
             after_sleep_cmd = "hyprctl dispatch dpms on";
           };

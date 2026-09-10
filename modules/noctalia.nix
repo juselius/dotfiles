@@ -22,6 +22,7 @@ let
       wf-recorder
       ffmpeg
       gifski
+      satty
     ];
     programs.noctalia.systemd.enable = false;
     programs.noctalia = {
@@ -86,13 +87,13 @@ let
 in
 {
   options.dotfiles.desktop = {
-    noctalia-shell = {
+    noctalia = {
       enable = mkEnableOption "Enable noctalia-shell";
     };
   };
 
   config = mkMerge [
-    (mkIf (cfg.wayland.enable && cfg.noctalia-shell.enable) noctalia-shell)
+    (mkIf (cfg.wayland.enable && cfg.noctalia.enable) noctalia-shell)
   ];
 
   imports = [
