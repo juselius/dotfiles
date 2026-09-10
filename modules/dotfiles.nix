@@ -186,7 +186,7 @@ let
             all = true;
           };
           pull = {
-            rebase = true;
+            rebase = false;
           };
           commit = {
             verbose = true;
