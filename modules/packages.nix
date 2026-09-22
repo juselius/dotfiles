@@ -66,8 +66,6 @@ let
     minio-client
     colmena
     azure-cli
-    dapr-cli
-    openfga-cli
   ];
 
   geo = with pkgs; [

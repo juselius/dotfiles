@@ -99,7 +99,6 @@ let
     gnome-disk-utility
     gnome-tweaks
     eog
-    networkmanager-fortisslvpn
     gnome-keyring
     dconf-editor
     pkgs.desktop-file-utils
