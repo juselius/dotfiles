@@ -10,22 +10,6 @@ let
 
   useIf = x: y: if x then y else [ ];
 
-  x11services =
-    if !cfg.wayland.enable then
-      {
-        pasystray.enable = true;
-        flameshot.enable = true;
-
-        screen-locker = {
-          enable = true;
-          inactiveInterval = 45;
-          lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 121212";
-          # lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p";
-        };
-      }
-    else
-      { };
-
   dropbox = {
     services.dropbox.enable = true;
     home.packages = with pkgs; [ dropbox-cli ];
@@ -56,34 +40,6 @@ let
     audacity
     xf86_input_wacom
     mpv
-  ];
-
-  x11 = with pkgs.xorg; [
-    appres
-    editres
-    listres
-    viewres
-    luit
-    xdpyinfo
-    xdriinfo
-    xev
-    xfd
-    xfontsel
-    xkill
-    xlsatoms
-    xlsclients
-    xlsfonts
-    xmessage
-    xprop
-    xvinfo
-    xwininfo
-    xmessage
-    xvinfo
-    xmodmap
-    pkgs.glxinfo
-    pkgs.xclip
-    pkgs.xsel
-    # pkgs.arandr
   ];
 
   gnome = with pkgs; [
@@ -164,7 +120,6 @@ let
   configuration = {
     dotfiles.desktop = {
       onedrive.enable = mkDefault false;
-      xmonad.enable = mkDefault false;
       i3.enable = mkDefault false;
     };
 
@@ -220,8 +175,7 @@ let
           "secrets"
         ];
       };
-    }
-    // x11services;
+    };
 
     systemd.user.sessionVariables = {
       GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
