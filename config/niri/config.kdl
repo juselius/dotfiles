@@ -103,8 +103,11 @@ include "outputs.kdl"
 }
 
 cursor {
-    xcursor-theme "breeze_cursors"
-    xcursor-size 20 // Set your desired size here (e.g., 24, 32, 48)
+    xcursor-theme "Vanilla-DMZ"
+    xcursor-size 32
+
+    hide-when-typing
+    hide-after-inactive-ms 1000
 }
 
 // Settings that influence how windows are positioned and sized.
