@@ -18,9 +18,20 @@ let
 
     xdg.configFile = {
       "niri/config.kdl" = {
-        source =
-          (pkgs.replaceVars ../config/niri/config.kdl { monitor = builtins.elemAt cfg.monitor 0; }).outPath;
+        source = ../config/niri/config.kdl;
       };
+      "niri/outputs.kdl".text = foldl' (
+        a: x:
+        a
+        + ''
+          output "${x.output}" {
+            scale ${toString x.scale}
+            transform "normal"
+            position x=${toString x.x} y=${toString x.y}
+          }
+
+        ''
+      ) "" cfg.monitors;
     };
 
     services = {
@@ -61,9 +72,9 @@ in
   options.dotfiles.desktop = {
     niri = {
       enable = mkEnableOption "Enable Niri";
-      monitor = mkOption {
-        type = types.listOf types.str;
-        default = [ "eDP-1" ];
+      monitors = mkOption {
+        type = types.listOf types.attrs;
+        default = [ ];
       };
     };
   };
