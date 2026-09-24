@@ -20,6 +20,10 @@ let
       "niri/config.kdl" = {
         source = ../config/niri/config.kdl;
       };
+      "niri/machine.kdl" = {
+        source =
+          if config.dotfiles.desktop.laptop then ../config/niri/laptop.kdl else ../config/niri/desctop.kdl;
+      };
       "niri/outputs.kdl".text = foldl' (
         a: x:
         a
