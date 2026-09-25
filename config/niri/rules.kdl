@@ -1,0 +1,67 @@
+// Window rules let you adjust behavior for individual windows.
+// Find more information on the wiki:
+// https://niri-wm.github.io/niri/Configuration:-Window-Rules
+
+// Work around WezTerm's initial configure bug
+// by setting an empty default-column-width.
+window-rule {
+    // This regular expression is intentionally made as specific as possible,
+    // since this is the default config, and we want no false positives.
+    // You can get away with just app-id="wezterm" if you want.
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match title="Welcome to JetBrains Rider"
+    open-floating true
+    max-width 1000
+    max-height 1400
+}
+
+window-rule {
+    match app-id=r#"^jetbrains-rider$"#
+    default-column-width { proportion 0.5; }
+}
+
+// Block out two password managers from screen capture.
+window-rule {
+    match app-id=r#"^.*Bitwarden.*$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+    block-out-from "screen-capture"
+    // Use this instead if you want them visible on third-party screenshot tools.
+    // block-out-from "screencast"
+}
+
+// Example: enable rounded corners for all windows.
+// (This example rule is commented out with a "/-" in front.)
+/-window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+window-rule {
+  // Rounded corners for a modern look.
+  geometry-corner-radius 10
+
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry tre
+}
+
+// Floating Noctalia settings window.
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  open-floating true
+  default-column-width { fixed 1080; }
+  default-window-height { fixed 920; }
+}

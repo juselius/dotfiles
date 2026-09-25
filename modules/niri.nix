@@ -20,6 +20,12 @@ let
       "niri/config.kdl" = {
         source = ../config/niri/config.kdl;
       };
+      "niri/rules.kdl" = {
+        source = ../config/niri/rules.kdl;
+      };
+      "niri/binds.kdl" = {
+        source = ../config/niri/binds.kdl;
+      };
       "niri/layout.kdl" = {
         source = ../config/niri/layout.kdl;
       };
