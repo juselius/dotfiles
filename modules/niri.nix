@@ -20,9 +20,12 @@ let
       "niri/config.kdl" = {
         source = ../config/niri/config.kdl;
       };
+      "niri/layout.kdl" = {
+        source = ../config/niri/layout.kdl;
+      };
       "niri/machine.kdl" = {
         source =
-          if config.dotfiles.desktop.laptop then ../config/niri/laptop.kdl else ../config/niri/desctop.kdl;
+          if config.dotfiles.desktop.laptop then ../config/niri/laptop.kdl else ../config/niri/desktop.kdl;
       };
       "niri/outputs.kdl".text = foldl' (
         a: x:
