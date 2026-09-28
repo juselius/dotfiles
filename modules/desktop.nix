@@ -150,6 +150,7 @@ let
     # };
 
     services = {
+      ssh-agent.enable = true;
       clipmenu.enable = false;
 
       network-manager-applet.enable = true; # !cfg.wayland.enable;
