@@ -125,7 +125,7 @@ let
 
     programs = {
       browserpass.enable = true;
-      feh.enable = true;
+      imv.enable = true;
       firefox.enable = true;
       gpg = {
         enable = true;
