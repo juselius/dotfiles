@@ -58,14 +58,25 @@ in
       enable = false;
       laptop = false;
       wayland.enable = true;
-      hyprland = {
+      niri = {
         enable = true;
+        monitors = [
+          # {
+          #   output = "eDP-1";
+          #   scale = 1;
+          #   x = 0;
+          #   y = 0;
+          # }
+        ];
+      };
+      hyprland = {
+        enable = false;
         # monitor = [
         #   "DP-1, preferred, 0x0, 1.25"
         #   "HDMI-A-1, preferred, 2048x0, 1.25"
         # ];
       };
-      noctalia-shell.enable = true;
+      noctalia.enable = true;
       waybar.enable = false;
       sway.enable = false;
       dropbox.enable = false;
