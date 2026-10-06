@@ -88,12 +88,12 @@ let
     '';
 
   rider-latest = super.jetbrains.rider.overrideAttrs (attrs: rec {
-    version = "2026.2.3";
+    version = "2026.2.3.1";
     name = "rider-${version}";
 
     src = super.fetchurl {
       url = "https://download.jetbrains.com/rider/JetBrains.Rider-${version}.tar.gz";
-      sha256 = "sha256-V5Pi9nMdXfx6CHtX22zcVC04efxkrW+0KCcKoShbiZ8=";
+      sha256 = "sha256-+ksJpffPS2Y1sJOtxzE5kXeKjcdPJWFKK4l2sE3uXU4=";
     };
 
     # postInstall =
