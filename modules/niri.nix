@@ -29,6 +29,9 @@ let
       "niri/layout.kdl" = {
         source = ../config/niri/layout.kdl;
       };
+      "niri/workspaces.kdl" = {
+        source = ../config/niri/workspaces.kdl;
+      };
       "niri/machine.kdl" = {
         source =
           if config.dotfiles.desktop.laptop then ../config/niri/laptop.kdl else ../config/niri/desktop.kdl;

@@ -12,6 +12,7 @@ include "outputs.kdl"
 include "rules.kdl"
 include "binds.kdl"
 include "machine.kdl"
+include "workspaces.kdl"
 
 prefer-no-csd 
 
