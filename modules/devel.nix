@@ -159,6 +159,11 @@ let
       nix = mkDefault true;
     };
 
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     home.packages =
       base
       ++ lsp
