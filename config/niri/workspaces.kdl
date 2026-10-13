@@ -2,24 +2,15 @@ workspace "mail"
 workspace "web"
 workspace "dev"
 workspace "work"
+workspace "config"
 
 binds {
     Mod+1 { focus-workspace "mail"; }
     Mod+2 { focus-workspace "web"; }
     Mod+3 { focus-workspace "dev"; }
     Mod+4 { focus-workspace "work"; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace "mail"; }
-    Mod+Ctrl+2 { move-column-to-workspace "web"; }
-    Mod+Ctrl+3 { move-column-to-workspace "dev"; }
-    Mod+Ctrl+4 { move-column-to-workspace "work"; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace "mail"; }
+    Mod+Shift+2 { move-column-to-workspace "web"; }
+    Mod+Shift+3 { move-column-to-workspace "dev"; }
+    Mod+Shift+4 { move-column-to-workspace "work"; }
 }
