@@ -10,3 +10,4 @@ vim/spell
 vim/.netrwhist
 vim-plugins/vim_fsharp_languageclient
 home.nix
+.direnv/
