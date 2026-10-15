@@ -44,6 +44,7 @@ let
             scale ${toString x.scale}
             transform "normal"
             position x=${toString x.x} y=${toString x.y}
+            ${if x.enabled then "" else "off"}
           }
 
         ''

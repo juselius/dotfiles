@@ -62,6 +62,7 @@ in
         enable = true;
         monitors = [
           # {
+          #   enabled = true;
           #   output = "eDP-1";
           #   scale = 1;
           #   x = 0;
