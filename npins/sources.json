@@ -10,9 +10,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "c6f3b4f6aca833b47f8d12d6b8386e5ab4116bf7",
-      "url": "https://git.oceanbox.io/oceanbox/claude-vm/archive/c6f3b4f6aca833b47f8d12d6b8386e5ab4116bf7.tar.gz",
-      "hash": "sha256-07zlMwDLdmIOtbV14Q9ErWAKBHasetbN9TO8rsDDf/k="
+      "revision": "c53f97a810333a5dd8e7dd87826552ab75d7e94b",
+      "url": "https://git.oceanbox.io/oceanbox/claude-vm/archive/c53f97a810333a5dd8e7dd87826552ab75d7e94b.tar.gz",
+      "hash": "sha256-Obj98dNMt1OKT661aWn2cdVW0/5MVl85AJ0umD66/uM="
     },
     "nix-index-database": {
       "type": "Git",
@@ -23,16 +23,16 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "9a2dd40780eeab8543aa97c59c26f11267025616",
-      "url": "https://github.com/nix-community/nix-index-database/archive/9a2dd40780eeab8543aa97c59c26f11267025616.tar.gz",
-      "hash": "sha256-LpIhxnuO0tYeZ4k7BbNMxsPs2zJpB4hWXO1jdhUuE7Q="
+      "revision": "cee0f879d338cf08f814210fa6c2b280594ade0a",
+      "url": "https://github.com/nix-community/nix-index-database/archive/cee0f879d338cf08f814210fa6c2b280594ade0a.tar.gz",
+      "hash": "sha256-PHtGxKYM99f8WhGR5YD7iiCiwemKa2wUD4yVI2oALFg="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-26.05",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.11829.a033e66ab94a/nixexprs.tar.xz",
-      "hash": "sha256-MdqpFMXQX2Vz1KgQ516wgEo4eiFzm3rEMyE3Qh4wyLA="
+      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.13446.7dcdd87373d7/nixexprs.tar.xz",
+      "hash": "sha256-dKEjuquCf1NEYiTZZr6xrvTrkhAm5Q94JuEwLBzycEs="
     },
     "noctalia-shell": {
       "type": "GitRelease",
@@ -45,10 +45,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v5.2.1",
-      "revision": "6ef43e2bf2f3d5b4205ec72a72e34a2ab76ce3b4",
-      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v5.2.1",
-      "hash": "sha256-ukT5U54WQSpq6sktl5QJOZ8S4ZF3LLmP8CAFel1XJf0="
+      "version": "v5.4.1",
+      "revision": "6c870fd158239ead0dcdee890b7c3b87f359293c",
+      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v5.4.1",
+      "hash": "sha256-j6EccQtLK45fYjA5uyUHXW8jxz0gYVxW2SE+pn5UA0Y="
     },
     "obx-pkgs": {
       "type": "Git",
@@ -60,16 +60,16 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "80e4ba91f0ab656ff92f6115c8a12aebaaed8498",
-      "url": "https://git.oceanbox.io/oceanbox/obx-pkgs/archive/80e4ba91f0ab656ff92f6115c8a12aebaaed8498.tar.gz",
-      "hash": "sha256-f/NIZww7ppEUA2ca0kO0bnEkfjfsPjVI52c9BpkPqZc="
+      "revision": "018650481878010d04b9ff73c3fd37e20c5396a0",
+      "url": "https://git.oceanbox.io/oceanbox/obx-pkgs/archive/018650481878010d04b9ff73c3fd37e20c5396a0.tar.gz",
+      "hash": "sha256-4ckjf3fEp+fE4vjStyBUjMlLu9qqZHAURWeEn3xXGxo="
     },
     "unstable": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1089329.ca1659429c95/nixexprs.tar.xz",
-      "hash": "sha256-Xdc4viyLXXA3qos9fo2Ezb+JxRasKk99tSasmSAdnSc="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1107035.f9887a8a434b/nixexprs.tar.xz",
+      "hash": "sha256-oeIw+gG/Q+bbBGUxbCWseSj4Ae6RACSdxypTixn2fkw="
     }
   },
   "version": 8
