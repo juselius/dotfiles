@@ -74,8 +74,8 @@ let
     google-chrome
     #firefox
     drive
-    rdesktop
-    remmina
+    # rdesktop
+    # remmina
     # googleearth
     # taskwarrior
     # timewarrior
@@ -87,16 +87,14 @@ let
     blueman
     gparted
     # calibre
-    fira-code
     # font-awesome
-    font-awesome_5
     keybase
     # keybase-gui
     pandoc
     polkit_gnome
     # cdrtools
-    innoextract
-    tectonic
+    # innoextract
+    # tectonic
     unrtf
     # virt-manager
     qrencode

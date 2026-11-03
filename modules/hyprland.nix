@@ -36,7 +36,7 @@ let
           "${pkgs.hyprland}/bin/hyprctl setcursor Vanilla-DMZ ${builtins.toString cfg.cursorSize}"
         ];
         # TODO: Set your monitor here. See hyprctl monitors and https://wiki.hyprland.org/Configuring/Monitors/
-        monitor = cfg.hyprland.monitor;
+        monitor = cfg.hyprland.monitors;
 
         "$terminal" = "${pkgs.ghostty}/bin/ghostty";
         "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
@@ -338,7 +338,7 @@ in
   options.dotfiles.desktop = {
     hyprland = {
       enable = mkEnableOption "Enable Hyprland";
-      monitor = mkOption {
+      monitors = mkOption {
         type = types.listOf types.str;
         default = [ ", preferred, 0x0, 1.0" ];
 
