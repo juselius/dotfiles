@@ -172,6 +172,7 @@ let
         components = [
           "pkcs11"
           "secrets"
+          "ssh"
         ];
       };
     };

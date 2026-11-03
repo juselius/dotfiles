@@ -133,10 +133,10 @@ in
       };
     };
 
-    ssh.matchBlocks = {
+    ssh.settings = {
       example = {
-        user = "nobody";
-        hostname = "acme.com";
+        User = "nobody";
+        Hostname = "acme.com";
       };
     };
   };
