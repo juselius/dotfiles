@@ -241,6 +241,7 @@ let
           show_startup_tips = false;
           theme = lib.mkDefault "nord";
           focus_follows_mouse = true;
+          session_serialization = false;
 
           ui = {
             pane_frames = {
