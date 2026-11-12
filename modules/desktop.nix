@@ -251,7 +251,7 @@ let
     # };
 
     programs.vscode = {
-      enable = true;
+      enable = lib.mkDefault false;
       profiles.default = {
         extensions = with pkgs.vscode-extensions; [
           vscodevim.vim
