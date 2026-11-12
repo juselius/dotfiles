@@ -23,16 +23,16 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "cee0f879d338cf08f814210fa6c2b280594ade0a",
-      "url": "https://github.com/nix-community/nix-index-database/archive/cee0f879d338cf08f814210fa6c2b280594ade0a.tar.gz",
-      "hash": "sha256-PHtGxKYM99f8WhGR5YD7iiCiwemKa2wUD4yVI2oALFg="
+      "revision": "af9249ca33bc2efaae5d071e4c67ddef19dcb681",
+      "url": "https://github.com/nix-community/nix-index-database/archive/af9249ca33bc2efaae5d071e4c67ddef19dcb681.tar.gz",
+      "hash": "sha256-iGNtQnUZsi+v6/4NbtYr+dsmASa6GkzXtUcTpE8F3mE="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-26.05",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.13446.7dcdd87373d7/nixexprs.tar.xz",
-      "hash": "sha256-dKEjuquCf1NEYiTZZr6xrvTrkhAm5Q94JuEwLBzycEs="
+      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.13936.ac588ef1c914/nixexprs.tar.xz",
+      "hash": "sha256-YqwBRaXgqn0+I8BCsZVLkzd746X/84fr1/FvZiocsYE="
     },
     "noctalia-shell": {
       "type": "GitRelease",
@@ -45,10 +45,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v5.4.1",
-      "revision": "6c870fd158239ead0dcdee890b7c3b87f359293c",
-      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v5.4.1",
-      "hash": "sha256-j6EccQtLK45fYjA5uyUHXW8jxz0gYVxW2SE+pn5UA0Y="
+      "version": "v5.5.0",
+      "revision": "89059f62172effcb924cf29930b3435301ca2aac",
+      "url": "https://api.github.com/repos/noctalia-dev/noctalia-shell/tarball/refs/tags/v5.5.0",
+      "hash": "sha256-JFT5v+NFN6j/5nDZ5oKizflUsGJNMvwCOdt+4zZ0IX8="
     },
     "obx-pkgs": {
       "type": "Git",
@@ -68,8 +68,8 @@
       "type": "Channel",
       "name": "nixpkgs-unstable",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1107035.f9887a8a434b/nixexprs.tar.xz",
-      "hash": "sha256-oeIw+gG/Q+bbBGUxbCWseSj4Ae6RACSdxypTixn2fkw="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1117836.9397dcb09c95/nixexprs.tar.xz",
+      "hash": "sha256-jnNhqdXGJs5qIvdzFwABBvhzuPHLK09CcWKtvYVxVOk="
     }
   },
   "version": 8
