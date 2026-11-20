@@ -64,3 +64,10 @@ window-rule {
   default-column-width { fixed 1080; }
   default-window-height { fixed 920; }
 }
+
+
+// Don't focus oidc refresh
+window-rule {
+  match app-id=r#"firefox"# title=r#"^Sign in to your account.*"#
+  open-focused false
+}
